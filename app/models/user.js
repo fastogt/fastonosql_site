@@ -26,12 +26,7 @@ var userSchema = mongoose.Schema({
         token        : String,
         email        : String,
         name         : String
-    },
-    
-    domains         : [{
-                        name : String,
-                        created_date : Date
-                      }]
+    }
 });
 
 // generating a hash

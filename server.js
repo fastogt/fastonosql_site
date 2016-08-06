@@ -17,7 +17,6 @@ var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || settings_config.http_server_port;
 var mongoose = require('mongoose');
-var redis = require('redis');
 var passport = require('passport');
 var flash    = require('connect-flash');
 var amqp = require('amqp');
@@ -28,11 +27,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
-app.redis_connection = redis.createClient();
-app.redis_connection.on("error", function (err) {
-    console.error(err);
-});
-
 // app_r
 
 var http = require('http');
@@ -42,9 +36,9 @@ var listener = io.listen(server);
 
 // settings
 app.locals.site = {
-    title: 'Site on your device',
+    title: 'FastoNoSQL',
     domain: 'http://fastonosql.com',
-    description: 'Site on your device - solution which connects your device with internet.',
+    description: 'FastoNoSQL it is GUI platform for NoSQL databases.',
     public_directory: public_dir_abs_path,
     users_directory: public_downloads_users_dir_abs_path
 };
@@ -55,12 +49,8 @@ app.locals.project = {
     github_issues_link: 'https://github.com/fastogt/fastonosql/issues'
 };
 app.locals.back_end = {
-    version : settings_config.client_version,
-    type : settings_config.client_version_type,
-    socketio_port : settings_config.socketio_port,
-    pub_sub_channel_in : settings_config.pub_sub_channel_in,
-    pub_sub_channel_out : settings_config.pub_sub_channel_out,
-    pub_sub_channel_client_state : settings_config.pub_sub_channel_client_state
+    version : settings_config.app_version,
+    type : settings_config.app_version_type
 };
 app.locals.author = {
     name: 'Topilski Alexandr',
@@ -141,26 +131,6 @@ listener.on('connection', function (socket) {
           } );
         });
     });
-});
-
-var redis_sub = redis.createClient();
-var redis_pub = redis.createClient();
-
-redis_sub.on('error', function (err) {
-    console.error(err);
-});
-
-redis_pub.on('error', function (err) {
-    console.error(err);
-});
-
-redis_sub.on('ready', function() {
-    redis_sub.subscribe(app.locals.back_end.pub_sub_channel_out, app.locals.back_end.pub_sub_channel_client_state);
-});
-
-redis_sub.on('message', function(channel, message){
-    var resp = {'text': message, 'channel':channel};
-    listener.in(channel).emit('message', resp);
 });
 
 // configuration ===============================================================

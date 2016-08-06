@@ -17,95 +17,6 @@ module.exports = function(app, passport) {
     app.get('/', function(req, res) {
         res.render('index.ejs');
     });
-
-    app.get('/templates', function(req, res) {
-        app.redis_connection.hgetall('templates', function(err, result) {
-            if (err) {
-                console.error(err);
-            } else {
-                var templates = [];
-                for (var i in result) {
-                    templates.push(JSON.parse(result[i]));
-                }
-                res.render('templates.ejs', {
-                    templates: templates
-                }); 
-            }
-        }); 
-    });
-    
-    app.post('/server_details', function(req, res) {
-        var user = req.user;        
-        var domain_name = req.body.domain_name;
-        
-        res.render('server_details.ejs', {
-            user : user,
-            domain_name: domain_name
-        });
-    });
-    
-    app.get('/servers_status', function(req, res){
-        User.find({"domains": { $exists: true, $ne: [] }} , function(err, all_users) {
-            if (err) {
-                console.error(err);
-            } else {
-                var domains = [];
-                for (var i = 0; i < all_users.length; i++) {
-                    var user_domains = all_users[i].domains;
-                    for(var j = 0; j < user_domains.length; ++j){
-                        domains.push({name : user_domains[j].name, created_date : user_domains[j].created_date} );
-                    }
-                }
-    
-                res.render('servers_status.ejs', {
-                    domains: domains
-                });
-            }
-        } ); 
-    });
-    
-    // ADD DOMAIN 
-    app.post('/add_domain', function(req, res) {
-        var user = req.user;        
-        var stable_domain = req.body.domain_name.replace(/^www\./ig, '');
-        var new_domain = stable_domain.toLowerCase();
-        
-        if (!checkIsValidDomain(new_domain)) {
-            req.flash('statusProfileMessage', new_domain + ' not valid domain name.');
-            res.redirect('/profile');
-            return;
-        }
-        
-        User.findOne({'domains.name': new_domain}, function(err, fuser) {
-            if (err) {
-                req.flash('statusProfileMessage', err);
-                res.redirect('/profile');
-                return;
-            }
-            
-            if (fuser) {
-                req.flash('statusProfileMessage', 'Sorry, ' + new_domain + ' isn’t available.');
-                res.redirect('/profile');
-                return;
-            }
-            
-            user.domains.push({name : new_domain, created_date : Date() });
-            user.save(function(err) {
-                if (err) {
-                    req.flash('statusProfileMessage', err);
-                } else {
-                    var redis_hosts = []; // Create a new empty array.
-                    for (var i = 0; i < user.domains.length; i++) {
-                        redis_hosts[i] = user.domains[i].name;
-                    }
-                    var needed_val = { name : user.local.email, password : user.local.password, hosts : redis_hosts};
-                    var needed_val_str = JSON.stringify(needed_val);
-                    app.redis_connection.hset("users", user.local.email, needed_val_str);
-                }
-                res.redirect('/profile');
-            });
-        });
-    });
     
     app.post('/build_server_request', function(req, res) {
         var user = req.user;        
@@ -143,28 +54,6 @@ module.exports = function(app, passport) {
           });
         });
         
-    });
-    
-    // REMOVE DOMAIN 
-    app.post('/remove_domain', function(req, res) {
-        var user = req.user;        
-        var remove_domain_id = req.body.domain_id;   
-        
-        user.domains.pull({_id : remove_domain_id });
-        user.save(function(err) {
-            if (err) {
-                req.flash('statusProfileMessage', err);
-            } else {
-                var redis_hosts = []; // Create a new empty array.
-                for (var i = 0; i < user.domains.length; i++) {
-                    redis_hosts[i] = user.domains[i].name;
-                }
-                var needed_val = { name : user.local.email, password : user.local.password, hosts : redis_hosts};
-                var needed_val_str = JSON.stringify(needed_val);
-                app.redis_connection.hset("users", user.local.email, needed_val_str);   
-            }
-            res.redirect('/profile');
-        });
     });
     
     // PROFILE SECTION =========================
