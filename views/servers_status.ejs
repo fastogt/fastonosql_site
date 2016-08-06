@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+    <head>
+        <title><%- site.title %></title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+        <style>
+            body         { padding-top:80px; word-wrap:break-word; }
+        </style>
+        
+        <script src="scripts/script.js" type="text/javascript"></script>
+        <script src="<%= site.domain %>:<%= back_end.socketio_port %>/socket.io/socket.io.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>
+            var socket = io.connect('<%= site.domain %>:<%= back_end.socketio_port %>');
+            
+            function handle_onconnection_changed(host, is_connected) {
+                var id_control = '#status_img' + host.replace('.', '_');
+                if (is_connected) {
+                    $(id_control).attr("src", SERVER_STATUS_IMG.ONLINE);
+                } else {
+                    $(id_control).attr("src", SERVER_STATUS_IMG.OFFLINE);
+                }
+            }
+            
+            function handle_state_changed(stateObj) {                
+                handle_onconnection_changed(stateObj.host, stateObj.status === CONNECTED_STATUS.CONNECTED);
+            }
+            
+            //on connetion, updates connection state and sends subscribe request
+            socket.on('connect', function(data){
+                socket.emit('subscribe_redis', {channel:'<%= back_end.pub_sub_channel_client_state %>'});
+            });
+
+            //when reconnection is attempted, updates status 
+            socket.on('reconnecting', function(data){
+            });
+
+            //on new message adds a new message to display
+            socket.on('message', function (data) {
+                var msg = data.text;
+                
+                if (data.channel === '<%= back_end.pub_sub_channel_client_state %>') {
+                    var stateObj = parse_state_msg(msg);
+                    if (stateObj == undefined) {
+                        return;
+                    }
+                    
+                    handle_state_changed(stateObj);
+                }
+            });
+            
+        </script>
+
+    </head>
+    <body>
+        <div class="container">
+            <% if (domains.length > 0) { %>
+            <div class="well">                
+                    <h2>Registered domains:</h2>
+                    <table class="table">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Date created</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% for (var i = 0; i < domains.length; i++) { %>
+                        <tr>
+                            <td><%= i + 1 %></td>
+                            <td><img id="status_img<%= domains[i].name.replace('.', '_') %>" src="images/offline.png"/> <%= domains[i].name %></td>
+                            <td><%= domains[i].created_date %></td>
+                        </tr>    
+                        <% } %>
+                    </tbody>              
+                    </table>
+            </div>
+            <% } %> 
+        </div>
+    </body>
+</html>

@@ -1,0 +1,313 @@
+<!doctype html>
+<html>
+    <head>
+        <title><%- site.title %></title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+        <style>
+            body         { padding-top:80px; word-wrap:break-word; }
+        </style>
+        
+        <script src="scripts/script.js" type="text/javascript"></script>
+        <script src="<%= site.domain%>:<%= back_end.socketio_port %>/socket.io/socket.io.js"></script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script>
+            const GB = (1024*1024*1024)
+            
+            //socket io client
+            //var io = require('socket.io');
+            var socket = io.connect('<%= site.domain %>:<%= back_end.socketio_port %>');
+            
+            function sync_server_config_local(id) {
+              var local_host = document.getElementById("localhost_host").value;
+              return sync_server_config(id, local_host, socket);
+            }
+            
+            function set_settings_local(id) {
+              var server_type = $('#connection_settings .active > a').attr('aria-controls') == "external" ? 1 : 0;
+              
+              var local_host = document.getElementById("localhost_host").value;
+              var local_port = document.getElementById("localhost_port").value;              
+              var content_path = document.getElementById('localhost_content').value;
+              
+              var external_host = document.getElementById('external_host').value; 
+              var external_port = document.getElementById('external_port').value;
+              
+              var private_site = document.getElementById('private_site').checked ? 1 : 0;
+              
+              var http_handlers_utls = [];              
+              var urls_handlers_table = document.getElementById('urls_handlers_table');
+              for (var i = 0, row; row = urls_handlers_table.rows[i]; i++) {
+                 var url = { url : row.cells[1].firstChild.nodeValue,   
+                             handler : row.cells[2].firstChild.nodeValue };
+                http_handlers_utls.push(url);
+              }
+              
+              var http_server_sockets = [];
+              var socket_urls_table = document.getElementById('socket_urls_table');
+              for (var i = 0, row; row = socket_urls_table.rows[i]; i++) {
+                 var url = { type : row.cells[1].firstChild.nodeValue,   
+                             path : row.cells[2].firstChild.nodeValue };
+                http_server_sockets.push(url);
+              }
+              
+              var config = { "local_host": local_host + ':' + local_port, 
+                             "content_path": content_path, 
+                             "private_site": private_site, 
+                             "external_host": external_host + ':' + external_port, 
+                             "server_type": server_type, 
+                             "http_handlers_utls": http_handlers_utls, 
+                             "http_server_sockets": http_server_sockets 
+                           };
+              return set_server_config(id, local_host, "'" + JSON.stringify(config) + "'", socket);
+            }
+            
+            function setServerType(type) {
+                if (type == SERVER_SETTING_HTTP_SERVER_TYPE.LOCAL_SERVER){
+                    document.forms["server_type"]["server_type_local"].checked = true;
+                } else {
+                    document.forms["server_type"]["server_type_external"].checked = true;
+                }
+            }
+            
+            function drawUrlHandlersTable(urls) {
+                $('#urls_handlers_table tr').remove();
+                for (var i = 0; i < urls.length; i++) {
+                    $('#urls_handlers_table').append('<tr><td>' + (i + 1) + '</td>' + '<td>' + urls[i].url + '</td>' + '<td>' + urls[i].handler + '</td></tr>');
+                }
+            }
+            
+            function drawSocketsPathTable(sockets) {
+                $('#socket_urls_table tr').remove();
+                for (var i = 0; i < sockets.length; i++) {
+                    $('#socket_urls_table').append('<tr><td>' + (i + 1) + '</td>' + '<td>' + sockets[i].type + '</td>' + '<td>' + sockets[i].path + '</td></tr>');
+                }
+            }
+            
+            function handle_onconnection_changed(is_connected) {
+                if (is_connected) {
+                    $('#status_label').html(SERVER_STATUS.ONLINE);
+                    $('#status_img').attr("src", SERVER_STATUS_IMG.ONLINE);
+                    $('#info_button').prop('disabled', false);
+                    $('#get_config_button').prop('disabled', false);
+                    $('#set_config_button').prop('disabled', false);
+                } else {
+                    $('#status_label').html(SERVER_STATUS.OFFLINE);
+                    $('#status_img').attr("src", SERVER_STATUS_IMG.OFFLINE);
+                    $('#info_button').prop('disabled', true);
+                    $('#get_config_button').prop('disabled', true);
+                    $('#set_config_button').prop('disabled', true);
+                    
+                    $('#os_label').html(SERVER_OS_DEFAULT_LABEL);
+                    $('#cpu_label').html(SERVER_CPU_DEFAULT_LABEL);
+                    $('#ram_label').html(SERVER_RAM_DEFAULT_LABEL);
+                                       
+                    drawUrlHandlersTable([]);
+                    drawSocketsPathTable([]);
+                }
+            }
+            
+            function handle_state_changed(stateObj) {
+                if(stateObj.host !== '<%- domain_name %>'){
+                    return;
+                }
+                
+                handle_onconnection_changed(stateObj.status === CONNECTED_STATUS.CONNECTED);
+            }
+            
+            function handle_command_received(msgObj) {
+                if ('<%- user._id %>' !== msgObj.id) {
+                    return;
+                }
+                
+                var is_ok = is_succsess_command(msgObj);
+                
+                if (is_ping_command(msgObj)) {
+                    handle_onconnection_changed(is_ok);
+                } else if(is_info_command(msgObj)) {
+                    if (is_ok) {
+                        var system_info = JSON.parse(msgObj.args);
+                        $('#os_label').html(system_info.os);
+                        $('#cpu_label').html(system_info.cpu);
+                        var ram_total_gb = system_info.ram_total/GB;
+                        var ram_total_fr = system_info.ram_free/GB;
+                        $('#ram_label').html(ram_total_gb.toFixed(2) + " GB (" + ram_total_fr.toFixed(2) + " GB free)");
+                    } else {
+                        $('#os_label').html(SERVER_OS_DEFAULT_LABEL);
+                        $('#cpu_label').html(SERVER_CPU_DEFAULT_LABEL);
+                        $('#ram_label').html(SERVER_RAM_DEFAULT_LABEL);
+                    }
+                } else if(is_config_command(msgObj)) {
+                    if (is_ok) {
+                        var config = JSON.parse(msgObj.args);
+                        var local_host_splited = config.local_host.split(':');
+                        $('#local_host').val(local_host_splited[0]);
+                        $('#localhost_port').val(local_host_splited[1]);
+                        $('#localhost_content').val(config.content_path);
+                        
+                        var external_host_splited = config.external_host.split(':');
+                        $('#external_host').val(external_host_splited[0]); 
+                        $('#external_port').val(external_host_splited[1]);
+                        
+                        $('#private_site').prop('checked', config.private_site);
+                        
+                        if (config.server_type == 0) {
+                          $('#connection_settings a[href="#local"]').tab('show');
+                        } else {
+                          $('#connection_settings a[href="#external"]').tab('show');
+                        }                        
+                        
+                        drawUrlHandlersTable(config.http_handlers_utls);
+                        drawSocketsPathTable(config.http_server_sockets);
+                        
+                    } else {                        
+                        drawUrlHandlersTable([]);
+                        drawSocketsPathTable([]);
+                    }
+                }
+            }
+            
+            //on connetion, updates connection state and sends subscribe request
+            socket.on('connect', function(data){
+                socket.emit('subscribe_redis', {channel:'<%= back_end.pub_sub_channel_out %>'});
+                socket.emit('subscribe_redis', {channel:'<%= back_end.pub_sub_channel_client_state %>'});
+            });
+
+            //when reconnection is attempted, updates status 
+            socket.on('reconnecting', function(data){
+            });
+
+            //on new message adds a new message to display
+            socket.on('message', function (data) {
+                var msg = data.text;
+                
+                if (data.channel === '<%= back_end.pub_sub_channel_out %>') {
+                    var msgObj = parse_command_out(msg);
+                    if(msgObj == undefined){
+                        return;
+                    }
+                    
+                    handle_command_received(msgObj);
+                } else if(data.channel === '<%= back_end.pub_sub_channel_client_state %>') {
+                    var stateObj = parse_state_msg(msg);
+                    if(stateObj == undefined){
+                        return;
+                    }
+                    
+                    handle_state_changed(stateObj);
+                }
+            });
+            
+            function init() {
+                ping_server('<%- user._id %>', '<%- domain_name %>', socket);
+                $('#status_label').html(SERVER_STATUS.OFFLINE);
+                $('#status_img').attr("src", SERVER_STATUS_IMG.OFFLINE);
+                $('#os_label').html(SERVER_OS_DEFAULT_LABEL);
+                $('#cpu_label').html(SERVER_CPU_DEFAULT_LABEL);
+                $('#ram_label').html(SERVER_RAM_DEFAULT_LABEL);
+            }
+        </script>
+
+    </head>
+    <body onload = "init()">
+        <div class="row">
+            <div class="container">
+                <legend id="server_name_label"><%- domain_name %></legend>
+                <div class="col-sm-4">
+                    <div class="well">                        
+                        Status: <img id="status_img" src="images/offline.png"/> <label id="status_label"></label><br>
+                        Os: <label id="os_label"></label><br>
+                        Processor: <label id="cpu_label"></label><br>
+                        Installed memory(RAM): <label id="ram_label"></label>
+                    </div>
+                    <button id="info_button" disabled onclick="server_info('<%- user._id %>', '<%- domain_name %>', socket)">Info</button>
+                </div>
+                
+                <div class="col-sm-8">
+                    <div class="well">
+                            <div class="row">
+                                <ul class="nav nav-tabs" role="tablist" id="connection_settings">
+                                  <li role="presentation" class="active">
+                                    <a href="#local" aria-controls="local" role="tab" data-toggle="tab">Local</a>
+                                  </li>
+                                  <li role="presentation">
+                                    <a href="#external" aria-controls="external" role="tab" data-toggle="tab">External</a>
+                                  </li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                  <p>&nbsp;</p>
+                                  <div role="tabpane2" class="tab-pane form-inline active" id="local">
+                                    <div>
+                                      <label>
+                                      Host: <input type="text" disabled name="Host" class="form-control" id="localhost_host" value='<%- domain_name %>'>
+                                      </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                        Port: <input type="number" min="1024" max="65535" name="Port" class="form-control" id="localhost_port" value=8080>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                        Conten-path: <input type="text" name="Conten-path" class="form-control" id="localhost_content" value="content">
+                                        </label>
+                                    </div>
+                                  </div>
+                                  <div role="tabpane2" class="tab-pane form-inline" id="external">
+                                    <div>
+                                      <label> 
+                                      Host: <input type="text" name="Host-ex" class="form-control" id="external_host" value="localhost">
+                                      </label>
+                                    </div>
+                                    <div>
+                                      <label>
+                                      Port: <input type="number" min="1024" max="65535" name="Port-ex" class="form-control" id="external_port" value=80>
+                                      </label>
+                                    </div>          
+                                  </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                              <label>
+                                <input type="checkbox" id="private_site"> Private site
+                              </<label>
+                            </div>
+                            
+                            <div>
+                                Urls handlers:
+                                <table class="table" id="urls_handlers_table">
+                                    <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>Url</th>
+                                        <th>Handler</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>  
+                                </table>
+                                Server sockets:
+                                <table class="table" id="socket_urls_table">
+                                    <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>Socket type</th>
+                                        <th>Socket path</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>  
+                                </table>
+                            </div>
+                    </div>
+                    <button id="get_config_button" disabled onclick="sync_server_config_local('<%- user._id %>')">Get settings</button>
+                    <button id="set_config_button" disabled onclick="set_settings_local('<%- user._id %>')">Apply settings</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

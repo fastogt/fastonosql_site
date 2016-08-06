@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+    <head>
+        <title><%- site.title %></title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+        <style>
+            body         { padding-top:80px; word-wrap:break-word; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="well">                
+                    <h2>Availible templates:</h2>
+                    <table class="table">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>[http_handlers_utls] config file</th>
+                        <th>Availible since</th>
+                        <th>Download link</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% if (templates.length > 0) { %>
+                            <% for (var i = 0; i < templates.length; i++) { %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td><%= templates[i].name %></td>
+                                <td>
+                                    <% for (var j = 0; j < templates[i].http_handlers_utls.length; ++j) { %>
+                                    <%= templates[i].http_handlers_utls[j].key %>=<%= templates[i].http_handlers_utls[j].value %>
+                                    <% } %>
+                                </td>
+                                <td>                                    
+                                    <%=
+                                        (parseInt((templates[i].version) >> 16) & 0xFF) + "." + 
+                                        (parseInt(templates[i].version >> 8) & 0xFF) + "." + 
+                                        (parseInt(templates[i].version & 0xFF)) + "."                                       
+                                    %>
+                                </td>
+                                <td>
+                                    <form action=<%= templates[i].download_link %> method="get">
+                                        <button type="submit" class="btn btn-danger btn-small">Download</button>
+                                    </form>
+                                </td>
+                            </tr>    
+                            <% } %>
+                        <% } %> 
+                    </tbody>
+                    </table>
+            </div>
+        </div>
+    </body>
+</html>

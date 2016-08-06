@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+<head>
+    <title><%- site.title %></title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-56403848-6', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <style>
+        body         { padding-top:80px; }
+    </style>
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#download">Download</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1><img src="logo64x64.png"/> Site on your device</h1>
+
+        <p>Login or Register with:</p>
+        <a href="/login" class="btn btn-warning"><span class="fa fa-sign-in"></span> Sign in</a>
+        <a href="/signup" class="btn btn-warning"><span class="fa fa-sign-in"></span> Sign up</a>
+        <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+        <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
+        <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google+</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row text-center">
+    
+        <div class="col-sm-3">
+            <div class="github">
+                <a aria-label="Watch fastogt/siteonyourdevice on GitHub" data-count-aria-label="# watchers on GitHub" data-count-api="/repos/fastogt/siteonyourdevice#subscribers_count" data-count-href="/fastogt/siteonyourdevice/watchers" data-icon="octicon-eye" href="https://github.com/fastogt/siteonyourdevice" class="github-button">Watch</a>
+                <a aria-label="Star fastogt/siteonyourdevice on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/fastogt/siteonyourdevice#stargazers_count" data-count-href="/fastogt/siteonyourdevice/stargazers" data-icon="octicon-star" href="https://github.com/fastogt/siteonyourdevice" class="github-button">Star</a>
+                <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+            </div>
+        </div>
+        
+        <div class="col-sm-3">
+            <div class="facebook">
+                <div id="fb-root"></div>
+                <script>(function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=1001700446558032";
+                    fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
+                </script>
+                <div class="fb-like" data-href="<%= site.domain %>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>	
+            </div>
+        </div>
+        
+        <div class="col-sm-3">
+            <div class="twitter">
+                <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="SiteOnDevice">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                <a href="https://twitter.com/SiteOnDevice" class="twitter-follow-button" data-show-count="false">Follow @SiteOnDevice</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+        </div>
+        
+        <div class="col-sm-3">
+            <div class="google_plus">
+                <div class="g-plus" data-action="share" data-annotation="bubble"></div>
+                <script type="text/javascript">
+                    window.___gcfg = {lang: 'en-GB'};
+                    (function() {
+                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                    po.src = 'https://apis.google.com/js/platform.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                    })();
+                </script>
+                <script src="https://apis.google.com/js/platform.js" async defer>
+                    {lang: 'en-GB'}
+                </script>
+                <div class="g-plusone" data-size="medium" data-href="<%= site.domain%>"></div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div class="container">
+    <div class="text-left">
+        <h1 id="about"><%= site.description %></h1>
+        <h3>Remote control any computer/mobile/device over the internet.</h3>
+
+        <div class="well">
+            <p><b>How to use:</b></p>
+            1) You register new account.<br>
+            2) Register domain which you want.<br>
+            3) Download our client(lightweight and fast Web Server).<br>
+            4) Install and start client, specify path which web content you want share with internet.<br>
+            5) Tell your friends about your own web site.
+        </div>
+        
+        <div class="well">
+            <p><b>Our client(Web Server) has next features:</b></p>
+            - Http 1.1 protocol.<br>
+            - Http 2 protocol.<br>
+            - WebSocket support.<br>
+            - IPV6 connections.<br>
+            - Proxy to external http server.<br>
+            - Basic & digest authentication for secure access.<br>
+            - Directory index.<br>
+            - Cross-platform support.<br>
+            - Open source(we only transfer web content, you can check that on next link: <a href="<%= project.github_link %>">project sources</a>).
+        </div>
+        
+        <div class="well">
+            <h3>Compare with standard internet domains:</h3>
+            <p>
+                <b>Advantages:</b><br>
+                1) Free domain address which proxies over <a href="<%= site.domain %>"><%= project.project_name %></a> site.<br>
+                2) Free hosting because you use your device.<br>
+                3) Work on all devices.<br>
+                4) Remote control access to device.<br>
+                5) Direct access to web server if server is placed on visible network.
+            </p>
+
+            <p>
+                <b>Disadvantages:</b><br>
+                1) It is not direct domain (proxies over <a href="<%= site.domain %>"><%= project.project_name %></a>).<br>
+                2) Young solution.<br>
+                3) Support only clear html/js pages.
+            </p>
+        </div>
+        
+        <p>
+            In addition you are able to use our program for your own purposes, all free and we love Open source, We are waiting for your feedback!<br>
+            Please write any issues and proposals to <a href="<%= project.github_issues_link %>">GitHub Issues.</a><br>
+        </p>
+    </div>
+</div>
+
+
+<div class="navbar navbar-inverse navbar-fixed-buttom">
+  <div class="container">
+    <div class="navbar-inner navbar-content-center">
+            <span class="navbar-text">
+            <div>
+                <h4>Contribute</h4>
+                    <p>Please submit any issues, bugs and proposals via GitHub Issues:<br />
+                    <a href="<%= project.github_issues_link %>" style="font-weight: bold;"><%= project.project_name %> in GitHub</a><br />
+                    Thank you for finding time to help us!</p>
+            </div>
+            <p><%= company.copyright %></p>
+            <p> Website development - <a href="<%= company.domain %>"><%= company.description %></a></p>
+        </span>
+        </div>
+  </div>
+</div>
+
+</body>
+</html>
