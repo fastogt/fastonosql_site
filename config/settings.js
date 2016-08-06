@@ -5,6 +5,6 @@ module.exports = {
     pub_sub_channel_in : 'COMMANDS_IN',
     pub_sub_channel_out : 'COMMANDS_OUT',
     pub_sub_channel_client_state : 'CLIENTS_STATE',
-    client_version : '0.0.2',
-    client_version_type : '-beta8-'
+    rabbitmq_host: 'localhost',
+    app_version : '0.7.2'
 };
