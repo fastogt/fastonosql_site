@@ -12,7 +12,7 @@
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        ga('create', 'UA-56403848-6', 'auto');
+        ga('create', <%- site.google_analitics_token %>, 'auto');
         ga('send', 'pageview');
     </script>
     <style>
@@ -41,7 +41,7 @@
 
 <div class="container">
     <div class="jumbotron text-center">
-        <h1><img src="logo64x64.png"/> Site on your device</h1>
+        <h1><img src="logo64x64.png"/><%- site.description %></h1>
 
         <p>Login or Register with:</p>
         <a href="/login" class="btn btn-warning"><span class="fa fa-sign-in"></span> Sign in</a>
@@ -111,46 +111,26 @@
 <div class="container">
     <div class="text-left">
         <h1 id="about"><%= site.description %></h1>
-        <h3>Remote control any computer/mobile/device over the internet.</h3>
-
+      
         <div class="well">
-            <p><b>How to use:</b></p>
-            1) You register new account.<br>
-            2) Register domain which you want.<br>
-            3) Download our client(lightweight and fast Web Server).<br>
-            4) Install and start client, specify path which web content you want share with internet.<br>
-            5) Tell your friends about your own web site.
-        </div>
-        
-        <div class="well">
-            <p><b>Our client(Web Server) has next features:</b></p>
-            - Http 1.1 protocol.<br>
-            - Http 2 protocol.<br>
-            - WebSocket support.<br>
-            - IPV6 connections.<br>
-            - Proxy to external http server.<br>
-            - Basic & digest authentication for secure access.<br>
-            - Directory index.<br>
-            - Cross-platform support.<br>
-            - Open source(we only transfer web content, you can check that on next link: <a href="<%= project.github_link %>">project sources</a>).
-        </div>
-        
-        <div class="well">
-            <h3>Compare with standard internet domains:</h3>
+            <h3>Currently we support next databases:</h3>
+            <p>
+                Redis
+                Memcached
+                SSDB
+                LevelDB
+                RocksDB
+                UnQLite
+                LMDB
+            </p>
+            For all this databases you can connect and use them in any way you need. Also FastoNoSQL is IDE tool for NoSQL which works on the most famous platforms like: Windows, Linux, MacOSX, Android, FreeBSD.
             <p>
                 <b>Advantages:</b><br>
-                1) Free domain address which proxies over <a href="<%= site.domain %>"><%= project.project_name %></a> site.<br>
-                2) Free hosting because you use your device.<br>
-                3) Work on all devices.<br>
-                4) Remote control access to device.<br>
-                5) Direct access to web server if server is placed on visible network.
-            </p>
-
-            <p>
-                <b>Disadvantages:</b><br>
-                1) It is not direct domain (proxies over <a href="<%= site.domain %>"><%= project.project_name %></a>).<br>
-                2) Young solution.<br>
-                3) Support only clear html/js pages.
+                Open source
+                Cross-platform
+                Flexible and extending for future databases
+                Simple code
+                Great solutions
             </p>
         </div>
         

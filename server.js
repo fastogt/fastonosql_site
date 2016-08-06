@@ -40,7 +40,8 @@ app.locals.site = {
     domain: 'http://fastonosql.com',
     description: 'FastoNoSQL it is GUI platform for NoSQL databases.',
     public_directory: public_dir_abs_path,
-    users_directory: public_downloads_users_dir_abs_path
+    users_directory: public_downloads_users_dir_abs_path,
+    google_analitics_token: settings_config.google_analitics_token
 };
 app.locals.project = {
     project_name: 'FastoNoSQL',
