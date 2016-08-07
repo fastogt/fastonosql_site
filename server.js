@@ -37,7 +37,7 @@ var listener = io.listen(server);
 // settings
 app.locals.site = {
     title: 'FastoNoSQL',
-    domain: 'http://fastonosql.com',
+    domain: 'http://46.101.179.225',
     description: 'FastoNoSQL it is GUI platform for NoSQL databases.',
     public_directory: public_dir_abs_path,
     users_directory: public_downloads_users_dir_abs_path,
