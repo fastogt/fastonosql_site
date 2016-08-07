@@ -1,6 +1,6 @@
 var amqp = require('amqp')
 
-var TIMEOUT = 5 * 60000; //time to wait for response in ms
+var TIMEOUT = 10 * 60000; //time to wait for response in ms
 var CONTENT_TYPE = 'application/json';
 
 exports = module.exports = AmqpRpc;
