@@ -15,7 +15,7 @@ var public_downloads_users_dir_abs_path = public_downloads_dir_abs_path + '/user
 // get all the tools we need
 var express  = require('express');
 var app      = express();
-var port     = process.env.PORT || settings_config.http_server_port;
+var port     = settings_config.http_server_port;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -162,4 +162,4 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 // launch ======================================================================
 app.listen(port);
 console.log('Http server ready for requests');
-//server.listen(app.locals.back_end.socketio_port);
+server.listen(app.locals.back_end.socketio_port);

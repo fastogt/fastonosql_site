@@ -24,9 +24,13 @@ module.exports = function(app, passport) {
           console.log('scan folder: ', dir);
           var results = [];
           fs.readdir(dir, function(err, list) {
-            if (err) return done(err);
+            if (err) {
+              return done(err, []);
+            }
             var pending = list.length;
-            if (!pending) return done(null, results);
+            if (!pending) {
+              return done(null, results);
+            }
             list.forEach(function(file) {
               var file_name = file;
               file = path.resolve(dir, file);
@@ -35,7 +39,9 @@ module.exports = function(app, passport) {
                 } else {
                   var path = file.replace(app.locals.site.public_directory, '');
                   results.push({ 'path' : path, 'file_name' : file_name});
-                  if (!--pending) done(null, results);
+                  if (!--pending) { 
+                    done(null, results);
+                  }
                 }
               });
             });
