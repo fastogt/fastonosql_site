@@ -172,27 +172,26 @@
     </div>
     
     <div class="col-sm-12 col-md-12 col-lg-12">
-        <h2><span class="os-icon"><i class="fa fa-cogs"></i></span> Connection settings:</h2>
+        <h2><span class="os-icon"><i class="fa fa-cogs"></i></span> Profile settings:</h2>
       <div>
         <ul class="nav nav-tabs" role="tablist" id="connection_settings">
           <li role="presentation" class="active">
-            <a href="#local" aria-controls="local" role="tab" data-toggle="tab">Local</a>
+            <a href="#base" aria-controls="base" role="tab" data-toggle="tab">Base</a>
           </li>
           <li role="presentation">
-            <a href="#external" aria-controls="external" role="tab" data-toggle="tab">External</a>
+            <a href="#advanced" aria-controls="advanced" role="tab" data-toggle="tab">Advanced</a>
           </li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
-          <p>&nbsp;</p>
-          <div role="tabpane2" class="tab-pane form-inline active" id="local">
+          <div role="tabpane2" class="tab-pane form-inline active" id="base">
             <div>
               <label>
               Email: <input type="text" disabled name="Host" class="form-control" id="localhost_host" value='<%- user.local.email %>'>
               </label>
             </div>
           </div>
-          <div role="tabpane2" class="tab-pane form-inline" id="external">        
+          <div role="tabpane2" class="tab-pane form-inline" id="advanced">        
           </div>
         </div>
         
