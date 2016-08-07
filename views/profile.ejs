@@ -89,30 +89,14 @@
         <div class="col-sm-6">
         <% if (user.isReadOnlyMode()) { %>
             <div class="alert alert-danger">Read only mode</div>
-        <% } %> 
-        <div class="row">
-            <div class="col-sm-6">
-                <form action="/servers_status" method="get">
-                    <button type="submit" class="btn btn-info btn-small">All domains</button>
-                </form>
+        <% } else { %> 
+            <div class="row">
+                <div class="col-sm-6">
+                    <form action="/build_installer_request" method="get">
+                        <button type="submit" class="btn btn-primary btn-xs">Build <%= project.project_name %> installer</button>
+                    </form>
+                </div>
             </div>
-        </div>
-       
-        <% if (!user.isReadOnlyMode()) { %>
-            <h2>Registered domains:</h2>
-            <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Date created</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>    
-            </table>
         <% } %>
         
         </div>
