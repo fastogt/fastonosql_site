@@ -50,7 +50,10 @@ app.locals.project = {
     project_version_type: settings_config.app_version_type,
     github_link: 'https://github.com/fastogt/fastonosql',
     github_issues_link: 'https://github.com/fastogt/fastonosql/issues',
-    github_link_wihout_host: 'fastogt/fastonosql'
+    github_link_wihout_host: 'fastogt/fastonosql',
+    twitter_name: 'FastoNoSQL',
+    twitter_link: 'https://twitter.com/SiteOnDevice',
+    facebook_appid: '289213528107502'
 };
 app.locals.author = {
     name: 'Topilski Alexandr',
