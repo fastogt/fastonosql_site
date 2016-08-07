@@ -18,9 +18,8 @@ module.exports = function(app, passport) {
         res.render('index.ejs');
     });
     
-    app.post('/build_server_request', function(req, res) {
-        var user = req.user;        
-        var domain_name = req.body.domain_name;        
+    app.post('/build_installer_request', function(req, res) {
+        var user = req.user;     
         var walk = function(dir, done) {  
           console.log('scan folder: ', dir);
           var results = [];
@@ -44,12 +43,12 @@ module.exports = function(app, passport) {
         };
         
         walk(app.locals.site.users_directory + '/' + user.local.email, function(err, results) {
-          if (err) 
+          if (err) {
             console.error(err);
+          }
           
-          res.render('build_server_request.ejs', {
+          res.render('build_installer_request.ejs', {
             user : user,
-            domain_name : domain_name,
             builded_packages : results
           });
         });
