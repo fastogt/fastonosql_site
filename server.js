@@ -46,12 +46,11 @@ app.locals.site = {
 app.locals.project = {
     project_name: 'FastoNoSQL',
     project_name_lowercase: 'fastonosql',
+    project_version: settings_config.app_version,
+    project_version_type: settings_config.app_version_type
     github_link: 'https://github.com/fastogt/fastonosql',
-    github_issues_link: 'https://github.com/fastogt/fastonosql/issues'
-};
-app.locals.back_end = {
-    version : settings_config.app_version,
-    type : settings_config.app_version_type
+    github_issues_link: 'https://github.com/fastogt/fastonosql/issues',
+    github_link_wihout_host: 'fastogt/fastonosql'
 };
 app.locals.author = {
     name: 'Topilski Alexandr',
@@ -74,10 +73,6 @@ listener.on('connection', function (socket) {
     socket.on('subscribe_redis', function (data) {
         console.log('subscribe_redis', data.channel);
         socket.join(data.channel);
-    });
-
-    socket.on('publish_redis', function (msg) {
-        redis_pub.publish(app.locals.back_end.pub_sub_channel_in, msg);
     });
     
     socket.on('publish_rabbitmq', function (msg) {
