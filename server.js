@@ -91,10 +91,7 @@ listener.on('connection', function (socket) {
           socket.emit('status_rabbitmq', { 'email': in_json.email, 'progress': 0, 'message': 'Send request to build server' } ); //
           
           var rpc = new (require('./app/amqprpc'))(rabbit_connection);
-          var branding_variables = '-DUSER_SPECIFIC_DEFAULT_LOGIN=' + in_json.email + ' -DUSER_SPECIFIC_DEFAULT_PASSWORD=' + in_json.password
-          + ' -DUSER_SPECIFIC_DEFAULT_LOCAL_DOMAIN=' + in_json.domain_host + ' -DUSER_SPECIFIC_CONTENT_PATH=' + in_json.content_path
-          + ' -DUSER_SPECIFIC_DEFAULT_EXTERNAL_DOMAIN=' + in_json.external_host + ' -DUSER_SPECIFIC_DEFAULT_PRIVATE_SITE=' + in_json.private_site
-          + ' -DUSER_SPECIFIC_SERVER_TYPE=' + in_json.server_type;
+          var branding_variables = '-DUSER_SPECIFIC_LOGIN=' + in_json.email + ' -DUSER_SPECIFIC_PASSWORD=' + in_json.password;
           
           var request_data_json = {
               'branding_variables': branding_variables,
