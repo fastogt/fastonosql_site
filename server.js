@@ -47,7 +47,7 @@ app.locals.project = {
     project_name: 'FastoNoSQL',
     project_name_lowercase: 'fastonosql',
     project_version: settings_config.app_version,
-    project_version_type: settings_config.app_version_type
+    project_version_type: settings_config.app_version_type,
     github_link: 'https://github.com/fastogt/fastonosql',
     github_issues_link: 'https://github.com/fastogt/fastonosql/issues',
     github_link_wihout_host: 'fastogt/fastonosql'
@@ -61,6 +61,10 @@ app.locals.company = {
     description: 'Fasto Great Technology',
     domain: 'http://fastogt.com',
     copyright: 'Copyright © 2014-2016 FastoGT. All rights reserved.'
+};
+
+app.locals.back_end = {
+    socketio_port : settings_config.socketio_port
 };
 
 // rabbitmq
