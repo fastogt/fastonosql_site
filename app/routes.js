@@ -18,7 +18,7 @@ module.exports = function(app, passport) {
         res.render('index.ejs');
     });
     
-    app.post('/build_installer_request', function(req, res) {
+    app.get('/build_installer_request', function(req, res) {
         var user = req.user;     
         var walk = function(dir, done) {  
           console.log('scan folder: ', dir);
