@@ -68,13 +68,8 @@
               update_bar(responce_json.progress, responce_json.message);             
             });
             
-            function send_build_request(user, password, domain_host, platform, private_site, external_host, server_type, content_path, package_type, bit) {
-              var build_args = { "domain_host": domain_host,
-                             "platform": platform, 
-                             "private_site": private_site, 
-                             "external_host": external_host, 
-                             "server_type": server_type,
-                             "content_path": content_path,
+            function send_build_request(user, password, platform, package_type, bit) {
+              var build_args = { "platform": platform,
                              "package_type" : package_type,
                              "email" : user,
                              "password" : password,
@@ -85,20 +80,11 @@
             }
             
             function send_build_request_local(user, password) {
-              var domain = document.getElementById("localhost_host").value;
-              var domain_port = document.getElementById("localhost_port").value;
-              var domain_host = domain + ':' + domain_port;
               var platform = $('.nav-tabs .active > a').attr('aria-controls');
-              var private_site = document.getElementById('private_site').checked ? 1 : 0;
-              var external = document.getElementById('external_host').value;
-              var external_port = document.getElementById('external_port').value;
-              var external_host = external + ':' + external_port;
-              var server_type = $('#connection_settings .active > a').attr('aria-controls') == "external" ? 1 : 0;
-              var content_path = document.getElementById('localhost_content').value;
               var os_ctrl = $('input[name=os]:checked');
               var package_type = os_ctrl.attr('package_type');
               var bit = parseInt(os_ctrl.attr('bit'));
-              return send_build_request(user, password, domain_host, platform, private_site, external_host, server_type, content_path, package_type, bit);
+              return send_build_request(user, password, platform, package_type, bit);
             }            
         </script>
 </head>

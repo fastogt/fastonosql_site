@@ -73,7 +73,7 @@ app.locals.back_end = {
 // rabbitmq
 var rabbit_connection = amqp.createConnection({ host: settings_config.rabbitmq_host });
 rabbit_connection.on('error', function (err) {
-    console.error("rabbit_connection.on: ", err);
+    console.error("rabbit_connection.on:", err);
 });
 
 listener.on('connection', function (socket) {   
