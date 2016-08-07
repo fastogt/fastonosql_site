@@ -52,7 +52,7 @@ app.locals.project = {
     github_issues_link: 'https://github.com/fastogt/fastonosql/issues',
     github_link_wihout_host: 'fastogt/fastonosql',
     twitter_name: 'FastoNoSQL',
-    twitter_link: 'https://twitter.com/SiteOnDevice',
+    twitter_link: 'https://twitter.com/FastoNoSQL',
     facebook_appid: '289213528107502'
 };
 app.locals.author = {
