@@ -162,4 +162,4 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 // launch ======================================================================
 app.listen(port);
 console.log('Http server ready for requests');
-server.listen(app.locals.back_end.socketio_port);
+//server.listen(app.locals.back_end.socketio_port);

@@ -202,38 +202,12 @@
           <div role="tabpane2" class="tab-pane form-inline active" id="local">
             <div>
               <label>
-              Host: <input type="text" disabled name="Host" class="form-control" id="localhost_host" value='<%- domain_name %>'>
+              Email: <input type="text" disabled name="Host" class="form-control" id="localhost_host" value='<%- user.local.email %>'>
               </label>
-            </div>
-            <div>
-                <label>
-                Port: <input type="number" min="1024" max="65535" name="Port" class="form-control" id="localhost_port" value=8080>
-                </label>
-            </div>
-            <div>
-                <label>
-                Conten-path: <input type="text" name="Conten-path" class="form-control" id="localhost_content" value="content">
-                </label>
             </div>
           </div>
-          <div role="tabpane2" class="tab-pane form-inline" id="external">
-            <div>
-              <label> 
-              Host: <input type="text" name="Host-ex" class="form-control" id="external_host" value="localhost">
-              </label>
-            </div>
-            <div>
-              <label>
-              Port: <input type="number" min="1024" max="65535" name="Port-ex" class="form-control" id="external_port" value=80>
-              </label>
-            </div>          
+          <div role="tabpane2" class="tab-pane form-inline" id="external">        
           </div>
-        </div>
-        
-        <div class="col-sm-12 col-md-12 col-lg-12">
-          <label>
-            <input type="checkbox" id="private_site"> Private site
-          </<label>
         </div>
         
         <div class="col-sm-12 col-md-12 col-lg-12">
