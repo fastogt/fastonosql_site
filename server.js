@@ -36,12 +36,13 @@ var listener = io.listen(server);
 
 // settings
 app.locals.site = {
-    title: 'FastoNoSQL',
+    title: 'FastoNoSQL - cross-platform GUI Manager for Redis, Memcached and SSDB Databases',
     domain: 'http://46.101.179.225',
     description: 'FastoNoSQL it is GUI platform for NoSQL databases.',
     public_directory: public_dir_abs_path,
     users_directory: public_downloads_users_dir_abs_path,
-    google_analitics_token: settings_config.google_analitics_token
+    google_analitics_token: settings_config.google_analitics_token,
+    version: '0.7.9'
 };
 app.locals.project = {
     project_name: 'FastoNoSQL',
