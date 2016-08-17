@@ -38,7 +38,7 @@ var listener = io.listen(server);
 app.locals.site = {
     title: 'FastoNoSQL',
     domain: 'http://46.101.179.225',
-    keyword: 'FastoNoSQL, GUI Manager, Redis gui, Memcached gui, SSDB gui',
+    keywords: 'FastoNoSQL, GUI Manager, Redis gui, Memcached gui, SSDB gui',
     description: 'FastoNoSQL it is GUI platform for NoSQL databases.',
     small_description: 'FastoNoSQL - cross-platform GUI Manager for Redis, Memcached and SSDB Databases.',
     large_description: 'FastoNoSQL — is a cross-platform GUI Manager for Redis, Memcached and SSDB Databases(i.e. Admin GUI Client). Our Desktop Client works on the most amount of Linux systems, also on Windows, Mac OS X, FreeBSD and Android platforms.',
