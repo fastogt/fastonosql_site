@@ -554,6 +554,18 @@ nav ul.sub-menu > li:last-child > a {
     background-repeat: no-repeat;
 }
 
+.intro-item {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(images/bg.png);
+}
+
 #intro.preload .intro-item {
     visibility: hidden;
 }

@@ -36,7 +36,7 @@
               <nav>
                   <ul class="reset" role="navigation">
                       <li class="active"><a href="#">Home</a></li>
-                      <li><a href="#about">About</a></li>
+                      <li><a href="#about">How to use</a></li>
                       <li><a href="#download">Download</a></li>
                   </ul>
               </nav>
@@ -44,7 +44,7 @@
       </div><!-- row -->  
   </header>
       
-  <div class="container">
+  <div class="container intro-item">
       <div class="jumbotron text-center">
           <p>Login or Register with:</p>
           <a href="/login" class="btn btn-warning"><span class="fa fa-sign-in"></span> Sign in</a>
@@ -57,7 +57,7 @@
 
   <div class="container">
       <div class="row text-center">
-        <div class="col-sm-3">
+        <div class="col-sm-3 col-md-3 col-xl-3">
           <div class="github">
             <a aria-label="Watch <%- project.github_link_wihout_host %> on GitHub" data-count-aria-label="# watchers on GitHub" data-count-api="/repos/<%- project.github_link_wihout_host %>#subscribers_count" data-count-href="/<%- project.github_link_wihout_host %>/watchers" data-icon="octicon-eye" href="<%- project.github_link %>" class="github-button">Watch</a>
             <a aria-label="Star <%- project.github_link_wihout_host %> on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/<%- project.github_link_wihout_host %>#stargazers_count" data-count-href="/<%- project.github_link_wihout_host %>/stargazers" data-icon="octicon-star" href="<%- project.github_link %>" class="github-button">Star</a>
@@ -65,7 +65,7 @@
           </div>
         </div>
 
-        <div class="col-sm-3">
+        <div class="col-sm-3 col-md-3 col-xl-3">
           <div class="facebook">
             <div id="fb-root"></div>
             <script>(function(d, s, id) {
@@ -80,7 +80,7 @@
         </div>
       </div>
       
-      <div class="col-sm-3">
+      <div class="col-sm-3 col-md-3 col-xl-3">
         <div class="twitter">
             <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="<%= project.twitter_name %>">Tweet</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -89,7 +89,7 @@
         </div>
       </div>
       
-      <div class="col-sm-3">
+      <div class="col-sm-3 col-md-3 col-xl-3">
           <div class="google_plus">
               <div class="g-plus" data-action="share" data-annotation="bubble"></div>
               <script type="text/javascript">
