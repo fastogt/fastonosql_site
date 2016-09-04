@@ -104,8 +104,6 @@ listener.on('connection', function (socket) {
           
           var request_data_json = {
               'branding_variables': branding_variables,
-              'platform': in_json.platform,
-              'arch': in_json.arch,
               'package_type' : in_json.package_type,
               'destination' : user_package_dir
           };
