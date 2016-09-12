@@ -69,14 +69,12 @@
             });
             
             function send_build_request(user, password, platform, package_type, bit) {
-              var build_args = { 
-                                "id" : '<%= user._id %>',
-                                "platform": platform,
-                                "package_type" : package_type,
-                                "email" : user,
-                                "password" : password,
-                                "arch" : bit
-                              };
+              var build_args = { "platform": platform,
+                             "package_type" : package_type,
+                             "email" : user,
+                             "password" : password,
+                             "arch" : bit
+                           };
               var msg = JSON.stringify(build_args);
               socket.emit('publish_rabbitmq', msg);
             }

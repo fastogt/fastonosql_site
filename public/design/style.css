@@ -52,8 +52,8 @@ body {
 }
 
 .row {
-    margin-right: none !important;
-    margin-left: none !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -129,7 +129,7 @@ img {
 }
 
 section {
-    overflow-x: hidden;
+    overflow-x: initial;
 }
 
 .last-special {
@@ -538,13 +538,13 @@ nav ul.sub-menu > li:last-child > a {
 #intro-wrap {
     position: relative;
     width: 100%;
-    height: 14.333em;
+    height: 20.333em;
     background-position: center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url(img/bg.jpg);
+    background-image: url(img/bg1.png);
 }
 
 #intro {
@@ -591,7 +591,7 @@ nav ul.sub-menu > li:last-child > a {
     z-index: 2;
 }
 
-.caption,
+/*.caption,*/F
 .photocaption {
     position: absolute;
 }
@@ -1637,6 +1637,7 @@ section {
 
 .call-to-action {
     text-align: center;
+    border-top: 1px solid #ccc;
 }
 
 .call-to-action p {
@@ -2843,6 +2844,35 @@ i.fa.dark-grey {
 
 
 /*----------------------------------------------------------------
+    Download
+----------------------------------------------------------------*/
+
+.down-page{
+    background: rgba(26, 24, 87, 0.85);
+    padding-left: 10px;
+    color: #fff;
+    margin-bottom: 15px;
+    margin-top: 25px;
+    border: 4px double rgba(255,255,255,0.8);
+    outline-offset: -5px;
+    min-height: 500px;
+}
+
+.down-h2{
+    color: #fff;
+    font-size: 20px;
+}
+
+.dowm-os{
+    font-size: 30px;
+}
+
+.help-menu{
+    position: fixed;
+    top: 100px;
+}
+
+/*----------------------------------------------------------------
     Footer
 ----------------------------------------------------------------*/
 
@@ -2902,6 +2932,8 @@ footer .row-content.buffer {
 #bottom-footer {
     font-size: 0.667em;
 }
+
+
 
 
 /*----------------------------------------------------------------

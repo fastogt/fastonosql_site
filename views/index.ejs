@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="design/css/layers.min.css" media="screen">
   <link rel="stylesheet" href="design/style.css" media="screen">
-  <script src="design/js/jquery-1.3.2.min.js" type="text/javascript"></script>
   <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
@@ -43,9 +42,9 @@
               <a id="menu-toggle" href="#"><i class="fa fa-bars fa-lg"></i></a>    
               <nav>
                   <ul class="reset" role="navigation">
-                      <li><a href="#">Home</a></li>
-                      <li><a href="#about">How to use</a></li>
-                      <li><a href="#download">Download</a></li>
+                      <li><a href="/">Home</a></li>
+                      <li><a href="/help">How to use</a></li>
+                      <li><a href="/download">Download</a></li>
                   </ul>
               </nav>
           </div><!-- row-content -->  
@@ -58,7 +57,8 @@
     <div class="container intro-item">
       <div class="intro-mockup-wrapper">
         <div class="text-center">
-            <h2 style="color: #fff;">Login or Register with:</h2>
+            <h1 style="color: #fff;">FastoNoSQL - GUI manager for NoSQL Databases</h1>
+            <h3 style="color: #fff;">Login or Register for download:</h3>
             <a href="/login" class="btn btn-warning"><span class="fa fa-sign-in"></span> Sign in</a>
             <a href="/signup" class="btn btn-warning"><span class="fa fa-sign-in"></span> Sign up</a>
             <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
@@ -70,9 +70,9 @@
   </div>  
 
 <div id="main">
-  <div class="container">
-      <div class="row text-center">
-        <div class="col-sm-3">
+  <section class="row section call-to-action first">
+    <div class="row-content buffer even" style="line-height: 0.8;">
+        <div class="column three">
           <div class="github">
             <a aria-label="Watch <%- project.github_link_wihout_host %> on GitHub" data-count-aria-label="# watchers on GitHub" data-count-api="/repos/<%- project.github_link_wihout_host %>#subscribers_count" data-count-href="/<%- project.github_link_wihout_host %>/watchers" data-icon="octicon-eye" href="<%- project.github_link %>" class="github-button">Watch</a>
             <a aria-label="Star <%- project.github_link_wihout_host %> on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/<%- project.github_link_wihout_host %>#stargazers_count" data-count-href="/<%- project.github_link_wihout_host %>/stargazers" data-icon="octicon-star" href="<%- project.github_link %>" class="github-button">Star</a>
@@ -80,7 +80,7 @@
           </div>
         </div>
 
-        <div class="col-sm-3">
+        <div class="column three">
           <div class="facebook">
             <div id="fb-root"></div>
             <script>(function(d, s, id) {
@@ -91,11 +91,11 @@
                       fjs.parentNode.insertBefore(js, fjs);
                   }(document, 'script', 'facebook-jssdk'));
             </script>
-          <div class="fb-like" data-href="<%= site.domain %>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>	
+          <div class="fb-like" style="vertical-align: sub !important;" data-href="<%= site.domain %>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>	
         </div>
       </div>
       
-      <div class="col-sm-3">
+      <div class="column three">
         <div class="twitter">
             <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="<%= project.twitter_name %>">Tweet</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -104,7 +104,7 @@
         </div>
       </div>
       
-      <div class="col-sm-3">
+      <div class="column three">
           <div class="google_plus">
               <div class="g-plus" data-action="share" data-annotation="bubble"></div>
               <script type="text/javascript">
@@ -122,7 +122,7 @@
           </div>
       </div> 
     </div>
-  </div>
+  </section>
 
   <!--content-->
   <section class="row section text-light first">
@@ -143,7 +143,15 @@
                       <li><a href="http://symas.com/mdb/">LMDB</a></li>
                   </ul>
               </p>
-              <p>
+             
+          </div>
+          <div class="side-mockup right-mockup animation">
+            <div class="slider desktop-slider">
+              <div><img src="images/main.png" alt="FastoNoSQL — is a cross-platform open source NoSQL management tool" title="FastoNoSQL Admin GUI" ></div>
+            </div>
+          </div>
+          <div class="column">
+           <p>
                   For all this databases you can connect and use them in any way you need. 
                   Also FastoNoSQL is IDE tool for NoSQL which works on the most famous platforms like: Windows, Linux, MacOSX, Android, FreeBSD.
               </p>
@@ -166,11 +174,6 @@
               <a class="button transparent white" href="download.html">Download</a>
               <a class="button transparent white" href="help.html">Info</a>
               <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
-          </div>
-          <div class="side-mockup right-mockup animation">
-            <div class="slider desktop-slider">
-              <div><img src="images/main_window_linux.png" alt="FastoNoSQL — is a cross-platform open source NoSQL management tool" title="FastoNoSQL Admin GUI" ></div>
-            </div>
           </div>
       </div>  
   </section>  
@@ -294,7 +297,7 @@
       </div>                      
       <div class="side-mockup left-mockup animation">
           <div class="slider desktop-slider">
-            <div><img src="/images/common/ssdb_workflow.png" alt="SSDB support" title="FastoNoSQL - SSDB support"></div>
+            <div><img src="/images/ssdb/ssdb_workflow.png" alt="SSDB support" title="FastoNoSQL - SSDB support"></div>
           </div>
       </div>                      
     </div>
@@ -312,7 +315,7 @@
     </div>
     <div class="side-mockup right-mockup animation">
       <div class="slider desktop-slider">
-        <div><img src="/images/common/history_graph.png" alt="FastoNoSQL - history of your server GUI" title="FastoNoSQL Admin GUI - History of your server"></div>
+        <div><img src="/images/history_graph.png" alt="FastoNoSQL - history of your server GUI" title="FastoNoSQL Admin GUI - History of your server"></div>
       </div>
     </div>
   </div>  
@@ -379,10 +382,11 @@
           <p class="keep-left"><%- company.copyright %></p>
           <p class="keep-right"><a href="/"><%- site.title %></a> | <a href="sdb.html">Supported DB</a> | <a href="download.html">Download</a> | <a href="help.html">Support</a> | <a href="contacts.html">Contact</a></p>
         </section><!-- bottom-footer -->
-          <p style="display: inline;"> Website development &ndash; <a href="<%- company.domain %>" target="blank" rel="nofollow"><img style="display: inline; margin: 0 !important;" src="design/img/fastogt.png" alt="<%- company.description %>" title="<%- company.description %>" /></a></p>
+          <p> Website development &ndash; <a href="<%- company.domain %>" target="blank" rel="nofollow"><img style="display: inline; margin: 0 !important;" src="design/img/fastogt.png" alt="<%- company.description %>" title="<%- company.description %>" /></a></p>
       </div><!-- row-content -->  
     </div><!-- row -->  
   </footer>
+<script src="https://code.jquery.com/jquery.js"></script>
 <script src="design/js/plugins.js"></script>
 <script src="design/js/beetle.js"></script>
 </body>

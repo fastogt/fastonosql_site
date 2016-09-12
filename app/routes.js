@@ -17,6 +17,14 @@ module.exports = function(app, passport) {
     app.get('/', function(req, res) {
         res.render('index.ejs');
     });
+
+    app.get('/download', function(req, res) {
+        res.render('download.ejs');
+    });
+
+    app.get('/help', function(req, res) {
+        res.render('help.ejs');
+    });
     
     app.get('/build_installer_request', function(req, res) {
         var user = req.user;     
