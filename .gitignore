@@ -1,0 +1,4 @@
+config/database.js
+config/auth.js
+config/settings.js
+public/downloads/*
