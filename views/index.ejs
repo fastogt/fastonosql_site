@@ -3,14 +3,25 @@
 <head>
   <title><%- site.title %></title>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <style type="text/css">@-ms-viewport{width: device-width;}</style>
+  
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="design/css/layers.min.css" media="screen">
+  <link rel="stylesheet" href="design/style.css" media="screen">
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="icon" href="/design/favicon.ico">
   <meta name="description" content="<%- site.large_description %>"/>
   <meta name="keywords" content="<%- site.keywords %>" />
   <meta name="copyright" content="FastoNoSQL.com" />
   <meta name="webmoney.attestation.label" CONTENT="webmoney attestation label#7DF987B9-C387-4DD0-BF5B-F23AB453166D" />
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/design/style.css">
-  <link rel="stylesheet" href="/design/layers.min.css">
+
+
   <script>
      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -19,10 +30,6 @@
      ga('create', <%- site.google_analitics_token %>, 'auto');
      ga('send', 'pageview');
   </script>
-  
-  <style>
-    body         { padding-top:80px; }
-  </style>
 </head>
 
 <body class="page">
@@ -32,32 +39,40 @@
               <div id="brand">
                   <h2 class="reset"><a href="/"><%- site.title %> <%- site.version %></a></h2>
               </div>
-                  <a id="menu-toggle" href="#"><i class="fa fa-bars fa-lg"></i></a>
+              <a id="menu-toggle" href="#"><i class="fa fa-bars fa-lg"></i></a>    
               <nav>
                   <ul class="reset" role="navigation">
-                      <li class="active"><a href="#">Home</a></li>
-                      <li><a href="#about">How to use</a></li>
-                      <li><a href="#download">Download</a></li>
+                      <li><a href="/">Home</a></li>
+                      <li><a href="/help">How to use</a></li>
+                      <li><a href="/download">Download</a></li>
                   </ul>
               </nav>
           </div><!-- row-content -->  
       </div><!-- row -->  
   </header>
-      
-  <div class="container intro-item">
-      <div class="jumbotron text-center">
-          <p>Login or Register with:</p>
-          <a href="/login" class="btn btn-warning"><span class="fa fa-sign-in"></span> Sign in</a>
-          <a href="/signup" class="btn btn-warning"><span class="fa fa-sign-in"></span> Sign up</a>
-          <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
-          <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
-          <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google+</a>
-      </div>
-  </div>
 
-  <div class="container">
-      <div class="row text-center">
-        <div class="col-sm-3 col-md-3 col-xl-3">
+<main role="main">
+  
+  <div id="intro-wrap">    
+    <div class="container intro-item">
+      <div class="intro-mockup-wrapper">
+        <div class="text-center">
+            <h1 style="color: #fff;">FastoNoSQL - GUI manager for NoSQL Databases</h1>
+            <h3 style="color: #fff;">Login or Register for download:</h3>
+            <a href="/login" class="btn btn-warning"><span class="fa fa-sign-in"></span> Sign in</a>
+            <a href="/signup" class="btn btn-warning"><span class="fa fa-sign-in"></span> Sign up</a>
+            <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+            <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
+            <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google+</a>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+<div id="main">
+  <section class="row section call-to-action first">
+    <div class="row-content buffer even" style="line-height: 0.8;">
+        <div class="column three">
           <div class="github">
             <a aria-label="Watch <%- project.github_link_wihout_host %> on GitHub" data-count-aria-label="# watchers on GitHub" data-count-api="/repos/<%- project.github_link_wihout_host %>#subscribers_count" data-count-href="/<%- project.github_link_wihout_host %>/watchers" data-icon="octicon-eye" href="<%- project.github_link %>" class="github-button">Watch</a>
             <a aria-label="Star <%- project.github_link_wihout_host %> on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/<%- project.github_link_wihout_host %>#stargazers_count" data-count-href="/<%- project.github_link_wihout_host %>/stargazers" data-icon="octicon-star" href="<%- project.github_link %>" class="github-button">Star</a>
@@ -65,7 +80,7 @@
           </div>
         </div>
 
-        <div class="col-sm-3 col-md-3 col-xl-3">
+        <div class="column three">
           <div class="facebook">
             <div id="fb-root"></div>
             <script>(function(d, s, id) {
@@ -76,11 +91,11 @@
                       fjs.parentNode.insertBefore(js, fjs);
                   }(document, 'script', 'facebook-jssdk'));
             </script>
-          <div class="fb-like" data-href="<%= site.domain %>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>	
+          <div class="fb-like" style="vertical-align: sub !important;" data-href="<%= site.domain %>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>	
         </div>
       </div>
       
-      <div class="col-sm-3 col-md-3 col-xl-3">
+      <div class="column three">
         <div class="twitter">
             <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="<%= project.twitter_name %>">Tweet</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -89,7 +104,7 @@
         </div>
       </div>
       
-      <div class="col-sm-3 col-md-3 col-xl-3">
+      <div class="column three">
           <div class="google_plus">
               <div class="g-plus" data-action="share" data-annotation="bubble"></div>
               <script type="text/javascript">
@@ -107,7 +122,7 @@
           </div>
       </div> 
     </div>
-  </div>
+  </section>
 
   <!--content-->
   <section class="row section text-light first">
@@ -119,16 +134,24 @@
               </p>
               <p>
                   <ul>
-                      <li><a href="http://redis.io">Redis</a></li>
-                      <li><a href="http://memcached.org">Memcached</a></li>
-                      <li><a href="http://ssdb.io">SSDB</a></li>
-                      <li><a href="http://leveldb.org">LevelDB</a></li>
-                      <li><a href="http://rocksdb.org">RocksDB</a></li>
-                      <li><a href="http://unqlite.org/">UnQLite</a></li>
-                      <li><a href="http://symas.com/mdb/">LMDB</a></li>
+                      <li><a href="http://redis.io" target="_blank">Redis</a></li>
+                      <li><a href="http://memcached.org" target="_blank">Memcached</a></li>
+                      <li><a href="http://ssdb.io" target="_blank">SSDB</a></li>
+                      <li><a href="http://leveldb.org" target="_blank">LevelDB</a></li>
+                      <li><a href="http://rocksdb.org" target="_blank">RocksDB</a></li>
+                      <li><a href="http://unqlite.org/" target="_blank">UnQLite</a></li>
+                      <li><a href="http://symas.com/mdb/" target="_blank">LMDB</a></li>
                   </ul>
               </p>
-              <p>
+             
+          </div>
+          <div class="side-mockup right-mockup animation">
+            <div class="slider desktop-slider">
+              <div><img src="images/main.png" alt="FastoNoSQL — is a cross-platform open source NoSQL management tool" title="FastoNoSQL Admin GUI" ></div>
+            </div>
+          </div>
+          <div class="column">
+           <p>
                   For all this databases you can connect and use them in any way you need. 
                   Also FastoNoSQL is IDE tool for NoSQL which works on the most famous platforms like: Windows, Linux, MacOSX, Android, FreeBSD.
               </p>
@@ -148,14 +171,9 @@
                   We are waiting for your feedback! Please write any issues and proposals to 
                   <a href="<%- project.github_issues_link %>" alt="NoSQL GUI">GitHub Issues</a>.
               </p>
-              <a class="button transparent white" href="download.html">Download</a>
-              <a class="button transparent white" href="help.html">Info</a>
+              <a class="button transparent white" href="/download">Download</a>
+              <a class="button transparent white" href="/help">How to use</a>
               <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
-          </div>
-          <div class="side-mockup right-mockup animation">
-            <div class="slider desktop-slider">
-              <div><img src="images/main_window_linux.png" alt="FastoNoSQL — is a cross-platform open source NoSQL management tool" title="FastoNoSQL Admin GUI" ></div>
-            </div>
           </div>
       </div>  
   </section>  
@@ -167,8 +185,8 @@
         <p> Full Power of Redis shell FastoNoSQL embeds the same redis-cli engine. It means that you can reuse your main skills of redis-cli shell in FastoNoSQL!
             This program provides you with syntax highlighting, autocompletion, different view modes (text, tree, table) and other. With excellent power comes 
             great responsibility. FastoNoSQL won’t stop you from executing "undesired" code. Be attentive, as you do with redis-cli shell!</p>
-            <a class="button transparent white" href="download.html">Download</a>
-            <a class="button transparent white" href="help.html">Info</a>
+            <a class="button transparent white" href="/download">Download</a>
+              <a class="button transparent white" href="/help">How to use</a>
             <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
       </div>                      
       <div class="side-mockup left-mockup animation">
@@ -185,8 +203,8 @@
         <h2>Multiple Shells</h2>
         <p> You can open as many shells as you need. Every tab in FastoNoSQL — is a Redis shell, fully divided from each other. 
           Have many opened shells for single Redis/Memcached server, or many shells for many different servers.</p>
-          <a class="button transparent white" href="download.html">Download</a>
-          <a class="button transparent white" href="help.html">Info</a>
+          <a class="button transparent white" href="/download">Download</a>
+              <a class="button transparent white" href="/help">How to use</a>
           <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
       </div>
       <div class="side-mockup right-mockup animation">
@@ -203,8 +221,8 @@
         <h2>Autocompletion</h2>
         <p> FastoNoSQL supply you with autocompletion for all Redis commands. To assist FastoNoSQL autocompletion — execute your code.
             Autocompletion is also available for Memcached commands.</p>
-            <a class="button transparent white" href="download.html">Download</a>
-            <a class="button transparent white" href="help.html">Info</a>
+            <a class="button transparent white" href="/download">Download</a>
+              <a class="button transparent white" href="/help">How to use</a>
             <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
       </div>                      
       <div class="side-mockup left-mockup animation">
@@ -221,8 +239,8 @@
       <div class="column six">
         <h2>Redis Cluster support</h2>
         <p> Redis Cluster provides a way to run a Redis installation where data is automatically sharded across multiple Redis nodes. FastoNoSQL is able to work with Redis Cluster, we support discovery functionality and you can work with cluser as one server.</p>
-            <a class="button transparent white" href="download.html">Download</a>
-            <a class="button transparent white" href="help.html">Info</a>
+            <a class="button transparent white" href="/download">Download</a>
+              <a class="button transparent white" href="/help">How to use</a>
             <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
       </div>
       <div class="side-mockup right-mockup animation">
@@ -239,8 +257,8 @@
         <h2>Access your server using SSH protocol</h2>
         <p>Access your server using SSH protocol
             You are able to connect to <strong>server via SSH tunnel</strong>. We support two methods of authentication: with password and with private key.</p>
-            <a class="button transparent white" href="download.html">Download</a>
-            <a class="button transparent white" href="help.html">Info</a>
+            <a class="button transparent white" href="/download">Download</a>
+              <a class="button transparent white" href="/help">How to use</a>
             <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
       </div>                      
       <div class="side-mockup left-mockup animation">
@@ -256,8 +274,8 @@
       <div class="column six">
           <h2>Memcached support</h2>
           <p> <a href="http://memcached.org">Memcached</a>  is like Redis and now our program can work with it.  Now you can work directly from <strong>FastoNoSQL with memcached</strong> - memory object caching system.</p>
-          <a class="button transparent white" href="download.html">Download</a>
-          <a class="button transparent white" href="sdb.html">Info</a>
+          <a class="button transparent white" href="/download">Download</a>
+              <a class="button transparent white" href="/help">How to use</a>
           <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
       </div>
       <div class="side-mockup right-mockup animation">
@@ -273,13 +291,13 @@
       <div class="column six push-six last-special">
         <h2>SSDB support</h2>
         <p> <a href="http://ssdb.io">SSDB</a> is a high performance NoSQL database supporting many data structures, an alternative to Redis, and now our program can work with it.</p>
-            <a class="button transparent white" href="download.html">Download</a>
-            <a class="button transparent white" href="sdb.html">Info</a>
+            <a class="button transparent white" href="/download">Download</a>
+              <a class="button transparent white" href="/help">How to use</a>
             <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
       </div>                      
       <div class="side-mockup left-mockup animation">
           <div class="slider desktop-slider">
-            <div><img src="/images/common/ssdb_workflow.png" alt="SSDB support" title="FastoNoSQL - SSDB support"></div>
+            <div><img src="/images/ssdb/ssdb_workflow.png" alt="SSDB support" title="FastoNoSQL - SSDB support"></div>
           </div>
       </div>                      
     </div>
@@ -291,17 +309,19 @@
       <h2>Graphics of history</h2>
       <p><strong>Desktop Managers</strong> makes working with the database more user-friendly. If you want to see the work <strong>history of your server</strong>, you can check "Logging enable" on connection dialog window. 
           And every minute FastoNoSQL executes redis <code>info</code> command, and saves result.</p>
-          <a class="button transparent white" href="download.html">Download</a>
-          <a class="button transparent white" href="help.html">Info</a>
+          <a class="button transparent white" href="/download">Download</a>
+              <a class="button transparent white" href="/help">How to use</a>
           <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
     </div>
     <div class="side-mockup right-mockup animation">
       <div class="slider desktop-slider">
-        <div><img src="/images/common/history_graph.png" alt="FastoNoSQL - history of your server GUI" title="FastoNoSQL Admin GUI - History of your server"></div>
+        <div><img src="/images/history_graph.png" alt="FastoNoSQL - history of your server GUI" title="FastoNoSQL Admin GUI - History of your server"></div>
       </div>
     </div>
   </div>  
   </section>
+  </div>
+</main>
 
   <footer role="contentinfo">
     <div class="row">
@@ -318,25 +338,25 @@
             <table>
               <tr>
                 <td>
-                  <a href="http://redis.io" class="box" style="display:block;width:70px">Redis</a>
-                  <a href="http://qt-project.org" class="box" style="display:block;width:70px">Qt</a>
-                  <a href="https://www.openssl.org" class="box" style="display:block;width:70px">OpenSSL</a>
-                  <a href="http://memcached.org/" class="box" style="display:block;width:70px">Memcached</a>
-                  <a href="http://unqlite.org/" class="box" style="display:block;width:70px">UnQLite</a>
+                  <a href="http://redis.io" target="_blank" class="box" style="display:block;width:70px">Redis</a>
+                  <a href="http://qt-project.org" target="_blank" class="box" style="display:block;width:70px">Qt</a>
+                  <a href="https://www.openssl.org" target="_blank" class="box" style="display:block;width:70px">OpenSSL</a>
+                  <a href="http://memcached.org/" target="_blank" class="box" style="display:block;width:70px">Memcached</a>
+                  <a href="http://unqlite.org/" target="_blank" class="box" style="display:block;width:70px">UnQLite</a>
                 </td>
                 <td>
-                  <a href="http://www.libssh2.org" class="box" style="display:block;width:70px">LibSSH2</a>
-                  <a href="http://www.ssdb.io/" class="box" style="display:block;width:70px">SSDB</a>
-                  <a href="http://www.riverbankcomputing.com/software/qscintilla/intro" class="box" style="display:block;width:70px">QScintilla</a>
-                  <a href="https://cyrusimap.org/" class="box" style="display:block;width:70px">Sasl</a>
-                  <a href="http://symas.com/mdb/" class="box" style="display:block;width:70px">LMDB</a>
+                  <a href="http://www.libssh2.org" target="_blank" class="box" style="display:block;width:70px">LibSSH2</a>
+                  <a href="http://www.ssdb.io/" target="_blank" class="box" style="display:block;width:70px">SSDB</a>
+                  <a href="http://www.riverbankcomputing.com/software/qscintilla/intro" target="_blank" class="box" style="display:block;width:70px">QScintilla</a>
+                  <a href="https://cyrusimap.org/" target="_blank" class="box" style="display:block;width:70px">Sasl</a>
+                  <a href="http://symas.com/mdb/" target="_blank" class="box" style="display:block;width:70px">LMDB</a>
                 </td>
               </tr>
             </table>
           </div>                              
           <div class="widget column three">
             <h4>E-mail:</h4> <p><a href="mailto:<%- author.contact %>"><%- author.contact %></a><br />
-              <a href="contacts.html" class="box">Contacts Us</a></p>
+              
           </div>              
           <div class="widget meta-social column three">
             <h4>Donate</h4>
@@ -355,17 +375,20 @@
                 </td>
               </tr>
               </table>
-              <a href="https://www.bountysource.com/teams/fasto?utm_source=Fasto&utm_medium=shield&utm_campaign=raised"><img src="https://www.bountysource.com/badge/team?team_id=45005&style=raised" style="margin-left: 15%;"/></a>
+              <a href="https://www.bountysource.com/teams/fasto?utm_source=Fasto&utm_medium=shield&utm_campaign=raised" target="_blank"><img src="https://www.bountysource.com/badge/team?team_id=45005&style=raised" style="margin-left: 15%;"/></a>
           </div>                                                      
         </section><!-- top-footer -->
         <section id="bottom-footer">
           <p class="keep-left"><%- company.copyright %></p>
-          <p class="keep-right"><a href="/"><%- site.title %></a> | <a href="sdb.html">Supported DB</a> | <a href="download.html">Download</a> | <a href="help.html">Support</a> | <a href="contacts.html">Contact</a></p>
+          <p class="keep-right"><a href="/"><%- site.title %></a> | <a href="/download">Download</a> | <a href="help">Support</a></p>
         </section><!-- bottom-footer -->
-          <p style="display: inline;"> Website development &ndash; <a href="<%- company.domain %>" target="blank" rel="nofollow"><img style="display: inline; margin: 0 !important;" src="design/img/fastogt.png" alt="<%- company.description %>" title="<%- company.description %>" /></a></p>
+          <p> Website development &ndash; <a href="<%- company.domain %>" target="_blank" rel="nofollow"><img style="display: inline; margin: 0 !important;" src="design/img/fastogt.png" alt="<%- company.description %>" title="<%- company.description %>" /></a></p>
       </div><!-- row-content -->  
     </div><!-- row -->  
   </footer>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="design/js/plugins.js"></script>
+<script src="design/js/beetle.js"></script>
 </body>
 
 </html>
