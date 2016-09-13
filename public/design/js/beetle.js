@@ -189,7 +189,7 @@ jQuery(document).ready(function ($) {
                 if (target.length) {
 
                     $('html,body').animate({
-                        scrollTop: target.offset().top - 50
+                        scrollTop: target.offset().top - 75
                     }, 500);
 
                     return false;
