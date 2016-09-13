@@ -70,88 +70,7 @@
             <!--content-->
             <br />
             <div class="row-content">
-              <div class="column five down-page">
-                <div class="row-content">
-                  <div class="column six">
-                    <h2 class="down-h2">FastoNoSQL <%= site.version %> <br><span class="dowm-os">For Mac OS X:</span></h2>
-                  </div>
-                  <div class="column four" style="float: right; margin-right: -40px; margin-top: -48px;">
-                    <img src="design/img/mac.png" alt="" title="">
-                  </div>
-                </div>
-                <!-- version -->
-                <p>Download Redis, Memcached, SSDB GUI Manager for Mac OS X</p>
-                <p>The latest stable version:</p>
-                <a class="button blue" href="http://fastonosql.com/download-p?platform=macos&filename=fastonosql-<%= site.version %>-x86_64.dmg">64 bit Mac OS X <%= site.version %> Installer (.dmg) </a>
-                <a class="button red" href="http://fastonosql.com/download-p?platform=macos&filename=fastonosql-<%= site.version %>-x86_64.zip">64 bit Application Archive <%= site.version %> (.zip) </a>
-                
-              </div>
-
-              <div class="column five down-page">
-
-                <div class="row-content">
-                  <div class="column six">
-                    <h2 class="down-h2">FastoNoSQL <%= site.version %> <br><span class="dowm-os">For Windows:</span></h2>
-                  </div>
-                  <div class="column four" style="float: right; margin-right: -40px; margin-top: -48px;">
-                    <img src="design/img/win.png" alt="" title="">
-                  </div>
-                </div>
-                <!-- version -->
-                <p>Download Redis, Memcached, SSDB GUI Manager for Windows</p>
-                <p>The latest stable version:</p>
-                <a class="button blue" href="http://fastonosql.com/download-p?platform=windows&filename=fastonosql-<%= site.version %>-x86_64.exe">64 bit Windows <%= site.version %> Installer (.exe)</a>
-                <a class="button red" href="http://fastonosql.com/download-p?platform=windows&filename=fastonosql-<%= site.version %>-x86_64.zip">64 bit Application Archive <%= site.version %> (.zip) </a></br>
-
-                <a class="button blue" href="http://fastonosql.com/download-p?platform=windows&filename=fastonosql-<%= site.version %>-i386.exe">32 bit Windows <%= site.version %> Installer (.exe)</a></br>
-                <a class="button red" href="http://fastonosql.com/download-p?platform=windows&filename=fastonosql-<%= site.version %>-i386.zip">32 bit Application Archive <%= site.version %> (.zip) </a>
-                         
-              </div>
-
-              <div class="column five down-page">
-                
-                <div class="row-content">
-                  <div class="column six">
-                    <h2 class="down-h2">FastoNoSQL <%= site.version %> <br><span class="dowm-os">For Linux:</span></h2>
-                  </div>
-                  <div class="column four" style="float: right; margin-right: -40px; margin-top: -48px;">
-                    <img src="design/img/lin.png" alt="" title="">
-                  </div>
-                </div>
-                <!-- version -->
-                <p>Download Redis, Memcached, SSDB GUI Manager for Linux</p>
-                <p>The latest stable version:</p>
-                <a class="button blue" href="http://fastonosql.com/download-p?platform=linux&filename=fastonosql-<%= site.version %>-x86_64.deb">64 bit Debian/Ubuntu <%= site.version %> Package (.deb)</a>
-                <a class="button red" href="http://fastonosql.com/download-p?platform=linux&filename=fastonosql-<%= site.version %>-x86_64.rpm">64 bit Fedora/openSUSE <%= site.version %> Package (.rpm)</a>
-                <a class="button red" href="http://fastonosql.com/download-p?platform=linux&filename=fastonosql-<%= site.version %>-x86_64.tar.gz">64 bit Application Archive <%= site.version %> (.tar.gz)</a>
-                                  
-              </div>
-
-              <div class="column five down-page">
-                
-                <div class="row-content">
-                  <div class="column six">
-                    <h2 class="down-h2">FastoNoSQL <%= site.version %> <br><span class="dowm-os">For FreeBSD:</span></h2>
-                  </div>
-                  <div class="column four" style="float: right; margin-right: -40px; margin-top: -48px;">
-                    <img src="design/img/bsd.png" alt="" title="">
-                  </div>
-                </div>
-                <!-- version -->
-                <p>Download Redis, Memcached, SSDB GUI Manager for FreeBSD</p>
-                <p>The latest stable version:</p>
-                <a class="button blue" href="http://fastonosql.com/download-p?platform=freebsd&filename=fastonosql-<%= site.version %>-x86_64.tar.gz">64 bit FreeBSD <%= site.version %> Archive (.tar.gz)</a>
-                          
-              </div>
-
-              <div class="column twelve" style="text-align: center;">
-                <h2>FastoNoSQL <%= site.version %> <span class="dowm-os">For Android:</span></h2>
-
-                <a class="button blue" href="http://fastonosql.com/download-p?platform=android&filename=fastonosql-<%= site.version %>-armeabi-v7a.apk">Android <%= site.version %> Installer (.apk)</a>
-                <!-- version -->
-                <p><hr></p>
-                        
-              </div>
+              каруселька, бла-бла-бла...
             </div>                  
             <!--content-->
         <div class="meta-social">
@@ -329,6 +248,18 @@
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="design/js/plugins.js"></script>
 <script src="design/js/beetle.js"></script>
+<script language="JavaScript">
+    function processUser()
+    {
+      var parameters = location.search.substring(1).split("&");
+      var temp = parameters[0].split("=");
+      platform = unescape(temp[1]);
+      temp = parameters[1].split("=");
+      filename = unescape(temp[1]); 
+      ga('send', 'event', 'Download', 'Download for ' + platform, 'Download Page');
+      location.href="http://fastonosql.com/files/" + platform + "/" + filename;
+    }
+    processUser();
+</script>
 </body>
-
 </html>

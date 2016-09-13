@@ -25,6 +25,10 @@ module.exports = function(app, passport) {
     app.get('/help', function(req, res) {
         res.render('help.ejs');
     });
+
+    app.get('/download-p', function(req, res) {
+        res.render('download-p.ejs');
+    });
     
     app.get('/build_installer_request', function(req, res) {
         var user = req.user;     
