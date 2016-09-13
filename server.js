@@ -75,7 +75,12 @@ app.locals.back_end = {
 };
 
 // rabbitmq
-var rabbit_connection = amqp.createConnection({ host: settings_config.rabbitmq_host });
+var rabbit_connection = amqp.createConnection({ 
+                                                host: settings_config.rabbitmq_host, 
+                                                login: settings_config.rabbitmq_login,
+                                                password: settings_config.rabbitmq_password,
+                                                connectionTimeout: settings_config.rabbitmq_connection_timeout 
+                                             });
 rabbit_connection.on('error', function (err) {
     console.error("rabbit_connection.on:", err);
 });
@@ -95,12 +100,10 @@ listener.on('connection', function (socket) {
           socket.emit('status_rabbitmq', { 'email': in_json.email, 'progress': 0, 'message': 'Send request to build server' } ); //
           
           var rpc = new (require('./app/amqprpc'))(rabbit_connection);
-          var branding_variables = '-DUSER_SPECIFIC_ID=' + in_json._id + ' -DUSER_SPECIFIC_LOGIN=' + in_json.email + ' -DUSER_SPECIFIC_PASSWORD=' + in_json.password;
+          var branding_variables = '-DUSER_SPECIFIC_ID=' + in_json.id + ' -DUSER_SPECIFIC_LOGIN=' + in_json.email + ' -DUSER_SPECIFIC_PASSWORD=' + in_json.password;
           
           var request_data_json = {
               'branding_variables': branding_variables,
-              'platform': in_json.platform,
-              'arch': in_json.arch,
               'package_type' : in_json.package_type,
               'destination' : user_package_dir
           };
