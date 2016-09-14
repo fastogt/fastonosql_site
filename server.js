@@ -45,13 +45,13 @@ app.locals.site = {
     public_directory: public_dir_abs_path,
     users_directory: public_downloads_users_dir_abs_path,
     google_analitics_token: settings_config.google_analitics_token,
-    version: '0.7.9'
+    version: '0.0.1'
 };
 app.locals.project = {
-    project_name: 'FastoNoSQL',
-    project_name_lowercase: 'fastonosql',
-    project_version: settings_config.app_version,
-    project_version_type: settings_config.app_version_type,
+    name: 'FastoNoSQL',
+    name_lowercase: 'fastonosql',
+    version: settings_config.app_version,
+    version_type: settings_config.app_version_type,
     github_link: 'https://github.com/fastogt/fastonosql',
     github_issues_link: 'https://github.com/fastogt/fastonosql/issues',
     github_link_wihout_host: 'fastogt/fastonosql',
