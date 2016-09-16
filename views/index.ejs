@@ -36,11 +36,11 @@
               </div>
               <a id="menu-toggle" href="#"><i class="fa fa-bars fa-lg"></i></a>    
               <nav>
-                  <ul class="reset" role="navigation">
-                      <li><a href="/">Home</a></li>
-                      <li><a href="/help">How to use</a></li>
-                      <li><a href="/download">Download</a></li>
-                  </ul>
+                <ul class="reset" role="navigation">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/help">How to use</a></li>
+                    <li><a href="/download">Download</a></li>
+                </ul>
               </nav>
           </div><!-- row-content -->  
       </div><!-- row -->  
@@ -64,254 +64,253 @@
     </div>
   </div>  
 
-<div id="main">
-  <section class="row section call-to-action first">
-    <div class="row-content buffer even" style="line-height: 0.8;">
-      <div class="column three">
-        <div class="github">
-          <a aria-label="Watch <%- site.github_link_without_host %> on GitHub" data-count-aria-label="# watchers on GitHub" data-count-api="/repos/<%- site.github_link_without_host %>#subscribers_count" data-count-href="/<%- site.github_link_without_host %>/watchers" data-icon="octicon-eye" href="<%- site.github_link %>" class="github-button">Watch</a>
-          <a aria-label="Star <%- site.github_link_without_host %> on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/<%- site.github_link_without_host %>#stargazers_count" data-count-href="/<%- site.github_link_without_host %>/stargazers" data-icon="octicon-star" href="<%- site.github_link %>" class="github-button">Star</a>
-          <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+  <div id="main">
+    <section class="row section call-to-action first">
+      <div class="row-content buffer even" style="line-height: 0.8;">
+        <div class="column three">
+          <div class="github">
+            <a aria-label="Watch <%- site.github_link_without_host %> on GitHub" data-count-aria-label="# watchers on GitHub" data-count-api="/repos/<%- site.github_link_without_host %>#subscribers_count" data-count-href="/<%- site.github_link_without_host %>/watchers" data-icon="octicon-eye" href="<%- site.github_link %>" class="github-button">Watch</a>
+            <a aria-label="Star <%- site.github_link_without_host %> on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/<%- site.github_link_without_host %>#stargazers_count" data-count-href="/<%- site.github_link_without_host %>/stargazers" data-icon="octicon-star" href="<%- site.github_link %>" class="github-button">Star</a>
+            <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+          </div>
         </div>
-      </div>
-      <div class="column three">
-        <div class="facebook">
-          <div id="fb-root"></div>
-          <script>(function(d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) return;
-                    js = d.createElement(s); js.id = id;
-                    js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=<%= site.facebook_appid %>";
-                    fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));
-          </script>
-          <div class="fb-like" style="vertical-align: sub !important;" data-href="<%= site.domain %>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>	
-        </div>
-      </div>      
-      <div class="column three">
-        <div class="twitter">
+        <div class="column three">
+          <div class="facebook">
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+                      var js, fjs = d.getElementsByTagName(s)[0];
+                      if (d.getElementById(id)) return;
+                      js = d.createElement(s); js.id = id;
+                      js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=<%= site.facebook_appid %>";
+                      fjs.parentNode.insertBefore(js, fjs);
+                  }(document, 'script', 'facebook-jssdk'));
+            </script>
+            <div class="fb-like" style="vertical-align: sub !important;" data-href="<%= site.domain %>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>	
+          </div>
+        </div>      
+        <div class="column three">
+          <div class="twitter">
             <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="<%= site.twitter_name %>">Tweet</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
             <a href="<%= site.twitter_link %>" class="twitter-follow-button" data-show-count="false">Follow @<%= site.twitter_name %></a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-      </div>      
-      <div class="column three">
-        <div class="google_plus">
-          <div class="g-plus" data-action="share" data-annotation="bubble"></div>
-          <script type="text/javascript">
-              window.___gcfg = {lang: 'en-GB'};
-              (function() {
-                  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                  po.src = 'https://apis.google.com/js/platform.js';
-                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-              })();
-          </script>
-          <script src="https://apis.google.com/js/platform.js" async defer>
-              {lang: 'en-GB'}
-          </script>
-          <div class="g-plusone" data-size="medium" data-href="<%= site.domain%>"></div>
-        </div>
-      </div> 
-    </div>
-  </section>
+          </div>
+        </div>      
+        <div class="column three">
+          <div class="google_plus">
+            <div class="g-plus" data-action="share" data-annotation="bubble"></div>
+            <script type="text/javascript">
+                window.___gcfg = {lang: 'en-GB'};
+                (function() {
+                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                    po.src = 'https://apis.google.com/js/platform.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                })();
+            </script>
+            <script src="https://apis.google.com/js/platform.js" async defer>
+                {lang: 'en-GB'}
+            </script>
+            <div class="g-plusone" data-size="medium" data-href="<%= site.domain%>"></div>
+          </div>
+        </div> 
+      </div>
+    </section>
 
-  <!--content-->
-  <section class="row section text-light first">
+    <!--content-->
+    <section class="row section text-light first">
       <div class="row-content buffer even clear-after">   
-          <div class="column six">
-              <h2>What is FastoNoSQL?</h2>
-              <p>
-                  FastoNoSQL it is GUI platform for NoSQL databases. Currently we support next databases:
-              </p>
-              <p>
-                  <ul>
-                      <li><a href="http://redis.io" target="_blank">Redis</a></li>
-                      <li><a href="http://memcached.org" target="_blank">Memcached</a></li>
-                      <li><a href="http://ssdb.io" target="_blank">SSDB</a></li>
-                      <li><a href="http://leveldb.org" target="_blank">LevelDB</a></li>
-                      <li><a href="http://rocksdb.org" target="_blank">RocksDB</a></li>
-                      <li><a href="http://unqlite.org/" target="_blank">UnQLite</a></li>
-                      <li><a href="http://symas.com/mdb/" target="_blank">LMDB</a></li>
-                  </ul>
-              </p>
-             
+        <div class="column six">
+          <h2>What is FastoNoSQL?</h2>
+          <p>
+            FastoNoSQL it is GUI platform for NoSQL databases. Currently we support next databases:
+          </p>
+          <p>
+              <ul>
+                <li><a href="http://redis.io" target="_blank">Redis</a></li>
+                <li><a href="http://memcached.org" target="_blank">Memcached</a></li>
+                <li><a href="http://ssdb.io" target="_blank">SSDB</a></li>
+                <li><a href="http://leveldb.org" target="_blank">LevelDB</a></li>
+                <li><a href="http://rocksdb.org" target="_blank">RocksDB</a></li>
+                <li><a href="http://unqlite.org/" target="_blank">UnQLite</a></li>
+                <li><a href="http://symas.com/mdb/" target="_blank">LMDB</a></li>
+              </ul>
+          </p>
+        </div>
+        <div class="side-mockup right-mockup animation">
+          <div class="slider desktop-slider">
+            <div><img src="images/main.png" alt="FastoNoSQL — is a cross-platform open source NoSQL management tool" title="FastoNoSQL Admin GUI" ></div>
           </div>
-          <div class="side-mockup right-mockup animation">
-            <div class="slider desktop-slider">
-              <div><img src="images/main.png" alt="FastoNoSQL — is a cross-platform open source NoSQL management tool" title="FastoNoSQL Admin GUI" ></div>
-            </div>
-          </div>
-          <div class="column">
-           <p>
-                  For all this databases you can connect and use them in any way you need. 
-                  Also FastoNoSQL is IDE tool for NoSQL which works on the most famous platforms like: Windows, Linux, MacOSX, Android, FreeBSD.
-              </p>
-              <p>
-                  Main big advantages of FastoNoSQL:
-              </p>
-              <p>
-                  <ul>
-                      <li>Open source</li>
-                      <li>Cross-platform</li>
-                      <li>Flexible and extending for future databases</li>
-                      <li>Simple code</li>
-                      <li>Great solutions</li>
-                  </ul>
-              </p>
-              <p>
-                  We are waiting for your feedback! Please write any issues and proposals to 
-                  <a href="<%- site.github_issues_link %>" alt="NoSQL GUI">GitHub Issues</a>.
-              </p>
-              <a class="button transparent white" href="/download">Download</a>
-              <a class="button transparent white" href="/help">How to use</a>
-              <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
-          </div>
+        </div>
+        <div class="column">
+          <p>
+            For all this databases you can connect and use them in any way you need. 
+            Also FastoNoSQL is IDE tool for NoSQL which works on the most famous platforms like: Windows, Linux, MacOSX, Android, FreeBSD.
+          </p>
+          <p>
+            Main big advantages of FastoNoSQL:
+          </p>
+          <p>
+            <ul>
+              <li>Open source</li>
+              <li>Cross-platform</li>
+              <li>Flexible and extending for future databases</li>
+              <li>Simple code</li>
+              <li>Great solutions</li>
+            </ul>
+          </p>
+          <p>
+            We are waiting for your feedback! Please write any issues and proposals to 
+            <a href="<%- site.github_issues_link %>" alt="NoSQL GUI">GitHub Issues</a>.
+          </p>
+          <a class="button transparent white" href="/download">Download</a>
+          <a class="button transparent white" href="/help">How to use</a>
+          <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+        </div>
       </div>  
-  </section>  
+    </section>  
 
-  <section class="row section text-light second">
-    <div class="row-content buffer even clear-after">
-      <div class="column six push-six last-special">
-        <h2>Features</h2>
-        <p> Full Power of Redis shell FastoNoSQL embeds the same redis-cli engine. It means that you can reuse your main skills of redis-cli shell in FastoNoSQL!
-            This program provides you with syntax highlighting, autocompletion, different view modes (text, tree, table) and other. With excellent power comes 
-            great responsibility. FastoNoSQL won’t stop you from executing "undesired" code. Be attentive, as you do with redis-cli shell!</p>
-            <a class="button transparent white" href="/download">Download</a>
-              <a class="button transparent white" href="/help">How to use</a>
-            <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
-      </div>                      
-      <div class="side-mockup left-mockup animation">
-        <div class="slider desktop-slider"> 
-          <div><img src="images/common/windows/main_window_windows_more.png" alt=""></div>
-        </div>
-      </div>                      
-    </div>  
-  </section>
-
-  <section class="row section text-light first">
-    <div class="row-content buffer even clear-after">   
-      <div class="column six">
-        <h2>Multiple Shells</h2>
-        <p> You can open as many shells as you need. Every tab in FastoNoSQL — is a Redis shell, fully divided from each other. 
-          Have many opened shells for single Redis/Memcached server, or many shells for many different servers.</p>
-          <a class="button transparent white" href="/download">Download</a>
-              <a class="button transparent white" href="/help">How to use</a>
-          <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
-      </div>
-      <div class="side-mockup right-mockup animation">
-        <div class="slider desktop-slider">
-          <div><img src="/images/common/macosx/Screen Shot 2015-07-20 at 9.12.43 AM.png" alt="FastoNoSQL - Multiple Shells" title="Multiple Shells" ></div>
-        </div>
-      </div>
-    </div>  
-  </section>  
-
-  <section class="row section text-light second">
-    <div class="row-content buffer even clear-after">
-      <div class="column six push-six last-special">
-        <h2>Autocompletion</h2>
-        <p> FastoNoSQL supply you with autocompletion for all Redis commands. To assist FastoNoSQL autocompletion — execute your code.
-            Autocompletion is also available for Memcached commands.</p>
-            <a class="button transparent white" href="/download">Download</a>
-              <a class="button transparent white" href="/help">How to use</a>
-            <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
-      </div>                      
-      <div class="side-mockup left-mockup animation">
-          <div class="slider desktop-slider">
-            <div><img src="/images/common/linux/autocomplete_linux.png" alt="FastoNoSQL Admin GUI" title="Memcached commands" ></div>
+    <section class="row section text-light second">
+      <div class="row-content buffer even clear-after">
+        <div class="column six push-six last-special">
+          <h2>Features</h2>
+          <p> Full Power of Redis shell FastoNoSQL embeds the same redis-cli engine. It means that you can reuse your main skills of redis-cli shell in FastoNoSQL!
+              This program provides you with syntax highlighting, autocompletion, different view modes (text, tree, table) and other. With excellent power comes 
+              great responsibility. FastoNoSQL won’t stop you from executing "undesired" code. Be attentive, as you do with redis-cli shell!</p>
+              <a class="button transparent white" href="/download">Download</a>
+                <a class="button transparent white" href="/help">How to use</a>
+              <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+        </div>                      
+        <div class="side-mockup left-mockup animation">
+          <div class="slider desktop-slider"> 
+            <div><img src="images/common/windows/main_window_windows_more.png" alt=""></div>
           </div>
-      </div>                      
-    </div>  
-  </section>
+        </div>                      
+      </div>  
+    </section>
 
-
-  <section class="row section text-light first">
-    <div class="row-content buffer even clear-after">   
-      <div class="column six">
-        <h2>Redis Cluster support</h2>
-        <p> Redis Cluster provides a way to run a Redis installation where data is automatically sharded across multiple Redis nodes. FastoNoSQL is able to work with Redis Cluster, we support discovery functionality and you can work with cluser as one server.</p>
+    <section class="row section text-light first">
+      <div class="row-content buffer even clear-after">   
+        <div class="column six">
+          <h2>Multiple Shells</h2>
+          <p> You can open as many shells as you need. Every tab in FastoNoSQL — is a Redis shell, fully divided from each other. 
+            Have many opened shells for single Redis/Memcached server, or many shells for many different servers.</p>
             <a class="button transparent white" href="/download">Download</a>
-              <a class="button transparent white" href="/help">How to use</a>
-            <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
-      </div>
-      <div class="side-mockup right-mockup animation">
-        <div class="slider desktop-slider">
-          <div><img src="/images/redis/cluster_workflow.png" alt="Redis Cluster workflow" title="Redis Cluster workflow"></div>
+                <a class="button transparent white" href="/help">How to use</a>
+            <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
         </div>
-      </div>
-    </div>  
-  </section>  
-
-  <section class="row section text-light second">
-    <div class="row-content buffer even clear-after">
-      <div class="column six push-six last-special">
-        <h2>Access your server using SSH protocol</h2>
-        <p>Access your server using SSH protocol
-            You are able to connect to <strong>server via SSH tunnel</strong>. We support two methods of authentication: with password and with private key.</p>
-            <a class="button transparent white" href="/download">Download</a>
-              <a class="button transparent white" href="/help">How to use</a>
-            <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
-      </div>                      
-      <div class="side-mockup left-mockup animation">
-        <div class="slider desktop-slider" data-autoplay="5000">
-          <div><img src="images/common/macosx/Screen Shot 2015-07-20 at 9.13.04 AM.png" alt="FastoNoSQL - SSH protocol" title="Access your LevelDB server using SSH protocol"></div>
-        </div>
-      </div>                      
-    </div>  
-  </section>
-             
-  <section class="row section text-light first">
-    <div class="row-content buffer even clear-after">   
-      <div class="column six">
-          <h2>Memcached support</h2>
-          <p> <a href="http://memcached.org">Memcached</a>  is like Redis and now our program can work with it.  Now you can work directly from <strong>FastoNoSQL with memcached</strong> - memory object caching system.</p>
-          <a class="button transparent white" href="/download">Download</a>
-              <a class="button transparent white" href="/help">How to use</a>
-          <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
-      </div>
-      <div class="side-mockup right-mockup animation">
-        <div class="slider desktop-slider">
-          <div><img src="/images/common/macosx/Screen Shot 2015-07-20 at 9.12.43 AM.png" alt="FastoNoSQL - Memcached GUI" title="FastoNoSQL - Memcached GUI"></div>
-        </div>
-      </div>
-    </div>  
-  </section>  
-
-  <section class="row section text-light second">
-    <div class="row-content buffer even clear-after">
-      <div class="column six push-six last-special">
-        <h2>SSDB support</h2>
-        <p> <a href="http://ssdb.io">SSDB</a> is a high performance NoSQL database supporting many data structures, an alternative to Redis, and now our program can work with it.</p>
-            <a class="button transparent white" href="/download">Download</a>
-              <a class="button transparent white" href="/help">How to use</a>
-            <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
-      </div>                      
-      <div class="side-mockup left-mockup animation">
+        <div class="side-mockup right-mockup animation">
           <div class="slider desktop-slider">
-            <div><img src="/images/ssdb/ssdb_workflow.png" alt="SSDB support" title="FastoNoSQL - SSDB support"></div>
+            <div><img src="/images/common/macosx/Screen Shot 2015-07-20 at 9.12.43 AM.png" alt="FastoNoSQL - Multiple Shells" title="Multiple Shells" ></div>
           </div>
-      </div>                      
-    </div>
-  </section>
+        </div>
+      </div>  
+    </section>  
 
-  <section class="row section text-light first">
-  <div class="row-content buffer even clear-after">   
-    <div class="column six">
-      <h2>Graphics of history</h2>
-      <p><strong>Desktop Managers</strong> makes working with the database more user-friendly. If you want to see the work <strong>history of your server</strong>, you can check "Logging enable" on connection dialog window. 
-          And every minute FastoNoSQL executes redis <code>info</code> command, and saves result.</p>
-          <a class="button transparent white" href="/download">Download</a>
-              <a class="button transparent white" href="/help">How to use</a>
-          <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
-    </div>
-    <div class="side-mockup right-mockup animation">
-      <div class="slider desktop-slider">
-        <div><img src="/images/history_graph.png" alt="FastoNoSQL - history of your server GUI" title="FastoNoSQL Admin GUI - History of your server"></div>
+    <section class="row section text-light second">
+      <div class="row-content buffer even clear-after">
+        <div class="column six push-six last-special">
+          <h2>Autocompletion</h2>
+          <p> FastoNoSQL supply you with autocompletion for all Redis commands. To assist FastoNoSQL autocompletion — execute your code.
+              Autocompletion is also available for Memcached commands.</p>
+              <a class="button transparent white" href="/download">Download</a>
+                <a class="button transparent white" href="/help">How to use</a>
+              <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+        </div>                      
+        <div class="side-mockup left-mockup animation">
+            <div class="slider desktop-slider">
+              <div><img src="/images/common/linux/autocomplete_linux.png" alt="FastoNoSQL Admin GUI" title="Memcached commands" ></div>
+            </div>
+        </div>                      
+      </div>  
+    </section>
+
+
+    <section class="row section text-light first">
+      <div class="row-content buffer even clear-after">   
+        <div class="column six">
+          <h2>Redis Cluster support</h2>
+          <p> Redis Cluster provides a way to run a Redis installation where data is automatically sharded across multiple Redis nodes. FastoNoSQL is able to work with Redis Cluster, we support discovery functionality and you can work with cluser as one server.</p>
+              <a class="button transparent white" href="/download">Download</a>
+                <a class="button transparent white" href="/help">How to use</a>
+              <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+        </div>
+        <div class="side-mockup right-mockup animation">
+          <div class="slider desktop-slider">
+            <div><img src="/images/redis/cluster_workflow.png" alt="Redis Cluster workflow" title="Redis Cluster workflow"></div>
+          </div>
+        </div>
+      </div>  
+    </section>  
+
+    <section class="row section text-light second">
+      <div class="row-content buffer even clear-after">
+        <div class="column six push-six last-special">
+          <h2>Access your server using SSH protocol</h2>
+          <p>Access your server using SSH protocol
+              You are able to connect to <strong>server via SSH tunnel</strong>. We support two methods of authentication: with password and with private key.</p>
+              <a class="button transparent white" href="/download">Download</a>
+                <a class="button transparent white" href="/help">How to use</a>
+              <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+        </div>                      
+        <div class="side-mockup left-mockup animation">
+          <div class="slider desktop-slider" data-autoplay="5000">
+            <div><img src="images/common/macosx/Screen Shot 2015-07-20 at 9.13.04 AM.png" alt="FastoNoSQL - SSH protocol" title="Access your LevelDB server using SSH protocol"></div>
+          </div>
+        </div>                      
+      </div>  
+    </section>
+               
+    <section class="row section text-light first">
+      <div class="row-content buffer even clear-after">   
+        <div class="column six">
+            <h2>Memcached support</h2>
+            <p> <a href="http://memcached.org">Memcached</a>  is like Redis and now our program can work with it.  Now you can work directly from <strong>FastoNoSQL with memcached</strong> - memory object caching system.</p>
+            <a class="button transparent white" href="/download">Download</a>
+                <a class="button transparent white" href="/help">How to use</a>
+            <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+        </div>
+        <div class="side-mockup right-mockup animation">
+          <div class="slider desktop-slider">
+            <div><img src="/images/common/macosx/Screen Shot 2015-07-20 at 9.12.43 AM.png" alt="FastoNoSQL - Memcached GUI" title="FastoNoSQL - Memcached GUI"></div>
+          </div>
+        </div>
+      </div>  
+    </section>  
+
+    <section class="row section text-light second">
+      <div class="row-content buffer even clear-after">
+        <div class="column six push-six last-special">
+          <h2>SSDB support</h2>
+          <p> <a href="http://ssdb.io">SSDB</a> is a high performance NoSQL database supporting many data structures, an alternative to Redis, and now our program can work with it.</p>
+              <a class="button transparent white" href="/download">Download</a>
+                <a class="button transparent white" href="/help">How to use</a>
+              <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+        </div>                      
+        <div class="side-mockup left-mockup animation">
+            <div class="slider desktop-slider">
+              <div><img src="/images/ssdb/ssdb_workflow.png" alt="SSDB support" title="FastoNoSQL - SSDB support"></div>
+            </div>
+        </div>                      
       </div>
-    </div>
-  </div>  
-  </section>
+    </section>
+
+    <section class="row section text-light first">
+    <div class="row-content buffer even clear-after">   
+      <div class="column six">
+        <h2>Graphics of history</h2>
+        <p><strong>Desktop Managers</strong> makes working with the database more user-friendly. If you want to see the work <strong>history of your server</strong>, you can check "Logging enable" on connection dialog window. 
+            And every minute FastoNoSQL executes redis <code>info</code> command, and saves result.</p>
+            <a class="button transparent white" href="/download">Download</a>
+                <a class="button transparent white" href="/help">How to use</a>
+            <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+      </div>
+      <div class="side-mockup right-mockup animation">
+        <div class="slider desktop-slider">
+          <div><img src="/images/history_graph.png" alt="FastoNoSQL - history of your server GUI" title="FastoNoSQL Admin GUI - History of your server"></div>
+        </div>
+      </div>
+    </div>  
+    </section>
   </div>
 </main>
 
