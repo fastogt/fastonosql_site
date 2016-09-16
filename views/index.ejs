@@ -69,8 +69,8 @@
     <div class="row-content buffer even" style="line-height: 0.8;">
         <div class="column three">
           <div class="github">
-            <a aria-label="Watch <%- project.github_link_wihout_host %> on GitHub" data-count-aria-label="# watchers on GitHub" data-count-api="/repos/<%- project.github_link_wihout_host %>#subscribers_count" data-count-href="/<%- project.github_link_wihout_host %>/watchers" data-icon="octicon-eye" href="<%- project.github_link %>" class="github-button">Watch</a>
-            <a aria-label="Star <%- project.github_link_wihout_host %> on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/<%- project.github_link_wihout_host %>#stargazers_count" data-count-href="/<%- project.github_link_wihout_host %>/stargazers" data-icon="octicon-star" href="<%- project.github_link %>" class="github-button">Star</a>
+            <a aria-label="Watch <%- site.github_link_without_host %> on GitHub" data-count-aria-label="# watchers on GitHub" data-count-api="/repos/<%- site.github_link_without_host %>#subscribers_count" data-count-href="/<%- site.github_link_without_host %>/watchers" data-icon="octicon-eye" href="<%- site.github_link %>" class="github-button">Watch</a>
+            <a aria-label="Star <%- site.github_link_without_host %> on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/<%- site.github_link_without_host %>#stargazers_count" data-count-href="/<%- site.github_link_without_host %>/stargazers" data-icon="octicon-star" href="<%- site.github_link %>" class="github-button">Star</a>
             <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
           </div>
         </div>
@@ -82,7 +82,7 @@
                       var js, fjs = d.getElementsByTagName(s)[0];
                       if (d.getElementById(id)) return;
                       js = d.createElement(s); js.id = id;
-                      js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=<%= project.facebook_appid %>";
+                      js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=<%= site.facebook_appid %>";
                       fjs.parentNode.insertBefore(js, fjs);
                   }(document, 'script', 'facebook-jssdk'));
             </script>
@@ -92,9 +92,9 @@
       
       <div class="column three">
         <div class="twitter">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="<%= project.twitter_name %>">Tweet</a>
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="<%= site.twitter_name %>">Tweet</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-            <a href="<%= project.twitter_link %>" class="twitter-follow-button" data-show-count="false">Follow @<%= project.twitter_name %></a>
+            <a href="<%= site.twitter_link %>" class="twitter-follow-button" data-show-count="false">Follow @<%= site.twitter_name %></a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
         </div>
       </div>
@@ -164,11 +164,11 @@
               </p>
               <p>
                   We are waiting for your feedback! Please write any issues and proposals to 
-                  <a href="<%- project.github_issues_link %>" alt="NoSQL GUI">GitHub Issues</a>.
+                  <a href="<%- site.github_issues_link %>" alt="NoSQL GUI">GitHub Issues</a>.
               </p>
               <a class="button transparent white" href="/download">Download</a>
               <a class="button transparent white" href="/help">How to use</a>
-              <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+              <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
           </div>
       </div>  
   </section>  
@@ -182,7 +182,7 @@
             great responsibility. FastoNoSQL won’t stop you from executing "undesired" code. Be attentive, as you do with redis-cli shell!</p>
             <a class="button transparent white" href="/download">Download</a>
               <a class="button transparent white" href="/help">How to use</a>
-            <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+            <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
       </div>                      
       <div class="side-mockup left-mockup animation">
         <div class="slider desktop-slider"> 
@@ -218,7 +218,7 @@
             Autocompletion is also available for Memcached commands.</p>
             <a class="button transparent white" href="/download">Download</a>
               <a class="button transparent white" href="/help">How to use</a>
-            <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+            <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
       </div>                      
       <div class="side-mockup left-mockup animation">
           <div class="slider desktop-slider">
@@ -236,7 +236,7 @@
         <p> Redis Cluster provides a way to run a Redis installation where data is automatically sharded across multiple Redis nodes. FastoNoSQL is able to work with Redis Cluster, we support discovery functionality and you can work with cluser as one server.</p>
             <a class="button transparent white" href="/download">Download</a>
               <a class="button transparent white" href="/help">How to use</a>
-            <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+            <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
       </div>
       <div class="side-mockup right-mockup animation">
         <div class="slider desktop-slider">
@@ -254,7 +254,7 @@
             You are able to connect to <strong>server via SSH tunnel</strong>. We support two methods of authentication: with password and with private key.</p>
             <a class="button transparent white" href="/download">Download</a>
               <a class="button transparent white" href="/help">How to use</a>
-            <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+            <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
       </div>                      
       <div class="side-mockup left-mockup animation">
         <div class="slider desktop-slider" data-autoplay="5000">
@@ -271,7 +271,7 @@
           <p> <a href="http://memcached.org">Memcached</a>  is like Redis and now our program can work with it.  Now you can work directly from <strong>FastoNoSQL with memcached</strong> - memory object caching system.</p>
           <a class="button transparent white" href="/download">Download</a>
               <a class="button transparent white" href="/help">How to use</a>
-          <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+          <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
       </div>
       <div class="side-mockup right-mockup animation">
         <div class="slider desktop-slider">
@@ -288,7 +288,7 @@
         <p> <a href="http://ssdb.io">SSDB</a> is a high performance NoSQL database supporting many data structures, an alternative to Redis, and now our program can work with it.</p>
             <a class="button transparent white" href="/download">Download</a>
               <a class="button transparent white" href="/help">How to use</a>
-            <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+            <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
       </div>                      
       <div class="side-mockup left-mockup animation">
           <div class="slider desktop-slider">
@@ -306,7 +306,7 @@
           And every minute FastoNoSQL executes redis <code>info</code> command, and saves result.</p>
           <a class="button transparent white" href="/download">Download</a>
               <a class="button transparent white" href="/help">How to use</a>
-          <a href=<%= project.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
+          <a href=<%= site.twitter_link %> title="Project in Twitter"><i style="font-size: 2.556em; vertical-align: middle;" class="fa fa-twitter"></i></a>
     </div>
     <div class="side-mockup right-mockup animation">
       <div class="slider desktop-slider">
@@ -325,7 +325,7 @@
           <div class="widget column three"><!-- la class="widget" è forse generata utomaticamente da wp -->
             <h4>Contribute</h4>
             <p>Please submit any issues, bugs and proposals via GitHub Issues:<br />
-            <a href="<%- project.github_issues_link %>" style="font-weight: bold;"><%- site.title %> in GitHub</a><br />
+            <a href="<%- site.github_issues_link %>" style="font-weight: bold;"><%- site.title %> in GitHub</a><br />
             Thank you for finding time to help us!</p>
           </div>
           <div class="widget column three">

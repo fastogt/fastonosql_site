@@ -7,6 +7,7 @@ function gen_routing_key(platform, arch) {
 // load configs
 var configDB = require('./config/database.js');
 var settings_config = require('./config/settings.js');
+var auth_config = require('./config/auth.js'); 
 var root_abs_path = __dirname; 
 var public_dir_abs_path = root_abs_path + '/public';
 var public_downloads_dir_abs_path = public_dir_abs_path + '/downloads';
@@ -37,6 +38,7 @@ var listener = io.listen(server);
 // settings
 app.locals.site = {
     title: 'FastoNoSQL',
+    version: '0.0.1',
     domain: 'http://46.101.179.225',
     keywords: 'FastoNoSQL, GUI Manager, Redis GUI, Memcached GUI, SSDB GUI, LevelDB GUI, RocksDB GUI, LMDB GUI, Unqlite GUI',
     description: 'FastoNoSQL it is GUI platform for NoSQL databases.',
@@ -44,20 +46,20 @@ app.locals.site = {
     large_description: 'FastoNoSQL — is a cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, and Unqlite databases(i.e. Admin GUI Client). Our Desktop Client works on the most amount of Linux systems, also on Windows, Mac OS X, FreeBSD and Android platforms.',
     public_directory: public_dir_abs_path,
     users_directory: public_downloads_users_dir_abs_path,
+    
     google_analitics_token: settings_config.google_analitics_token,
-    version: '0.0.1'
+    github_link: 'https://github.com/fastogt/fastonosql',
+    github_issues_link: 'https://github.com/fastogt/fastonosql/issues',
+    github_link_without_host: 'fastogt/fastonosql',
+    twitter_name: 'FastoNoSQL',
+    twitter_link: 'https://twitter.com/FastoNoSQL',
+    facebook_appid: auth_config.facebookAuth.clientID
 };
 app.locals.project = {
     name: 'FastoNoSQL',
     name_lowercase: 'fastonosql',
     version: settings_config.app_version,
-    version_type: settings_config.app_version_type,
-    github_link: 'https://github.com/fastogt/fastonosql',
-    github_issues_link: 'https://github.com/fastogt/fastonosql/issues',
-    github_link_wihout_host: 'fastogt/fastonosql',
-    twitter_name: 'FastoNoSQL',
-    twitter_link: 'https://twitter.com/FastoNoSQL',
-    facebook_appid: '289213528107502'
+    version_type: settings_config.app_version_type
 };
 app.locals.author = {
     name: 'Topilski Alexandr',
