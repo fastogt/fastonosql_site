@@ -2948,8 +2948,6 @@ footer .row-content.buffer {
   font-family: "lineicon";
   src:url("fonts/lineicon.eot");
   src:url("fonts/lineicon.eot?#iefix") format("embedded-opentype"),
-    url("fonts/lineicon.woff") format("woff"),
-    url("fonts/lineicon.ttf") format("truetype"),
     url("fonts/lineicon.svg#lineicon") format("svg");
 }
 
