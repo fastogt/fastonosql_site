@@ -974,14 +974,14 @@ jQuery(document).ready(function ($) {
 
                     $this.css({
                         'position': 'absolute',
-                        'left': '52%'
+                        'left': '50%'
                     });
 
                 } else if ($this.hasClass('left-mockup')) {
 
                     $this.css({
                         'position': 'absolute',
-                        'right': '52%'
+                        'right': '50%'
                     });
 
                 }
