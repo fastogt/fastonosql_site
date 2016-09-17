@@ -46,8 +46,9 @@ app.locals.site = {
     large_description: 'FastoNoSQL — is a cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, and Unqlite databases(i.e. Admin GUI Client). Our Desktop Client works on the most amount of Linux systems, also on Windows, Mac OS X, FreeBSD and Android platforms.',
     public_directory: public_dir_abs_path,
     users_directory: public_downloads_users_dir_abs_path,
-    
     google_analitics_token: settings_config.google_analitics_token,
+    data_ad_client: 'ca-pub-4299795201353238',
+    data_ad_slot: '3306573902',
     github_link: 'https://github.com/fastogt/fastonosql',
     github_issues_link: 'https://github.com/fastogt/fastonosql/issues',
     github_link_without_host: 'fastogt/fastonosql',
