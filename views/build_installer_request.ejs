@@ -111,73 +111,46 @@
             <li role="presentation" class="active"><a href="#windows" aria-controls="windows" role="tab" data-toggle="tab"><i class="fa fa-windows"></i> Windows</a></li>
             <li role="presentation"><a href="#linux" aria-controls="linux" role="tab" data-toggle="tab"><i class="fa fa-linux"></i> Linux</a></li>
             <li role="presentation"><a href="#macosx" aria-controls="macosx" role="tab" data-toggle="tab"><i class="fa fa-apple"></i> MacOS</a></li>
-            <li role="presentation"><a href="#freebsd" aria-controls="freebsd" role="tab" data-toggle="tab"> FreeBSD</a></li>
           </ul>
           <!-- Tab panes -->
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="windows">
             <div data-toggle="buttons" class="buttons-row">
               <label class="btn btn-primary">
-                <input type="radio" name="os" value="windows_7_x32" bit="32" package_type="NSIS" id="option1" autocomplete="off"> Windows 7 x32
+                <input type="radio" name="os" value="windows_7_x64" bit="64" package_type="NSIS" id="option1" autocomplete="off" checked="checked"> Windows 7 x64
               </label>
               <label class="btn btn-primary">
-                <input type="radio" name="os" value="windows_7_x64" bit="64" package_type="NSIS" id="option2" autocomplete="off"> Windows 7 x64
+                <input type="radio" name="os" value="windows_8_x64" bit="64" package_type="NSIS" id="option2" autocomplete="off"> Windows 8 x64
               </label>
               <label class="btn btn-primary">
-                <input type="radio" name="os" value="windows_10_x32" bit="32" package_type="NSIS" id="option3" autocomplete="off"> Windows 10 x32
-              </label>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="windows_10_x64" bit="64" package_type="NSIS" id="option4" autocomplete="off"> Windows 10 x64
+                <input type="radio" name="os" value="windows_10_x64" bit="64" package_type="NSIS" id="option3" autocomplete="off"> Windows 10 x64
               </label>
             </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="linux">
             <div data-toggle="buttons" class="buttons-row">
               <label class="btn btn-primary">
-                <input type="radio" name="os" value="ubuntu_x32" bit="32" package_type="DEB" id="option5" autocomplete="off"> Ubuntu x32</label>
+                <input type="radio" name="os" value="ubuntu_x64" bit="64" package_type="DEB" id="option4" autocomplete="off" checked="checked"> Ubuntu x64</label>
               <label class="btn btn-primary">
-                <input type="radio" name="os" value="debian_x32" bit="32" package_type="DEB" id="option6" autocomplete="off"> Debian x32</label>
+                <input type="radio" name="os" value="debian_x64" bit="64" package_type="DEB" id="option5" autocomplete="off"> Debian x64</label>
               <label class="btn btn-primary">
-                <input type="radio" name="os" value="centos_x32" bit="32" package_type="RPM" id="option7" autocomplete="off"> CentOS x32</label>
+                <input type="radio" name="os" value="centOS_x64" bit="64" package_type="RPM" id="option6" autocomplete="off"> CentOS x64</label>
               <label class="btn btn-primary">
-                <input type="radio" name="os" value="fedora_x32" bit="32" package_type="RPM" id="option8" autocomplete="off"> Fedora x32</label>
+                <input type="radio" name="os" value="fedora_x64" bit="64" package_type="RPM" id="option7" autocomplete="off"> Fedora x64</label>
               <label class="btn btn-primary">
-                <input type="radio" name="os" value="arch_linux_x32" bit="32" package_type="TGZ" id="option9" autocomplete="off"> Arch Linux x32</label>
-            </br>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="ubuntu_x64" bit="64" package_type="DEB" id="option10" autocomplete="off"> Ubuntu x64</label>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="debian_x64" bit="64" package_type="DEB" id="option11" autocomplete="off"> Debian x64</label>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="centOS_x64" bit="64" package_type="RPM" id="option12" autocomplete="off"> CentOS x64</label>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="fedora_x64" bit="64" package_type="RPM" id="option13" autocomplete="off"> Fedora x64</label>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="arch_linux_x64" bit="64" package_type="TGZ" id="option14" autocomplete="off"> Arch Linux x64</label>
+                <input type="radio" name="os" value="arch_linux_x64" bit="64" package_type="TGZ" id="option8" autocomplete="off"> Arch Linux x64</label>
             </div>
             </div>          
             <div role="tabpanel" class="tab-pane" id="macosx">
             <div data-toggle="buttons" class="buttons-row">
               <label class="btn btn-primary">
-                <input type="radio" name="os" value="macosx_10_8_x64" bit="64" package_type="DragNDrop" id="option19" autocomplete="off"> MacOS 10.8 x64</label>
+                <input type="radio" name="os" value="macosx_10_8_x64" bit="64" package_type="DragNDrop" id="option9" autocomplete="off" checked="checked"> MacOS 10.8 x64</label>
               <label class="btn btn-primary">
-                <input type="radio" name="os" value="macosx_10_9_x64" bit="64" package_type="DragNDrop" id="option20" autocomplete="off"> MacOS 10.9 x64</label>
+                <input type="radio" name="os" value="macosx_10_9_x64" bit="64" package_type="DragNDrop" id="option10" autocomplete="off"> MacOS 10.9 x64</label>
               <label class="btn btn-primary">
-                <input type="radio" name="os" value="macosx_10_10_x64" bit="64" package_type="DragNDrop" id="option21" autocomplete="off"> MacOS 10.10 x64</label>
+                <input type="radio" name="os" value="macosx_10_10_x64" bit="64" package_type="DragNDrop" id="option11" autocomplete="off"> MacOS 10.10 x64</label>
               <label class="btn btn-primary">
-                <input type="radio" name="os" value="macosx_10_11_x64" bit="64" package_type="DragNDrop" id="option22" autocomplete="off"> MacOS 10.11 x64</label>
-            </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="freebsd">
-            <div data-toggle="buttons" class="buttons-row">
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="freebsd_10_1_x64" bit="64" package_type="TGZ" id="option15" autocomplete="off"> FreeBSD 10.1 x64</label>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="freebsd_10_2_x64" bit="64" package_type="TGZ" id="option16" autocomplete="off"> FreeBSD 10.2 x64</label>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="freebsd_10_3_x64" bit="64" package_type="TGZ" id="option17" autocomplete="off"> FreeBSD 10.3 x64</label>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="freebsd_11_0_x64" bit="64" package_type="TGZ" id="option18" autocomplete="off"> FreeBSD 11.0 x64</label>
+                <input type="radio" name="os" value="macosx_10_11_x64" bit="64" package_type="DragNDrop" id="option12" autocomplete="off"> MacOS 10.11 x64</label>
             </div>
             </div>
           </div>
@@ -190,9 +163,6 @@
           <ul class="nav nav-tabs" role="tablist" id="connection_settings">
             <li role="presentation" class="active">
               <a href="#base" aria-controls="base" role="tab" data-toggle="tab">Base</a>
-            </li>
-            <li role="presentation">
-              <a href="#advanced" aria-controls="advanced" role="tab" data-toggle="tab">Advanced</a>
             </li>
           </ul>
           <!-- Tab panes -->
