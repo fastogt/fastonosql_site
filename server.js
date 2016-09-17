@@ -39,7 +39,7 @@ var listener = io.listen(server);
 app.locals.site = {
     title: 'FastoNoSQL',
     version: '0.0.1',
-    domain: 'http://46.101.179.225',
+    domain: 'http://fastonosql.com',
     keywords: 'FastoNoSQL, GUI Manager, Redis GUI, Memcached GUI, SSDB GUI, LevelDB GUI, RocksDB GUI, LMDB GUI, Unqlite GUI',
     description: 'FastoNoSQL it is GUI platform for NoSQL databases.',
     small_description: 'FastoNoSQL - cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, and Unqlite databases.',
