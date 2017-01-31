@@ -22,6 +22,8 @@ var passport = require('passport');
 var flash    = require('connect-flash');
 var amqp = require('amqp');
 var mkdirp = require('mkdirp');
+const util = require('util');
+
 
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -40,10 +42,10 @@ app.locals.site = {
     title: 'FastoNoSQL',
     version: '0.0.1',
     domain: 'http://fastonosql.com',
-    keywords: 'FastoNoSQL, GUI Manager, Redis GUI, Memcached GUI, SSDB GUI, LevelDB GUI, RocksDB GUI, LMDB GUI, Unqlite GUI',
+    keywords: 'FastoNoSQL, GUI Manager, Redis GUI, Memcached GUI, SSDB GUI, LevelDB GUI, RocksDB GUI, LMDB GUI, Unqlite GUI, UpscaleDB GUI',
     description: 'FastoNoSQL it is GUI platform for NoSQL databases.',
-    small_description: 'FastoNoSQL - cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, and Unqlite databases.',
-    large_description: 'FastoNoSQL — is a cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, and Unqlite databases(i.e. Admin GUI Client). Our Desktop Client works on the most amount of Linux systems, also on Windows, Mac OS X, FreeBSD and Android platforms.',
+    small_description: 'FastoNoSQL - cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, UpscaleDB, and Unqlite databases.',
+    large_description: 'FastoNoSQL — is a cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, UpscaleDB, and Unqlite databases(i.e. Admin GUI Client). Our Desktop Client works on the most amount of Linux systems, also on Windows, Mac OS X, FreeBSD and Android platforms.',
     public_directory: public_dir_abs_path,
     users_directory: public_downloads_users_dir_abs_path,
     google_analitics_token: settings_config.google_analitics_token,
@@ -54,7 +56,26 @@ app.locals.site = {
     github_link_without_host: 'fastogt/fastonosql',
     twitter_name: 'FastoNoSQL',
     twitter_link: 'https://twitter.com/FastoNoSQL',
-    facebook_appid: auth_config.facebookAuth.clientID
+    facebook_appid: auth_config.facebookAuth.clientID,
+    supported_databases: [{ 'name' : 'Redis', 'option' : 'BUILD_WITH_REDIS'}, 
+    { 'name' : 'Memcached', 'option' : 'BUILD_WITH_MEMCACHED'},
+    { 'name' : 'SSDB', 'option' : 'BUILD_WITH_SSDB'},
+    { 'name' : 'LevelDB', 'option' : 'BUILD_WITH_LEVELDB'},
+    { 'name' : 'RocksDB', 'option' : 'BUILD_WITH_ROCKSDB'},
+    { 'name' : 'LMDB', 'option' : 'BUILD_WITH_LMDB'},
+    { 'name' : 'Unqlite', 'option' : 'BUILD_WITH_UNQLITE'},
+    { 'name' : 'UpscaleDB', 'option' : 'BUILD_WITH_UPSCALEDB'}  ]
+};
+// checking if password is valid
+app.methods.FindDatabase = function(name) {
+  for(var j = 0; j < this.local.site.supported_databases.length; ++j) {
+    var sel_db = this.local.site.supported_databases.databases[i];
+    if(sel_db.name == name) {
+      return sel_db;
+    }
+  }
+  
+  return undefined;
 };
 app.locals.project = {
     name: 'FastoNoSQL',
@@ -90,6 +111,14 @@ rabbit_connection.on('error', function (err) {
 listener.on('connection', function (socket) {   
     socket.on('publish_rabbitmq', function (msg) {
         var in_json = JSON.parse(msg);
+        if (in_json.databases.length == 0) {
+          var err = Error('At least one database must be selected!');
+          console.error(err);
+          socket.emit('status_rabbitmq', { 'email': in_json.email, 'progress': 100, 'message': err.message } ); //
+          socket.emit('message_rabbitmq', { 'email': in_json.email, 'error': err.message });
+          return;
+        }
+        
         var user_package_dir = public_downloads_users_dir_abs_path + '/' + in_json.email;
         mkdirp(user_package_dir, function(err) {
           if (err) {
@@ -103,7 +132,17 @@ listener.on('connection', function (socket) {
           
           var rpc = new (require('./app/amqprpc'))(rabbit_connection);
           var branding_variables = '-DIS_PUBLIC_BUILD=OFF -DUSER_SPECIFIC_ID=' + in_json.id + ' -DUSER_SPECIFIC_LOGIN=' + in_json.email + ' -DUSER_SPECIFIC_PASSWORD=' + in_json.password;
-          
+          for(var i = 0; i < app.locals.site.supported_databases.length; ++i) {
+            var sup_db = app.locals.site.supported_databases[i].name;
+            for(var j = 0; j < in_json.databases.length; ++j) {
+              var sel_db = in_json.databases[i];
+              if(sel_db == sup_db) {
+                branding_variables += util.format(' -D%s=ON', sup_db.option);
+                break;
+              }
+            }
+            branding_variables += util.format(' -D%s=OFF', sup_db.option);
+          }
           var request_data_json = {
               'branding_variables': branding_variables,
               'package_type' : in_json.package_type,
