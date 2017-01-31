@@ -122,15 +122,20 @@ listener.on('connection', function (socket) {
           var rpc = new (require('./app/amqprpc'))(rabbit_connection);
           var branding_variables = '-DIS_PUBLIC_BUILD=OFF -DUSER_SPECIFIC_ID=' + in_json.id + ' -DUSER_SPECIFIC_LOGIN=' + in_json.email + ' -DUSER_SPECIFIC_PASSWORD=' + in_json.password;
           for(var i = 0; i < app.locals.site.supported_databases.length; ++i) {
-            var sup_db = app.locals.site.supported_databases[i].name;
+            var sup_db = app.locals.site.supported_databases[i];
+            var found = false;
             for(var j = 0; j < in_json.databases.length; ++j) {
               var sel_db = in_json.databases[i];
-              if(sel_db == sup_db) {
-                branding_variables += util.format(' -D%s=ON', sup_db.option);
+              if(sel_db == sup_db.name) {
+                found = true;
                 break;
               }
             }
-            branding_variables += util.format(' -D%s=OFF', sup_db.option);
+            if (found) {
+              branding_variables += util.format(' -D%s=ON', sup_db.option);
+            } else {
+              branding_variables += util.format(' -D%s=OFF', sup_db.option);
+            }
           }
           var request_data_json = {
               'branding_variables': branding_variables,
