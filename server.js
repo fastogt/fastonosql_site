@@ -125,7 +125,7 @@ listener.on('connection', function (socket) {
             var sup_db = app.locals.site.supported_databases[i];
             var found = false;
             for(var j = 0; j < in_json.databases.length; ++j) {
-              var sel_db = in_json.databases[i];
+              var sel_db = in_json.databases[j];
               if(sel_db == sup_db.name) {
                 found = true;
                 break;
