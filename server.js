@@ -66,17 +66,6 @@ app.locals.site = {
     { 'name' : 'Unqlite', 'option' : 'BUILD_WITH_UNQLITE'},
     { 'name' : 'UpscaleDB', 'option' : 'BUILD_WITH_UPSCALEDB'}  ]
 };
-// checking if password is valid
-app.methods.FindDatabase = function(name) {
-  for(var j = 0; j < this.local.site.supported_databases.length; ++j) {
-    var sel_db = this.local.site.supported_databases.databases[i];
-    if(sel_db.name == name) {
-      return sel_db;
-    }
-  }
-  
-  return undefined;
-};
 app.locals.project = {
     name: 'FastoNoSQL',
     name_lowercase: 'fastonosql',
