@@ -1,118 +1,129 @@
 <!doctype html>
 <html>
 <head>
-    <title><%- site.title %></title>
-    <meta charset="utf-8">
-    <meta name="description" content="<%- site.large_description %>"/>
-    <meta name="keywords" content="<%- site.keywords %>" />
-    <meta name="copyright" content="FastoNoSQL.com" />
-    <meta name="webmoney.attestation.label" CONTENT="webmoney attestation label#7DF987B9-C387-4DD0-BF5B-F23AB453166D" />
-  
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <style>
-        body         { padding-top:80px; word-wrap:break-word; }
-    </style>
-    
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', '<%- site.google_analitics_token %>', 'auto');
-      ga('send', 'pageview');
-    </script>
+  <title><%- site.title %></title>
+  <meta charset="utf-8">
+  <meta name="description" content="<%- site.large_description %>"/>
+  <meta name="keywords" content="<%- site.keywords %>"/>
+  <meta name="copyright" content="FastoNoSQL.com"/>
+  <meta name="webmoney.attestation.label" CONTENT="webmoney attestation label#7DF987B9-C387-4DD0-BF5B-F23AB453166D"/>
+
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <style>
+    body {
+      padding-top: 80px;
+      word-wrap: break-word;
+    }
+  </style>
+
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', '<%- site.google_analitics_token %>', 'auto');
+    ga('send', 'pageview');
+  </script>
 </head>
 <body>
-  <div class="container">
-    <div class="page-header text-left">
-      <div class="well">
-        <h1><img src="logo32x32.png"/><%= site.title %><a href="/logout" class="btn btn-warning btn-md pull-right"><span class="fa fa-sign-out""</span> Sign out</a></h1>      
-          <% if (user.isReadOnlyMode()) { %>
-            <a href="/connect/local" class="btn btn-warning">Connect</a>
-          <% } else { %>
-            <p>
-              <strong>id</strong>: <%= user._id %><br>
-              <strong>email</strong>: <%= user.local.email %><br>
-              <!-- <strong>password</strong>: <%= user.local.password %> -->
-            </p>
-            <a href="/unlink/local" class="btn btn-warning disabled">Unlink</a>
-          <% } %>
-        <a href="/" class="btn btn-warning btn-md pull-right"><span class="glyphicon glyphicon-home"></span> Home</a>                
-      </div>
+<div class="container">
+  <div class="page-header text-left">
+    <div class="well">
+      <h1><img src="logo32x32.png"/><%= site.title %><a href="/logout" class="btn btn-warning btn-md pull-right"><span
+                  class="fa fa-sign-out""</span> Sign out</a></h1>
+      <% if (user.isReadOnlyMode()) { %>
+      <a href="/connect/local" class="btn btn-warning">Connect</a>
+      <% } else { %>
+      <p>
+        <strong>id</strong>: <%= user._id %><br>
+        <strong>email</strong>: <%= user.local.email %><br>
+        <!-- <strong>password</strong>: <%= user.local.password %> -->
+      </p>
+      <a href="/unlink/local" class="btn btn-warning disabled">Unlink</a>
+      <% } %>
+      <a href="/" class="btn btn-warning btn-md pull-right"><span class="glyphicon glyphicon-home"></span> Home</a>
     </div>
-    
-    <% if (message.length > 0) { %>
-      <div class="alert alert-danger"><%= message %></div>
-    <% } %>
-    
-    <div class="row">
-      <!-- LOCAL INFORMATION -->
-      <div class="col-sm-6">
-        <!-- FACEBOOK INFORMATION -->
-        <div class="well">
-          <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
-          <!-- check if the user has this token (is the user authenticated with this social account) -->
-          <% if (user.facebook.token) { %>
-            <p>
-              <strong>id</strong>: <%= user.facebook.id %><br>
-              <strong>token</strong>: <%= user.facebook.token %><br>
-              <strong>email</strong>: <%= user.facebook.email %><br>
-              <strong>name</strong>: <%= user.facebook.name %><br>
-            </p>
-            <a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
-          <% } else { %>
-            <a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
-          <% } %>
-        </div>
+  </div>
 
-        <!-- TWITTER INFORMATION -->
-        <div class="well">
-          <h3 class="text-info"><span class="fa fa-twitter"></span> Twitter</h3>
-          <% if (user.twitter.token) { %>
-            <p>
-              <strong>id</strong>: <%= user.twitter.id %><br>
-              <strong>token</strong>: <%= user.twitter.token %><br>
-              <strong>display name</strong>: <%= user.twitter.displayName %><br>
-              <strong>username</strong>: <%= user.twitter.username %>
-            </p>
-            <a href="/unlink/twitter" class="btn btn-info">Unlink</a>
-          <% } else { %>
-            <a href="/connect/twitter" class="btn btn-info">Connect Twitter</a>
-          <% } %>
-        </div>
+  <% if (message.length > 0) { %>
+  <div class="alert alert-danger"><%= message %></div>
+  <% } %>
 
-        <!-- GOOGLE INFORMATION -->
-          <div class="well">
-          <h3 class="text-danger"><span class="fa fa-google-plus"></span> Google+</h3>
-            <% if (user.google.token) { %>
-              <p>
-                <strong>id</strong>: <%= user.google.id %><br>
-                <strong>token</strong>: <%= user.google.token %><br>
-                <strong>email</strong>: <%= user.google.email %><br>
-                <strong>name</strong>: <%= user.google.name %>
-              </p>
-                <a href="/unlink/google" class="btn btn-danger">Unlink</a>
-            <% } else { %>
-              <a href="/connect/google" class="btn btn-danger">Connect Google</a>
-            <% } %>
-          </div>
-        </div>
-        
-        <div class="col-sm-6">
-        <% if (user.isReadOnlyMode()) { %>
-          <div class="alert alert-danger">Read only mode</div>
-        <% } else { %> 
-          <div class="row">
-            <div class="col-sm-6">
-              <form action="/build_installer_request" method="get">
-                <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version</button>
-              </form>
-            </div>
-          </div>
+  <div class="row">
+    <!-- LOCAL INFORMATION -->
+    <div class="col-sm-6">
+      <!-- FACEBOOK INFORMATION -->
+      <div class="well">
+        <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+        <!-- check if the user has this token (is the user authenticated with this social account) -->
+        <% if (user.facebook.token) { %>
+        <p>
+          <strong>id</strong>: <%= user.facebook.id %><br>
+          <strong>token</strong>: <%= user.facebook.token %><br>
+          <strong>email</strong>: <%= user.facebook.email %><br>
+          <strong>name</strong>: <%= user.facebook.name %><br>
+        </p>
+        <a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
+        <% } else { %>
+        <a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
+        <% } %>
+      </div>
+
+      <!-- TWITTER INFORMATION -->
+      <div class="well">
+        <h3 class="text-info"><span class="fa fa-twitter"></span> Twitter</h3>
+        <% if (user.twitter.token) { %>
+        <p>
+          <strong>id</strong>: <%= user.twitter.id %><br>
+          <strong>token</strong>: <%= user.twitter.token %><br>
+          <strong>display name</strong>: <%= user.twitter.displayName %><br>
+          <strong>username</strong>: <%= user.twitter.username %>
+        </p>
+        <a href="/unlink/twitter" class="btn btn-info">Unlink</a>
+        <% } else { %>
+        <a href="/connect/twitter" class="btn btn-info">Connect Twitter</a>
+        <% } %>
+      </div>
+
+      <!-- GOOGLE INFORMATION -->
+      <div class="well">
+        <h3 class="text-danger"><span class="fa fa-google-plus"></span> Google+</h3>
+        <% if (user.google.token) { %>
+        <p>
+          <strong>id</strong>: <%= user.google.id %><br>
+          <strong>token</strong>: <%= user.google.token %><br>
+          <strong>email</strong>: <%= user.google.email %><br>
+          <strong>name</strong>: <%= user.google.name %>
+        </p>
+        <a href="/unlink/google" class="btn btn-danger">Unlink</a>
+        <% } else { %>
+        <a href="/connect/google" class="btn btn-danger">Connect Google</a>
         <% } %>
       </div>
     </div>
+
+    <div class="col-sm-6">
+      <% if (user.isReadOnlyMode()) { %>
+      <div class="alert alert-danger">Read only mode</div>
+      <% } else { %>
+      <div class="row">
+        <div class="col-sm-6">
+          <form action="/build_installer_request" method="get">
+            <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version</button>
+          </form>
+        </div>
+      </div>
+      <% } %>
+    </div>
   </div>
+</div>
 </body>
 </html>

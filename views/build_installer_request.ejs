@@ -4,14 +4,17 @@
   <title><%- site.title %></title>
   <meta charset="utf-8">
   <meta name="description" content="<%- site.large_description %>"/>
-  <meta name="keywords" content="<%- site.keywords %>" />
-  <meta name="copyright" content="FastoNoSQL.com" />
-  <meta name="webmoney.attestation.label" CONTENT="webmoney attestation label#7DF987B9-C387-4DD0-BF5B-F23AB453166D" />
-  
+  <meta name="keywords" content="<%- site.keywords %>"/>
+  <meta name="copyright" content="FastoNoSQL.com"/>
+  <meta name="webmoney.attestation.label" CONTENT="webmoney attestation label#7DF987B9-C387-4DD0-BF5B-F23AB453166D"/>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
   <style>
-    body         { padding-top:80px; }
+    body {
+      padding-top: 80px;
+    }
+
     .progress {
       position: relative;
     }
@@ -22,218 +25,247 @@
       width: 100%;
       color: black;
     }
-    </style>
-    <script src="scripts/script.js" type="text/javascript"></script>
-    <script src="<%= site.domain%>:<%= back_end.socketio_port %>/socket.io/socket.io.js"></script>
-      
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script>
-      function update_bar(progress, text) {
-        var $bar = $('.progress-bar');
-        $bar.css('width', progress+'%').attr('aria-valuenow', progress);
-        var $span = $bar.find('span');
-        var ptext = progress + '% ' + text;
-        $span.text(ptext);
-        if (progress == 100) {
-          $('.progress').removeClass('active');
+  </style>
+  <script src="scripts/script.js" type="text/javascript"></script>
+  <script src="<%= site.domain %>:<%= back_end.socketio_port %>/socket.io/socket.io.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script>
+    function update_bar(progress, text) {
+      var $bar = $('.progress-bar');
+      $bar.css('width', progress + '%').attr('aria-valuenow', progress);
+      var $span = $bar.find('span');
+      var ptext = progress + '% ' + text;
+      $span.text(ptext);
+      if (progress == 100) {
+        $('.progress').removeClass('active');
+      }
+    }
+
+    var socket = io.connect('<%= site.domain %>:<%= back_end.socketio_port %>');
+    //on connetion, updates connection state and sends subscribe request
+    socket.on('connect', function (data) {
+    });
+
+    //when reconnection is attempted, updates status
+    socket.on('reconnecting', function (data) {
+    });
+
+    //on new message adds a new message to display
+    socket.on('message_rabbitmq', function (responce_json) {
+      if (responce_json.email != '<%= user.local.email %>') {
+        return;
+      }
+
+      if (responce_json.hasOwnProperty('error')) {
+        //console.error(responce_json.error);
+        $('.progress').removeClass('progress-bar-success');
+        $('.progress').addClass('progress-bar-danger');
+      } else {
+        console.log('received', responce_json.body);
+        $('#package_link').attr("href", responce_json.body);
+        $('#package_link').show();
+      }
+    });
+
+    socket.on('status_rabbitmq', function (responce_json) {
+      if (responce_json.email != '<%= user.local.email %>') {
+        return;
+      }
+      update_bar(responce_json.progress, responce_json.message);
+    });
+
+    function send_build_request(id, user, password, platform, package_type, bit, databases) {
+      var build_args = {
+        "id": id,
+        "platform": platform,
+        "package_type": package_type,
+        "email": user,
+        "password": password,
+        "arch": bit,
+        "databases": databases
+      };
+      var msg = JSON.stringify(build_args);
+      socket.emit('publish_rabbitmq', msg);
+    }
+
+    function send_build_request_local(id, user, password) {
+      var platform = $('.nav-tabs .active > a').attr('aria-controls');
+      var os_ctrl = $('input[name=os]:checked');
+      var package_type = os_ctrl.attr('package_type');
+      var bit = parseInt(os_ctrl.attr('bit'));
+      var databases = [];
+      var dbs = document.getElementsByName('database');
+      for (var i = 0; i < dbs.length; ++i) {
+        if (dbs[i].checked) {
+          databases.push(dbs[i].value);
         }
       }
-          
-      var socket = io.connect('<%= site.domain%>:<%= back_end.socketio_port %>');
-      //on connetion, updates connection state and sends subscribe request
-      socket.on('connect', function(data){
-      });
-
-      //when reconnection is attempted, updates status 
-      socket.on('reconnecting', function(data){
-      });
-
-      //on new message adds a new message to display
-      socket.on('message_rabbitmq', function (responce_json) {
-        if (responce_json.email != '<%= user.local.email %>') {
-          return;
-        }
-
-        if (responce_json.hasOwnProperty('error')){
-          //console.error(responce_json.error);
-          $('.progress').removeClass('progress-bar-success');
-          $('.progress').addClass('progress-bar-danger');
-        } else {
-          console.log('received', responce_json.body);
-          $('#package_link').attr("href", responce_json.body);
-          $('#package_link').show();
-        }              
-      });
-          
-      socket.on('status_rabbitmq', function (responce_json) {
-        if (responce_json.email != '<%= user.local.email %>') {
-          return;
-        }
-        update_bar(responce_json.progress, responce_json.message);             
-      });
-          
-      function send_build_request(id, user, password, platform, package_type, bit, databases) {
-        var build_args = { "id" : id,
-                           "platform": platform,
-                           "package_type" : package_type,
-                           "email" : user,
-                           "password" : password,
-                           "arch" : bit,
-                           "databases" : databases
-                         };
-        var msg = JSON.stringify(build_args);
-        socket.emit('publish_rabbitmq', msg);
-      }
-          
-      function send_build_request_local(id, user, password) {
-        var platform = $('.nav-tabs .active > a').attr('aria-controls');
-        var os_ctrl = $('input[name=os]:checked');
-        var package_type = os_ctrl.attr('package_type');
-        var bit = parseInt(os_ctrl.attr('bit'));
-        var databases = [];
-        var dbs = document.getElementsByName('database');
-        for(var i = 0; i < dbs.length; ++i) {
-          if(dbs[i].checked) {
-            databases.push(dbs[i].value);
-          }
-        }
-        return send_build_request(id, user, password, platform, package_type, bit, databases);
-      }            
-    </script>
-    <script>
- (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
- (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
- m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
- })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
- ga('create', '<%- site.google_analitics_token %>', 'auto');
- ga('send', 'pageview');
-</script>
+      return send_build_request(id, user, password, platform, package_type, bit, databases);
+    }
+  </script>
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', '<%- site.google_analitics_token %>', 'auto');
+    ga('send', 'pageview');
+  </script>
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 col-md-12 col-lg-12">
-        <h2><span class="os-icon"><i class="fa fa-television"></i></span> OS</h2>
-        <div>
-          <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#windows" aria-controls="windows" role="tab" data-toggle="tab"><i class="fa fa-windows"></i> Windows</a></li>
-            <li role="presentation"><a href="#linux" aria-controls="linux" role="tab" data-toggle="tab"><i class="fa fa-linux"></i> Linux</a></li>
-            <li role="presentation"><a href="#macosx" aria-controls="macosx" role="tab" data-toggle="tab"><i class="fa fa-apple"></i> MacOS</a></li>
-          </ul>
-          <!-- Tab panes -->
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="windows">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <h2><span class="os-icon"><i class="fa fa-television"></i></span> OS</h2>
+      <div>
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#windows" aria-controls="windows" role="tab"
+                                                    data-toggle="tab"><i class="fa fa-windows"></i> Windows</a></li>
+          <li role="presentation"><a href="#linux" aria-controls="linux" role="tab" data-toggle="tab"><i
+                      class="fa fa-linux"></i> Linux</a></li>
+          <li role="presentation"><a href="#macosx" aria-controls="macosx" role="tab" data-toggle="tab"><i
+                      class="fa fa-apple"></i> MacOS</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="windows">
             <div data-toggle="buttons" class="buttons-row">
               <label class="btn btn-primary">
-                <input type="radio" name="os" value="windows_7_x64" bit="64" package_type="NSIS" id="option1" autocomplete="off" checked="checked"> Windows 7 x64
+                <input type="radio" name="os" value="windows_7_x64" bit="64" package_type="NSIS" id="option1"
+                       autocomplete="off" checked="checked"> Windows 7 x64
               </label>
               <label class="btn btn-primary">
-                <input type="radio" name="os" value="windows_8_x64" bit="64" package_type="NSIS" id="option2" autocomplete="off"> Windows 8 x64
+                <input type="radio" name="os" value="windows_8_x64" bit="64" package_type="NSIS" id="option2"
+                       autocomplete="off"> Windows 8 x64
               </label>
               <label class="btn btn-primary">
-                <input type="radio" name="os" value="windows_10_x64" bit="64" package_type="NSIS" id="option3" autocomplete="off"> Windows 10 x64
+                <input type="radio" name="os" value="windows_10_x64" bit="64" package_type="NSIS" id="option3"
+                       autocomplete="off"> Windows 10 x64
               </label>
-            </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="linux">
-            <div data-toggle="buttons" class="buttons-row">
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="ubuntu_x64" bit="64" package_type="DEB" id="option4" autocomplete="off" checked="checked"> Ubuntu x64</label>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="debian_x64" bit="64" package_type="DEB" id="option5" autocomplete="off"> Debian x64</label>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="centOS_x64" bit="64" package_type="RPM" id="option6" autocomplete="off"> CentOS x64</label>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="fedora_x64" bit="64" package_type="RPM" id="option7" autocomplete="off"> Fedora x64</label>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="arch_linux_x64" bit="64" package_type="TGZ" id="option8" autocomplete="off"> Arch Linux x64</label>
-            </div>
-            </div>          
-            <div role="tabpanel" class="tab-pane" id="macosx">
-            <div data-toggle="buttons" class="buttons-row">
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="macosx_10_8_x64" bit="64" package_type="DragNDrop" id="option9" autocomplete="off" checked="checked"> MacOS 10.8 x64</label>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="macosx_10_9_x64" bit="64" package_type="DragNDrop" id="option10" autocomplete="off"> MacOS 10.9 x64</label>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="macosx_10_10_x64" bit="64" package_type="DragNDrop" id="option11" autocomplete="off"> MacOS 10.10 x64</label>
-              <label class="btn btn-primary">
-                <input type="radio" name="os" value="macosx_10_11_x64" bit="64" package_type="DragNDrop" id="option12" autocomplete="off"> MacOS 10.11 x64</label>
-            </div>
             </div>
           </div>
-        </div>
-      </div>
-      
-      <div class="col-sm-12 col-md-12 col-lg-12">
-        <h2><span class="os-icon"><i class="fa fa-cogs"></i></span> Profile settings:</h2>
-        <div>
-          <ul class="nav nav-tabs" role="tablist" id="connection_settings">
-            <li role="presentation" class="active">
-              <a href="#base" aria-controls="base" role="tab" data-toggle="tab">Base</a>
-            </li>
-            <li role="presentation">
-              <a href="#advanced" aria-controls="advanced" role="tab" data-toggle="tab">Advanced</a>
-            </li>
-          </ul>
-          <!-- Tab panes -->
-          <div class="tab-content">
-            <div role="tabpane2" class="tab-pane form-inline active" id="base">
-              <div>
-                <label>Email: <input type="text" disabled name="Host" class="form-control" id="localhost_host" value='<%- user.local.email %>'></label>
-              </div>
-            </div>
-            <div role="tabpane2" class="tab-pane form-inline" id="advanced">
-              <div>
-                <% for (var i = 0; i < site.supported_databases.length; ++i) { %>
-                  <input type="checkbox" name="database" value="<%- site.supported_databases[i].name %>" checked="checked"> <%- site.supported_databases[i].name %></br>
-                <% } %>
-              </div>            
+          <div role="tabpanel" class="tab-pane" id="linux">
+            <div data-toggle="buttons" class="buttons-row">
+              <label class="btn btn-primary">
+                <input type="radio" name="os" value="ubuntu_x64" bit="64" package_type="DEB" id="option4"
+                       autocomplete="off" checked="checked"> Ubuntu x64</label>
+              <label class="btn btn-primary">
+                <input type="radio" name="os" value="debian_x64" bit="64" package_type="DEB" id="option5"
+                       autocomplete="off"> Debian x64</label>
+              <label class="btn btn-primary">
+                <input type="radio" name="os" value="centOS_x64" bit="64" package_type="RPM" id="option6"
+                       autocomplete="off"> CentOS x64</label>
+              <label class="btn btn-primary">
+                <input type="radio" name="os" value="fedora_x64" bit="64" package_type="RPM" id="option7"
+                       autocomplete="off"> Fedora x64</label>
+              <label class="btn btn-primary">
+                <input type="radio" name="os" value="arch_linux_x64" bit="64" package_type="TGZ" id="option8"
+                       autocomplete="off"> Arch Linux x64</label>
             </div>
           </div>
-          
-          <div class="col-sm-12 col-md-12 col-lg-12">
-            <button id="build_package_button" class="btn btn-success btn-send" data-toggle="modal" data-target="#myModal">
-              Build Package
-            </button>
+          <div role="tabpanel" class="tab-pane" id="macosx">
+            <div data-toggle="buttons" class="buttons-row">
+              <label class="btn btn-primary">
+                <input type="radio" name="os" value="macosx_10_8_x64" bit="64" package_type="DragNDrop" id="option9"
+                       autocomplete="off" checked="checked"> MacOS 10.8 x64</label>
+              <label class="btn btn-primary">
+                <input type="radio" name="os" value="macosx_10_9_x64" bit="64" package_type="DragNDrop" id="option10"
+                       autocomplete="off"> MacOS 10.9 x64</label>
+              <label class="btn btn-primary">
+                <input type="radio" name="os" value="macosx_10_10_x64" bit="64" package_type="DragNDrop" id="option11"
+                       autocomplete="off"> MacOS 10.10 x64</label>
+              <label class="btn btn-primary">
+                <input type="radio" name="os" value="macosx_10_11_x64" bit="64" package_type="DragNDrop" id="option12"
+                       autocomplete="off"> MacOS 10.11 x64</label>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  
-    <div id="myModal" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Confirmation</h4>
-          </div>
-          <div class="modal-body">
-            <div class="build_container">
-              <p>Do you want to start build package?</p>                   
-              <div class="progress progress-striped active">
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="max-width:1600px;">
-                  <span></span>
-                </div>
-              </div>
-              <a href="" id="package_link" style="display:none">Click to download</a>
+
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <h2><span class="os-icon"><i class="fa fa-cogs"></i></span> Profile settings:</h2>
+      <div>
+        <ul class="nav nav-tabs" role="tablist" id="connection_settings">
+          <li role="presentation" class="active">
+            <a href="#base" aria-controls="base" role="tab" data-toggle="tab">Base</a>
+          </li>
+          <li role="presentation">
+            <a href="#advanced" aria-controls="advanced" role="tab" data-toggle="tab">Advanced</a>
+          </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpane2" class="tab-pane form-inline active" id="base">
+            <div>
+              <label>Email: <input type="text" disabled name="Host" class="form-control" id="localhost_host"
+                                   value='<%- user.local.email %>'></label>
             </div>
           </div>
-          <div class="modal-footer">                  
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="send_build_request_local('<%- user._id %>', '<%- user.local.email %>', '<%- user.local.password %>')">Start build</button>
+          <div role="tabpane2" class="tab-pane form-inline" id="advanced">
+            <div>
+              <% for (var i = 0; i < site.supported_databases.length; ++i) { %>
+              <input type="checkbox" name="database" value="<%- site.supported_databases[i].name %>"
+                     checked="checked"> <%- site.supported_databases[i].name %></br>
+              <% } %>
+            </div>
           </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <button id="build_package_button" class="btn btn-success btn-send" data-toggle="modal" data-target="#myModal">
+            Build Package
+          </button>
         </div>
       </div>
     </div>
-    <% if (builded_packages.length > 0) { %>
-      <h2>Ready to use builds:</h2>
-      <% for (var i = 0; i < builded_packages.length; ++i) { %>
-        <a href="<%= builded_packages[i].path %>"><%= builded_packages[i].file_name %></a></br>
-      <% } %>
-    <% } %> 
   </div>
+
+  <div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Confirmation</h4>
+        </div>
+        <div class="modal-body">
+          <div class="build_container">
+            <p>Do you want to start build package?</p>
+            <div class="progress progress-striped active">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                   aria-valuemax="100" style="max-width:1600px;">
+                <span></span>
+              </div>
+            </div>
+            <a href="" id="package_link" style="display:none">Click to download</a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary"
+                  onclick="send_build_request_local('<%- user._id %>', '<%- user.local.email %>', '<%- user.local.password %>')">
+            Start build
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% if (builded_packages.length > 0) { %>
+  <h2>Ready to use builds:</h2>
+  <% for (var i = 0; i < builded_packages.length; ++i) { %>
+  <a href="<%= builded_packages[i].path %>"><%= builded_packages[i].file_name %></a></br>
+  <% } %>
+  <% } %>
+</div>
 </body>
 
 </html>
