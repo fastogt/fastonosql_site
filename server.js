@@ -29,19 +29,26 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var fs = require('fs');
 
 // app_r
 
-var http = require('http');
+var https = require('https');
 var io = require('socket.io');
-var server = http.createServer(app);
+var server = https.createServer({
+  key: fs.readFileSync(settings_config.ssl_key_path),
+  cert: fs.readFileSync(settings_config.ssl_cert_path),
+  ca: fs.readFileSync(settings_config.ssl_ca_path),
+  requestCert: false,
+  rejectUnauthorized: false
+}, app);
 var listener = io.listen(server);
 
 // settings
 app.locals.site = {
   title: 'FastoNoSQL',
   version: '0.0.1',
-  domain: 'http://fastonosql.com',
+  domain: 'https://fastonosql.com',
   keywords: 'FastoNoSQL, GUI Manager, Redis GUI, Memcached GUI, SSDB GUI, LevelDB GUI, RocksDB GUI, LMDB GUI, Unqlite GUI, UpscaleDB GUI',
   description: 'FastoNoSQL it is GUI platform for NoSQL databases.',
   small_description: 'FastoNoSQL - cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, UpscaleDB, and Unqlite databases.',
@@ -193,7 +200,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
-app.use(session({secret: app.locals.project.name_lowercase})); // session secret
+app.use(session({
+  secret: app.locals.project.name_lowercase,
+  resave: true,
+  saveUninitialized: true
+})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
