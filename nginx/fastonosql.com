@@ -17,7 +17,6 @@ server {
     # if ($scheme != "https") {
     #     return 301 https://$host$request_uri;
     # } # managed by Certbot
-
 }
 
 server {
@@ -25,8 +24,8 @@ server {
     access_log /var/log/nginx/fastonosql.log;
 
     listen 443 ssl;
-ssl_certificate /etc/letsencrypt/live/fastonosql.com/fullchain.pem; # managed by Certbot
-ssl_certificate_key /etc/letsencrypt/live/fastonosql.com/privkey.pem; # managed by Certbot    
+    ssl_certificate /etc/letsencrypt/live/fastonosql.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/fastonosql.com/privkey.pem; # managed by Certbot    
 
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
     ssl_prefer_server_ciphers on;
@@ -56,7 +55,9 @@ ssl_certificate_key /etc/letsencrypt/live/fastonosql.com/privkey.pem; # managed 
       proxy_pass http://app_fastonosql;
       proxy_redirect off;
     }
-
-
 }
+# ssl_certificate /etc/nginx/ssl/nginx.crt;
+# ssl_certificate_key /etc/nginx/ssl/nginx.key;
+# openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
+# https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04
 
