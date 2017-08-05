@@ -34,14 +34,11 @@ var fs = require('fs');
 // app_r
 
 var https = require('https');
-var io = require('socket.io');
 var server = https.createServer({
   key: fs.readFileSync(settings_config.ssl_key_path),
-  cert: fs.readFileSync(settings_config.ssl_cert_path),
-  ca: fs.readFileSync(settings_config.ssl_ca_path),
-  requestCert: false,
-  rejectUnauthorized: false
+  cert: fs.readFileSync(settings_config.ssl_cert_path)
 }, app);
+var io = require('socket.io');
 var listener = io.listen(server);
 
 // settings
@@ -49,10 +46,10 @@ app.locals.site = {
   title: 'FastoNoSQL',
   version: '0.0.1',
   domain: 'https://fastonosql.com',
-  keywords: 'FastoNoSQL, GUI Manager, Redis GUI, Memcached GUI, SSDB GUI, LevelDB GUI, RocksDB GUI, LMDB GUI, Unqlite GUI, UpscaleDB GUI',
+  keywords: 'FastoNoSQL, GUI Manager, Redis GUI, Memcached GUI, SSDB GUI, LevelDB GUI, RocksDB GUI, LMDB GUI, Unqlite GUI, UpscaleDB GUI, ForestDB GUI',
   description: 'FastoNoSQL it is GUI platform for NoSQL databases.',
-  small_description: 'FastoNoSQL - cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, UpscaleDB, and Unqlite databases.',
-  large_description: 'FastoNoSQL — is a cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, UpscaleDB, and Unqlite databases(i.e. Admin GUI Client). Our Desktop Client works on the most amount of Linux systems, also on Windows, Mac OS X, FreeBSD and Android platforms.',
+  small_description: 'FastoNoSQL - cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, UpscaleDB, Unqlite and ForestDB databases.',
+  large_description: 'FastoNoSQL — is a cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, UpscaleDB, Unqlite and ForestDB databases(i.e. Admin GUI Client). Our Desktop Client works on the most amount of Linux systems, also on Windows, Mac OS X, FreeBSD and Android platforms.',
   public_directory: public_dir_abs_path,
   users_directory: public_downloads_users_dir_abs_path,
   google_analitics_token: settings_config.google_analitics_token,
@@ -71,7 +68,8 @@ app.locals.site = {
     {'name': 'RocksDB', 'option': 'BUILD_WITH_ROCKSDB'},
     {'name': 'LMDB', 'option': 'BUILD_WITH_LMDB'},
     {'name': 'Unqlite', 'option': 'BUILD_WITH_UNQLITE'},
-    {'name': 'UpscaleDB', 'option': 'BUILD_WITH_UPSCALEDB'}]
+    {'name': 'UpscaleDB', 'option': 'BUILD_WITH_UPSCALEDB'},
+    {'name': 'ForestDB', 'option': 'BUILD_WITH_FORESTDB'}]
 };
 app.locals.project = {
   name: 'FastoNoSQL',
