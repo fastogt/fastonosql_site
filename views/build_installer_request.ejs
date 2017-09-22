@@ -94,7 +94,7 @@
       var platform = $('.nav-tabs .active > a').attr('aria-controls');
       var os_ctrl = $('input[name=os]:checked');
       var package_type = os_ctrl.attr('package_type');
-      var arch = parseInt(os_ctrl.attr('data-arch'));
+      var arch = os_ctrl.attr('data-arch');
       var databases = [];
       var dbs = document.getElementsByName('database');
       for (var i = 0; i < dbs.length; ++i) {
