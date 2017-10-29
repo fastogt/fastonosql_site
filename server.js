@@ -7,7 +7,9 @@ function gen_routing_key(platform, arch) {
 // load configs
 var configDB = require('./config/database.js');
 var settings_config = require('./config/settings.js');
+var public_settings_config = require('./config/public_settings.js');
 var auth_config = require('./config/auth.js');
+
 var root_abs_path = __dirname;
 var public_dir_abs_path = root_abs_path + '/public';
 var public_downloads_dir_abs_path = public_dir_abs_path + '/downloads';
@@ -43,49 +45,41 @@ var listener = io.listen(server);
 
 // settings
 app.locals.site = {
-  title: 'FastoNoSQL',
-  version: '0.0.1',
-  domain: 'https://fastonosql.com',
-  keywords: 'FastoNoSQL, GUI Manager, Redis GUI, Memcached GUI, SSDB GUI, LevelDB GUI, RocksDB GUI, LMDB GUI, Unqlite GUI, UpscaleDB GUI, ForestDB GUI',
-  description: 'FastoNoSQL it is GUI platform for NoSQL databases.',
-  small_description: 'FastoNoSQL - cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, UpscaleDB, Unqlite and ForestDB databases.',
-  large_description: 'FastoNoSQL — is a cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, UpscaleDB, Unqlite and ForestDB databases(i.e. Admin GUI Client). Our Desktop Client works on the most amount of Linux systems, also on Windows, Mac OS X, FreeBSD and Android platforms.',
+  title: public_settings_config.site.name,
+  version: public_settings_config.site.version,
+  domain: public_settings_config.site.domain,
+  keywords: public_settings_config.site.keywords,
+  description: public_settings_config.site.description,
+  small_description: public_settings_config.site.small_description,
+  large_description: public_settings_config.site.large_description,
   public_directory: public_dir_abs_path,
   users_directory: public_downloads_users_dir_abs_path,
   google_analitics_token: settings_config.google_analitics_token,
   data_ad_client: settings_config.data_ad_client,
   data_ad_slot: settings_config.data_ad_slot,
-  github_link: 'https://github.com/fastogt/fastonosql',
-  github_issues_link: 'https://github.com/fastogt/fastonosql/issues',
-  github_link_without_host: 'fastogt/fastonosql',
-  twitter_name: 'FastoNoSQL',
-  twitter_link: 'https://twitter.com/FastoNoSQL',
+  github_link: public_settings_config.site.github_link,
+  github_issues_link: public_settings_config.site.github_issues_link,
+  github_link_without_host: public_settings_config.site.github_link_without_host,
+  twitter_name: public_settings_config.site.twitter_name,
+  twitter_link: public_settings_config.site.twitter_link,
   facebook_appid: auth_config.facebookAuth.clientID,
-  supported_databases: [{'name': 'Redis', 'option': 'BUILD_WITH_REDIS'},
-    {'name': 'Memcached', 'option': 'BUILD_WITH_MEMCACHED'},
-    {'name': 'SSDB', 'option': 'BUILD_WITH_SSDB'},
-    {'name': 'LevelDB', 'option': 'BUILD_WITH_LEVELDB'},
-    {'name': 'RocksDB', 'option': 'BUILD_WITH_ROCKSDB'},
-    {'name': 'LMDB', 'option': 'BUILD_WITH_LMDB'},
-    {'name': 'Unqlite', 'option': 'BUILD_WITH_UNQLITE'},
-    {'name': 'UpscaleDB', 'option': 'BUILD_WITH_UPSCALEDB'},
-    {'name': 'ForestDB', 'option': 'BUILD_WITH_FORESTDB'}]
+  supported_databases: public_settings_config.site.supported_databases
 };
 app.locals.project = {
-  name: 'FastoNoSQL',
-  name_lowercase: 'fastonosql',
-  version: settings_config.app_version,
-  version_type: settings_config.app_version_type
+  name: public_settings_config.project.name,
+  name_lowercase: public_settings_config.project.name_lowercase,
+  version: public_settings_config.project.version,
+  version_type: public_settings_config.project.version_type
 };
 app.locals.author = {
-  name: 'Topilski Alexandr',
-  contact: 'atopilski@fastogt.com'
+  name: public_settings_config.support.name,
+  contact: public_settings_config.support.contact
 };
 app.locals.company = {
-  name: 'FastoGT',
-  description: 'Fasto Great Technology',
-  domain: 'http://fastogt.com',
-  copyright: 'Copyright © 2014-2016 FastoGT. All rights reserved.'
+  name: public_settings_config.company.name,
+  description: public_settings_config.company.description,
+  domain: public_settings_config.company.domain,
+  copyright: public_settings_config.company.copyright
 };
 
 app.locals.back_end = {
@@ -105,7 +99,7 @@ rabbit_connection.on('error', function (err) {
 listener.on('connection', function (socket) {
   socket.on('publish_rabbitmq', function (msg) {
     var in_json = JSON.parse(msg);
-    if (in_json.databases.length == 0) {
+    if (in_json.databases.length === 0) {
       var err = Error('At least one database must be selected!');
       console.error(err);
       socket.emit('status_rabbitmq', {'email': in_json.email, 'progress': 100, 'message': err.message}); //
@@ -135,7 +129,7 @@ listener.on('connection', function (socket) {
         var found = false;
         for (var j = 0; j < in_json.databases.length; ++j) {
           var sel_db = in_json.databases[j];
-          if (sel_db == sup_db.name) {
+          if (sel_db === sup_db.name) {
             found = true;
             break;
           }
