@@ -1,296 +1,306 @@
 <!doctype html>
 <html>
 <head>
-  <title><%- site.title %> - How to use</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <style type="text/css">@-ms-viewport {
-      width: device-width;
-    }</style>
+    <title><%- site.title %> - How to use</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <style type="text/css">@-ms-viewport {
+            width: device-width;
+        }</style>
 
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="design/css/layers.min.css" media="screen">
-  <link rel="stylesheet" href="design/style.css" media="screen">
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400italic,700italic,400,700'
-        rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="design/css/layers.min.css" media="screen">
+    <link rel="stylesheet" href="design/style.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400italic,700italic,400,700'
+          rel='stylesheet' type='text/css'>
 
-  <meta name="description" content="<%- site.large_description %>"/>
-  <meta name="keywords" content="<%- site.keywords %>"/>
-  <meta name="copyright" content="FastoNoSQL.com"/>
-  <meta name="webmoney.attestation.label" CONTENT="webmoney attestation label#7DF987B9-C387-4DD0-BF5B-F23AB453166D"/>
+    <meta name="description" content="<%- site.large_description %>"/>
+    <meta name="keywords" content="<%- site.keywords %>"/>
+    <meta name="copyright" content="FastoNoSQL.com"/>
+    <meta name="webmoney.attestation.label" CONTENT="webmoney attestation label#7DF987B9-C387-4DD0-BF5B-F23AB453166D"/>
 
-  <script>
-    (function (i, s, o, g, r, a, m) {
-      i['GoogleAnalyticsObject'] = r;
-      i[r] = i[r] || function () {
-          (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-      a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-      a.async = 1;
-      a.src = g;
-      m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-    ga('create', '<%- site.google_analitics_token %>', 'auto');
-    ga('send', 'pageview');
-  </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', '<%- site.google_analitics_token %>', 'auto');
+        ga('send', 'pageview');
+    </script>
 </head>
 
 <body>
 
 <header role="banner" class="transparent light">
-  <div class="row">
-    <div class="nav-inner row-content buffer-left buffer-right even clear-after">
-      <div id="brand">
-        <h2 class="reset"><a href="/"><%- site.title %></a></h2>
-      </div>
-      <a id="menu-toggle" href="#"><i class="fa fa-bars fa-lg"></i></a>
-      <nav>
-        <ul class="reset" role="navigation">
-          <li><a href="/">Home</a></li>
-          <li><a href="/help">How to use</a></li>
-          <li><a href="/download">Download</a></li>
-        </ul>
-      </nav>
-    </div><!-- row-content -->
-  </div><!-- row -->
+    <div class="row">
+        <div class="nav-inner row-content buffer-left buffer-right even clear-after">
+            <div id="brand">
+                <h2 class="reset"><a href="/"><%- site.title %></a></h2>
+            </div>
+            <a id="menu-toggle" href="#"><i class="fa fa-bars fa-lg"></i></a>
+            <nav>
+                <ul class="reset" role="navigation">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/help">How to use</a></li>
+                    <li><a href="/download">Download</a></li>
+                </ul>
+            </nav>
+        </div><!-- row-content -->
+    </div><!-- row -->
 </header>
 
 <div id="intro-wrap" data-height="3.222">
-  <div id="intro" class="preload darken">
-    <div class="intro-item">
-      <div class="caption" style="top: 25.5px;">
-        <h1 style="color: #fff;">How to use FastoNoSQL</h1>
-      </div><!-- caption -->
+    <div id="intro" class="preload darken">
+        <div class="intro-item">
+            <div class="caption" style="top: 25.5px;">
+                <h1 style="color: #fff;">How to use FastoNoSQL</h1>
+            </div><!-- caption -->
+        </div><!-- intro -->
     </div><!-- intro -->
-  </div><!-- intro -->
 </div><!-- intro-wrap -->
 
 <div id="main" class="row">
-  <div class="row-content buffer-left buffer-right buffer-bottom clear-after">
-    <div class="post-area clear-after">
-      <article role="main" class="column nine">
-        <div class="row-content" id="1">
-          <h2 style="margin: 25px 0 0 0;">Create connection</h2>
-          </p>
-          <img src="images/connect.gif" alt="Help - Create connection" title="Help - Create connection"/>
-          <p>
-        </div>
+    <div class="row-content buffer-left buffer-right buffer-bottom clear-after">
+        <div class="post-area clear-after">
+            <article role="main" class="column nine">
+                <div class="row-content" id="1">
+                    <h2 style="margin: 25px 0 0 0;">Create connection</h2>
+                    </p>
+                    <img src="images/connect.gif" alt="Help - Create connection" title="Help - Create connection"/>
+                    <p>
+                </div>
 
-        <div class="row-content" id="2">
-          <h2>Workflow</h2>
-          </p>
-          <img src="images/edit.gif" alt="Help - FastoNoSQL workflow" title="Help - FastoNoSQL workflow"/>
-          <p>
-        </div>
-        <div class="meta-social">
+                <div class="row-content" id="2">
+                    <h2>Workflow</h2>
+                    </p>
+                    <img src="images/edit.gif" alt="Help - FastoNoSQL workflow" title="Help - FastoNoSQL workflow"/>
+                    <p>
+                </div>
+                <div class="meta-social">
 
-          <div class="column twelve" style="text-align: center; margin: 10px 0;">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle"
-                 style="display:block; text-align:center;"
-                 data-ad-layout="in-article"
-                 data-ad-format="fluid"
-                 data-ad-client="<%- site.data_ad_client %>"
-                 data-ad-slot="<%- site.data_ad_slot %>"></ins>
-            <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-          </div>
 
-          <div class="row-content buffer even" style="line-height: 0.8;">
-            <div class="column three">
-              <div class="github">
-                <a aria-label="Watch <%- site.github_link_without_host %> on GitHub"
-                   data-count-aria-label="# watchers on GitHub"
-                   data-count-api="/repos/<%- site.github_link_without_host %>#subscribers_count"
-                   data-count-href="/<%- site.github_link_without_host %>/watchers" data-icon="octicon-eye"
-                   href="<%- site.github_link %>" class="github-button">Watch</a>
-                <a aria-label="Star <%- site.github_link_without_host %> on GitHub"
-                   data-count-aria-label="# stargazers on GitHub"
-                   data-count-api="/repos/<%- site.github_link_without_host %>#stargazers_count"
-                   data-count-href="/<%- site.github_link_without_host %>/stargazers" data-icon="octicon-star"
-                   href="<%- site.github_link %>" class="github-button">Star</a>
-                <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
-              </div>
-            </div>
-            <div class="column three">
-              <div class="facebook">
-                <div id="fb-root"></div>
-                <script>(function (d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) return;
-                    js = d.createElement(s);
-                    js.id = id;
-                    js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=<%= site.facebook_appid %>";
-                    fjs.parentNode.insertBefore(js, fjs);
-                  }(document, 'script', 'facebook-jssdk'));
-                </script>
-                <div class="fb-like" style="vertical-align: sub !important;" data-href="<%= site.domain %>"
-                     data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
-              </div>
-            </div>
-            <div class="column three">
-              <div class="twitter">
-                <a href="https://twitter.com/share" class="twitter-share-button" {count}
-                   data-via="<%= site.twitter_name %>">Tweet</a>
-                <script>!function (d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-                    if (!d.getElementById(id)) {
-                      js = d.createElement(s);
-                      js.id = id;
-                      js.src = p + '://platform.twitter.com/widgets.js';
-                      fjs.parentNode.insertBefore(js, fjs);
-                    }
-                  }(document, 'script', 'twitter-wjs');</script>
-                <a href="<%= site.twitter_link %>" class="twitter-follow-button" data-show-count="false">Follow
-                  @<%= site.twitter_name %></a>
-                <script>!function (d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-                    if (!d.getElementById(id)) {
-                      js = d.createElement(s);
-                      js.id = id;
-                      js.src = p + '://platform.twitter.com/widgets.js';
-                      fjs.parentNode.insertBefore(js, fjs);
-                    }
-                  }(document, 'script', 'twitter-wjs');</script>
-              </div>
-            </div>
-            <div class="column three">
-              <div class="google_plus">
-                <div class="g-plus" data-action="share" data-annotation="bubble"></div>
+                    <div class="row-content buffer even" style="line-height: 0.8;">
+                        <div class="column three">
+                            <div class="github">
+                                <a aria-label="Watch <%- site.github_link_without_host %> on GitHub"
+                                   data-count-aria-label="# watchers on GitHub"
+                                   data-count-api="/repos/<%- site.github_link_without_host %>#subscribers_count"
+                                   data-count-href="/<%- site.github_link_without_host %>/watchers"
+                                   data-icon="octicon-eye"
+                                   href="<%- site.github_link %>" class="github-button">Watch</a>
+                                <a aria-label="Star <%- site.github_link_without_host %> on GitHub"
+                                   data-count-aria-label="# stargazers on GitHub"
+                                   data-count-api="/repos/<%- site.github_link_without_host %>#stargazers_count"
+                                   data-count-href="/<%- site.github_link_without_host %>/stargazers"
+                                   data-icon="octicon-star"
+                                   href="<%- site.github_link %>" class="github-button">Star</a>
+                                <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+                            </div>
+                        </div>
+                        <div class="column three">
+                            <div class="facebook">
+                                <div id="fb-root"></div>
+                                <script>(function (d, s, id) {
+                                        var js, fjs = d.getElementsByTagName(s)[0];
+                                        if (d.getElementById(id)) return;
+                                        js = d.createElement(s);
+                                        js.id = id;
+                                        js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=<%= site.facebook_appid %>";
+                                        fjs.parentNode.insertBefore(js, fjs);
+                                    }(document, 'script', 'facebook-jssdk'));
+                                </script>
+                                <div class="fb-like" style="vertical-align: sub !important;"
+                                     data-href="<%= site.domain %>"
+                                     data-layout="button_count" data-action="like" data-show-faces="false"
+                                     data-share="true"></div>
+                            </div>
+                        </div>
+                        <div class="column three">
+                            <div class="twitter">
+                                <a href="https://twitter.com/share" class="twitter-share-button" {count}
+                                   data-via="<%= site.twitter_name %>">Tweet</a>
+                                <script>!function (d, s, id) {
+                                        var js, fjs = d.getElementsByTagName(s)[0],
+                                            p = /^http:/.test(d.location) ? 'http' : 'https';
+                                        if (!d.getElementById(id)) {
+                                            js = d.createElement(s);
+                                            js.id = id;
+                                            js.src = p + '://platform.twitter.com/widgets.js';
+                                            fjs.parentNode.insertBefore(js, fjs);
+                                        }
+                                    }(document, 'script', 'twitter-wjs');</script>
+                                <a href="<%= site.twitter_link %>" class="twitter-follow-button"
+                                   data-show-count="false">Follow
+                                    @<%= site.twitter_name %></a>
+                                <script>!function (d, s, id) {
+                                        var js, fjs = d.getElementsByTagName(s)[0],
+                                            p = /^http:/.test(d.location) ? 'http' : 'https';
+                                        if (!d.getElementById(id)) {
+                                            js = d.createElement(s);
+                                            js.id = id;
+                                            js.src = p + '://platform.twitter.com/widgets.js';
+                                            fjs.parentNode.insertBefore(js, fjs);
+                                        }
+                                    }(document, 'script', 'twitter-wjs');</script>
+                            </div>
+                        </div>
+                        <div class="column three">
+                            <div class="google_plus">
+                                <div class="g-plus" data-action="share" data-annotation="bubble"></div>
+                                <script type="text/javascript">
+                                    window.___gcfg = {lang: 'en-GB'};
+                                    (function () {
+                                        var po = document.createElement('script');
+                                        po.type = 'text/javascript';
+                                        po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0];
+                                        s.parentNode.insertBefore(po, s);
+                                    })();
+                                </script>
+                                <script src="https://apis.google.com/js/platform.js" async defer>
+                                    {
+                                        lang: 'en-GB'
+                                    }
+                                </script>
+                                <div class="g-plusone" data-size="medium" data-href="<%= site.domain %>"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="disqus_thread"></div>
                 <script type="text/javascript">
-                  window.___gcfg = {lang: 'en-GB'};
-                  (function () {
-                    var po = document.createElement('script');
-                    po.type = 'text/javascript';
-                    po.async = true;
-                    po.src = 'https://apis.google.com/js/platform.js';
-                    var s = document.getElementsByTagName('script')[0];
-                    s.parentNode.insertBefore(po, s);
-                  })();
-                </script>
-                <script src="https://apis.google.com/js/platform.js" async defer>
-                  {
-                    lang: 'en-GB'
-                  }
-                </script>
-                <div class="g-plusone" data-size="medium" data-href="<%= site.domain %>"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="disqus_thread"></div>
-        <script type="text/javascript">
-          /* * * CONFIGURATION VARIABLES * * */
-          var disqus_shortname = 'fastonosqlcom';
+                    /* * * CONFIGURATION VARIABLES * * */
+                    var disqus_shortname = 'fastonosqlcom';
 
-          /* * * DON'T EDIT BELOW THIS LINE * * */
-          (function () {
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-          })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments
-            powered by Disqus.</a></noscript>
-      </article>
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function () {
+                        var dsq = document.createElement('script');
+                        dsq.type = 'text/javascript';
+                        dsq.async = true;
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+                                                                  rel="nofollow">comments
+                        powered by Disqus.</a></noscript>
+            </article>
 
-      <aside role="complementary" class="sidebar column three last">
-        <div class="widget help-menu">
-          <h3>How to use</h3>
-          <ul class="plain">
-            <li><a href="#1">Create connection</a></li>
-            <li><a href="#2">Workflow</a></li>
-          </ul>
-        </div>
-      </aside>
-    </div><!-- post-area -->
-  </div><!-- row-content -->
+            <aside role="complementary" class="sidebar column three last">
+                <div class="widget help-menu">
+                    <h3>How to use</h3>
+                    <ul class="plain">
+                        <li><a href="#1">Create connection</a></li>
+                        <li><a href="#2">Workflow</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div><!-- post-area -->
+    </div><!-- row-content -->
 </div><!-- row -->
 
 <footer role="contentinfo">
-  <div class="row">
-    <div class="row-content buffer clear-after">
-      <section id="top-footer">
-        <div class="widget column three"><!-- la class="widget" è forse generata utomaticamente da wp -->
-          <h4>Contribute</h4>
-          <p>Please submit any issues, bugs and proposals via GitHub Issues:<br/>
-            <a href="<%- site.github_issues_link %>" style="font-weight: bold;"><%- site.title %> in GitHub</a><br/>
-            Thank you for finding time to help us!</p>
-        </div>
-        <div class="widget column three">
-          <h4>Credits</h4>
-          <table>
-            <tr>
-              <td>
-                <a href="http://redis.io" target="_blank" class="box" style="display:block;width:70px">Redis</a>
-                <a href="http://qt-project.org" target="_blank" class="box" style="display:block;width:70px">Qt</a>
-                <a href="https://www.openssl.org" target="_blank" class="box"
-                   style="display:block;width:70px">OpenSSL</a>
-                <a href="http://memcached.org/" target="_blank" class="box"
-                   style="display:block;width:70px">Memcached</a>
-                <a href="http://unqlite.org/" target="_blank" class="box" style="display:block;width:70px">UnQLite</a>
-              </td>
-              <td>
-                <a href="http://www.libssh2.org" target="_blank" class="box"
-                   style="display:block;width:70px">LibSSH2</a>
-                <a href="http://www.ssdb.io/" target="_blank" class="box" style="display:block;width:70px">SSDB</a>
-                <a href="http://www.riverbankcomputing.com/software/qscintilla/intro" target="_blank" class="box"
-                   style="display:block;width:70px">QScintilla</a>
-                <a href="https://cyrusimap.org/" target="_blank" class="box" style="display:block;width:70px">Sasl</a>
-                <a href="http://symas.com/mdb/" target="_blank" class="box" style="display:block;width:70px">LMDB</a>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="widget column three">
-          <h4>E-mail:</h4>
-          <p><a href="mailto:<%- author.contact %>"><%- author.contact %></a><br/>
-        </div>
-        <div class="widget meta-social column three">
-          <h4>Donate</h4>
-          <table style="padding: 0px; margin: 0px;">
-            <tr>
-              <td>
-                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" float="center">
-                  <input type="hidden" name="cmd" value="_s-xclick">
-                  <input type="hidden" name="hosted_button_id" value="QD9QB9UGF6VMY">
-                  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0"
-                         name="submit" alt="PayPal - The safer, easier way to pay online!">
-                  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                </form>
-              </td>
-              <td>
-                <form action="https://merchant.wmtransfer.com/lmi/payment.asp" method="POST"><input type="hidden"
-                                                                                                    name="LMI_PAYMENT_AMOUNT"
-                                                                                                    value="10.00">
-                  <input type="hidden" name="LMI_PAYMENT_DESC_BASE64" value="RG9uYXRlIGZvciBGYXN0b05vU1FM"> <input
-                          type="hidden" name="LMI_PAYEE_PURSE" value="Z330657777229"> <input type="submit" class="wmbtn"
-                                                                                             style="font-famaly:Verdana, Helvetica, sans-serif!important;padding:0 10px;height:25px;font-size:12px!important;border:1px solid #538ec1!important;background:#2A3198!important;color:#fff!important; border-radius: 5px;"
-                                                                                             value=" pay 10.00 WMZ ">
-                </form>
-              </td>
-            </tr>
-          </table>
-          <a href="https://www.bountysource.com/teams/fasto?utm_source=Fasto&utm_medium=shield&utm_campaign=raised"
-             target="_blank"><img src="https://www.bountysource.com/badge/team?team_id=45005&style=raised"
-                                  style="margin-left: 15%;"/></a>
-        </div>
-      </section><!-- top-footer -->
-      <section id="bottom-footer">
-        <p class="keep-left"><%- company.copyright %></p>
-        <p class="keep-right"><a href="/"><%- site.title %></a> | <a href="/download">Download</a> | <a href="help">Support</a>
-        </p>
-      </section><!-- bottom-footer -->
-      <p> Website development &ndash; <a href="<%- company.domain %>" target="_blank" rel="nofollow"><img
-                  style="display: inline; margin: 0 !important;" src="design/img/fastogt.png"
-                  alt="<%- company.description %>" title="<%- company.description %>"/></a></p>
-    </div><!-- row-content -->
-  </div><!-- row -->
+    <div class="row">
+        <div class="row-content buffer clear-after">
+            <section id="top-footer">
+                <div class="widget column three"><!-- la class="widget" è forse generata utomaticamente da wp -->
+                    <h4>Contribute</h4>
+                    <p>Please submit any issues, bugs and proposals via GitHub Issues:<br/>
+                        <a href="<%- site.github_issues_link %>" style="font-weight: bold;"><%- site.title %> in
+                            GitHub</a><br/>
+                        Thank you for finding time to help us!</p>
+                </div>
+                <div class="widget column three">
+                    <h4>Credits</h4>
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="http://redis.io" target="_blank" class="box" style="display:block;width:70px">Redis</a>
+                                <a href="http://qt-project.org" target="_blank" class="box"
+                                   style="display:block;width:70px">Qt</a>
+                                <a href="https://www.openssl.org" target="_blank" class="box"
+                                   style="display:block;width:70px">OpenSSL</a>
+                                <a href="http://memcached.org/" target="_blank" class="box"
+                                   style="display:block;width:70px">Memcached</a>
+                                <a href="http://unqlite.org/" target="_blank" class="box"
+                                   style="display:block;width:70px">UnQLite</a>
+                            </td>
+                            <td>
+                                <a href="http://www.libssh2.org" target="_blank" class="box"
+                                   style="display:block;width:70px">LibSSH2</a>
+                                <a href="http://www.ssdb.io/" target="_blank" class="box"
+                                   style="display:block;width:70px">SSDB</a>
+                                <a href="http://www.riverbankcomputing.com/software/qscintilla/intro" target="_blank"
+                                   class="box"
+                                   style="display:block;width:70px">QScintilla</a>
+                                <a href="https://cyrusimap.org/" target="_blank" class="box"
+                                   style="display:block;width:70px">Sasl</a>
+                                <a href="http://symas.com/mdb/" target="_blank" class="box"
+                                   style="display:block;width:70px">LMDB</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="widget column three">
+                    <h4>E-mail:</h4>
+                    <p><a href="mailto:<%- author.contact %>"><%- author.contact %></a><br/>
+                </div>
+                <div class="widget meta-social column three">
+                    <h4>Donate</h4>
+                    <table style="padding: 0px; margin: 0px;">
+                        <tr>
+                            <td>
+                                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"
+                                      float="center">
+                                    <input type="hidden" name="cmd" value="_s-xclick">
+                                    <input type="hidden" name="hosted_button_id" value="QD9QB9UGF6VMY">
+                                    <input type="image"
+                                           src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0"
+                                           name="submit" alt="PayPal - The safer, easier way to pay online!">
+                                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif"
+                                         width="1" height="1">
+                                </form>
+                            </td>
+                            <td>
+                                <form action="https://merchant.wmtransfer.com/lmi/payment.asp" method="POST"><input
+                                            type="hidden"
+                                            name="LMI_PAYMENT_AMOUNT"
+                                            value="10.00">
+                                    <input type="hidden" name="LMI_PAYMENT_DESC_BASE64"
+                                           value="RG9uYXRlIGZvciBGYXN0b05vU1FM"> <input
+                                            type="hidden" name="LMI_PAYEE_PURSE" value="Z330657777229"> <input
+                                            type="submit" class="wmbtn"
+                                            style="font-famaly:Verdana, Helvetica, sans-serif!important;padding:0 10px;height:25px;font-size:12px!important;border:1px solid #538ec1!important;background:#2A3198!important;color:#fff!important; border-radius: 5px;"
+                                            value=" pay 10.00 WMZ ">
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                    <a href="https://www.bountysource.com/teams/fasto?utm_source=Fasto&utm_medium=shield&utm_campaign=raised"
+                       target="_blank"><img src="https://www.bountysource.com/badge/team?team_id=45005&style=raised"
+                                            style="margin-left: 15%;"/></a>
+                </div>
+            </section><!-- top-footer -->
+            <section id="bottom-footer">
+                <p class="keep-left"><%- company.copyright %></p>
+                <p class="keep-right"><a href="/"><%- site.title %></a> | <a href="/download">Download</a> | <a
+                            href="help">Support</a>
+                </p>
+            </section><!-- bottom-footer -->
+            <p> Website development &ndash; <a href="<%- company.domain %>" target="_blank" rel="nofollow"><img
+                            style="display: inline; margin: 0 !important;" src="design/img/fastogt.png"
+                            alt="<%- company.description %>" title="<%- company.description %>"/></a></p>
+        </div><!-- row-content -->
+    </div><!-- row -->
 </footer>
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="design/js/plugins.js"></script>
