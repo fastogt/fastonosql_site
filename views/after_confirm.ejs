@@ -37,8 +37,7 @@
     </script>
 </head>
 
-<body>
-
+<body class="page">
 <header role="banner" class="transparent light">
     <div class="row">
         <div class="nav-inner row-content buffer-left buffer-right even clear-after">
@@ -72,9 +71,7 @@
         <div class="container">
             <div class="well">
                 <p><b>Confirmed, we glad to see you in our comunity.</b></p>
-                <form action="/login" method="get">
-                    <button type="submit" class="btn btn-info btn-small">Login</button>
-                </form>
+                <a href="/login" class="btn btn-warning"><span class="fa fa-sign-in"></span> Login</a>
             </div>
         </div>
     </div><!-- row-content -->
@@ -102,23 +99,35 @@
                                    style="display:block;width:70px">Qt</a>
                                 <a href="https://www.openssl.org" target="_blank" class="box"
                                    style="display:block;width:70px">OpenSSL</a>
-                                <a href="http://memcached.org/" target="_blank" class="box"
+                                <a href="http://memcached.org" target="_blank" class="box"
                                    style="display:block;width:70px">Memcached</a>
-                                <a href="http://unqlite.org/" target="_blank" class="box"
+                                <a href="http://unqlite.org" target="_blank" class="box"
                                    style="display:block;width:70px">UnQLite</a>
+                                <a href="http://upscaledb.com" target="_blank" class="box"
+                                   style="display:block;width:70px">UpscaleDB</a>
+                                <a href="http://leveldb.org" target="_blank" class="box"
+                                   style="display:block;width:70px">LevelDB</a>
+                                <a href="https://github.com/google/snappy" target="_blank" class="box"
+                                   style="display:block;width:70px">Snappy</a>
                             </td>
                             <td>
                                 <a href="http://www.libssh2.org" target="_blank" class="box"
                                    style="display:block;width:70px">LibSSH2</a>
-                                <a href="http://www.ssdb.io/" target="_blank" class="box"
+                                <a href="http://www.ssdb.io" target="_blank" class="box"
                                    style="display:block;width:70px">SSDB</a>
                                 <a href="http://www.riverbankcomputing.com/software/qscintilla/intro" target="_blank"
                                    class="box"
                                    style="display:block;width:70px">QScintilla</a>
-                                <a href="https://cyrusimap.org/" target="_blank" class="box"
+                                <a href="https://cyrusimap.org" target="_blank" class="box"
                                    style="display:block;width:70px">Sasl</a>
-                                <a href="http://symas.com/mdb/" target="_blank" class="box"
+                                <a href="http://symas.com/mdb" target="_blank" class="box"
                                    style="display:block;width:70px">LMDB</a>
+                                <a href="http://www.boost.org" target="_blank" class="box"
+                                   style="display:block;width:70px">Boost</a>
+                                <a href="http://rocksdb.org" target="_blank" class="box"
+                                   style="display:block;width:70px">RocksDB</a>
+                                <a href="http://forestdb.org" target="_blank" class="box"
+                                   style="display:block;width:70px">ForestDB</a>
                             </td>
                         </tr>
                     </table>
@@ -126,6 +135,7 @@
                 <div class="widget column three">
                     <h4>E-mail:</h4>
                     <p><a href="mailto:<%- author.contact %>"><%- author.contact %></a><br/>
+
                 </div>
                 <div class="widget meta-social column three">
                     <h4>Donate</h4>
