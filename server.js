@@ -184,6 +184,7 @@ listener.on('connection', function (socket) {
 });
 
 // configuration ===============================================================
+mongoose.Promise = global.Promise;
 mongoose.connect(configDB.url); // connect to our database
 // NEV configuration =====================
 // our persistent user model
