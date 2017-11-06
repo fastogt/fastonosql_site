@@ -131,12 +131,7 @@ module.exports = function (app, passport, nev) {
                         return res.status(404).send('ERROR: sending confirmation email FAILED');
                     }
 
-                    updateRedisUser(user, function (err, user) {
-                        if (err) {
-                            return res.status(404).send('ERROR: save into cache');
-                        }
-                        res.render('after_confirm.ejs');
-                    });
+                    res.render('after_confirm.ejs');
                 });
             } else {
                 return res.status(404).send('ERROR: confirming temp user FAILED');
