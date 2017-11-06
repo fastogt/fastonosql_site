@@ -9,7 +9,7 @@ function checkIsValidDomain(domain) {
     return domain.match(re);
 }
 
-module.exports = function (app, passport) {
+module.exports = function (app, passport, nev) {
 
 // normal routes ===============================================================
 
