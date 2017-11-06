@@ -54,7 +54,7 @@
 
     //on new message adds a new message to display
     socket.on('message_rabbitmq', function (responce_json) {
-      if (responce_json.email != '<%= user.local.email %>') {
+      if (responce_json.email != '<%= user.email %>') {
         return;
       }
 
@@ -70,7 +70,7 @@
     });
 
     socket.on('status_rabbitmq', function (responce_json) {
-      if (responce_json.email != '<%= user.local.email %>') {
+      if (responce_json.email != '<%= user.email %>') {
         return;
       }
       update_bar(responce_json.progress, responce_json.message);
@@ -208,7 +208,7 @@
           <div role="tabpane2" class="tab-pane form-inline active" id="base">
             <div>
               <label>Email: <input type="text" disabled name="Host" class="form-control" id="localhost_host"
-                                   value='<%- user.local.email %>'></label>
+                                   value='<%- user.email %>'></label>
             </div>
           </div>
           <div role="tabpane2" class="tab-pane form-inline" id="advanced">
@@ -252,7 +252,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary"
-                  onclick="send_build_request_local('<%- user._id %>', '<%- user.local.email %>', '<%- user.local.password %>')">
+                  onclick="send_build_request_local('<%- user._id %>', '<%- user.email %>', '<%- user.password %>')">
             Start build
           </button>
         </div>

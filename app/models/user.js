@@ -18,7 +18,7 @@ userSchema.methods.generateHash = function (password) {
 // checking if password is valid
 userSchema.methods.validPassword = function (password) {
     var hash = crypto.createHash('md5').update(password).digest('hex');
-    return hash === this.local.password;
+    return hash === this.password;
 };
 
 // create the model for users and expose it to our app

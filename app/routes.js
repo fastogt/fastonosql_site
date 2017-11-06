@@ -60,7 +60,7 @@ module.exports = function (app, passport, nev) {
             });
         };
 
-        walk(app.locals.site.users_directory + '/' + user.local.email, function (err, results) {
+        walk(app.locals.site.users_directory + '/' + user.email, function (err, results) {
             if (err) {
                 console.error(err);
             }
