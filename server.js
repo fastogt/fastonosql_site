@@ -20,6 +20,7 @@ var express = require('express');
 var app = express();
 var port = settings_config.http_server_port;
 var mongoose = require('mongoose');
+var nev = require('email-verification')(mongoose);
 var passport = require('passport');
 var flash = require('connect-flash');
 var amqp = require('amqp');
@@ -61,6 +62,13 @@ app.locals.site = {
     twitter_name: public_settings_config.site.twitter_name,
     twitter_link: public_settings_config.site.twitter_link,
     facebook_appid: auth_config.facebookAuth.clientID,
+
+    support_email_service_host: settings_config.support_email_service_host,
+    support_email_service_port: settings_config.support_email_service_port,
+    support_email_service_secure: settings_config.support_email_service_secure,
+    support_email: settings_config.support_email,
+    support_email_password: settings_config.support_email_password,
+
     supported_databases: public_settings_config.site.supported_databases
 };
 app.locals.project = {
@@ -177,8 +185,52 @@ listener.on('connection', function (socket) {
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
+// NEV configuration =====================
+// our persistent user model
+var User = require('./app/models/user');
 
-require('./config/passport')(passport); // pass passport for configuration
+nev.configure({
+    persistentUserModel: User,
+    expirationTime: 3600 * 24, // 10 minutes
+
+    verificationURL: app.locals.site.domain + '/email-verification/${URL}',
+    transportOptions: {
+        host: app.locals.site.support_email_service_host,
+        port: app.locals.site.support_email_service_port,
+        secure: app.locals.site.support_email_service_secure, // secure:true for port 465, secure:false for port 587
+        auth: {
+            user: app.locals.site.support_email,
+            pass: app.locals.site.support_email_password
+        }
+    },
+    verifyMailOptions: {
+        from: 'Do Not Reply <' + app.locals.site.support_email + '>',
+        subject: 'Please confirm account',
+        html: 'Click the following link to confirm your account:</p><p>${URL}</p>',
+        text: 'Please confirm your account by clicking the following link: ${URL}'
+    },
+
+    emailFieldName: 'email',
+    passwordFieldName: 'password'
+}, function (err, options) {
+    if (err) {
+        console.log(err);
+        return;
+    }
+
+    console.log('configured: ' + (typeof options === 'object'));
+});
+
+nev.generateTempUserModel(User, function (err, tempUserModel) {
+    if (err) {
+        console.log(err);
+        return;
+    }
+
+    console.log('generated temp user model: ' + (typeof tempUserModel === 'function'));
+});
+
+require('./config/passport')(nev, passport); // pass passport for configuration
 
 // set up our express application
 app.use(express.static(public_dir_abs_path));
