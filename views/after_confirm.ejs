@@ -69,71 +69,14 @@
 
 <div id="main" class="row">
     <div class="row-content buffer-left buffer-right buffer-bottom clear-after">
-        <div class="post-area clear-after">
-
-            <article role="main" class="column twelve">
-                <div id="disqus_thread"></div>
-                <script type="text/javascript">
-                    /* * * CONFIGURATION VARIABLES * * */
-                    var disqus_shortname = 'fastonosqlcom';
-
-                    /* * * DON'T EDIT BELOW THIS LINE * * */
-                    (function () {
-                        var dsq = document.createElement('script');
-                        dsq.type = 'text/javascript';
-                        dsq.async = true;
-                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                    })();
-                </script>
-                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
-                                                                  rel="nofollow">comments
-                        powered by Disqus.</a></noscript>
-            </article>
-            <!--
-                  <aside role="complementary" class="sidebar column three last">
-                    <div class="widget">
-                      <table style="padding: 0px; margin: 0px;">
-                        <tr>
-                          <td>
-                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" float="center">
-                            <input type="hidden" name="cmd" value="_s-xclick">
-                            <input type="hidden" name="hosted_button_id" value="QD9QB9UGF6VMY">
-                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                            </form>
-                          </td>
-                          <td>
-                            <form action="https://advisor.wmtransfer.com/Spasibo.aspx" method="post"  target="_blank" title="Say `thank you` to our site" float="center">
-                            <input type="hidden" name="url" value="http://fastoredis.com"/>
-                            <input type="image" src="/images/common/acc_blue_on_transp_en.png" border="0" name="submit"/>
-                            </form>
-                          </td>
-                        </tr>
-                      </table>
-                      <a href="https://www.bountysource.com/teams/fasto?utm_source=Fasto&utm_medium=shield&utm_campaign=raised"><img src="https://www.bountysource.com/badge/team?team_id=45005&style=raised" style="margin-left: 15%;"/></a>
-                    </div>
-                    <div class="widget">
-                      <h4>Download</h4>
-                        <ul class="plain">
-                          <li><a href="download_mac_os_x.html" alt="Download FastoNoSQL for Mac OS X">Download FastoNoSQL for Mac OS X</a></li>
-                          <li><a href="download_windows.html" alt="Download FastoNoSQL for Windows">Download FastoNoSQL for Windows</a></li>
-                          <li><a href="download_linux.html" alt="Download FastoNoSQL for Linux">Download FastoNoSQL for Linux</a></li>
-                          <li><a href="download_freebsd.html" alt="Download FastoNoSQL for FreeBSD">Download FastoNoSQL for FreeBSD</a></li>
-                          <li><a href="download_android.html" alt="Download FastoNoSQL for Andriod">Download FastoNoSQL for Andriod</a></li>
-                        </ul>
-                    </div>
-                    <div class="widget">
-                      <h4>Supported Platforms</h4>
-                      <p>The following links provide information of supported operating systems, that have been tested Fastoteam. We are always open to suggestions on additions to our OS platforms - please let us know via FastoNoSQL's GitHub Issues. <a href="https://github.com/fasto/fastonosql/issues">GitHub Issues</a></p>
-                    </div>
-                    <div class="widget">
-                      <h4>Connection with developer</h4>
-                      <p>If you will have any questions, you can <a href="contacts.html">write to our auther...</a></p>
-                    </div>
-                  </aside>
-            -->
-        </div><!-- post-area -->
+        <div class="container">
+            <div class="well">
+                <p><b>Confirmed, we glad to see you in our comunity.</b></p>
+                <form action="/login" method="get">
+                    <button type="submit" class="btn btn-info btn-small">Login</button>
+                </form>
+            </div>
+        </div>
     </div><!-- row-content -->
 </div><!-- row -->
 
@@ -235,18 +178,5 @@
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="design/js/plugins.js"></script>
 <script src="design/js/beetle.js"></script>
-<script language="JavaScript">
-    function processUser() {
-        var parameters = location.search.substring(1).split("&");
-        var temp = parameters[0].split("=");
-        platform = unescape(temp[1]);
-        temp = parameters[1].split("=");
-        filename = unescape(temp[1]);
-        ga('send', 'event', 'Download', 'Download for ' + platform, 'Download Page');
-        location.href = "/downloads/" + platform + "/" + filename;
-    }
-
-    processUser();
-</script>
 </body>
 </html>

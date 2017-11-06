@@ -119,6 +119,35 @@ module.exports = function (app, passport) {
     }));
 
 
+    // user accesses the link that is sent
+    app.get('/email-verification/:URL', function (req, res) {
+        var url = req.params.URL;
+        nev.confirmTempUser(url, function (err, user) {
+            if (user) {
+                var email = user.email;
+                nev.sendConfirmationEmail(email, function (err, info) {
+                    console.log("confirm message sended to: " + email + ", error: " + err);
+                    if (err) {
+                        return res.status(404).send('ERROR: sending confirmation email FAILED');
+                    }
+
+                    updateRedisUser(user, function (err, user) {
+                        if (err) {
+                            return res.status(404).send('ERROR: save into cache');
+                        }
+                        res.render('after_confirm.ejs');
+                    });
+                });
+            } else {
+                return res.status(404).send('ERROR: confirming temp user FAILED');
+            }
+        });
+    });
+
+    app.get('/after_confirm', function (req, res) {
+        res.render('after_confirm.ejs');
+    });
+
 // =============================================================================
 // AUTHORIZE (ALREADY LOGGED IN / CONNECTING OTHER SOCIAL ACCOUNT) =============
 // =============================================================================
