@@ -22,6 +22,7 @@
     "body-parser": "latest",
     "cookie-parser": "latest",
     "method-override": "latest",
-    "express-session": "latest"
+    "express-session": "latest",
+    "email-verification": "latest"
   }
 }
