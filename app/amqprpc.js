@@ -1,7 +1,8 @@
 var amqp = require('amqp')
 
-var TIMEOUT = 10 * 60000; //time to wait for response in ms
-var CONTENT_TYPE = 'application/json';
+const TIMEOUT = 10 * 60000; //time to wait for response in ms
+const CONTENT_TYPE = 'application/json';
+const CONTENT_ENCODING = 'utf-8';
 
 exports = module.exports = AmqpRpc;
 
@@ -39,6 +40,7 @@ AmqpRpc.prototype.makeRequest = function (queue_name, correlationId, content, ca
         self.connection.publish(queue_name, content, {
             correlationId: correlationId,
             contentType: CONTENT_TYPE,
+            contentEncoding: CONTENT_ENCODING,
             replyTo: self.response_queue
         });
     });
@@ -58,6 +60,7 @@ AmqpRpc.prototype.setupResponseQueue = function (next) {
         //store the name
         self.response_queue = q.name;
         console.log('response_queue:', q.name);
+        console.log('correlationId:', self.correlationId);
         //subscribe to messages
         q.subscribe(function (message, headers, deliveryInfo, m) {
             //get the correlationId
