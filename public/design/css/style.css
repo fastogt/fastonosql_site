@@ -2885,7 +2885,7 @@ footer {
     -moz-background-size: cover;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url(img/header-bg.png);
+    background-image: url(../img/header-bg.png);
 }
 
 footer h1,
