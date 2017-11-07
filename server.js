@@ -27,7 +27,6 @@ var amqp = require('amqp');
 var mkdirp = require('mkdirp');
 const util = require('util');
 
-
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -38,8 +37,8 @@ var fs = require('fs');
 
 var https = require('https');
 var server = https.createServer({
-  key: fs.readFileSync(settings_config.ssl_key_path),
-  cert: fs.readFileSync(settings_config.ssl_cert_path)
+    key: fs.readFileSync(settings_config.ssl_key_path),
+    cert: fs.readFileSync(settings_config.ssl_cert_path)
 }, app);
 var io = require('socket.io');
 var listener = io.listen(server);
@@ -214,24 +213,24 @@ nev.configure({
         text: 'Please confirm your account by clicking the following link: ${URL}'
     },
 
-  emailFieldName: 'email',
-  passwordFieldName: 'password'
+    emailFieldName: 'email',
+    passwordFieldName: 'password'
 }, function (err, options) {
-  if (err) {
-    console.log(err);
-    return;
-  }
+    if (err) {
+        console.log(err);
+        return;
+    }
 
-  console.log('configured: ' + (typeof options === 'object'));
+    console.log('configured: ' + (typeof options === 'object'));
 });
 
 nev.generateTempUserModel(User, function (err, tempUserModel) {
-  if (err) {
-    console.log(err);
-    return;
-  }
+    if (err) {
+        console.log(err);
+        return;
+    }
 
-  console.log('generated temp user model: ' + (typeof tempUserModel === 'function'));
+    console.log('generated temp user model: ' + (typeof tempUserModel === 'function'));
 });
 
 require('./config/passport')(nev, passport); // pass passport for configuration
@@ -247,9 +246,9 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
 app.use(session({
-  secret: app.locals.project.name_lowercase,
-  resave: true,
-  saveUninitialized: true
+    secret: app.locals.project.name_lowercase,
+    resave: true,
+    saveUninitialized: true
 })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
