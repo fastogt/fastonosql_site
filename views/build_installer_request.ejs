@@ -52,27 +52,27 @@
         });
 
         //on new message adds a new message to display
-        socket.on('message_rabbitmq', function (responce_json) {
-            if (responce_json.email !== '<%= user.email %>') {
+        socket.on('message_rabbitmq', function (response_json) {
+            if (response_json.email !== '<%= user.email %>') {
                 return;
             }
 
-            if (responce_json.hasOwnProperty('error')) {
-                //console.error(responce_json.error);
+            if (response_json.hasOwnProperty('error')) {
+                //console.error(response_json.error);
                 $('.progress').removeClass('progress-bar-success');
                 $('.progress').addClass('progress-bar-danger');
             } else {
-                console.log('received', responce_json.body);
-                $('#package_link').attr("href", responce_json.body);
+                console.log('received', response_json.body);
+                $('#package_link').attr("href", response_json.body);
                 $('#package_link').show();
             }
         });
 
-        socket.on('status_rabbitmq', function (responce_json) {
-            if (responce_json.email !== '<%= user.email %>') {
+        socket.on('status_rabbitmq', function (response_json) {
+            if (response_json.email !== '<%= user.email %>') {
                 return;
             }
-            update_bar(responce_json.progress, responce_json.message);
+            update_bar(response_json.progress, response_json.message);
         });
 
         function send_build_request(id, user, password, platform, package_type, arch, databases) {

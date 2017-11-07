@@ -165,8 +165,8 @@ listener.on('connection', function (socket) {
                         return;
                     }
 
-                    var responce_json = response;
-                    console.log("response", responce_json);
+                    var response_json = response;
+                    console.log("response", response_json);
                     if (response.hasOwnProperty('error')) {
                         socket.emit('message_rabbitmq', {'email': in_json.email, 'error': response.error});
                     } else {
