@@ -1,13 +1,13 @@
 var amqp = require('amqp')
 
-var TIMEOUT = 20 * 60000; //time to wait for response in ms
+var TIMEOUT = 10 * 60000; //time to wait for response in ms
 var CONTENT_TYPE = 'application/json';
 
 exports = module.exports = AmqpRpc;
 
 function AmqpRpc(connection) {
   var self = this;
-  this.connection = typeof(connection) != 'undefined' ? connection : amqp.createConnection();
+  this.connection = typeof(connection) !== 'undefined' ? connection : amqp.createConnection();
   this.requests = {}; //hash to store request in wait for response
   this.response_queue = false; //plaseholder for the future queue
 }
@@ -16,7 +16,7 @@ AmqpRpc.prototype.makeRequest = function (queue_name, correlationId, content, ca
   var self = this;
   //create a timeout for what should happen if we don't get a response
   var tId = setTimeout(function (corr_id) {
-    //if this ever gets called we didn't get a response in a 
+    //if this ever gets called we didn't get a response in a
     //timely fashion
     callback(new Error("timeout " + corr_id));
     //delete the entry from hash

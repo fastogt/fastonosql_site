@@ -5,9 +5,9 @@ function gen_routing_key(platform, arch) {
 }
 
 // load configs
-var configDB = require('./config/database.js');
-var settings_config = require('./config/settings.js');
+var config_db = require('./config/database.js');
 var public_settings_config = require('./config/public_settings.js');
+var settings_config = require('./config/settings.js');
 var auth_config = require('./config/auth.js');
 
 var root_abs_path = __dirname;
@@ -38,8 +38,8 @@ var fs = require('fs');
 
 var https = require('https');
 var server = https.createServer({
-    key: fs.readFileSync(settings_config.ssl_key_path),
-    cert: fs.readFileSync(settings_config.ssl_cert_path)
+  key: fs.readFileSync(settings_config.ssl_key_path),
+  cert: fs.readFileSync(settings_config.ssl_cert_path)
 }, app);
 var io = require('socket.io');
 var listener = io.listen(server);
@@ -187,7 +187,8 @@ listener.on('connection', function (socket) {
 
 // configuration ===============================================================
 mongoose.Promise = global.Promise;
-mongoose.connect(configDB.url); // connect to our database
+mongoose.connect(config_db.url); // connect to our database
+
 // NEV configuration =====================
 // our persistent user model
 var User = require('./app/models/user');
@@ -213,24 +214,24 @@ nev.configure({
         text: 'Please confirm your account by clicking the following link: ${URL}'
     },
 
-    emailFieldName: 'email',
-    passwordFieldName: 'password'
+  emailFieldName: 'email',
+  passwordFieldName: 'password'
 }, function (err, options) {
-    if (err) {
-        console.log(err);
-        return;
-    }
+  if (err) {
+    console.log(err);
+    return;
+  }
 
-    console.log('configured: ' + (typeof options === 'object'));
+  console.log('configured: ' + (typeof options === 'object'));
 });
 
 nev.generateTempUserModel(User, function (err, tempUserModel) {
-    if (err) {
-        console.log(err);
-        return;
-    }
+  if (err) {
+    console.log(err);
+    return;
+  }
 
-    console.log('generated temp user model: ' + (typeof tempUserModel === 'function'));
+  console.log('generated temp user model: ' + (typeof tempUserModel === 'function'));
 });
 
 require('./config/passport')(nev, passport); // pass passport for configuration
@@ -246,9 +247,9 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
 app.use(session({
-    secret: app.locals.project.name_lowercase,
-    resave: true,
-    saveUninitialized: true
+  secret: app.locals.project.name_lowercase,
+  resave: true,
+  saveUninitialized: true
 })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions

@@ -3,20 +3,10 @@ upstream app_fastonosql {
 }
 
 server {
-    listen 80;
-    server_name www.fastonosql.com fastonosql.com;
-    access_log /var/log/nginx/fastonosql.log;
-    return 301 https://$server_name$request_uri;
-
     # Redirect non-https traffic to https
-    # if ($scheme != "https") {
-    #     return 301 https://$host$request_uri;
-    # } # managed by Certbot
-
-    # Redirect non-https traffic to https
-    # if ($scheme != "https") {
-    #     return 301 https://$host$request_uri;
-    # } # managed by Certbot
+    if ($scheme != "https") {
+         return 301 https://$host$request_uri;
+    } # managed by Certbot
 }
 
 server {
@@ -40,7 +30,7 @@ server {
     # Disable preloading HSTS for now.  You can use the commented out header line that includes
     # the "preload" directive if you understand the implications.
     # add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";
-    # add_header Strict-Transport-Security "max-age=63072000; includeSubdomains";
+    add_header Strict-Transport-Security "max-age=63072000; includeSubdomains";
     add_header X-Frame-Options DENY;
     add_header X-Content-Type-Options nosniff;
 
@@ -60,4 +50,3 @@ server {
 # ssl_certificate_key /etc/nginx/ssl/nginx.key;
 # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
 # https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04
-
