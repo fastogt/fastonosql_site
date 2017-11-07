@@ -161,7 +161,6 @@ listener.on('connection', function (socket) {
             console.log("routing_key", routing_key);
 
             rpc.makeRequest(routing_key, in_json.email, request_data_json, function (err, response) {
-                    console.log("makeRequest finished");
                     if (err) {
                         console.error(err);
                         socket.emit('status_rabbitmq', {'email': in_json.email, 'progress': 100, 'message': err.message}); //
@@ -179,7 +178,6 @@ listener.on('connection', function (socket) {
                     }
                 },
                 function (response) {
-                    console.log("status_rabbitmq");
                     socket.emit('status_rabbitmq', {
                         'email': in_json.email,
                         'progress': response.progress,
