@@ -14,6 +14,7 @@ function AmqpRpc(connection) {
 }
 
 AmqpRpc.prototype.makeRequest = function (queue_name, correlationId, content, callback, status_callback) {
+    console.log("amqp request id:", correlationId);
     var self = this;
     //create a timeout for what should happen if we don't get a response
     var tId = setTimeout(function (corr_id) {
