@@ -55,13 +55,15 @@ app.locals.site = {
     large_description: public_settings_config.site.large_description,
     public_directory: public_dir_abs_path,
     users_directory: public_downloads_users_dir_abs_path,
-    google_analitics_token: settings_config.google_analitics_token,
+
+    google_analitics_token: public_settings_config.google_analitics_token,
+
     github_link: public_settings_config.site.github_link,
     github_issues_link: public_settings_config.site.github_issues_link,
     github_link_without_host: public_settings_config.site.github_link_without_host,
+
     twitter_name: public_settings_config.site.twitter_name,
     twitter_link: public_settings_config.site.twitter_link,
-    facebook_appid: auth_config.facebookAuth.clientID,
 
     support_email_service_host: settings_config.support_email_service_host,
     support_email_service_port: settings_config.support_email_service_port,
