@@ -34,6 +34,8 @@
         ga('create', '<%- site.google_analitics_token %>', 'auto');
         ga('send', 'pageview');
     </script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 
 <body class="page">
@@ -73,17 +75,14 @@
         <section class="row section call-to-action first">
             <div class="row-content buffer even" style="line-height: 0.8;">
                 <div class="github">
-                    <a aria-label="Watch <%- site.github_link_without_host %> on GitHub"
-                       data-count-aria-label="# watchers on GitHub"
-                       data-count-api="/repos/<%- site.github_link_without_host %>#subscribers_count"
-                       data-count-href="/<%- site.github_link_without_host %>/watchers" data-icon="octicon-eye"
-                       href="<%- site.github_link %>" class="github-button">Watch</a>
-                    <a aria-label="Star <%- site.github_link_without_host %> on GitHub"
-                       data-count-aria-label="# stargazers on GitHub"
-                       data-count-api="/repos/<%- site.github_link_without_host %>#stargazers_count"
-                       data-count-href="/<%- site.github_link_without_host %>/stargazers" data-icon="octicon-star"
-                       href="<%- site.github_link %>" class="github-button">Star</a>
-                    <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+                    <!-- Place this tag where you want the button to render. -->
+                    <a class="github-button" href="<%- site.github_link %>/subscription"
+                       data-icon="octicon-eye" data-show-count="true"
+                       aria-label="Watch <%- site.github_link_without_host %> on GitHub">Watch</a>
+                    <!-- Place this tag where you want the button to render. -->
+                    <a class="github-button" href="<%- site.github_link %>" data-icon="octicon-star"
+                       data-show-count="true"
+                       aria-label="Star <%- site.github_link_without_host %> on GitHub">Star</a>
                 </div>
             </div>
         </section>
