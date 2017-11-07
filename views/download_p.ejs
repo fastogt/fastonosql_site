@@ -231,9 +231,7 @@
         </div><!-- row-content -->
     </div><!-- row -->
 </footer>
-<script src="https://code.jquery.com/jquery.js"></script>
-<script src="design/js/plugins.js"></script>
-<script src="design/js/beetle.js"></script>
+
 <script language="JavaScript">
     function processUser() {
         var parameters = location.search.substring(1).split("&");
@@ -244,7 +242,6 @@
         ga('send', 'event', 'Download', 'Download for ' + platform, 'Download Page');
         location.href = "/downloads/" + platform + "/" + filename;
     }
-
     processUser();
 </script>
 </body>
