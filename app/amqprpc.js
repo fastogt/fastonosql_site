@@ -63,7 +63,6 @@ AmqpRpc.prototype.setupResponseQueue = function (next) {
         //subscribe to messages
         q.subscribe(function (message, headers, deliveryInfo, m) {
             //get the correlationId
-            console.log('queue subscribe message:', m);
             var correlationId = m.correlationId;
             var type = headers.type;
             //is it a response to a pending request
@@ -80,6 +79,8 @@ AmqpRpc.prototype.setupResponseQueue = function (next) {
                 } else if (type === 'status') {
                     var entry = self.requests[correlationId];
                     entry.status_callback(message);
+                } else {
+                    console.log("unknown message type:", type)
                 }
             }
         });
