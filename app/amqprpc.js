@@ -60,16 +60,16 @@ AmqpRpc.prototype.setupResponseQueue = function (next) {
         //store the name
         self.response_queue = q.name;
         console.log('response_queue:', q.name);
-        console.log('correlationId:', self.correlationId);
         //subscribe to messages
         q.subscribe(function (message, headers, deliveryInfo, m) {
             //get the correlationId
+            console.log('queue subscribe message:', m);
             var correlationId = m.correlationId;
             var type = headers.type;
             //is it a response to a pending request
             if (correlationId in self.requests) {
                 //retreive the request entry
-                if (type == 'response') {
+                if (type === 'response') {
                     var entry = self.requests[correlationId];
                     //make sure we don't timeout by clearing it
                     clearTimeout(entry.timeout);
@@ -77,7 +77,7 @@ AmqpRpc.prototype.setupResponseQueue = function (next) {
                     delete self.requests[correlationId];
                     //callback, no err
                     entry.callback(null, message);
-                } else if (type == 'status') {
+                } else if (type === 'status') {
                     var entry = self.requests[correlationId];
                     entry.status_callback(message);
                 }
