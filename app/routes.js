@@ -4,6 +4,20 @@ var User = require('../app/models/user');
 var fs = require('fs');
 var path = require('path');
 
+function deleteFolderRecursive(path) {
+    if (fs.existsSync(path)) {
+        fs.readdirSync(path).forEach(function (file, index) {
+            var curPath = path + "/" + file;
+            if (fs.lstatSync(curPath).isDirectory()) { // recurse
+                deleteFolderRecursive(curPath);
+            } else { // delete file
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(path);
+    }
+}
+
 function checkIsValidDomain(domain) {
     var re = new RegExp(/^((?:(?:(?:\w[\.\-\+]?)*)\w)+)((?:(?:(?:\w[\.\-\+]?){0,62})\w)+)\.(\w{2,6})$/);
     return domain.match(re);
@@ -32,6 +46,7 @@ module.exports = function (app, passport, nev) {
 
     app.get('/build_installer_request', function (req, res) {
         var user = req.user;
+
         var walk = function (dir, done) {
             console.log('scan folder: ', dir);
             var results = [];
@@ -47,10 +62,24 @@ module.exports = function (app, passport, nev) {
                     var file_name = file;
                     file = path.resolve(dir, file);
                     fs.stat(file, function (err, stat) {
+                        if (err) {
+                            return done(err, []);
+                        }
+
                         if (stat && stat.isDirectory()) {
+                            walk(file, function (err, res) {
+                                results = results.concat(res);
+                                if (!--pending) {
+                                    done(null, results);
+                                }
+                            });
                         } else {
                             var path = file.replace(app.locals.site.public_directory, '');
-                            results.push({'path': path, 'file_name': file_name});
+                            results.push({
+                                'path': app.locals.site.domain + path,
+                                'file_name': file_name,
+                                'size': parseInt(stat.size / 1024)
+                            });
                             if (!--pending) {
                                 done(null, results);
                             }
@@ -70,7 +99,16 @@ module.exports = function (app, passport, nev) {
                 builded_packages: results
             });
         });
+    });
 
+    // CLEAR user packages
+    app.post('/clear_packages', function (req, res) {
+        var user = req.user;
+        deleteFolderRecursive(app.locals.site.users_directory + '/' + user.email);
+        res.render('build_installer_request.ejs', {
+            user: user,
+            builded_packages: []
+        });
     });
 
     // PROFILE SECTION =========================
