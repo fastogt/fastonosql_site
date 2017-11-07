@@ -544,7 +544,7 @@ nav ul.sub-menu > li:last-child > a {
     -moz-background-size: cover;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url(img/bg1.png);
+    background-image: url(../img/bg1.png);
 }
 
 #intro {
