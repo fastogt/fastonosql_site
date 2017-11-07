@@ -103,8 +103,8 @@ rabbit_connection.on('error', function (err) {
     console.error("rabbit_connection.error:", err);
 });
 // Wait for connection to become established.
-rabbit_connection.on('ready', function (err) {
-    console.log("rabbit_connection.ready:", err);
+rabbit_connection.on('ready', function () {
+    console.log("rabbit_connection ready for use!");
 });
 
 listener.on('connection', function (socket) {
