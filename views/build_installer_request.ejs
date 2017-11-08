@@ -139,7 +139,7 @@
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="windows">
                         <div data-toggle="buttons" class="buttons-row">
-                            <label class="btn btn-primary">
+                            <label class="btn btn-primary active">
                                 <input type="radio" name="os" value="windows_7_x64" data-arch="x86_64"
                                        package_type="NSIS" id="option1"
                                        autocomplete="off" checked="checked"> Windows 7 x64
@@ -158,7 +158,7 @@
                     </div>
                     <div role="tabpanel" class="tab-pane" id="linux">
                         <div data-toggle="buttons" class="buttons-row">
-                            <label class="btn btn-primary">
+                            <label class="btn btn-primary active">
                                 <input type="radio" name="os" value="ubuntu_x64" data-arch="x86_64" package_type="DEB"
                                        id="option4"
                                        autocomplete="off" checked="checked"> Ubuntu x64</label>
@@ -182,7 +182,7 @@
                     </div>
                     <div role="tabpanel" class="tab-pane" id="macosx">
                         <div data-toggle="buttons" class="buttons-row">
-                            <label class="btn btn-primary">
+                            <label class="btn btn-primary active">
                                 <input type="radio" name="os" value="macosx_10_8_x64" data-arch="x86_64"
                                        package_type="DragNDrop" id="option9"
                                        autocomplete="off" checked="checked"> MacOS 10.8 x64</label>
@@ -235,7 +235,7 @@
                 </div>
 
                 <div class="col-sm-12 col-md-12 col-lg-12">
-                    <button id="build_package_button" class="btn btn-success btn-send" data-toggle="modal"
+                    <button id="build_package_button" class="btn-lg btn-success btn-send" data-toggle="modal"
                             data-target="#myModal">
                         Build Package
                     </button>
