@@ -55,7 +55,7 @@ app.locals.site = {
     public_directory: public_dir_abs_path,
     users_directory: public_downloads_users_dir_abs_path,
 
-    google_analitics_token: public_settings_config.google_analitics_token,
+    google_analitics_token: public_settings_config.site.google_analitics_token,
 
     github_link: public_settings_config.site.github_link,
     github_issues_link: public_settings_config.site.github_issues_link,
