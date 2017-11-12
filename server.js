@@ -214,9 +214,16 @@ nev.configure({
     },
     verifyMailOptions: {
         from: 'Do Not Reply <' + app.locals.site.support_email + '>',
-        subject: 'Please confirm account',
-        html: 'Click the following link to confirm your account:</p><p>${URL}</p>',
-        text: 'Please confirm your account by clicking the following link: ${URL}'
+        subject: 'Please confirm account for ' + app.locals.site.domain + ' site.',
+        html: '<p>Please verify your ' + app.locals.site.title + ' account by clicking <a href="${URL}">this link</a>. If you are unable to do so, copy and paste the following link into your browser:</p><p>${URL}</p>',
+        text: 'Please verify your account by clicking the following link, or by copying and pasting it into your browser: ${URL}'
+    },
+    shouldSendConfirmation: true,
+    confirmMailOptions: {
+        from: 'Do Not Reply <' + app.locals.site.support_email + '>',
+        subject: 'Successfully verified!',
+        html: '<p>Your account has been successfully verified.</p>',
+        text: 'Your account has been successfully verified.'
     },
 
     emailFieldName: 'email',
