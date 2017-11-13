@@ -119,6 +119,22 @@ module.exports = function (app, passport, nev) {
         });
     });
 
+    // SUBSCRIPTION =============================
+    app.get('/subscription', isLoggedIn, function (req, res) {
+        var user = req.user;
+        if (!user.isSubscribe()) {
+            user.subscription = true;
+            user.save(function (err) {
+                if (err) {
+                    req.flash('statusProfileMessage', err);
+                    return false;
+                }
+            });
+        }
+
+        res.redirect('/profile');
+    });
+
     // LOGOUT ==============================
     app.get('/logout', function (req, res) {
         req.logout();

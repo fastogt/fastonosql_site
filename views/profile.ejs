@@ -57,14 +57,50 @@
         <div class="col-sm-6">
             <div class="row">
                 <div class="col-sm-6">
+                    <% if (user.isSubscribe()) { %>
                     <form action="/build_installer_request" method="get">
                         <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version
                         </button>
                     </form>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6">&nbsp;</div>
+                <div class="col-sm-6 text-right">
+                    <% if (!user.isSubscribe()) { %>
+                    <strong data-fsc-item-path="subscr1" data-fsc-item-price></strong>
+                    <button type="submit" class="btn btn-primary" data-fsc-item-path="subscr1" data-fsc-item-value="subscr1" data-fsc-action="Add, Checkout">
+                        <span data-fsc-item-path="subscr1" data-fsc-item-description-action>Subscribe</span>
+                    </button>
+                    <strong> / 1 Month</strong>
+                    <% } %>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- Fastspring actions -->
+<script>
+  function successCallback (data) {
+    console.log('successCallback: ', data);
+    // window.location.href = 'https://fastonosql.com/subscription';
+  }
+
+  function errorCallback (error) {
+    console.log('errorCallback', error);
+  }
+</script>
+
+<!-- Fastspring script -->
+<script id="fsc-api"
+        src="https://d1f8f9xcsvx3ha.cloudfront.net/sbl/0.7.4/fastspring-builder.min.js"
+        data-data-callback="successCallback"
+        data-error-callback="errorCallback"
+        type="text/javascript"
+        data-storefront="fastogt.test.onfastspring.com/popup-fastogt">
+</script>
 </body>
 </html>
