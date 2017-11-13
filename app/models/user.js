@@ -6,7 +6,11 @@ var crypto = require('crypto');
 var userSchema = mongoose.Schema({
     email: String,
     password: String,
-    created_date: Date
+    created_date: Date,
+    subscription: {
+        type: Boolean,
+        default: false
+    }
 });
 
 // generating a hash
@@ -19,6 +23,11 @@ userSchema.methods.generateHash = function (password) {
 userSchema.methods.validPassword = function (password) {
     var hash = crypto.createHash('md5').update(password).digest('hex');
     return hash === this.password;
+};
+
+// check subscription
+userSchema.methods.isSubscribe = function() {
+    return this.subscription;
 };
 
 // create the model for users and expose it to our app
