@@ -120,20 +120,29 @@ module.exports = function (app, passport, nev) {
     });
 
     // SUBSCRIPTION =============================
-    app.get('/subscription', isLoggedIn, function (req, res) {
+    app.post('/subscription', isLoggedIn, function (req, res) {
         var user = req.user;
+        var response = {
+            status: 200,
+            text: 'SUCCESS: Subscription success!'
+        };
+
         if (!user.isSubscribe()) {
-            user.subscription = true;
+            user.set({subscription: true});
             user.save(function (err) {
                 if (err) {
-                    req.flash('statusProfileMessage', err);
-                    return false;
+                    response.status = 500;
+                    response.text = 'ERROR: Subscription was failed!';
                 }
             });
         }
+        else {
+            response.status = 500;
+            response.text = 'ERROR: Subscription is already exist!';
+        }
 
-        res.redirect('/profile');
-    });
+        return res.status(response.status).send(response.text);
+    })
 
     // LOGOUT ==============================
     app.get('/logout', function (req, res) {

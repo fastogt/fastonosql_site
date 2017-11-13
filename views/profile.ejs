@@ -7,6 +7,7 @@
     <meta name="keywords" content="<%- site.keywords %>"/>
     <meta name="copyright" content="<%- company.domain %>"/>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <style>
@@ -34,6 +35,7 @@
 </head>
 <body>
 <div class="container">
+    <div class="alert hide" role="alert" id="alert"></div>
     <div class="page-header text-left">
         <div class="well">
             <h1><img src="logo32x32.png"/><%= site.title %><a href="/logout"
@@ -84,14 +86,48 @@
 </div>
 <!-- Fastspring actions -->
 <script>
-  function successCallback (data) {
-    console.log('successCallback: ', data);
-    // window.location.href = 'https://fastonosql.com/subscription';
-  }
+    /**
+     * Render alert block
+     * @param {String} status - options: success, info, warning, danger
+     * @param {String} message - message from request
+     */
+    function viewAlert (status, message) {
+        var el = document.getElementById('alert');
+        var classList = el.classList;
 
-  function errorCallback (error) {
-    console.log('errorCallback', error);
-  }
+        el.innerHTML = message;
+
+        classList.add('alert-' + status);
+        classList.add('hide');
+        classList.add('show');
+
+        setTimeout(function () {
+            classList.remove('show', 'alert-' + status);
+            classList.add('hide');
+            el.innerHTML = '';
+
+            status === 'success'
+                && window.location.reload();
+        }, 3000);
+    }
+
+    function successCallback (data) {
+        console.log('successCallback: ', data);
+        /* $.ajax({ // TODO: uncomment after inspect payments.
+            type: 'POST',
+            url: '/subscription',
+            success: function (response) {
+                viewAlert('success', response);
+            },
+            error: function (response) {
+                viewAlert('danger', response.responseText);
+            }
+        }); */
+    }
+
+    function errorCallback (error) {
+        console.log('errorCallback', error);
+    }
 </script>
 
 <!-- Fastspring script -->
