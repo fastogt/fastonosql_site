@@ -91,7 +91,7 @@
 
         function send_build_request_local(id, user, password) {
             var platform = $('.nav-tabs .active > a').attr('aria-controls');
-            var os_ctrl = $('input[name=os]:checked');
+            var os_ctrl = $('input[name=' + platform + ']:checked');
             var package_type = os_ctrl.attr('package_type');
             var arch = os_ctrl.attr('data-arch');
             var databases = [];
@@ -140,17 +140,17 @@
                     <div role="tabpanel" class="tab-pane active" id="windows">
                         <div data-toggle="buttons" class="buttons-row">
                             <label class="btn btn-primary active">
-                                <input type="radio" name="os" value="windows_7_x64" data-arch="x86_64"
+                                <input type="radio" name="windows" value="windows_7_x64" data-arch="x86_64"
                                        package_type="NSIS" id="option1"
                                        autocomplete="off" checked="checked"> Windows 7 x64
                             </label>
                             <label class="btn btn-primary">
-                                <input type="radio" name="os" value="windows_8_x64" data-arch="x86_64"
+                                <input type="radio" name="windows" value="windows_8_x64" data-arch="x86_64"
                                        package_type="NSIS" id="option2"
                                        autocomplete="off"> Windows 8 x64
                             </label>
                             <label class="btn btn-primary">
-                                <input type="radio" name="os" value="windows_10_x64" data-arch="x86_64"
+                                <input type="radio" name="windows" value="windows_10_x64" data-arch="x86_64"
                                        package_type="NSIS" id="option3"
                                        autocomplete="off"> Windows 10 x64
                             </label>
@@ -159,23 +159,23 @@
                     <div role="tabpanel" class="tab-pane" id="linux">
                         <div data-toggle="buttons" class="buttons-row">
                             <label class="btn btn-primary active">
-                                <input type="radio" name="os" value="ubuntu_x64" data-arch="x86_64" package_type="DEB"
+                                <input type="radio" name="linux" value="ubuntu_x64" data-arch="x86_64" package_type="DEB"
                                        id="option4"
                                        autocomplete="off" checked="checked"> Ubuntu x64</label>
                             <label class="btn btn-primary">
-                                <input type="radio" name="os" value="debian_x64" data-arch="x86_64" package_type="DEB"
+                                <input type="radio" name="linux" value="debian_x64" data-arch="x86_64" package_type="DEB"
                                        id="option5"
                                        autocomplete="off"> Debian x64</label>
                             <label class="btn btn-primary">
-                                <input type="radio" name="os" value="centOS_x64" data-arch="x86_64" package_type="RPM"
+                                <input type="radio" name="linux" value="centOS_x64" data-arch="x86_64" package_type="RPM"
                                        id="option6"
                                        autocomplete="off"> CentOS x64</label>
                             <label class="btn btn-primary">
-                                <input type="radio" name="os" value="fedora_x64" data-arch="x86_64" package_type="RPM"
+                                <input type="radio" name="linux" value="fedora_x64" data-arch="x86_64" package_type="RPM"
                                        id="option7"
                                        autocomplete="off"> Fedora x64</label>
                             <label class="btn btn-primary">
-                                <input type="radio" name="os" value="arch_linux_x64" data-arch="x86_64"
+                                <input type="radio" name="linux" value="arch_linux_x64" data-arch="x86_64"
                                        package_type="TGZ" id="option8"
                                        autocomplete="off"> Arch Linux x64</label>
                         </div>
@@ -183,19 +183,19 @@
                     <div role="tabpanel" class="tab-pane" id="macosx">
                         <div data-toggle="buttons" class="buttons-row">
                             <label class="btn btn-primary active">
-                                <input type="radio" name="os" value="macosx_10_8_x64" data-arch="x86_64"
+                                <input type="radio" name="macosx" value="macosx_10_8_x64" data-arch="x86_64"
                                        package_type="DragNDrop" id="option9"
                                        autocomplete="off" checked="checked"> MacOS 10.8 x64</label>
                             <label class="btn btn-primary">
-                                <input type="radio" name="os" value="macosx_10_9_x64" data-arch="x86_64"
+                                <input type="radio" name="macosx" value="macosx_10_9_x64" data-arch="x86_64"
                                        package_type="DragNDrop" id="option10"
                                        autocomplete="off"> MacOS 10.9 x64</label>
                             <label class="btn btn-primary">
-                                <input type="radio" name="os" value="macosx_10_10_x64" data-arch="x86_64"
+                                <input type="radio" name="macosx" value="macosx_10_10_x64" data-arch="x86_64"
                                        package_type="DragNDrop" id="option11"
                                        autocomplete="off"> MacOS 10.10 x64</label>
                             <label class="btn btn-primary">
-                                <input type="radio" name="os" value="macosx_10_11_x64" data-arch="x86_64"
+                                <input type="radio" name="macosx" value="macosx_10_11_x64" data-arch="x86_64"
                                        package_type="DragNDrop" id="option12"
                                        autocomplete="off"> MacOS 10.11 x64</label>
                         </div>
