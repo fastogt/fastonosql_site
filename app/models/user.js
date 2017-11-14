@@ -8,8 +8,8 @@ var userSchema = mongoose.Schema({
     password: String,
     created_date: Date,
     subscription: {
-        type: Boolean,
-        default: false
+        type: String,
+        default: ''
     }
 });
 
