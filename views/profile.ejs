@@ -74,7 +74,8 @@
                 <div class="col-sm-6 text-right">
                     <% if (!user.isSubscribe()) { %>
                     <strong data-fsc-item-path="subscr1" data-fsc-item-price></strong>
-                    <button type="submit" class="btn btn-primary" data-fsc-item-path="subscr1" data-fsc-item-value="subscr1" data-fsc-action="Add, Checkout">
+                    <button type="submit" class="btn btn-primary" data-fsc-item-path="subscr1"
+                            data-fsc-item-value="subscr1" data-fsc-action="Add, Checkout">
                         <span data-fsc-item-path="subscr1" data-fsc-item-description-action>Subscribe</span>
                     </button>
                     <strong> / 1 Month</strong>
@@ -91,7 +92,7 @@
      * @param {String} status - options: success, info, warning, danger
      * @param {String} message - message from request
      */
-    function viewAlert (status, message) {
+    function viewAlert(status, message) {
         var el = document.getElementById('alert');
         var classList = el.classList;
 
@@ -107,11 +108,11 @@
             el.innerHTML = '';
 
             status === 'success'
-                && window.location.reload();
+            && window.location.reload();
         }, 3000);
     }
 
-    function successCallback (data) {
+    function successCallback(data) {
         console.log('successCallback: ', data);
         /* $.ajax({ // TODO: uncomment after inspect payments.
             type: 'POST',
@@ -125,7 +126,7 @@
         }); */
     }
 
-    function errorCallback (error) {
+    function errorCallback(error) {
         console.log('errorCallback', error);
     }
 </script>
