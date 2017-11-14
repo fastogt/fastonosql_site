@@ -91,7 +91,7 @@
      * @param {String} status - options: success, info, warning, danger
      * @param {String} message - message from request
      */
-    function viewAlert (status, message) {
+    function viewAlert(status, message) {
         var el = document.getElementById('alert');
         var classList = el.classList;
 
@@ -107,7 +107,7 @@
             el.innerHTML = '';
 
             status === 'success'
-                && window.location.reload();
+            && window.location.reload();
         }, 3000);
     }
 

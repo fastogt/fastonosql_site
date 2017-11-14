@@ -60,7 +60,7 @@
     <div id="intro">
         <div class="intro-item">
             <div class="caption" style="top: 25.5px;">
-                <h1 style="color: #fff;">Download FastoNoSQL</h1>
+                <h1 style="color: #fff;">Download <%- site.title %></h1>
             </div><!-- caption -->
         </div><!-- intro -->
     </div><!-- intro -->
@@ -75,7 +75,7 @@
                     <div class="column five down-page">
                         <div class="row-content">
                             <div class="column six">
-                                <h2 class="down-h2">FastoNoSQL <%= project.version %> <br><span class="dowm-os">For Mac OS X:</span>
+                                <h2 class="down-h2"><%- site.title %> <%= project.version %> <br><span class="dowm-os">For Mac OS X:</span>
                                 </h2>
                             </div>
                             <div class="column four" style="float: right; margin-right: -40px; margin-top: -48px;">
@@ -86,11 +86,11 @@
                         <p>Download Redis, Memcached, SSDB GUI Manager for Mac OS X</p>
                         <p>The latest stable version:</p>
                         <a class="button blue"
-                           href="/download_p?platform=macosx&filename=fastonosql-<%= project.version %>-x86_64.dmg">64
+                           href="/download_p?platform=macosx&filename=<%= project.name_lowercase %>-<%= project.version %>-x86_64.dmg">64
                             bit Mac OS
                             X <%= project.version %> Installer (.dmg) </a>
                         <a class="button red"
-                           href="/download_p?platform=macosx&filename=fastonosql-<%= project.version %>-x86_64.zip">64
+                           href="/download_p?platform=macosx&filename=<%= project.name_lowercase %>-<%= project.version %>-x86_64.zip">64
                             bit
                             Application Archive <%= project.version %> (.zip) </a>
                     </div>
@@ -98,7 +98,7 @@
                     <div class="column five down-page">
                         <div class="row-content">
                             <div class="column six">
-                                <h2 class="down-h2">FastoNoSQL <%= project.version %> <br><span class="dowm-os">For Windows:</span>
+                                <h2 class="down-h2"><%- site.title %> <%= project.version %> <br><span class="dowm-os">For Windows:</span>
                                 </h2>
                             </div>
                             <div class="column four" style="float: right; margin-right: -40px; margin-top: -48px;">
@@ -109,11 +109,11 @@
                         <p>Download Redis, Memcached, SSDB GUI Manager for Windows</p>
                         <p>The latest stable version:</p>
                         <a class="button blue"
-                           href="/download_p?platform=windows&filename=fastonosql-<%= project.version %>-x86_64.exe">64
+                           href="/download_p?platform=windows&filename=<%= project.name_lowercase %>-<%= project.version %>-x86_64.exe">64
                             bit
                             Windows <%= project.version %> Installer (.exe)</a>
                         <a class="button red"
-                           href="/download_p?platform=windows&filename=fastonosql-<%= project.version %>-x86_64.zip">64
+                           href="/download_p?platform=windows&filename=<%= project.name_lowercase %>-<%= project.version %>-x86_64.zip">64
                             bit
                             Application Archive <%= project.version %> (.zip) </a></br>
 
@@ -122,7 +122,7 @@
                     <div class="column five down-page">
                         <div class="row-content">
                             <div class="column six">
-                                <h2 class="down-h2">FastoNoSQL <%= project.version %> <br><span class="dowm-os">For Linux:</span>
+                                <h2 class="down-h2"><%- site.title %> <%= project.version %> <br><span class="dowm-os">For Linux:</span>
                                 </h2>
                             </div>
                             <div class="column four" style="float: right; margin-right: -40px; margin-top: -48px;">
@@ -133,22 +133,22 @@
                         <p>Download Redis, Memcached, SSDB GUI Manager for Linux</p>
                         <p>The latest stable version:</p>
                         <a class="button blue"
-                           href="/download_p?platform=linux&filename=fastonosql-<%= project.version %>-x86_64.deb">64
+                           href="/download_p?platform=linux&filename=<%= project.name_lowercase %>-<%= project.version %>-x86_64.deb">64
                             bit
                             Debian/Ubuntu <%= project.version %> Package (.deb)</a>
                         <a class="button red"
-                           href="/download_p?platform=linux&filename=fastonosql-<%= project.version %>-x86_64.rpm">64
+                           href="/download_p?platform=linux&filename=<%= project.name_lowercase %>-<%= project.version %>-x86_64.rpm">64
                             bit
                             Fedora/openSUSE <%= project.version %> Package (.rpm)</a>
                         <a class="button red"
-                           href="/download_p?platform=linux&filename=fastonosql-<%= project.version %>-x86_64.tar.gz">64
+                           href="/download_p?platform=linux&filename=<%= project.name_lowercase %>-<%= project.version %>-x86_64.tar.gz">64
                             bit
                             Application Archive <%= project.version %> (.tar.gz)</a>
                     </div>
                     <div class="column five down-page">
                         <div class="row-content">
                             <div class="column six">
-                                <h2 class="down-h2">FastoNoSQL <%= project.version %> <br><span class="dowm-os">For FreeBSD:</span>
+                                <h2 class="down-h2"><%- site.title %> <%= project.version %> <br><span class="dowm-os">For FreeBSD:</span>
                                 </h2>
                             </div>
                             <div class="column four" style="float: right; margin-right: -40px; margin-top: -48px;">
@@ -159,40 +159,18 @@
                         <p>Download Redis, Memcached, SSDB GUI Manager for FreeBSD</p>
                         <p>The latest stable version:</p>
                         <a class="button blue"
-                           href="/download_p?platform=freebsd&filename=fastonosql-<%= project.version %>-x86_64.tar.gz">64
+                           href="/download_p?platform=freebsd&filename=<%= project.name_lowercase %>-<%= project.version %>-x86_64.tar.gz">64
                             bit
                             FreeBSD <%= project.version %> Archive (.tar.gz)</a>
                     </div>
 
                     <div class="column twelve" style="text-align: center;">
-                        <h2>FastoNoSQL <%= project.version %> <span class="dowm-os">For Android:</span></h2>
+                        <h2><%- site.title %> <%= project.version %> <span class="dowm-os">For Android:</span></h2>
                         <a class="button blue"
-                           href="/download_p?platform=android&filename=fastonosql-<%= project.version %>-armeabi-v7a.apk">Android <%= project.version %>
+                           href="/download_p?platform=android&filename=<%= project.name_lowercase %>-<%= project.version %>-armeabi-v7a.apk">Android <%= project.version %>
                             Installer (.apk)</a>
-                        <!-- version -->
-                        <p>
-                        <hr>
-                        </p>
                     </div>
                 </div>
-
-                <div id="disqus_thread"></div>
-                <script type="text/javascript">
-                    /* * * CONFIGURATION VARIABLES * * */
-                    var disqus_shortname = 'fastonosqlcom';
-
-                    /* * * DON'T EDIT BELOW THIS LINE * * */
-                    (function () {
-                        var dsq = document.createElement('script');
-                        dsq.type = 'text/javascript';
-                        dsq.async = true;
-                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                    })();
-                </script>
-                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
-                                                                  rel="nofollow">comments
-                        powered by Disqus.</a></noscript>
             </article>
         </div><!-- post-area -->
     </div><!-- row-content -->
@@ -253,7 +231,7 @@
                                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"
                                       float="center">
                                     <input type="hidden" name="cmd" value="_s-xclick">
-                                    <input type="hidden" name="hosted_button_id" value="QD9QB9UGF6VMY">
+                                    <input type="hidden" name="hosted_button_id" value="<%- site.paypal_token %>">
                                     <input type="image"
                                            src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0"
                                            name="submit" alt="PayPal - The safer, easier way to pay online!">
@@ -276,16 +254,10 @@
                             </td>
                         </tr>
                     </table>
-                    <a href="https://www.bountysource.com/teams/fasto?utm_source=Fasto&utm_medium=shield&utm_campaign=raised"
-                       target="_blank"><img src="https://www.bountysource.com/badge/team?team_id=45005&style=raised"
-                                            style="margin-left: 15%;"/></a>
                 </div>
             </section><!-- top-footer -->
             <section id="bottom-footer">
                 <p class="keep-left"><%- company.copyright %></p>
-                <p class="keep-right"><a href="/"><%- site.title %></a> | <a href="/download">Download</a> | <a
-                            href="help">Support</a>
-                </p>
             </section><!-- bottom-footer -->
             <p> Website development &ndash; <a href="<%- company.domain %>" target="_blank" rel="nofollow"><img
                             style="display: inline; margin: 0 !important;" src="design/img/fastogt.png"

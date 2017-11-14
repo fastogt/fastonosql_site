@@ -55,6 +55,7 @@ app.locals.site = {
     public_directory: public_dir_abs_path,
     users_directory: public_downloads_users_dir_abs_path,
 
+    paypal_token: public_settings_config.site.paypal_token,
     google_analitics_token: public_settings_config.site.google_analitics_token,
 
     github_link: public_settings_config.site.github_link,
@@ -190,7 +191,7 @@ listener.on('connection', function (socket) {
 
 // configuration ===============================================================
 mongoose.Promise = global.Promise;
-mongoose.connect(config_db.url); // connect to our database
+mongoose.connect(config_db.url, { useMongoClient: true }); // connect to our database
 
 // NEV configuration =====================
 // our persistent user model
@@ -234,7 +235,7 @@ nev.configure({
         return;
     }
 
-    console.log('configured: ' + (typeof options === 'object'));
+    console.log('email-verification configured: ' + (typeof options === 'object'));
 });
 
 nev.generateTempUserModel(User, function (err, tempUserModel) {

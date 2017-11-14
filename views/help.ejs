@@ -56,64 +56,35 @@
     </div><!-- row -->
 </header>
 
-<div id="intro-wrap" data-height="3.222">
-    <div id="intro" class="preload darken">
-        <div class="intro-item">
-            <div class="caption" style="top: 25.5px;">
-                <h1 style="color: #fff;">How to use FastoNoSQL</h1>
-            </div><!-- caption -->
-        </div><!-- intro -->
-    </div><!-- intro -->
-</div><!-- intro-wrap -->
-
-<div id="main" class="row">
-    <div class="row-content buffer-left buffer-right buffer-bottom clear-after">
-        <div class="post-area clear-after">
-            <article role="main" class="column nine">
-                <div class="row-content" id="1">
-                    <h2 style="margin: 25px 0 0 0;">Create connection</h2>
-                    </p>
-                    <img src="images/connect.gif" alt="Help - Create connection" title="Help - Create connection"/>
-                    <p>
+<main role="main">
+    <div id="intro-wrap">
+        <div class="container intro-item">
+            <div class="intro-mockup-wrapper">
+                <div class="text-center">
+                    <h1 style="color: #fff;">How to use <%- site.title %></h1>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="row-content" id="2">
-                    <h2>Workflow</h2>
-                    </p>
-                    <img src="images/edit.gif" alt="Help - FastoNoSQL workflow" title="Help - FastoNoSQL workflow"/>
-                    <p>
-                </div>
-                <div id="disqus_thread"></div>
-                <script type="text/javascript">
-                    /* * * CONFIGURATION VARIABLES * * */
-                    var disqus_shortname = 'fastonosqlcom';
+    <div id="main" class="row">
+        <div class="row-content buffer-left buffer-right buffer-bottom clear-after">
+            <div class="post-area clear-after">
+                <article role="main" class="column nine">
+                    <div class="row-content" id="1">
+                        <h2 style="margin: 25px 0 0 0;">Create connection</h2>
+                        <img src="images/connect.gif" alt="Help - Create connection" title="Help - Create connection"/>
+                    </div>
 
-                    /* * * DON'T EDIT BELOW THIS LINE * * */
-                    (function () {
-                        var dsq = document.createElement('script');
-                        dsq.type = 'text/javascript';
-                        dsq.async = true;
-                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                    })();
-                </script>
-                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
-                                                                  rel="nofollow">comments
-                        powered by Disqus.</a></noscript>
-            </article>
-
-            <aside role="complementary" class="sidebar column three last">
-                <div class="widget help-menu">
-                    <h3>How to use</h3>
-                    <ul class="plain">
-                        <li><a href="#1">Create connection</a></li>
-                        <li><a href="#2">Workflow</a></li>
-                    </ul>
-                </div>
-            </aside>
-        </div><!-- post-area -->
-    </div><!-- row-content -->
-</div><!-- row -->
+                    <div class="row-content" id="2">
+                        <h2>Workflow</h2>
+                        <img src="images/edit.gif" alt="Help - FastoNoSQL workflow" title="Help - FastoNoSQL workflow"/>
+                    </div>
+                </article>
+            </div><!-- post-area -->
+        </div><!-- row-content -->
+    </div><!-- row -->
+</main>
 
 <footer role="contentinfo">
     <div class="row">
@@ -169,7 +140,7 @@
                                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"
                                       float="center">
                                     <input type="hidden" name="cmd" value="_s-xclick">
-                                    <input type="hidden" name="hosted_button_id" value="QD9QB9UGF6VMY">
+                                    <input type="hidden" name="hosted_button_id" value="<%- site.paypal_token %>">
                                     <input type="image"
                                            src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0"
                                            name="submit" alt="PayPal - The safer, easier way to pay online!">
@@ -192,16 +163,10 @@
                             </td>
                         </tr>
                     </table>
-                    <a href="https://www.bountysource.com/teams/fasto?utm_source=Fasto&utm_medium=shield&utm_campaign=raised"
-                       target="_blank"><img src="https://www.bountysource.com/badge/team?team_id=45005&style=raised"
-                                            style="margin-left: 15%;"/></a>
                 </div>
             </section><!-- top-footer -->
             <section id="bottom-footer">
                 <p class="keep-left"><%- company.copyright %></p>
-                <p class="keep-right"><a href="/"><%- site.title %></a> | <a href="/download">Download</a> | <a
-                            href="help">Support</a>
-                </p>
             </section><!-- bottom-footer -->
             <p> Website development &ndash; <a href="<%- company.domain %>" target="_blank" rel="nofollow"><img
                             style="display: inline; margin: 0 !important;" src="design/img/fastogt.png"
