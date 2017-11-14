@@ -130,7 +130,7 @@
                                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"
                                       float="center">
                                     <input type="hidden" name="cmd" value="_s-xclick">
-                                    <input type="hidden" name="hosted_button_id" value="QD9QB9UGF6VMY">
+                                    <input type="hidden" name="hosted_button_id" value="<%- site.paypal_token %>">
                                     <input type="image"
                                            src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0"
                                            name="submit" alt="PayPal - The safer, easier way to pay online!">
@@ -153,16 +153,10 @@
                             </td>
                         </tr>
                     </table>
-                    <a href="https://www.bountysource.com/teams/fasto?utm_source=Fasto&utm_medium=shield&utm_campaign=raised"
-                       target="_blank"><img src="https://www.bountysource.com/badge/team?team_id=45005&style=raised"
-                                            style="margin-left: 15%;"/></a>
                 </div>
             </section><!-- top-footer -->
             <section id="bottom-footer">
                 <p class="keep-left"><%- company.copyright %></p>
-                <p class="keep-right"><a href="/"><%- site.title %></a> | <a href="/download">Download</a> | <a
-                            href="help">Support</a>
-                </p>
             </section><!-- bottom-footer -->
             <p> Website development &ndash; <a href="<%- company.domain %>" target="_blank" rel="nofollow"><img
                             style="display: inline; margin: 0 !important;" src="design/img/fastogt.png"

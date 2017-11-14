@@ -23,6 +23,7 @@ module.exports = {
         twitter_name: 'FastoNoSQL',
         twitter_link: 'https://twitter.com/FastoNoSQL',
 
+        paypal_token: 'FY5JBFRE6NP9Y',
         google_analitics_token: 'UA-56403848-4',
         //data_ad_client: 'ca-pub-4299795201353238',
         //data_ad_slot: '1261996191',
