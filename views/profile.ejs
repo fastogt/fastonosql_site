@@ -73,12 +73,11 @@
                 <div class="col-sm-6">&nbsp;</div>
                 <div class="col-sm-6 text-right">
                     <% if (!user.isSubscribe()) { %>
-                    <strong data-fsc-item-path="subscr1" data-fsc-item-price></strong>
-                    <button type="submit" class="btn btn-primary" data-fsc-item-path="subscr1"
-                            data-fsc-item-value="subscr1" data-fsc-action="Add, Checkout">
-                        <span data-fsc-item-path="subscr1" data-fsc-item-description-action>Subscribe</span>
+                    <!--<strong data-fsc-item-path="next-monthly-subscription" data-fsc-item-price></strong>-->
+                    <button type="submit" class="btn btn-primary" data-fsc-action="Add,Checkout" data-fsc-item-path-value="next-monthly-subscription">
+                        Subscription
                     </button>
-                    <strong> / 1 Month</strong>
+                    <strong>9.95$ / 1 Month</strong>
                     <% } %>
                 </div>
             </div>
@@ -112,32 +111,31 @@
         }, 3000);
     }
 
-    function successCallback(data) {
-        console.log('successCallback: ', data);
-        /* $.ajax({ // TODO: uncomment after inspect payments.
-            type: 'POST',
-            url: '/subscription',
-            success: function (response) {
-                viewAlert('success', response);
-            },
-            error: function (response) {
-                viewAlert('danger', response.responseText);
-            }
-        }); */
-    }
-
-    function errorCallback(error) {
-        console.log('errorCallback', error);
+    function onPopupClose (data) {
+        console.log('onPopupClose', JSON.stringify(data));
+        if (data) {
+            $.ajax({
+                type: 'POST',
+                url: '/subscription',
+                data: {data: JSON.stringify(data)},
+                success: function (response) {
+                    viewAlert('success', response);
+                },
+                error: function (response) {
+                    viewAlert('danger', response.responseText);
+                }
+            });
+        }
     }
 </script>
 
 <!-- Fastspring script -->
 <script id="fsc-api"
         src="https://d1f8f9xcsvx3ha.cloudfront.net/sbl/0.7.4/fastspring-builder.min.js"
-        data-data-callback="successCallback"
-        data-error-callback="errorCallback"
         type="text/javascript"
-        data-storefront="fastogt.test.onfastspring.com/popup-fastogt">
+        data-storefront="fastogt.test.onfastspring.com/popup-fastonosql"
+        data-popup-closed="onPopupClose"
+>
 </script>
 </body>
 </html>

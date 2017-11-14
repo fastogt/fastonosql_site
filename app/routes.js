@@ -128,13 +128,19 @@ module.exports = function (app, passport, nev) {
         };
 
         if (!user.isSubscribe()) {
-            user.set({subscription: true});
-            user.save(function (err) {
-                if (err) {
-                    response.status = 500;
-                    response.text = 'ERROR: Subscription was failed!';
-                }
-            });
+            var body = JSON.parse(req.body.data);
+            if (body.hasOwnProperty('id') && body.hasOwnProperty('reference')) {
+                user.set({subscription: req.body.data});
+                user.save(function (err) {
+                    if (err) {
+                        response.status = 500;
+                        response.text = 'ERROR: Subscription was failed!';
+                    }
+                });
+            } else {
+                response.status = 400;
+                response.text = 'ERROR: Invalid data!';
+            }
         }
         else {
             response.status = 500;
