@@ -190,7 +190,7 @@ listener.on('connection', function (socket) {
 
 // configuration ===============================================================
 mongoose.Promise = global.Promise;
-mongoose.connect(config_db.url); // connect to our database
+mongoose.connect(config_db.url, { useMongoClient: true }); // connect to our database
 
 // NEV configuration =====================
 // our persistent user model
@@ -234,7 +234,7 @@ nev.configure({
         return;
     }
 
-    console.log('configured: ' + (typeof options === 'object'));
+    console.log('email-verification configured: ' + (typeof options === 'object'));
 });
 
 nev.generateTempUserModel(User, function (err, tempUserModel) {
