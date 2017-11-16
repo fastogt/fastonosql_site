@@ -54,12 +54,15 @@
     <% if (message.length > 0) { %>
     <div class="alert alert-danger"><%= message %></div>
     <% } %>
+    <% if (user.getSubscriptionState() && user.getSubscriptionState() !== 'active') { %>
+    <div class="alert alert-warning">Your subscription is <%= user.getSubscriptionState() %>. Resubscribe or contact the administrator.</div>
+    <% } %>
 
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
                 <div class="col-sm-6">
-                    <% if (user.isSubscribe()) { %>
+                    <% if (user.getSubscriptionState() === 'active') { %>
                     <form action="/build_installer_request" method="get">
                         <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version
                         </button>
@@ -72,12 +75,15 @@
             <div class="row">
                 <div class="col-sm-6">&nbsp;</div>
                 <div class="col-sm-6 text-right">
-                    <% if (!user.isSubscribe()) { %>
-                    <!--<strong data-fsc-item-path="next-monthly-subscription" data-fsc-item-price></strong>-->
-                    <button type="submit" class="btn btn-primary" data-fsc-action="Add,Checkout" data-fsc-item-path-value="next-monthly-subscription">
+                    <% if (user.enableSubscription()) { %>
+                    <button type="submit" class="btn btn-primary" id="subscription" data-fsc-action="Add,Checkout" data-fsc-item-path-value="next-monthly-subscription">
                         Subscription
                     </button>
                     <strong>9.95$ / 1 Month</strong>
+                    <% } else if (user.getSubscriptionState() === 'active') { %>
+                    <form action="/cancel_subscription" method="post">
+                        <button type="submit" class="btn btn-primary">Cancel Subscription</button>
+                    </form>
                     <% } %>
                 </div>
             </div>
@@ -91,8 +97,9 @@
      * @param {String} status - options: success, info, warning, danger
      * @param {String} message - message from request
      */
-    function viewAlert(status, message) {
+    function viewAlert (status, message) {
         var el = document.getElementById('alert');
+        var btn = document.getElementById('subscription');
         var classList = el.classList;
 
         el.innerHTML = message;
@@ -101,13 +108,16 @@
         classList.add('hide');
         classList.add('show');
 
+//        btn.disabled = true;
+
         setTimeout(function () {
             classList.remove('show', 'alert-' + status);
             classList.add('hide');
             el.innerHTML = '';
+//            btn.disabled = false;
 
             status === 'success'
-            && window.location.reload();
+                && window.location.reload();
         }, 3000);
     }
 
