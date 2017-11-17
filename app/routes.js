@@ -25,7 +25,7 @@ function checkIsValidDomain(domain) {
 }
 
 module.exports = function (app, passport, nev) {
-    var fastSpring = FastSpring('5QDHQHQLQY6TQCY3ZL85JW', 'Mtd_FX1uQMiyK0MXCOVcwg');
+    var fastSpring = FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
 
 // normal routes ===============================================================
 
@@ -122,7 +122,7 @@ module.exports = function (app, passport, nev) {
                 .then(function (data) {
                     var subscription = JSON.parse(data);
 
-                    req.user.set({subscriptionState: subscription.state});
+                    req.user.set({subscription_state: subscription.state});
                     req.user.save(function (err) {
                         if (err) {
                             console.error('getSubscription: ', err);
