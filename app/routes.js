@@ -3,6 +3,7 @@ var User = require('../app/models/user');
 
 var fs = require('fs');
 var path = require('path');
+var FastSpring = require('./fastspring');
 
 function deleteFolderRecursive(path) {
     if (fs.existsSync(path)) {
@@ -24,6 +25,7 @@ function checkIsValidDomain(domain) {
 }
 
 module.exports = function (app, passport, nev) {
+    var fastSpring = FastSpring('5QDHQHQLQY6TQCY3ZL85JW', 'Mtd_FX1uQMiyK0MXCOVcwg');
 
 // normal routes ===============================================================
 
@@ -113,41 +115,98 @@ module.exports = function (app, passport, nev) {
 
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function (req, res) {
-        res.render('profile.ejs', {
-            user: req.user,
-            message: req.flash('statusProfileMessage')
-        });
+        var subscr = req.user.getSubscription();
+
+        if (subscr) {
+            fastSpring.getSubscription(subscr.subscriptionId)
+                .then(function (data) {
+                    var subscription = JSON.parse(data);
+
+                    req.user.set({subscriptionState: subscription.state});
+                    req.user.save(function (err) {
+                        if (err) {
+                            console.error('getSubscription: ', err);
+                        }
+                    });
+
+                    res.render('profile.ejs', {
+                        user: req.user,
+                        message: req.flash('statusProfileMessage')
+                    });
+                }).catch(function (error) {
+                    console.error('getSubscription: ', error);
+                });
+        } else {
+            res.render('profile.ejs', {
+                user: req.user,
+                message: req.flash('statusProfileMessage')
+            });
+        }
     });
 
     // SUBSCRIPTION =============================
     app.post('/subscription', isLoggedIn, function (req, res) {
         var user = req.user;
-        var response = {
-            status: 200,
-            text: 'SUCCESS: Subscription success!'
-        };
 
-        if (!user.isSubscribe()) {
+        if (user.enableSubscription()) {
             var body = JSON.parse(req.body.data);
-            if (body.hasOwnProperty('id') && body.hasOwnProperty('reference')) {
-                user.set({subscription: req.body.data});
-                user.save(function (err) {
-                    if (err) {
-                        response.status = 500;
-                        response.text = 'ERROR: Subscription was failed!';
-                    }
-                });
-            } else {
-                response.status = 400;
-                response.text = 'ERROR: Invalid data!';
-            }
-        }
-        else {
-            response.status = 500;
-            response.text = 'ERROR: Subscription is already exist!';
-        }
 
-        return res.status(response.status).send(response.text);
+            if (body.hasOwnProperty('id') && body.hasOwnProperty('reference')) {
+                // ===== fastSpring.getOrder
+                fastSpring.getOrder(body.id)
+                    .then(function (data) {
+                        var order = JSON.parse(data);
+
+                        if (order.hasOwnProperty('error')) {
+                            return res.status(500).send('ERROR: Subscription was failed!');
+                        }
+
+                        if (!order.items.length) {
+                            return res.status(500).send('ERROR: Subscription was failed!');
+                        }
+
+                        user.set({
+                            subscription: JSON.stringify(Object.assign(body, {subscriptionId: order.items[0].subscription}))
+                        });
+                        user.save(function (err) {
+                            if (err) {
+                                return res.status(500).send('ERROR: Subscription was failed!');
+                            }
+                        });
+
+                        res.status(200).send('SUCCESS: Subscription success!');
+                    }).catch(function (error) {
+                        console.error('getOrder: ', error);
+                        return res.status(500).send('ERROR: Subscription was failed!');
+                    });
+                // =====
+            } else {
+                return res.status(400).send('ERROR: Invalid data!');
+            }
+        } else {
+            return res.status(500).send('ERROR: Subscription is already exist!');
+        }
+    })
+
+    // CANCEL_SUBSCRIPTION ==============================
+    app.post('/cancel_subscription', function (req, res) {
+        var user = req.user;
+
+        if (user.getSubscriptionState() === 'active') {
+            var subscr = user.getSubscription();
+
+            fastSpring.cancelSubscription(subscr.subscriptionId)
+                .then(function (data) {
+                    var answer = JSON.parse(data);
+
+                    if (answer.result === 'error') {
+                        throw new Error('Cancel subscription was failed.');
+                    }
+                    res.redirect('/profile');
+                }).catch(function (error) {
+                    console.log('cancelSubscription: ', error);
+                });
+        }
     })
 
     // LOGOUT ==============================
