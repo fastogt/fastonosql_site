@@ -94,6 +94,12 @@ app.locals.back_end = {
     socketio_port: settings_config.socketio_port
 };
 
+// fast spring
+app.locals.fastspring_config = {
+    login: settings_config.fastspring_login,
+    password: settings_config.fastspring_password
+}
+
 // rabbitmq
 var rabbit_connection = amqp.createConnection({
     host: settings_config.rabbitmq_host,

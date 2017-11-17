@@ -11,7 +11,7 @@ var userSchema = mongoose.Schema({
         type: String,
         default: ''
     },
-    subscriptionState: { // "active", "overdue", "canceled", "deactivated", "trial"
+    subscription_state: { // "active", "overdue", "canceled", "deactivated", "trial"
         type: String,
         default: ''
     }
@@ -31,7 +31,7 @@ userSchema.methods.validPassword = function (password) {
 
 // enable subscription
 userSchema.methods.enableSubscription = function() {
-    return (!this.subscriptionState || this.subscriptionState === 'canceled') && !this.subscription;
+    return (!this.subscription_state || this.subscription_state === 'canceled');
 };
 
 // get subscription info
@@ -43,7 +43,7 @@ userSchema.methods.getSubscription = function () {
 
 // get subscription state
 userSchema.methods.getSubscriptionState = function () {
-    return this.subscriptionState;
+    return this.subscription_state;
 }
 
 // create the model for users and expose it to our app
