@@ -55,7 +55,9 @@
     <div class="alert alert-danger"><%= message %></div>
     <% } %>
     <% if (user.getSubscriptionState() && user.getSubscriptionState() !== 'active') { %>
-    <div class="alert alert-warning">Your subscription is <%= user.getSubscriptionState() %>. Resubscribe or contact the administrator.</div>
+    <div class="alert alert-warning">Your subscription is <%= user.getSubscriptionState() %>. Resubscribe or contact the
+        administrator.
+    </div>
     <% } %>
 
     <div class="row">
@@ -76,7 +78,8 @@
                 <div class="col-sm-6">&nbsp;</div>
                 <div class="col-sm-6 text-right">
                     <% if (user.enableSubscription()) { %>
-                    <button type="submit" class="btn btn-primary" id="subscription" data-fsc-action="Add,Checkout" data-fsc-item-path-value="fastonosql-subscription">
+                    <button type="submit" class="btn btn-primary" id="subscription" data-fsc-action="Add,Checkout"
+                            data-fsc-item-path-value="fastonosql-subscription">
                         Order subscription
                     </button>
                     <strong>2.99$ / 1 Month</strong>
@@ -89,6 +92,41 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="well">
+            <h3>Why do we need subscriptions?</h3>
+            <strong><%- site.title %></strong> was founded in Jule 2015 and since that time more than 40 releases had
+            been published.
+            We started from <strong>FastoRedis</strong> which worked only with <strong>Redis</strong> database and then
+            we understood
+            that there are a lot of <strong>NoSQL databases</strong> which need our solution.
+            At the moment we support <strong>9</strong> databases:
+            <ul>
+                <li><a href="http://redis.io" target="_blank">Redis</a></li>
+                <li><a href="http://memcached.org" target="_blank">Memcached</a></li>
+                <li><a href="http://ssdb.io" target="_blank">SSDB</a></li>
+                <li><a href="http://leveldb.org" target="_blank">LevelDB</a></li>
+                <li><a href="http://rocksdb.org" target="_blank">RocksDB</a></li>
+                <li><a href="http://unqlite.org" target="_blank">UnQLite</a></li>
+                <li><a href="http://symas.com/mdb" target="_blank">LMDB</a></li>
+                <li><a href="http://upscaledb.com" target="_blank">UpscaleDB</a></li>
+                <li><a href="http://forestdb.org" target="_blank">ForestDB</a></li>
+            </ul>
+            Our solution is the <strong>only one in the world</strong> which can support such number of databases and still be
+            <strong>opensource</strong>, we
+            don't want to stop at this we gonna add new <strong>NoSQL databases</strong> and improve the functionality
+            of existing databases.
+            Also in plans create forum for all who love <strong>NoSQL</strong> like we do to simplify database workflow
+            and <strong>be close to each other</strong>.</br>
+            We need your <strong>support</strong>, <strong>understanding</strong>, <strong>feedbacks</strong>.
+            In order to develop we are introducing <strong>paid Subscriptions for users</strong>.</br>
+            The subscription gives access to <strong>individual unlimited binaries</strong> for <strong>$2.99</strong>
+            per month.
+            We are waiting for your feedback! Please write any issues and proposals to <a
+                    href="<%- site.github_issues_link %>" alt="NoSQL GUI">GitHub Issues</a>..
+        </div>
+    </div>
 </div>
 <!-- Fastspring actions -->
 <script>
@@ -97,7 +135,7 @@
      * @param {String} status - options: success, info, warning, danger
      * @param {String} message - message from request
      */
-    function viewAlert (status, message) {
+    function viewAlert(status, message) {
         var el = document.getElementById('alert');
         var btn = document.getElementById('subscription');
         var classList = el.classList;
@@ -117,11 +155,11 @@
             btn.disabled = false;
 
             status === 'success'
-                && window.location.reload();
+            && window.location.reload();
         }, 3000);
     }
 
-    function onPopupClose (data) {
+    function onPopupClose(data) {
         console.log('onPopupClose', JSON.stringify(data));
         if (data) {
             $.ajax({
