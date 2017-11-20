@@ -108,13 +108,13 @@
         classList.add('hide');
         classList.add('show');
 
-//        btn.disabled = true;
+        btn.disabled = true;
 
         setTimeout(function () {
             classList.remove('show', 'alert-' + status);
             classList.add('hide');
             el.innerHTML = '';
-//            btn.disabled = false;
+            btn.disabled = false;
 
             status === 'success'
                 && window.location.reload();
