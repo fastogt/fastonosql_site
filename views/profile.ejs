@@ -75,14 +75,14 @@
         </div>
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-6">&nbsp;</div>
-                <div class="col-sm-6 text-right">
+                <div class="col-sm-5">&nbsp;</div>
+                <div class="col-sm-7 text-right">
                     <% if (user.enableSubscription()) { %>
                     <button type="submit" class="btn btn-primary" id="subscription" data-fsc-action="Add,Checkout"
                             data-fsc-item-path-value="fastonosql-subscription">
                         Order Subscription
                     </button>
-                    <strong>4.99$ / 1 Month</strong>
+                    <strong><span data-fsc-item-path="fastonosql-subscription"  data-fsc-item-price></span> / 1 Month</strong>
                     <% } else if (user.getSubscriptionState() === 'active') { %>
                     <form action="/cancel_subscription" method="post">
                         <button type="submit" class="btn btn-primary">Cancel Subscription</button>
@@ -92,7 +92,7 @@
             </div>
         </div>
     </div>
-
+    <br />
     <div class="row">
         <div class="well">
             <h3>Why do we need subscriptions?</h3>
