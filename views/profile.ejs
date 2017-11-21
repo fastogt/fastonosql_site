@@ -80,9 +80,9 @@
                     <% if (user.enableSubscription()) { %>
                     <button type="submit" class="btn btn-primary" id="subscription" data-fsc-action="Add,Checkout"
                             data-fsc-item-path-value="fastonosql-subscription">
-                        Order subscription
+                        Order Subscription
                     </button>
-                    <strong>2.99$ / 1 Month</strong>
+                    <strong>4.99$ / 1 Month</strong>
                     <% } else if (user.getSubscriptionState() === 'active') { %>
                     <form action="/cancel_subscription" method="post">
                         <button type="submit" class="btn btn-primary">Cancel Subscription</button>
@@ -121,7 +121,7 @@
             and <strong>be close to each other</strong>.</br>
             We need your <strong>support</strong>, <strong>understanding</strong>, <strong>feedbacks</strong>.
             In order to develop we are introducing <strong>paid Subscriptions for users</strong>.</br>
-            The subscription gives access to <strong>individual unlimited binaries</strong> for <strong>$2.99</strong>
+            The subscription gives access to <strong>individual unlimited binaries</strong> for <strong>$4.99</strong>
             per month.
             We are waiting for your feedback! Please write any issues and proposals to <a
                     href="<%- site.github_issues_link %>" alt="NoSQL GUI">GitHub Issues</a>..
