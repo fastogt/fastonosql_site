@@ -42,17 +42,20 @@
 <header role="banner" class="transparent light">
     <div class="row">
         <div class="nav-inner row-content buffer-left buffer-right even clear-after">
-            <div id="brand">
-                <h2 class="reset"><a href="/"><%- site.title %></a></h2>
-            </div>
-            <a id="menu-toggle" href="#"><i class="fa fa-bars fa-lg"></i></a>
             <nav>
                 <ul class="reset" role="navigation">
                     <li><a href="/">Home</a></li>
                     <li><a href="/help">How to use</a></li>
-                    <li><a href="/download">Download</a></li>
                 </ul>
             </nav>
+            <div id="brand">
+                <h2 class="reset"><a href="/"><%- site.title %></a></h2>
+            </div>
+            <div class="login">
+                <a href="/login" class="btn btn-warning"><span class="fa fa-sign-in"></span> Sign in</a>
+                <a href="/signup" class="btn btn-warning"><span class="fa fa-sign-in"></span> Sign up</a>
+            </div>
+            <a id="menu-toggle" href="#"><i class="fa fa-bars fa-lg"></i></a>
         </div><!-- row-content -->
     </div><!-- row -->
 </header>
@@ -64,8 +67,6 @@
             <div class="intro-mockup-wrapper">
                 <div class="text-center">
                     <h1 style="color: #fff;"><%- site.title %> - GUI manager for NoSQL databases</h1>
-                    <a href="/login" class="btn btn-warning"><span class="fa fa-sign-in"></span> Sign in</a>
-                    <a href="/signup" class="btn btn-warning"><span class="fa fa-sign-in"></span> Sign up</a>
                 </div>
             </div>
         </div>
