@@ -63,9 +63,10 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-success download" id="download">Download</button>
                     <% if (user.getSubscriptionState() === 'active') { %>
-                    <form action="/build_installer_request" method="get">
+                    <form action="/build_installer_request" method="get" class="btn-verification">
                         <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version
                         </button>
                     </form>
