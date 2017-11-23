@@ -113,6 +113,40 @@
             <p>
         </div>
 
+        <div class="row">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>
+                        <img src="/images/android.png" alt="" title="">
+                        <%= project.name %> <%= project.version %> <span class="dowm-os">For Android:</span>
+                    </h3>
+                </div>
+            </div>
+            <!-- version -->
+            <p>
+                <a href="/downloads/android/<%= project.name_lowercase %>-<%= project.version %>-armeabi-v7a.apk">
+                    Android <%= project.version %> Package (.deb)
+                </a>
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>
+                        <img src="/images/freebsd.png" alt="" title="">
+                        <%= project.name %> <%= project.version %> <span class="dowm-os">For Android:</span>
+                    </h3>
+                </div>
+            </div>
+            <!-- version -->
+            <p>
+                <a href="/downloads/freebsd/<%= project.name_lowercase %>-<%= project.version %>-x86_64.tar.gz">
+                    FreeBSD <%= project.version %> Package (.deb)
+                </a>
+            </p>
+        </div>
+
     </div>
 </div>
 </body>
