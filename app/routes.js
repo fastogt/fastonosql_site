@@ -38,12 +38,8 @@ module.exports = function (app, passport, nev) {
         res.render('help.ejs');
     });
 
-    app.get('/download', isLoggedIn, function (req, res) {
-        res.render('download.ejs');
-    });
-
-    app.get('/download_p', isLoggedIn, function (req, res) {
-        res.render('download_p.ejs');
+    app.get('/downloads', isLoggedIn, function (req, res) {
+        res.render('downloads.ejs');
     });
 
     app.get('/build_installer_request', isLoggedIn, function (req, res) {
