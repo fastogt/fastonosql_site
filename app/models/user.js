@@ -14,6 +14,11 @@ var userSchema = mongoose.Schema({
     subscription_state: { // "active", "overdue", "canceled", "deactivated", "trial"
         type: String,
         default: ''
+    },
+    type: {
+        type: String,
+        enum: ['USER', 'FOUNDER', 'SUPPORT'],
+        default: 'USER'
     }
 });
 
