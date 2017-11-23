@@ -34,19 +34,15 @@ module.exports = function (app, passport, nev) {
         res.render('index.ejs');
     });
 
-    app.get('/download', function (req, res) {
-        res.render('download.ejs');
-    });
-
     app.get('/help', function (req, res) {
         res.render('help.ejs');
     });
 
-    app.get('/download_p', function (req, res) {
-        res.render('download_p.ejs');
+    app.get('/downloads', isLoggedIn, function (req, res) {
+        res.render('downloads.ejs');
     });
 
-    app.get('/build_installer_request', function (req, res) {
+    app.get('/build_installer_request', isLoggedIn, function (req, res) {
         var user = req.user;
 
         var walk = function (dir, done) {
@@ -104,7 +100,7 @@ module.exports = function (app, passport, nev) {
     });
 
     // CLEAR user packages
-    app.post('/clear_packages', function (req, res) {
+    app.post('/clear_packages', isLoggedIn, function (req, res) {
         var user = req.user;
         deleteFolderRecursive(app.locals.site.users_directory + '/' + user.email);
         res.render('build_installer_request.ejs', {
@@ -189,7 +185,7 @@ module.exports = function (app, passport, nev) {
     })
 
     // CANCEL_SUBSCRIPTION ==============================
-    app.post('/cancel_subscription', function (req, res) {
+    app.post('/cancel_subscription', isLoggedIn, function (req, res) {
         var user = req.user;
 
         if (user.getSubscriptionState() === 'active') {

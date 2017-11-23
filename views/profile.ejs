@@ -62,16 +62,13 @@
 
     <div class="row">
         <div class="col-sm-6">
-            <div class="row">
-                <div class="col-sm-6">
-                    <% if (user.getSubscriptionState() === 'active') { %>
-                    <form action="/build_installer_request" method="get">
-                        <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version
-                        </button>
-                    </form>
-                    <% } %>
-                </div>
-            </div>
+            <a href="/downloads" class="btn btn-success download">Download</a>
+            <% if (user.getSubscriptionState() === 'active') { %>
+            <form action="/build_installer_request" method="get" class="btn-verification">
+                <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version
+                </button>
+            </form>
+            <% } %>
         </div>
         <div class="col-sm-6">
             <div class="row">
@@ -82,7 +79,8 @@
                             data-fsc-item-path-value="fastonosql-subscription">
                         Order Subscription
                     </button>
-                    <strong><span data-fsc-item-path="fastonosql-subscription"  data-fsc-item-price></span> / 1 Month</strong>
+                    <strong><span data-fsc-item-path="fastonosql-subscription" data-fsc-item-price></span> / 1
+                        Month</strong>
                     <% } else if (user.getSubscriptionState() === 'active') { %>
                     <form action="/cancel_subscription" method="post">
                         <button type="submit" class="btn btn-primary">Cancel Subscription</button>
@@ -92,7 +90,7 @@
             </div>
         </div>
     </div>
-    <br />
+    <br/>
     <div class="row">
         <div class="well">
             <h3>Why do we need subscriptions?</h3>
@@ -113,7 +111,8 @@
                 <li><a href="http://upscaledb.com" target="_blank">UpscaleDB</a></li>
                 <li><a href="http://forestdb.org" target="_blank">ForestDB</a></li>
             </ul>
-            Our solution is the <strong>only one in the world</strong> which can support such number of databases and still be
+            Our solution is the <strong>only one in the world</strong> which can support such number of databases and
+            still be
             <strong>opensource</strong>, we
             don't want to stop at this we gonna add new <strong>NoSQL databases</strong> and improve the functionality
             of existing databases.
@@ -121,8 +120,8 @@
             and <strong>be close to each other</strong>.</br>
             We need your <strong>support</strong>, <strong>understanding</strong>, <strong>feedbacks</strong>.
             In order to develop we are introducing <strong>paid Subscriptions for users</strong>.</br>
-            The subscription gives access to <strong>individual unlimited binaries</strong> for <strong>$4.99</strong>
-            per month.
+            The subscription gives access to <strong>individual unlimited binaries</strong> and <strong>realtime
+                support, we can help you with understanding NoSQL world</strong>.
             We are waiting for your feedback! Please write any issues and proposals to <a
                     href="<%- site.github_issues_link %>" alt="NoSQL GUI">GitHub Issues</a>..
         </div>
