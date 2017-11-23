@@ -109,7 +109,12 @@
                         </button>
                         <strong id="subscription-descr">
                             <% for (var j = 0; j < subscriptions.length; j++) { %>
-                            <span data-fsc-item-path="<%=subscriptions[j]%>" data-fsc-item-price class="hide"></span>
+                            <span data-subscr="<%=subscriptions[j]%>" class="hide">
+                                <strong data-fsc-item-path="<%=subscriptions[j]%>" data-fsc-item-price></strong>
+                                <% if (subscriptions[j] === 'fastonosql-subscription-12-month') { %>
+                                &nbsp;<strong class="text-danger">YOU SAVE 20%!</strong>
+                                <% } %>
+                            </span>
                             <% } %>
                         </strong>
                     </form>
@@ -203,7 +208,7 @@
       document.querySelectorAll("#subscription-descr span").forEach(function (el) {
           el.classList.add('hide');
       });
-      document.querySelector('#subscription-descr [data-fsc-item-path=' + id + ']').classList.remove('hide');
+      document.querySelector('#subscription-descr [data-subscr=' + id + ']').classList.remove('hide');
     }
 
     function onPopupClose(data) {
