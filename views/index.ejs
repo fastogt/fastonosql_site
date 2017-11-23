@@ -75,7 +75,7 @@
 
     <div id="main">
         <section class="row section call-to-action first">
-            <div class="row-content buffer even" style="line-height: 0.8;">
+            <div class="row-content" style="line-height: 0.8;">
                 <div class="github">
                     <!-- Place this tag where you want the button to render. -->
                     <a class="github-button" href="<%- site.github_link %>/subscription"
@@ -97,7 +97,6 @@
                     <p>
                         <%- site.title %> it is GUI platform for NoSQL databases. Currently we support next databases:
                     </p>
-                    <p>
                     <ul>
                         <li><a href="http://redis.io" target="_blank">Redis</a></li>
                         <li><a href="http://memcached.org" target="_blank">Memcached</a></li>
@@ -109,13 +108,32 @@
                         <li><a href="http://upscaledb.com" target="_blank">UpscaleDB</a></li>
                         <li><a href="http://forestdb.org" target="_blank">ForestDB</a></li>
                     </ul>
-                    </p>
                 </div>
                 <div class="side-mockup right-mockup animation">
                     <div class="slider desktop-slider">
-                        <div><img src="images/main.png"
-                                  alt="<%- site.title %> - is a cross-platform open source NoSQL management tool"
-                                  title="<%- site.title %> Admin GUI"></div>
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner" role="listbox">
+                                <div class="item active">
+                                    <img src="images/slider/main-1-min.png" alt="">
+                                </div>
+                                <div class="item">
+                                    <img src="images/slider/main_linux_redis-min.png" alt="">
+                                </div>
+                                <div class="item">
+                                    <img src="images/slider/all_database-min.png" alt="">
+                                </div>
+                            </div>
+                        
+                            <!-- Controls -->
+                            <a class="left carousel-control" href="#myCarousel" role="button">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" role="button" >
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="column">
@@ -409,7 +427,9 @@
     </div><!-- row -->
 </footer>
 <script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="design/js/plugins.js"></script>
 <script src="design/js/beetle.js"></script>
+<script src="design/js/slider.js"></script>
 </body>
 </html>

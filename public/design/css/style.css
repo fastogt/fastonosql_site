@@ -74,6 +74,7 @@ h6 {
 a {
     color: #222;
     text-decoration: underline;
+    outline: none !important;
 }
 
 .csstransitions a {
@@ -737,6 +738,7 @@ F .photocaption {
     color: #fff;
     font-size: 1.25em;
 }
+
 
 /*----------------------------------------------------------------
     Blog & Portfolio
@@ -1641,14 +1643,11 @@ section {
     CTA
 ----------------------------------------------------------------*/
 
-.call-to-action .row-content.buffer {
+.call-to-action {
+    text-align: right;
+    border-top: 1px solid #ccc;
     padding-top: 1%;
     padding-bottom: 1%;
-}
-
-.call-to-action {
-    text-align: center;
-    border-top: 1px solid #ccc;
 }
 
 .call-to-action p {
@@ -3649,6 +3648,7 @@ only screen and (max-width: 48em) {
     .carousel-item img {
         max-width: 12.5em;
     }
+
     .about-us img {
         max-width: 20em;
         width: 100%;
