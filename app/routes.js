@@ -25,7 +25,7 @@ function checkIsValidDomain(domain) {
 }
 
 module.exports = function (app, passport, nev) {
-    var fastSpring = FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
+    var fastSpring = new FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
 
 // normal routes ===============================================================
 
@@ -127,7 +127,8 @@ module.exports = function (app, passport, nev) {
 
                     res.render('profile.ejs', {
                         user: req.user,
-                        message: req.flash('statusProfileMessage')
+                        message: req.flash('statusProfileMessage'),
+                        subscriptions: app.locals.fastspring_config.subscriptions
                     });
                 }).catch(function (error) {
                     console.error('getSubscription: ', error);
@@ -135,7 +136,8 @@ module.exports = function (app, passport, nev) {
         } else {
             res.render('profile.ejs', {
                 user: req.user,
-                message: req.flash('statusProfileMessage')
+                message: req.flash('statusProfileMessage'),
+                subscriptions_list: app.locals.fastspring_config.subscriptions
             });
         }
     });
