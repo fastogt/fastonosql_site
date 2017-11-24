@@ -61,43 +61,193 @@
     <% } %>
 
     <div class="row">
+        <% if (user.enableSubscription()) { %>
+        <div class="row-content clear-after">
+            <div class="container-subscription">
+                <div class="col-sm-3 box-subscription">
+                    <div class="subscription">
+                        <h1 class="title-subscription">FREE</h1>
+                        <p class="price">
+                            0</span>
+                            <span class="price-name">&#36;/m</span>
+                        </p>
+                        <ul class="list-conditions">
+                            <li>
+                                <i class="material-icons item-conditions">storage</i>
+                                <span>8 Databases</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">polymer</i>
+                                <span>Database Instance</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">edit</i>
+                                <span>Key batch editing</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">alarm_on</i>
+                                <span>Real-time atomic editor</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">screen_share</i>
+                                <span>Real-time monitoring</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">search</i>
+                                <span>Key filters</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">data_usage</i>
+                                <span>Data-visualization</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">timer_off</i>
+                                <span>Free forever</span>
+                            </li>
+                        </ul>
+                        <a href="/downloads" class="btn btn-success download btn-subscription">Download</a>
+                    </div>
+                </div>
+                <div class="col-sm-3 box-subscription">
+                    <div class="subscription">
+                        <h1 class="title-subscription">1 MONTH</h1>
+                        <p class="price">
+                            <span data-fsc-item-path="fastonosql-subscription-1-month" data-fsc-item-price></span>
+                            <span class="price-name">&#36;/m</span>
+                        </p>
+                        <ul class="list-conditions">
+                            <li>
+                                <i class="material-icons item-conditions">storage</i>
+                                <span>8 Databases</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">polymer</i>
+                                <span>Database Instance</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">edit</i>
+                                <span>Key batch editing</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">alarm_on</i>
+                                <span>Real-time atomic editor</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">screen_share</i>
+                                <span>Real-time monitoring</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">search</i>
+                                <span>Key filters</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">data_usage</i>
+                                <span>Data-visualization</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">timer_off</i>
+                                <span>Free forever</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">accessibility</i>
+                                <span>Individual builds without limitations</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">build</i>
+                                <span>Support services</span>
+                            </li>
+                        </ul>
+
+                        <form>
+                            <button type="submit" class="btn btn-primary btn-subscription" id="subscription" data-fsc-action="Add,Checkout" data-fsc-item-path-value="fastonosql-subscription-1-month">
+                                Order Subscription
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-3 box-subscription">
+                    <div class="subscription">
+                        <h1 class="title-subscription">1 YEAR</h1>
+                        <p class="price">
+                            <span data-fsc-item-path="fastonosql-subscription-12-month" data-fsc-item-price></span>
+                            <span class="price-name">&#36;/m</span>
+                        </p>
+
+                        <ul class="list-conditions">
+                            <li>
+                                <i class="material-icons item-conditions">storage</i>
+                                <span>8 Databases</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">polymer</i>
+                                <span>Database Instance</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">edit</i>
+                                <span>Key batch editing</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">alarm_on</i>
+                                <span>Real-time atomic editor</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">screen_share</i>
+                                <span>Real-time monitoring</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">search</i>
+                                <span>Key filters</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">data_usage</i>
+                                <span>Data-visualization</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">timer_off</i>
+                                <span>Free forever</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">accessibility</i>
+                                <span>Individual builds without limitations</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">build</i>
+                                <span>Support services</span>
+                            </li>
+                            <li>
+                                <i class="material-icons item-conditions">money_off</i>
+                                <span>You save 20%</span>
+                            </li>
+                        </ul>
+
+                        <form>
+                            <button type="submit" class="btn btn-primary btn-subscription" id="subscription" data-fsc-action="Add,Checkout" data-fsc-item-path-value="fastonosql-subscription-12-month">
+                                Order Subscription
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } else if (user.getSubscriptionState() === 'active') { %>
         <div class="col-sm-4">
             <a href="/downloads" class="btn btn-success download">Download</a>
-            <% if (user.getSubscriptionState() === 'active') { %>
             <form action="/build_installer_request" method="get" class="btn-verification">
                 <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version
                 </button>
             </form>
-            <% } %>
         </div>
         <div class="col-sm-8">
             <div class="row">
                 <div class="col-sm-12 text-right">
-                    <% if (user.enableSubscription()) { %>
-                    <span>
-                    <button type="submit" class="btn btn-primary" id="subscription" data-fsc-action="Add,Checkout"
-                            data-fsc-item-path-value="fastonosql-subscription-1-month"> Order Subscription
-                    </button>
-                    <strong>
-                        <span data-fsc-item-path="fastonosql-subscription-1-month" data-fsc-item-price></span> / 1 Month
-                    </strong>
-                    </span>
-                    <span>
-                    <button type="submit" class="btn btn-primary" id="subscription" data-fsc-action="Add,Checkout"
-                            data-fsc-item-path-value="fastonosql-subscription-12-month"> Order Subscription
-                    </button>
-                    <strong>
-                        <span data-fsc-item-path="fastonosql-subscription-12-month" data-fsc-item-price></span> / 12 Month
-                    </strong>
-                    </span>
-                    <% } else if (user.getSubscriptionState() === 'active') { %>
+                    
                     <form action="/cancel_subscription" method="post">
                         <button type="submit" class="btn btn-primary">Cancel Subscription</button>
                     </form>
-                    <% } %>
                 </div>
             </div>
         </div>
+        <% } %>
     </div>
     <br/>
     <div class="row">
