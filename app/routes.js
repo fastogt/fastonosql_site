@@ -45,6 +45,10 @@ module.exports = function (app, passport, nev) {
     app.get('/build_installer_request', isLoggedIn, function (req, res) {
         var user = req.user;
 
+        if (user.getSubscriptionState() !== 'active') {
+            res.redirect('/profile');
+        }
+
         var walk = function (dir, done) {
             console.log('scan folder: ', dir);
             var results = [];
