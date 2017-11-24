@@ -28,15 +28,15 @@ module.exports = {
         //data_ad_client: 'ca-pub-4299795201353238',
         //data_ad_slot: '1261996191',
 
-        supported_databases: [{'name': 'Redis', 'option': 'BUILD_WITH_REDIS'},
-            {'name': 'Memcached', 'option': 'BUILD_WITH_MEMCACHED'},
-            {'name': 'SSDB', 'option': 'BUILD_WITH_SSDB'},
-            {'name': 'LevelDB', 'option': 'BUILD_WITH_LEVELDB'},
-            {'name': 'RocksDB', 'option': 'BUILD_WITH_ROCKSDB'},
-            {'name': 'LMDB', 'option': 'BUILD_WITH_LMDB'},
-            {'name': 'Unqlite', 'option': 'BUILD_WITH_UNQLITE'},
-            {'name': 'UpscaleDB', 'option': 'BUILD_WITH_UPSCALEDB'},
-            {'name': 'ForestDB', 'option': 'BUILD_WITH_FORESTDB'}]
+        supported_databases: [{'name': 'Redis', 'option': 'BUILD_WITH_REDIS', 'active' : true},
+            {'name': 'Memcached', 'option': 'BUILD_WITH_MEMCACHED', 'active' : true},
+            {'name': 'SSDB', 'option': 'BUILD_WITH_SSDB', 'active' : true},
+            {'name': 'LevelDB', 'option': 'BUILD_WITH_LEVELDB', 'active' : true},
+            {'name': 'RocksDB', 'option': 'BUILD_WITH_ROCKSDB', 'active' : true},
+            {'name': 'LMDB', 'option': 'BUILD_WITH_LMDB', 'active' : true},
+            {'name': 'Unqlite', 'option': 'BUILD_WITH_UNQLITE', 'active' : true},
+            {'name': 'UpscaleDB', 'option': 'BUILD_WITH_UPSCALEDB', 'active' : false},
+            {'name': 'ForestDB', 'option': 'BUILD_WITH_FORESTDB', 'active' : true}]
     },
 
     support: {

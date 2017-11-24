@@ -159,19 +159,23 @@
                     <div role="tabpanel" class="tab-pane" id="linux">
                         <div data-toggle="buttons" class="buttons-row">
                             <label class="btn btn-primary active">
-                                <input type="radio" name="linux" value="ubuntu_x64" data-arch="x86_64" package_type="DEB"
+                                <input type="radio" name="linux" value="ubuntu_x64" data-arch="x86_64"
+                                       package_type="DEB"
                                        id="option4"
                                        autocomplete="off" checked="checked"> Ubuntu x64</label>
                             <label class="btn btn-primary">
-                                <input type="radio" name="linux" value="debian_x64" data-arch="x86_64" package_type="DEB"
+                                <input type="radio" name="linux" value="debian_x64" data-arch="x86_64"
+                                       package_type="DEB"
                                        id="option5"
                                        autocomplete="off"> Debian x64</label>
                             <label class="btn btn-primary">
-                                <input type="radio" name="linux" value="centOS_x64" data-arch="x86_64" package_type="RPM"
+                                <input type="radio" name="linux" value="centOS_x64" data-arch="x86_64"
+                                       package_type="RPM"
                                        id="option6"
                                        autocomplete="off"> CentOS x64</label>
                             <label class="btn btn-primary">
-                                <input type="radio" name="linux" value="fedora_x64" data-arch="x86_64" package_type="RPM"
+                                <input type="radio" name="linux" value="fedora_x64" data-arch="x86_64"
+                                       package_type="RPM"
                                        id="option7"
                                        autocomplete="off"> Fedora x64</label>
                             <label class="btn btn-primary">
@@ -227,8 +231,13 @@
                     <div role="tabpane2" class="tab-pane form-inline" id="advanced">
                         <div>
                             <% for (var i = 0; i < site.supported_databases.length; ++i) { %>
+                            <% if (site.supported_databases[i].active) { %>
                             <input type="checkbox" name="database" value="<%- site.supported_databases[i].name %>"
                                    checked="checked"> <%- site.supported_databases[i].name %></br>
+                            <% } else { %>
+                            <input type="checkbox" name="database"
+                                   value="<%- site.supported_databases[i].name %>"> <%- site.supported_databases[i].name %></br>
+                            <% } %>
                             <% } %>
                         </div>
                     </div>
