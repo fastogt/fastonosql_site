@@ -33,6 +33,11 @@
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
         ga('create', '<%- site.google_analitics_token %>', 'auto');
         ga('send', 'pageview');
+
+        function download(os, platform, package_extension){
+          ga('send', 'event', 'Download', 'Download for ' + os, 'Download Page');
+          location.href = '/downloads/' + os + '/<%= project.name_lowercase %>-<%= project.version %>-'+ platform + package_extension;
+        }
     </script>
 </head>
 <body>
@@ -53,14 +58,14 @@
             </div>
             <!-- version -->
             <p>
-                <a href="/downloads/macosx/<%= project.name_lowercase %>-<%= project.version %>-x86_64.dmg">
-                    64 bit Mac OS X <%= project.version %> Installer (.dmg)
-                </a>
+                <button type="button" id="build_button" class="btn btn-primary"
+                  onclick="download('macosx', 'x86_64', '.dmg')"> 64 bit Mac OS X <%= project.version %> Installer (.dmg)
+                </button>
             </p>
             <p>
-                <a href="/downloads/macosx/<%= project.name_lowercase %>-<%= project.version %>-x86_64.zip">
-                    Application Archive <%= project.version %> (.zip)
-                </a>
+                <button type="button" id="build_button" class="btn btn-primary"
+                  onclick="download('macosx', 'x86_64', '.zip')"> 64 bit Application Archive <%= project.version %> (.zip)
+                </button>
             <p>
         </div>
 
@@ -75,14 +80,14 @@
             </div>
             <!-- version -->
             <p>
-                <a href="/downloads/windows/<%= project.name_lowercase %>-<%= project.version %>-x86_64.exe">
-                    64 bit Windows <%= project.version %> Installer (.exe)
-                </a>
+                <button type="button" id="build_button" class="btn btn-primary"
+                  onclick="download('windows', 'x86_64', '.exe')"> 64 bit Windows <%= project.version %> Installer (.exe)
+                </button>
             </p>
             <p>
-                <a href="/downloads/windows/<%= project.name_lowercase %>-<%= project.version %>-x86_64.zip">
-                    64 bit Application Archive <%= project.version %> (.zip)
-                </a>
+                <button type="button" id="build_button" class="btn btn-primary"
+                  onclick="download('windows', 'x86_64', '.zip')"> 64 bit Application Archive <%= project.version %> (.zip)
+                </button>
             </p>
         </div>
 
@@ -97,19 +102,19 @@
             </div>
             <!-- version -->
             <p>
-                <a href="/downloads/linux/<%= project.name_lowercase %>-<%= project.version %>-x86_64.deb">
-                    Debian/Ubuntu <%= project.version %> Package (.deb)
-                </a>
+                <button type="button" id="build_button" class="btn btn-primary"
+                  onclick="download('linux', 'x86_64', '.deb')"> 64 bit Debian/Ubuntu <%= project.version %> Package (.deb)
+                </button>
             </p>
             <p>
-                <a href="/downloads/linux/<%= project.name_lowercase %>-<%= project.version %>-x86_64.rpm">
-                    Fedora/openSUSE <%= project.version %> Package (.rpm)
-                </a>
+                <button type="button" id="build_button" class="btn btn-primary"
+                  onclick="download('linux', 'x86_64', '.rpm')"> 64 bit Fedora/openSUSE <%= project.version %> Package (.rpm)
+                </button>
             </p>
             <p>
-                <a href="/downloads/linux/<%= project.name_lowercase %>-<%= project.version %>-x86_64.tar.gz">
-                    Application Archive <%= project.version %> (.tar.gz)
-                </a>
+                <button type="button" id="build_button" class="btn btn-primary"
+                  onclick="download('linux', 'x86_64', '.tar.gz')"> 64 bit Application Archive <%= project.version %> (.tar.gz)
+                </button>
             <p>
         </div>
 
@@ -124,9 +129,9 @@
             </div>
             <!-- version -->
             <p>
-                <a href="/downloads/android/<%= project.name_lowercase %>-<%= project.version %>-armeabi-v7a.apk">
-                    Android <%= project.version %> Package (.apk)
-                </a>
+                <button type="button" id="build_button" class="btn btn-primary"
+                  onclick="download('android', 'armeabi-v7a', '.apk')"> Android <%= project.version %> Package (.apk)
+                </button>
             </p>
         </div>
 
@@ -141,9 +146,9 @@
             </div>
             <!-- version -->
             <p>
-                <a href="/downloads/freebsd/<%= project.name_lowercase %>-<%= project.version %>-x86_64.tar.gz">
-                    FreeBSD <%= project.version %> Package (.tar.gz)
-                </a>
+                <button type="button" id="build_button" class="btn btn-primary"
+                  onclick="download('freebsd', 'x86_64', '.tar.gz')"> 64 bit FreeBSD <%= project.version %> Package (.tar.gz)
+                </button>
             </p>
         </div>
 
