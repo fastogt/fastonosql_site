@@ -741,6 +741,81 @@ F .photocaption {
 
 
 /*----------------------------------------------------------------
+    Subscription
+----------------------------------------------------------------*/
+
+.container-subscription {
+    text-align: center;
+}
+
+.box-subscription {
+    margin-top: 3%;
+    margin-bottom: 3%;
+    padding: 0 0.5em;
+    display: inline-block;
+    float: none;
+}
+
+.subscription {
+    background: #fff;
+    box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    padding: 1em;
+    width: 100%;
+}
+
+.title-subscription {
+    color: #b41D1D;
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.price {
+    color: #484646;
+    margin: 0;
+    font-size: 3em;
+    line-height: 1.5;
+}
+
+.price .price-name {
+    font-size: 0.4em;
+}
+
+.list-conditions {
+    list-style-type: none;
+    color: #666666;
+    font-size: .85em;
+    font-weight: 400;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+.list-conditions li {
+    border-bottom: 1px solid #e6e6e6;
+    padding: 0.62em 0;
+    font-size: 0.85em;
+}
+
+.list-conditions li:nth-last-child(1) {
+    border-bottom: none;
+}
+
+.item-conditions {
+    vertical-align: bottom;
+    margin-right: 0.3em;
+}
+
+.btn-subscription {
+    margin: 1em 0;
+    width: 12em;
+    padding: 0.6em;
+    text-decoration: none;
+}
+
+
+/*----------------------------------------------------------------
     Blog & Portfolio
 ----------------------------------------------------------------*/
 
@@ -3648,7 +3723,6 @@ only screen and (max-width: 48em) {
     .carousel-item img {
         max-width: 12.5em;
     }
-
     .about-us img {
         max-width: 20em;
         width: 100%;
