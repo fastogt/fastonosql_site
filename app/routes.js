@@ -127,8 +127,7 @@ module.exports = function (app, passport, nev) {
 
                     res.render('profile.ejs', {
                         user: req.user,
-                        message: req.flash('statusProfileMessage'),
-                        subscriptions: app.locals.fastspring_config.subscriptions
+                        message: req.flash('statusProfileMessage')
                     });
                 }).catch(function (error) {
                     console.error('getSubscription: ', error);
@@ -136,8 +135,7 @@ module.exports = function (app, passport, nev) {
         } else {
             res.render('profile.ejs', {
                 user: req.user,
-                message: req.flash('statusProfileMessage'),
-                subscriptions_list: app.locals.fastspring_config.subscriptions
+                message: req.flash('statusProfileMessage')
             });
         }
     });

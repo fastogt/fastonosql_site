@@ -38,7 +38,7 @@
      * @param id
      * @returns {string}
      */
-    function getSubscriptionNameById (id) {
+    function getSubscriptionNameById(id) {
         var name = '';
         switch (id) {
             case 'fastonosql-subscription-12-month':
@@ -47,7 +47,8 @@
             case 'fastonosql-subscription-1-month':
                 name = '1 Month';
                 break;
-            default: break;
+            default:
+                break;
         }
         return name;
     }
@@ -94,30 +95,22 @@
             <div class="row">
                 <div class="col-sm-12 text-right">
                     <% if (user.enableSubscription()) { %>
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <select class="form-control" id="subscription-plan" onchange="renderSubscription()">
-                                <% for (var i = 0; i < subscriptions.length; i++) { %>
-                                    <option value="<%=subscriptions[i]%>"><%=getSubscriptionNameById(subscriptions[i])%></option>
-                                <% } %>
-                            </select>
-                        </div>
-                        &nbsp;
-                        <button type="button" class="btn btn-primary" id="subscription" data-fsc-action="Add,Checkout"
-                                data-fsc-item-path-value="">
-                            Order Subscription
-                        </button>
-                        <strong id="subscription-descr">
-                            <% for (var j = 0; j < subscriptions.length; j++) { %>
-                            <span data-subscr="<%=subscriptions[j]%>" class="hide">
-                                <strong data-fsc-item-path="<%=subscriptions[j]%>" data-fsc-item-price></strong>
-                                <% if (subscriptions[j] === 'fastonosql-subscription-12-month') { %>
-                                &nbsp;<strong class="text-danger">YOU SAVE 20%!</strong>
-                                <% } %>
-                            </span>
-                            <% } %>
-                        </strong>
-                    </form>
+                    <span>
+                    <button type="submit" class="btn btn-primary" id="subscription" data-fsc-action="Add,Checkout"
+                            data-fsc-item-path-value="fastonosql-subscription-1-month"> Order Subscription
+                    </button>
+                    <strong>
+                        <span data-fsc-item-path="fastonosql-subscription-1-month" data-fsc-item-price></span> / 1 Month
+                    </strong>
+                    </span>
+                    <span>
+                    <button type="submit" class="btn btn-primary" id="subscription" data-fsc-action="Add,Checkout"
+                            data-fsc-item-path-value="fastonosql-subscription-12-month"> Order Subscription
+                    </button>
+                    <strong>
+                        <span data-fsc-item-path="fastonosql-subscription-12-month" data-fsc-item-price></span> / 12 Month
+                    </strong>
+                    </span>
                     <% } else if (user.getSubscriptionState() === 'active') { %>
                     <form action="/cancel_subscription" method="post">
                         <button type="submit" class="btn btn-primary">Cancel Subscription</button>
@@ -174,9 +167,6 @@
 </div>
 <!-- Fastspring actions -->
 <script>
-    /* pre-load */
-    renderSubscription ();
-
     /**
      * Render alert block
      * @param {String} status - options: success, info, warning, danger
@@ -204,19 +194,6 @@
             status === 'success'
             && window.location.reload();
         }, 3000);
-    }
-
-    /**
-     * Change handler for subscription
-     */
-    function renderSubscription () {
-      var id = document.getElementById("subscription-plan").value;
-      document.getElementById("subscription").setAttribute('data-fsc-item-path-value', id);
-
-      document.querySelectorAll("#subscription-descr span").forEach(function (el) {
-          el.classList.add('hide');
-      });
-      document.querySelector('#subscription-descr [data-subscr=' + id + ']').classList.remove('hide');
     }
 
     function onPopupClose(data) {
