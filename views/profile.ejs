@@ -239,7 +239,7 @@
         <div class="col-sm-4">
             <a href="/downloads" class="btn btn-success download">Download</a>
             <form action="/build_installer_request" method="get" class="btn-verification">
-                <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version </button>
+                <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version</button>
             </form>
             <a href="skype:<%- author.contact_skype %>"><%- author.contact_skype %></a>
             <a href="mailto:<%- author.contact_mail %>"><%- author.contact_mail %></a>
@@ -287,9 +287,11 @@
             We need your <strong>support</strong>, <strong>understanding</strong>, <strong>feedbacks</strong>.
             In order to develop we are introducing <strong>paid subscriptions for users</strong>.</br>
 
+            <span style="color:red">
             <h3>
                 The subscription gives access to:
                 <ul>
+                    <li>Last stable version, unsubscribed users can download only previous release version.</li>
                     <li>Individual builds,
                         <strong>
                             <a href="https://github.com/fastogt/fastonosql/wiki/Individual-builds"> without
@@ -301,6 +303,7 @@
                     </li>
                 </ul>
             </h3>
+            </span>
 
             <h3>Our team strongly believe in the project and we subscribe with you too.</h3>
 
