@@ -82,7 +82,7 @@ app.locals.project = {
 app.locals.author = {
     name: public_settings_config.support.name,
     contact_mail: public_settings_config.support.contact_mail,
-    contact_skype: public_settings_config.support.contact_skype,
+    contact_skype: public_settings_config.support.contact_skype
 };
 app.locals.company = {
     name: public_settings_config.company.name,

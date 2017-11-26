@@ -143,7 +143,6 @@ module.exports = function (app, passport, nev) {
     // SUBSCRIPTION =============================
     app.post('/subscription', isLoggedIn, function (req, res) {
         var user = req.user;
-
         if (user.enableSubscription()) {
             var body = JSON.parse(req.body.data);
 
@@ -185,24 +184,20 @@ module.exports = function (app, passport, nev) {
     })
 
     // CANCEL_SUBSCRIPTION ==============================
-    app.post('/cancel_subscription', isLoggedIn, function (req, res) {
+    app.post('/cancel_subscription', isSubscribed, function (req, res) {
         var user = req.user;
+        var subscr = user.getSubscription();
+        fastSpring.cancelSubscription(subscr.subscriptionId)
+            .then(function (data) {
+                var answer = JSON.parse(data);
 
-        if (user.getSubscriptionState() === 'active') {
-            var subscr = user.getSubscription();
-
-            fastSpring.cancelSubscription(subscr.subscriptionId)
-                .then(function (data) {
-                    var answer = JSON.parse(data);
-
-                    if (answer.result === 'error') {
-                        throw new Error('Cancel subscription was failed.');
-                    }
-                    res.redirect('/profile');
-                }).catch(function (error) {
-                console.log('cancelSubscription: ', error);
-            });
-        }
+                if (answer.result === 'error') {
+                    throw new Error('Cancel subscription was failed.');
+                }
+                res.redirect('/profile');
+            }).catch(function (error) {
+            console.log('cancelSubscription: ', error);
+        });
     })
 
     // LOGOUT ==============================
