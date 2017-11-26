@@ -41,7 +41,8 @@ module.exports = {
 
     support: {
         author: 'Topilski Alexandr',
-        contact: 'support@fastogt.com'
+        contact_mail: 'support@fastogt.com',
+        contact_skype: 'support.fastogt'
     },
 
     company: {

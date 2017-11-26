@@ -56,6 +56,7 @@
     <% if (message.length > 0) { %>
     <div class="alert alert-danger"><%= message %></div>
     <% } %>
+
     <% if (user.getSubscriptionState() && user.getSubscriptionState() !== 'active') { %>
     <div class="alert alert-warning">Your subscription is <%= user.getSubscriptionState() %>. Resubscribe or contact the
         administrator.
@@ -228,9 +229,10 @@
         <div class="col-sm-4">
             <a href="/downloads" class="btn btn-success download">Download</a>
             <form action="/build_installer_request" method="get" class="btn-verification">
-                <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version
-                </button>
+                <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version </button>
             </form>
+            <a href="skype:<%- author.contact_skype %>"><%- author.contact_skype %></a>
+            <a href="mailto:<%- author.contact_mail %>"><%- author.contact_mail %></a>
         </div>
         <div class="col-sm-8">
             <div class="row">

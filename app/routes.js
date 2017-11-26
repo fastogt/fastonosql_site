@@ -42,7 +42,7 @@ module.exports = function (app, passport, nev) {
         res.render('downloads.ejs');
     });
 
-    app.get('/build_installer_request', [isLoggedIn, isSubscribed], function (req, res) {
+    app.get('/build_installer_request', isSubscribed, function (req, res) {
         var user = req.user;
 
         var walk = function (dir, done) {
@@ -100,7 +100,7 @@ module.exports = function (app, passport, nev) {
     });
 
     // CLEAR user packages
-    app.post('/clear_packages', isLoggedIn, function (req, res) {
+    app.post('/clear_packages', isSubscribed, function (req, res) {
         var user = req.user;
         deleteFolderRecursive(app.locals.site.users_directory + '/' + user.email);
         res.render('build_installer_request.ejs', {
@@ -130,8 +130,8 @@ module.exports = function (app, passport, nev) {
                         message: req.flash('statusProfileMessage')
                     });
                 }).catch(function (error) {
-                    console.error('getSubscription: ', error);
-                });
+                console.error('getSubscription: ', error);
+            });
         } else {
             res.render('profile.ejs', {
                 user: req.user,
@@ -172,9 +172,9 @@ module.exports = function (app, passport, nev) {
 
                         res.status(200).send('SUCCESS: Subscription success!');
                     }).catch(function (error) {
-                        console.error('getOrder: ', error);
-                        return res.status(500).send('ERROR: Subscription was failed!');
-                    });
+                    console.error('getOrder: ', error);
+                    return res.status(500).send('ERROR: Subscription was failed!');
+                });
                 // =====
             } else {
                 return res.status(400).send('ERROR: Invalid data!');
@@ -200,8 +200,8 @@ module.exports = function (app, passport, nev) {
                     }
                     res.redirect('/profile');
                 }).catch(function (error) {
-                    console.log('cancelSubscription: ', error);
-                });
+                console.log('cancelSubscription: ', error);
+            });
         }
     })
 
@@ -285,8 +285,9 @@ function isLoggedIn(req, res, next) {
 }
 
 function isSubscribed(req, res, next) {
-    req.user.getSubscriptionState() === 'active'
-        && next();
+    if (req.user.getSubscriptionState() === 'active') {
+        return next();
+    }
 
     res.redirect('/profile');
 }
