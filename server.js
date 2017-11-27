@@ -76,9 +76,9 @@ app.locals.site = {
 app.locals.project = {
     name: public_settings_config.project.name,
     name_lowercase: public_settings_config.project.name_lowercase,
-    anonim_version: public_settings_config.site.anonim_version,
-    registered_version: public_settings_config.site.registered_version,
-    subscribed_version: public_settings_config.site.subscribed_version
+    anonim_version: public_settings_config.project.anonim_version,
+    registered_version: public_settings_config.project.registered_version,
+    subscribed_version: public_settings_config.project.subscribed_version
 };
 app.locals.author = {
     name: public_settings_config.support.name,

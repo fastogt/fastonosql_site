@@ -246,7 +246,7 @@
         </div>
         <% } else if (user.getSubscriptionState() === 'active') { %>
         <div class="col-sm-4">
-            <a href="/downloads" class="btn btn-success download">Download</a>
+            <a href="/subscribed_users_downloads" class="btn btn-success download">Download</a>
             <form action="/build_installer_request" method="get" class="btn-verification">
                 <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version</button>
             </form>
