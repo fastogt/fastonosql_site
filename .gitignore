@@ -2,6 +2,8 @@
 config/database.js
 config/auth.js
 config/settings.js
-public/downloads/*
+public/anonim_users_downloads/*
+public/registered_users_downloads/*
+public/subscribed_users_downloads/*
 node_modules/
 npm-debug.log
