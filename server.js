@@ -68,10 +68,9 @@ app.locals.site = {
     support_email_service_host: settings_config.support_email_service_host,
     support_email_service_port: settings_config.support_email_service_port,
     support_email_service_secure: settings_config.support_email_service_secure,
+    supported_databases: public_settings_config.site.supported_databases,
     support_email: settings_config.support_email,
-    support_email_password: settings_config.support_email_password,
-
-    supported_databases: public_settings_config.site.supported_databases
+    support_email_password: settings_config.support_email_password
 };
 app.locals.project = {
     name: public_settings_config.project.name,
