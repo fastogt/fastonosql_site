@@ -38,7 +38,7 @@ module.exports = function (app, passport, nev) {
         res.render('help.ejs');
     });
 
-    app.get('/anonims_users_downloads', function (req, res) {
+    app.get('/anonim_users_downloads', function (req, res) {
         res.render('anonims_users_downloads.ejs');
     });
 
