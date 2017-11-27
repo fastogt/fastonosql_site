@@ -39,7 +39,7 @@ module.exports = function (app, passport, nev) {
     });
 
     app.get('/anonim_users_downloads', function (req, res) {
-        res.render('anonims_users_downloads.ejs');
+        res.render('anonim_users_downloads.ejs');
     });
 
     app.get('/registered_users_downloads', isLoggedIn, function (req, res) {
