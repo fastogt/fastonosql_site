@@ -3,8 +3,9 @@ module.exports = {
     project: {
         name: 'FastoNoSQL',
         name_lowercase: 'fastonosql',
-        version: '1.11.0',
-        version_type: 'release'
+        anonim_version: '1.10.0',
+        registered_version: '1.11.0',
+        subscribed_version: '1.12.0'
     },
 
     site: {
