@@ -35,7 +35,7 @@
         ga('send', 'pageview');
 
         function download(os, platform, package_extension) {
-            ga('send', 'event', 'Download', 'Registerd user download for ' + os, 'Download Page');
+            ga('send', 'event', 'Download', 'Registered user download for ' + os, 'Download Page');
             location.href = '/registered_users_downloads/' + os + '/<%= project.name_lowercase %>-<%= project.registered_version %>-' + platform + package_extension;
         }
     </script>
