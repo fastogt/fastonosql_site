@@ -12,7 +12,7 @@ module.exports = {
         name: 'FastoNoSQL',
         version: '1.0.0',
         domain: 'https://fastonosql.com',
-        keywords: 'FastoNoSQL, GUI Manager, Redis GUI, Memcached GUI, SSDB GUI, LevelDB GUI, RocksDB GUI, LMDB GUI, Unqlite GUI, UpscaleDB GUI, ForestDB GUI',
+        keywords: 'fastonosql, nosql, gui, manager, redis, client, memcached, ssdb, leveldb, rocksdb, lmdb, unqlite, upscaledb, forestdb, admin, tool',
         description: 'FastoNoSQL it is GUI platform for NoSQL databases.',
         small_description: 'FastoNoSQL - cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, UpscaleDB, Unqlite and ForestDB databases.',
         large_description: 'FastoNoSQL — is a cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, UpscaleDB, Unqlite and ForestDB databases(i.e. Admin GUI Client). Our Desktop Client works on the most amount of Linux systems, also on Windows, Mac OS X, FreeBSD and Android platforms.',
