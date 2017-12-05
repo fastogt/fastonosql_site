@@ -5,7 +5,7 @@ module.exports = {
         name_lowercase: 'fastonosql',
         anonim_version: '1.10.0',
         registered_version: '1.11.0',
-        subscribed_version: '1.12.0'
+        subscribed_version: '1.13.0'
     },
 
     site: {
