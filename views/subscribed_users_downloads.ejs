@@ -36,7 +36,7 @@
 
         function download(os, platform, package_extension) {
             ga('send', 'event', 'Download', 'Subscribed user download for ' + os, 'Download Page');
-            location.href = '/subscribed_users_downloads/' + os + '/<%= project.name_lowercase %>-<%= project.subscribed_version %>-' + platform + package_extension;
+            location.href = '/subscribed_users_downloads/' + os + '/<%= project.name_lowercase %>-<%= project.version %>-' + platform + package_extension;
         }
     </script>
 </head>
@@ -51,21 +51,21 @@
                 <div class="col-md-12">
                     <h3>
                         <img src="/images/macosx.png" alt="" title="">
-                        <%= project.name %> <%= project.subscribed_version %> <span class="dowm-os">For Mac OS X:</span>
+                        <%= project.name %> <%= project.version %> <span class="dowm-os">For Mac OS X:</span>
                     </h3>
                 </div>
             </div>
             <!-- version -->
             <p>
                 <button type="button" id="build_button" class="btn btn-primary"
-                        onclick="download('macosx', 'x86_64', '.dmg')"> 64 bit Mac OS X <%= project.subscribed_version %> Installer
+                        onclick="download('macosx', 'x86_64', '.dmg')"> 64 bit Mac OS X <%= project.version %> Installer
                     (.dmg)
                 </button>
             </p>
             <p>
                 <button type="button" id="build_button" class="btn btn-primary"
                         onclick="download('macosx', 'x86_64', '.zip')"> 64 bit Application
-                    Archive <%= project.subscribed_version %> (.zip)
+                    Archive <%= project.version %> (.zip)
                 </button>
             <p>
         </div>
@@ -75,21 +75,21 @@
                 <div class="col-md-12">
                     <h3>
                         <img src="/images/windows.png" alt="" title="">
-                        <%= project.name %> <%= project.subscribed_version %> <span class="dowm-os">For Windows:</span>
+                        <%= project.name %> <%= project.version %> <span class="dowm-os">For Windows:</span>
                     </h3>
                 </div>
             </div>
             <!-- version -->
             <p>
                 <button type="button" id="build_button" class="btn btn-primary"
-                        onclick="download('windows', 'x86_64', '.exe')"> 64 bit Windows <%= project.subscribed_version %> Installer
+                        onclick="download('windows', 'x86_64', '.exe')"> 64 bit Windows <%= project.version %> Installer
                     (.exe)
                 </button>
             </p>
             <p>
                 <button type="button" id="build_button" class="btn btn-primary"
                         onclick="download('windows', 'x86_64', '.zip')"> 64 bit Application
-                    Archive <%= project.subscribed_version %> (.zip)
+                    Archive <%= project.version %> (.zip)
                 </button>
             </p>
         </div>
@@ -99,27 +99,27 @@
                 <div class="col-md-12">
                     <h3>
                         <img src="/images/linux.png" alt="" title="">
-                        <%= project.name %> <%= project.subscribed_version %> <span class="dowm-os">For Linux:</span>
+                        <%= project.name %> <%= project.version %> <span class="dowm-os">For Linux:</span>
                     </h3>
                 </div>
             </div>
             <!-- version -->
             <p>
                 <button type="button" id="build_button" class="btn btn-primary"
-                        onclick="download('linux', 'x86_64', '.deb')"> 64 bit Debian/Ubuntu <%= project.subscribed_version %>
+                        onclick="download('linux', 'x86_64', '.deb')"> 64 bit Debian/Ubuntu <%= project.version %>
                     Package (.deb)
                 </button>
             </p>
             <p>
                 <button type="button" id="build_button" class="btn btn-primary"
-                        onclick="download('linux', 'x86_64', '.rpm')"> 64 bit Fedora/openSUSE <%= project.subscribed_version %>
+                        onclick="download('linux', 'x86_64', '.rpm')"> 64 bit Fedora/openSUSE <%= project.version %>
                     Package (.rpm)
                 </button>
             </p>
             <p>
                 <button type="button" id="build_button" class="btn btn-primary"
                         onclick="download('linux', 'x86_64', '.tar.gz')"> 64 bit Application
-                    Archive <%= project.subscribed_version %> (.tar.gz)
+                    Archive <%= project.version %> (.tar.gz)
                 </button>
             <p>
         </div>
@@ -129,14 +129,14 @@
                 <div class="col-md-12">
                     <h3>
                         <img src="/images/android.png" alt="" title="">
-                        <%= project.name %> <%= project.subscribed_version %> <span class="dowm-os">For Android:</span>
+                        <%= project.name %> <%= project.version %> <span class="dowm-os">For Android:</span>
                     </h3>
                 </div>
             </div>
             <!-- version -->
             <p>
                 <button type="button" id="build_button" class="btn btn-primary"
-                        onclick="download('android', 'armeabi-v7a', '.apk')"> Android <%= project.subscribed_version %> Package
+                        onclick="download('android', 'armeabi-v7a', '.apk')"> Android <%= project.version %> Package
                     (.apk)
                 </button>
             </p>
@@ -147,14 +147,14 @@
                 <div class="col-md-12">
                     <h3>
                         <img src="/images/freebsd.png" alt="" title="">
-                        <%= project.name %> <%= project.subscribed_version %> <span class="dowm-os">For FreeBSD:</span>
+                        <%= project.name %> <%= project.version %> <span class="dowm-os">For FreeBSD:</span>
                     </h3>
                 </div>
             </div>
             <!-- version -->
             <p>
                 <button type="button" id="build_button" class="btn btn-primary"
-                        onclick="download('freebsd', 'x86_64', '.tar.gz')"> 64 bit FreeBSD <%= project.subscribed_version %>
+                        onclick="download('freebsd', 'x86_64', '.tar.gz')"> 64 bit FreeBSD <%= project.version %>
                     Package (.tar.gz)
                 </button>
             </p>

@@ -36,7 +36,7 @@
 
         function download(os, platform, package_extension) {
             ga('send', 'event', 'Download', 'Anonim user download for ' + os, 'Download Page');
-            location.href = '/anonim_users_downloads/' + os + '/<%= project.name_lowercase %>-<%= project.anonim_version %>-' + platform + package_extension;
+            location.href = '/trial_users_downloads/' + os + '/<%= project.name_lowercase %>-<%= project.version %>-' + platform + package_extension;
         }
     </script>
 </head>
@@ -80,14 +80,14 @@
         <div class="container">
             <h3>
                 <p>Download <%= site.small_description %></p>
-                <span style="color:red">After registration you can get a new version, much better than before, in current page you can download some previous stable version.</span>
+                <span style="color:red">This is trial version, after subscription you can get unlimited version.</span>
             </h3>
             <div class="row">
                 <div class="row">
                     <div class="col-md-12">
                         <h3>
                             <img src="/images/macosx.png" alt="" title="">
-                            <%= project.name %> <%= project.anonim_version %> <span
+                            <%= project.name %> <%= project.version %> <span
                                     class="dowm-os">For Mac OS X:</span>
                         </h3>
                     </div>
@@ -96,7 +96,7 @@
                 <p>
                     <button type="button" id="build_button" class="btn btn-primary"
                             onclick="download('macosx', 'x86_64', '.dmg')"> 64 bit Mac OS
-                        X <%= project.anonim_version %>
+                        X <%= project.version %>
                         Installer
                         (.dmg)
                     </button>
@@ -104,7 +104,7 @@
                 <p>
                     <button type="button" id="build_button" class="btn btn-primary"
                             onclick="download('macosx', 'x86_64', '.zip')"> 64 bit Application
-                        Archive <%= project.anonim_version %> (.zip)
+                        Archive <%= project.version %> (.zip)
                     </button>
                 <p>
             </div>
@@ -114,7 +114,7 @@
                     <div class="col-md-12">
                         <h3>
                             <img src="/images/windows.png" alt="" title="">
-                            <%= project.name %> <%= project.anonim_version %> <span
+                            <%= project.name %> <%= project.version %> <span
                                     class="dowm-os">For Windows:</span>
                         </h3>
                     </div>
@@ -123,7 +123,7 @@
                 <p>
                     <button type="button" id="build_button" class="btn btn-primary"
                             onclick="download('windows', 'x86_64', '.exe')"> 64 bit
-                        Windows <%= project.anonim_version %>
+                        Windows <%= project.version %>
                         Installer
                         (.exe)
                     </button>
@@ -131,7 +131,7 @@
                 <p>
                     <button type="button" id="build_button" class="btn btn-primary"
                             onclick="download('windows', 'x86_64', '.zip')"> 64 bit Application
-                        Archive <%= project.anonim_version %> (.zip)
+                        Archive <%= project.version %> (.zip)
                     </button>
                 </p>
             </div>
@@ -141,7 +141,7 @@
                     <div class="col-md-12">
                         <h3>
                             <img src="/images/linux.png" alt="" title="">
-                            <%= project.name %> <%= project.anonim_version %> <span
+                            <%= project.name %> <%= project.version %> <span
                                     class="dowm-os">For Linux:</span>
                         </h3>
                     </div>
@@ -150,21 +150,21 @@
                 <p>
                     <button type="button" id="build_button" class="btn btn-primary"
                             onclick="download('linux', 'x86_64', '.deb')"> 64 bit
-                        Debian/Ubuntu <%= project.anonim_version %>
+                        Debian/Ubuntu <%= project.version %>
                         Package (.deb)
                     </button>
                 </p>
                 <p>
                     <button type="button" id="build_button" class="btn btn-primary"
                             onclick="download('linux', 'x86_64', '.rpm')"> 64 bit
-                        Fedora/openSUSE <%= project.anonim_version %>
+                        Fedora/openSUSE <%= project.version %>
                         Package (.rpm)
                     </button>
                 </p>
                 <p>
                     <button type="button" id="build_button" class="btn btn-primary"
                             onclick="download('linux', 'x86_64', '.tar.gz')"> 64 bit Application
-                        Archive <%= project.anonim_version %> (.tar.gz)
+                        Archive <%= project.version %> (.tar.gz)
                     </button>
                 <p>
             </div>
@@ -174,7 +174,7 @@
                     <div class="col-md-12">
                         <h3>
                             <img src="/images/android.png" alt="" title="">
-                            <%= project.name %> <%= project.anonim_version %> <span
+                            <%= project.name %> <%= project.version %> <span
                                     class="dowm-os">For Android:</span>
                         </h3>
                     </div>
@@ -183,7 +183,7 @@
                 <p>
                     <button type="button" id="build_button" class="btn btn-primary"
                             onclick="download('android', 'armeabi-v7a', '.apk')">
-                        Android <%= project.anonim_version %>
+                        Android <%= project.version %>
                         Package
                         (.apk)
                     </button>
@@ -195,7 +195,7 @@
                     <div class="col-md-12">
                         <h3>
                             <img src="/images/freebsd.png" alt="" title="">
-                            <%= project.name %> <%= project.anonim_version %> <span
+                            <%= project.name %> <%= project.version %> <span
                                     class="dowm-os">For FreeBSD:</span>
                         </h3>
                     </div>
@@ -204,7 +204,7 @@
                 <p>
                     <button type="button" id="build_button" class="btn btn-primary"
                             onclick="download('freebsd', 'x86_64', '.tar.gz')"> 64 bit
-                        FreeBSD <%= project.anonim_version %>
+                        FreeBSD <%= project.version %>
                         Package (.tar.gz)
                     </button>
                 </p>
