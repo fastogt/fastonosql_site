@@ -1,6 +1,6 @@
 var amqp = require('amqp')
 
-const TIMEOUT = 10 * 60000; //time to wait for response in ms
+const TIMEOUT = 20 * 60000; //time to wait for response in ms
 const CONTENT_TYPE = 'application/json';
 const CONTENT_ENCODING = 'utf-8';
 
