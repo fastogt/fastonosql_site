@@ -38,6 +38,10 @@ module.exports = function (app, passport, nev) {
         res.render('help.ejs');
     });
 
+    app.get('/private_policy', function (req, res) {
+        res.render('private_policy.ejs');
+    });
+
     app.get('/anonim_users_downloads', function (req, res) {
         res.render('anonim_users_downloads.ejs');
         //res.render('login.ejs', {message: req.flash('loginMessage')});
