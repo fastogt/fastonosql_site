@@ -42,6 +42,10 @@ module.exports = function (app, passport, nev) {
         res.render('private_policy.ejs');
     });
 
+    app.get('/term_of_use', function (req, res) {
+        res.render('term_of_use.ejs');
+    });
+
     app.get('/anonim_users_downloads', function (req, res) {
         res.render('anonim_users_downloads.ejs');
         //res.render('login.ejs', {message: req.flash('loginMessage')});
