@@ -26,6 +26,7 @@ var flash = require('connect-flash');
 var amqp = require('amqp');
 var mkdirp = require('mkdirp');
 const util = require('util');
+var net = require('net');
 
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -75,7 +76,9 @@ app.locals.site = {
 app.locals.project = {
     name: public_settings_config.project.name,
     name_lowercase: public_settings_config.project.name_lowercase,
-    version: public_settings_config.project.version
+    version: public_settings_config.project.version,
+    port: settings_config.app_port,
+    domain: public_settings_config.project.domain
 };
 app.locals.author = {
     name: public_settings_config.support.name,
@@ -280,3 +283,27 @@ require('./app/routes.js')(app, passport, nev); // load our routes and pass in o
 app.listen(port);
 console.log('Http server ready for requests');
 server.listen(app.locals.back_end.socketio_port);
+
+var application_server = net.createServer(function (socket) {
+    socket.on('data', function (data) {
+        utf_data = data.toString('utf8');
+        console.log(utf_data);
+        if (utf_data === 'VERSION') {
+            socket.write(app.locals.project.version);
+            socket.end();
+            socket.destroy();
+        } else {
+            socket.end();
+            socket.destroy();
+        }
+    });
+
+    socket.on("error", function (error) {
+        console.log("error: " + error);
+    });
+
+    socket.on("close", function () {
+        console.log("client socket closed");
+    });
+});
+application_server.listen(app.locals.project.port, app.locals.project.domain);
