@@ -100,7 +100,7 @@ app.locals.back_end = {
 app.locals.fastspring_config = {
     login: settings_config.fastspring_login,
     password: settings_config.fastspring_password
-}
+};
 
 // rabbitmq
 var rabbit_connection = amqp.createConnection({
@@ -299,11 +299,17 @@ var application_server = net.createServer(function (socket) {
     });
 
     socket.on("error", function (error) {
-        console.log("error: " + error);
+        console.log("error: ", error);
     });
 
     socket.on("close", function () {
-        console.log("client socket closed");
     });
+});
+application_server.on("error", function (error) {
+    console.error("error: ", error);
+});
+
+application_server.on("ready", function () {
+    console.log('APP server ready for requests');
 });
 application_server.listen(app.locals.project.port, app.locals.project.domain);
