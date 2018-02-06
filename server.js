@@ -284,8 +284,20 @@ app.listen(port);
 console.log('Http server ready for requests');
 server.listen(app.locals.back_end.socketio_port);
 
-var application_server = net.createServer(function (socket) {
-    socket.on('data', function (data) {
+var application_server = net.createServer(function (socket);
+server.on('connection', handleConnection);
+
+function handleConnection(conn) {
+    var remoteAddress = conn.remoteAddress + ':' + conn.remotePort;
+    console.log('new client connection from %s', remoteAddress);
+
+    conn.setEncoding('utf8');
+
+    conn.on('data', onConnData);
+    conn.once('close', onConnClose);
+    conn.on('error', onConnError);
+
+    function onConnData(data) {
         utf_data = data.toString('utf8');
         console.log(utf_data);
         if (utf_data === 'VERSION') {
@@ -296,20 +308,17 @@ var application_server = net.createServer(function (socket) {
             socket.end();
             socket.destroy();
         }
-    });
+    }
 
-    socket.on("error", function (error) {
-        console.log("error: ", error);
-    });
+    function onConnClose() {
+        console.log('connection from %s closed', remoteAddress);
+    }
 
-    socket.on("close", function () {
-    });
-});
-application_server.on("error", function (error) {
-    console.error("error: ", error);
-});
+    function onConnError(err) {
+        console.log('Connection %s error: %s', remoteAddress, err.message);
+    }
+}
 
-application_server.on("ready", function () {
-    console.log('APP server ready for requests');
+application_server.listen(app.locals.project.port, app.locals.project.domain, function () {
+    console.log('server listening to %j', application_server.address());
 });
-application_server.listen(app.locals.project.port, app.locals.project.domain);
