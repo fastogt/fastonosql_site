@@ -292,13 +292,14 @@ function onClientConnected(sock) {
     sock.setEncoding('utf8');
 
     sock.on('data', function (data) {
+        console.log('%s data: %s', remoteAddress, data);
         if (data === 'VERSION') {
-            socket.write(app.locals.project.version);
-            socket.end();
-            socket.destroy();
+            sock.write(app.locals.project.version);
+            sock.end();
+            sock.destroy();
         } else {
-            socket.end();
-            socket.destroy();
+            sock.end();
+            sock.destroy();
         }
     });
     sock.on('close', function () {
