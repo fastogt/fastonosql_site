@@ -284,7 +284,7 @@ app.listen(port);
 console.log('Http server ready for requests');
 server.listen(app.locals.back_end.socketio_port);
 
-var application_server = net.createServer(function (socket);
+var application_server = net.createServer();
 server.on('connection', handleConnection);
 
 function handleConnection(conn) {
@@ -298,9 +298,8 @@ function handleConnection(conn) {
     conn.on('error', onConnError);
 
     function onConnData(data) {
-        utf_data = data.toString('utf8');
-        console.log(utf_data);
-        if (utf_data === 'VERSION') {
+        console.log(data);
+        if (data === 'VERSION') {
             socket.write(app.locals.project.version);
             socket.end();
             socket.destroy();
