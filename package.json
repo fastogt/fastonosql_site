@@ -1,28 +1,28 @@
 {
-  "name": "node-authentication",
+  "name": "fastonosql_site",
   "main": "server.js",
-  "dependencies" : {
-    "express" : "latest",
-    "ejs" : "latest",
+  "dependencies": {
+    "express": "latest",
+    "ejs": "latest",
     "ejs-locals": "latest",
-    "mongoose" : "latest",
-    "passport" : "latest",
-    "passport-local" : "latest",
-    "passport-facebook" : "latest",
-    "passport-twitter" : "latest",
-    "passport-google-oauth" : "latest",
-    "connect-flash" : "latest",
-    "crypto" : "latest",
-    "redis" : "latest",
+    "mongoose": "latest",
+    "passport": "latest",
+    "passport-local": "latest",
+    "passport-facebook": "latest",
+    "passport-twitter": "latest",
+    "passport-google-oauth": "latest",
+    "connect-flash": "latest",
+    "crypto": "latest",
+    "redis": "latest",
     "socket.io": "latest",
-    "amqp" : "latest",
-    "mkdirp" : "latest",
-
+    "amqp": "latest",
+    "mkdirp": "latest",
     "morgan": "latest",
     "body-parser": "latest",
     "cookie-parser": "latest",
     "method-override": "latest",
     "express-session": "latest",
-    "email-verification": "latest"
+    "email-verification": "latest",
+    "json-rpc2": "latest"
   }
 }

@@ -26,7 +26,7 @@ var flash = require('connect-flash');
 var amqp = require('amqp');
 var mkdirp = require('mkdirp');
 const util = require('util');
-var net = require('net');
+var json_rpc2 = require('json-rpc2');
 
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -284,34 +284,27 @@ app.listen(port);
 console.log('Http server ready for requests');
 server.listen(app.locals.back_end.socketio_port);
 
-var application_server = net.createServer(onClientConnected);
+var json_rpc2_server = json_rpc2.Server.$create({
+    'websocket': true, // is true by default
+    'headers': { // allow custom headers is empty by default
+        'Access-Control-Allow-Origin': '*'
+    }
+});
 
-function onClientConnected(sock) {
-    var remoteAddress = sock.remoteAddress + ':' + sock.remotePort;
-    console.log('new client connected: %s', remoteAddress);
-    sock.setEncoding('utf8');
-
-    sock.on('data', function (data) {
-        console.log('%s data: %s', remoteAddress, data);
-        if (data === 'VERSION') {
-            sock.write(app.locals.project.version);
-            sock.end();
-            sock.destroy();
-        } else {
-            sock.end();
-            sock.destroy();
-        }
-    });
-    sock.on('close', function () {
-        console.log('connection from %s closed', remoteAddress);
-    });
-    sock.on('error', function (err) {
-        console.log('Connection %s error: %s', remoteAddress, err.message);
-    });
+function version(args, opt, callback) {
+    callback(null, app.locals.project.version);
 }
 
-application_server.listen(app.locals.project.port, app.locals.project.domain, function () {
-    console.log('server listening to %j', application_server.address());
+function statistic(args, opt, callback) {
+    callback(null, 'OK');
+}
+
+json_rpc2_server.expose('version', version);
+json_rpc2_server.expose('statistic', statistic);
+
+// listen creates an HTTP server on localhost only
+json_rpc2_server.listen(app.locals.project.port, app.locals.project.domain, function () {
+    console.log('json_rpc2_server listening to %j', application_server.address());
 });
 
 
