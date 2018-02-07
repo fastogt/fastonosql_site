@@ -287,12 +287,10 @@ server.listen(app.locals.back_end.socketio_port);
 var json_rpc2_server = json_rpc2.Server.$create();
 
 function version(args, opt, callback) {
-    console.log(args);
     callback(null, app.locals.project.version);
 }
 
 function statistic(args, opt, callback) {
-    console.log(args);
     callback(null, 'OK');
 }
 
@@ -300,8 +298,6 @@ json_rpc2_server.expose('version', version);
 json_rpc2_server.expose('statistic', statistic);
 
 // listen creates an HTTP server on localhost only
-json_rpc2_server.listenRaw(app.locals.project.port, app.locals.project.domain, function () {
-    console.log('json_rpc2_server listening to %j', application_server.address());
-});
+json_rpc2_server.listenRaw(app.locals.project.port, app.locals.project.domain);
 
 
