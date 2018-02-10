@@ -3,7 +3,7 @@ module.exports = {
     project: {
         name: 'FastoNoSQL',
         name_lowercase: 'fastonosql',
-        version: '1.16.1',
+        version: '1.16.2',
         domain: 'fastonosql.com'
     },
 
