@@ -291,12 +291,18 @@ function version(args, opt, callback) {
 }
 
 function statistic(args, opt, callback) {
-    console.log(args);
+    console.log("statistic:", args);
+    callback(null, 'OK');
+}
+
+function is_subscribed(args, opt, callback) {
+    console.log("is_subscribed:", args);
     callback(null, 'OK');
 }
 
 json_rpc2_server.expose('version', version);
 json_rpc2_server.expose('statistic', statistic);
+json_rpc2_server.expose('is_subscribed', is_subscribed);
 
 // listen creates an HTTP server on localhost only
 json_rpc2_server.listenRaw(app.locals.project.port, app.locals.project.domain);
