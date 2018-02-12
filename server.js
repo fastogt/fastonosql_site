@@ -45,8 +45,6 @@ var io = require('socket.io');
 var listener = io.listen(server);
 
 // statistic
-var Statistic = require('./app/models/statistic');
-var Project = require('./app/models/project');
 var OperationSystem = require('./app/models/operation_system');
 
 // settings
@@ -298,17 +296,17 @@ function version(args, opt, callback) {
 function statistic(args, opt, callback) {
     console.log("statistic:", args);
     if (args.hasOwnProperty('os') && args.hasOwnProperty('project')) {
-        var os = new OperationSystem({
+        var os = {
             name: args.os.name,
             version: args.os.name,
             arch: args.os.name
-        });
-        var proj = new Project({
+        };
+        var proj = {
             name: args.project.name,
             version: args.project.version,
             arch: args.project.arch,
             exec_count: args.project.exec_count
-        });
+        };
         if (args.project.hasOwnProperty("owner")) {
             proj.owner = args.project.owner;
         }
