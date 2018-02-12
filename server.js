@@ -298,8 +298,8 @@ function statistic(args, opt, callback) {
     if (args.hasOwnProperty('os') && args.hasOwnProperty('project')) {
         var os = {
             name: args.os.name,
-            version: args.os.name,
-            arch: args.os.name
+            version: args.os.version,
+            arch: args.os.arch
         };
         var proj = {
             name: args.project.name,
