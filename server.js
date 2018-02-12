@@ -45,7 +45,7 @@ var io = require('socket.io');
 var listener = io.listen(server);
 
 // statistic
-var OperationSystem = require('./app/models/operation_system');
+var Statistic = require('./app/models/statistic');
 
 // settings
 app.locals.site = {
@@ -310,9 +310,7 @@ function statistic(args, opt, callback) {
         if (args.project.hasOwnProperty("owner")) {
             proj.owner = args.project.owner;
         }
-        var new_stat = new Statistic();
-        new_stat.os = os;
-        new_stat.project = proj;
+        var new_stat = new Statistic({os : os, project:proj});
         new_stat.save(function (err) {
             if (err) {
                 console.error('failed to save statistic request: ', err);
