@@ -10,6 +10,6 @@ var ProjectSchema = mongoose.Schema({
 });
 
 // create the model for users and expose it to our app
-module.exports = ProjectSchema;
+module.exports = mongoose.model('Project', ProjectSchema);
 
 

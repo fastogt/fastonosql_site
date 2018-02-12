@@ -15,6 +15,6 @@ var StatisticSchema = mongoose.Schema({
 });
 
 // create the model for users and expose it to our app
-module.exports = StatisticSchema;
+module.exports = mongoose.model('Statistic', StatisticSchema);
 
 
