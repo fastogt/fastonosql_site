@@ -1,6 +1,4 @@
 // load up the user model
-var User = require('../app/models/user');
-
 var fs = require('fs');
 var path = require('path');
 var FastSpring = require('./fastspring');

@@ -44,6 +44,9 @@ var server = https.createServer({
 var io = require('socket.io');
 var listener = io.listen(server);
 
+// statistic
+var Statistic = require('app/models/statistic');
+
 // settings
 app.locals.site = {
     title: public_settings_config.site.name,
@@ -292,6 +295,18 @@ function version(args, opt, callback) {
 
 function statistic(args, opt, callback) {
     console.log("statistic:", args);
+    if (args.hasOwnProperty('os') && args.hasOwnProperty('project')) {
+        var new_stat = new Statistic();
+        var os = args.os;
+        var proj = args.project;
+        new_stat.os = os;
+        new_stat.project = proj;
+        new_stat.save(function (err) {
+            if (err) {
+                console.error('failed to save statistic request: ', err);
+            }
+        });
+    }
     callback(null, 'OK');
 }
 
@@ -306,5 +321,3 @@ json_rpc2_server.expose('is_subscribed', is_subscribed);
 
 // listen creates an HTTP server on localhost only
 json_rpc2_server.listenRaw(app.locals.project.port, app.locals.project.domain);
-
-

@@ -1,6 +1,6 @@
 var https = require('https')
 
-function FastSpring (login, password) {
+function FastSpring(login, password) {
     var self = this;
 
     this._login = login;
