@@ -296,7 +296,6 @@ function version(args, opt, callback) {
 function statistic(args, opt, callback) {
     console.log("statistic:", args);
     if (args.hasOwnProperty('os') && args.hasOwnProperty('project')) {
-        var new_stat = new Statistic();
         var os = new OperationSystemSchema({
             name: args.os.name,
             version: args.os.name,
@@ -311,8 +310,7 @@ function statistic(args, opt, callback) {
         if (args.project.hasOwnProperty("owner")) {
             proj.owner = args.project.owner;
         }
-        new_stat.os = os;
-        new_stat.project = proj;
+        var new_stat = new Statistic({os: os, project: proj});
         new_stat.save(function (err) {
             if (err) {
                 console.error('failed to save statistic request: ', err);
