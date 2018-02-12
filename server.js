@@ -46,6 +46,8 @@ var listener = io.listen(server);
 
 // statistic
 var Statistic = require('./app/models/statistic');
+var Project = require('./app/models/project');
+var OperationSystem = require('./app/models/operation_system');
 
 // settings
 app.locals.site = {
@@ -296,12 +298,12 @@ function version(args, opt, callback) {
 function statistic(args, opt, callback) {
     console.log("statistic:", args);
     if (args.hasOwnProperty('os') && args.hasOwnProperty('project')) {
-        var os = new OperationSystemSchema({
+        var os = new OperationSystem({
             name: args.os.name,
             version: args.os.name,
             arch: args.os.name
         });
-        var proj = new ProjectSchema({
+        var proj = new Project({
             name: args.project.name,
             version: args.project.version,
             arch: args.project.arch,
