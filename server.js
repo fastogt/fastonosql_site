@@ -325,7 +325,7 @@ function statistic(args, opt, callback) {
         return;
     }
 
-    callback('error', 'invalid arguments');
+    callback('invalid arguments', null);
     return;
 }
 
@@ -337,7 +337,7 @@ function is_subscribed(args, opt, callback) {
     }
 
 
-    callback('error', 'invalid arguments');
+    callback('invalid arguments', null);
     return;
 }
 
