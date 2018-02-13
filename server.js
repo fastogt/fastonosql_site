@@ -45,7 +45,7 @@ var io = require('socket.io');
 var listener = io.listen(server);
 
 // statistic
-var Statistic = mongoose.model("Statistic");
+var Statistic = require('./app/models/statistic');
 
 // settings
 app.locals.site = {
