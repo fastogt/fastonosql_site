@@ -297,34 +297,32 @@ function version(args, opt, callback) {
 }
 
 function statistic(args, opt, callback) {
-    if (!args) {
+    if (!args || !args.hasOwnProperty('os') || !args.hasOwnProperty('project')) {
         callback('invalid arguments', null);
         return;
     }
 
     console.log("statistic:", args);
-    if (args.hasOwnProperty('os') && args.hasOwnProperty('project')) {
-        var os = {
-            name: args.os.name,
-            version: args.os.version,
-            arch: args.os.arch
-        };
-        var proj = {
-            name: args.project.name,
-            version: args.project.version,
-            arch: args.project.arch,
-            exec_count: args.project.exec_count
-        };
-        if (args.project.hasOwnProperty("owner")) {
-            proj.owner = args.project.owner;
-        }
-        var new_stat = new Statistic({os: os, project: proj});
-        new_stat.save(function (err) {
-            if (err) {
-                console.error('failed to save statistic request: ', err);
-            }
-        });
+    var os = {
+        name: args.os.name,
+        version: args.os.version,
+        arch: args.os.arch
+    };
+    var proj = {
+        name: args.project.name,
+        version: args.project.version,
+        arch: args.project.arch,
+        exec_count: args.project.exec_count
+    };
+    if (args.project.hasOwnProperty("owner")) {
+        proj.owner = args.project.owner;
     }
+    var new_stat = new Statistic({os: os, project: proj});
+    new_stat.save(function (err) {
+        if (err) {
+            console.error('failed to save statistic request: ', err);
+        }
+    });
     callback(null, 'OK');
     return;
 }
