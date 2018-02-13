@@ -324,7 +324,6 @@ function statistic(args, opt, callback) {
         }
     });
     callback(null, 'OK');
-    return;
 }
 
 function is_subscribed(args, opt, callback) {
@@ -335,7 +334,6 @@ function is_subscribed(args, opt, callback) {
 
     console.log("is_subscribed:", args);
     callback(null, 'OK');
-    return;
 }
 
 json_rpc2_server.expose('version', version);
