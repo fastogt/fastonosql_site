@@ -257,11 +257,11 @@ module.exports = function (app, passport, nev) {
     app.get('/email-verification/:URL', function (req, res) {
         var url = req.params.URL;
         nev.confirmTempUser(url, function (err, user) {
-            var email = user.email;
-            console.log("confirm message sended to: " + email + ", error: " + err);
             if (err) {
                 return res.status(404).send('ERROR: sending confirmation email FAILED');
             }
+            var email = user.email;
+            console.log("confirm message sended to: " + email + ", error: " + err);
             res.render('after_confirm.ejs');
         });
     });
