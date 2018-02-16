@@ -333,7 +333,25 @@ function is_subscribed(args, opt, callback) {
     }
 
     console.log("is_subscribed:", args);
-    callback(null, 'OK');
+    var mongoose = require('mongoose');
+    var User = mongoose.model("User");
+    User.findOne({'email': email}, function (err, user) {
+        // if there are any errors, return the error
+        if (err) {
+            return callback(err, null);
+        }
+
+        // if no user is found, return the message
+        if (!user) {
+            return callback('User with email:' + user + ' not found.', null);
+        }
+
+        if (!user.validPassword(password)) {
+            return callback('Oops! Wrong password.', null);
+        }
+
+        return callback(null, 'OK');
+    });
 }
 
 json_rpc2_server.expose('version', version);
