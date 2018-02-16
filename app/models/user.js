@@ -28,7 +28,7 @@ userSchema.methods.generateHash = function (password) {
     return hash;
 };
 
-// checking if password is valid
+// checking if hexed password is valid
 userSchema.methods.validHexedPassword = function (hexed_password) {
     return hexed_password === this.password;
 };
@@ -40,7 +40,7 @@ userSchema.methods.validPassword = function (password) {
 };
 
 // enable subscription
-userSchema.methods.enableSubscription = function() {
+userSchema.methods.enableSubscription = function () {
     return (!this.subscription_state || this.subscription_state === 'canceled');
 };
 
@@ -49,12 +49,12 @@ userSchema.methods.getSubscription = function () {
     return this.subscription
         ? JSON.parse(this.subscription)
         : null;
-}
+};
 
 // get subscription state
 userSchema.methods.getSubscriptionState = function () {
     return this.subscription_state;
-}
+};
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);
