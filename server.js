@@ -327,7 +327,7 @@ function statistic(args, opt, callback) {
 }
 
 function is_subscribed(args, opt, callback) {
-    if (!args) {
+    if (!args || !args.hasOwnProperty('email') || !args.hasOwnProperty('password')) {
         callback('invalid arguments', null);
         return;
     }
@@ -335,7 +335,7 @@ function is_subscribed(args, opt, callback) {
     console.log("is_subscribed:", args);
     var mongoose = require('mongoose');
     var User = mongoose.model("User");
-    User.findOne({'email': email}, function (err, user) {
+    User.findOne({'email': args.email}, function (err, user) {
         // if there are any errors, return the error
         if (err) {
             return callback(err, null);
@@ -346,7 +346,7 @@ function is_subscribed(args, opt, callback) {
             return callback('User with email:' + user + ' not found.', null);
         }
 
-        if (!user.validPassword(password)) {
+        if (!user.validPassword(args.password)) {
             return callback('Oops! Wrong password.', null);
         }
 
