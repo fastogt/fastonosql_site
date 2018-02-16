@@ -29,9 +29,14 @@ userSchema.methods.generateHash = function (password) {
 };
 
 // checking if password is valid
+userSchema.methods.validHexedPassword = function (hexed_password) {
+    return hexed_password === this.password;
+};
+
+// checking if password is valid
 userSchema.methods.validPassword = function (password) {
     var hash = crypto.createHash('md5').update(password).digest('hex');
-    return hash === this.password;
+    return validHexedPassword(hash);
 };
 
 // enable subscription

@@ -346,7 +346,7 @@ function is_subscribed(args, opt, callback) {
             return callback('User with email:' + user + ' not found.', null);
         }
 
-        if (!user.validPassword(args.password)) {
+        if (!user.validHexedPassword(args.password)) {
             return callback('Oops! Wrong password.', null);
         }
 
