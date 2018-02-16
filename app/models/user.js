@@ -36,7 +36,7 @@ userSchema.methods.validHexedPassword = function (hexed_password) {
 // checking if password is valid
 userSchema.methods.validPassword = function (password) {
     var hash = crypto.createHash('md5').update(password).digest('hex');
-    return validHexedPassword(hash);
+    return this.validHexedPassword(hash);
 };
 
 // enable subscription
