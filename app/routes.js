@@ -1,4 +1,6 @@
 // load up the user model
+var User = require('../app/models/user');
+
 var fs = require('fs');
 var path = require('path');
 var FastSpring = require('./fastspring');
@@ -53,7 +55,7 @@ module.exports = function (app, passport, nev) {
         res.render('registered_users_downloads.ejs');
     });
 
-    app.get('/subscribed_users_downloads', isSubscribed, function (req, res) {
+    app.get('/subscribed_users_downloads', User.isSubscribed(app, 'active'), function (req, res) {
         res.render('subscribed_users_downloads.ejs');
     });
 
@@ -140,14 +142,16 @@ module.exports = function (app, passport, nev) {
                         }
                     });
 
+                    console.log('Success. Set subscription.');
                     res.render('profile.ejs', {
                         user: req.user,
                         message: req.flash('statusProfileMessage')
                     });
                 }).catch(function (error) {
-                console.error('getSubscription: ', error);
-            });
+                    console.error('getSubscription: ', error);
+                });
         } else {
+            console.error('Not found `subscr`.', subscr);
             res.render('profile.ejs', {
                 user: req.user,
                 message: req.flash('statusProfileMessage')
