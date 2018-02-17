@@ -260,6 +260,11 @@ module.exports = function (app, passport, nev) {
             if (err) {
                 return res.status(404).send('ERROR: sending confirmation email FAILED');
             }
+
+            if (!user) {
+                return res.status(404).send('ERROR: confirming temp user FAILED');
+            }
+
             var email = user.email;
             console.log("confirm message sended to: " + email + ", error: " + err);
             res.render('after_confirm.ejs');
