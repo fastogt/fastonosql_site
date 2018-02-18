@@ -59,7 +59,7 @@ module.exports = function (app, passport, nev) {
         res.render('subscribed_users_downloads.ejs');
     });
 
-    app.get('/build_installer_request', isSubscribed, function (req, res) {
+    app.get('/build_installer_request', User.isSubscribed(app, 'active'), function (req, res) {
         var user = req.user;
 
         var walk = function (dir, done) {
@@ -117,7 +117,7 @@ module.exports = function (app, passport, nev) {
     });
 
     // CLEAR user packages
-    app.post('/clear_packages', isSubscribed, function (req, res) {
+    app.post('/clear_packages', User.isSubscribed(app, 'active'), function (req, res) {
         var user = req.user;
         deleteFolderRecursive(app.locals.site.users_directory + '/' + user.email);
         res.render('build_installer_request.ejs', {
@@ -203,7 +203,7 @@ module.exports = function (app, passport, nev) {
     })
 
     // CANCEL_SUBSCRIPTION ==============================
-    app.post('/cancel_subscription', isSubscribed, function (req, res) {
+    app.post('/cancel_subscription', User.isSubscribed(app, 'active'), function (req, res) {
         var user = req.user;
         var subscr = user.getSubscription();
         fastSpring.cancelSubscription(subscr.subscriptionId)
@@ -303,6 +303,7 @@ function isLoggedIn(req, res, next) {
     res.redirect('/');
 }
 
+// Note: will be deleted
 function isSubscribed(req, res, next) {
     if (req.user.getSubscriptionState() === 'active') {
         return next();
