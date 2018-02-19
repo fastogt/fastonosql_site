@@ -51,7 +51,8 @@ function FastSpring(login, password) {
     return {
         getOrder: FastSpring.prototype.getOrder.bind(this),
         getSubscription: FastSpring.prototype.getSubscription.bind(this),
-        cancelSubscription: FastSpring.prototype.cancelSubscription.bind(this)
+        cancelSubscription: FastSpring.prototype.cancelSubscription.bind(this),
+        checkSubscriptionState: FastSpring.prototype.checkSubscriptionState.bind(this)
     }
 }
 
@@ -89,6 +90,21 @@ FastSpring.prototype.cancelSubscription = function (id) {
     var path = '/subscriptions/' + id;
 
     return this._request('DELETE', path);
+}
+
+/**
+ * Check subscription state
+ *
+ * @param state {String} - 'canceled', 'active' & etc.
+ * @param id {String} - subscription id
+ * @returns {Promise} - result is Boolean
+ */
+FastSpring.prototype.checkSubscriptionState = function (state, id) {
+  return this.getSubscription(id)
+      .then(function (data) {
+          var subscription = JSON.parse(data)
+          return subscription.state === state
+      })
 }
 
 module.exports = FastSpring;

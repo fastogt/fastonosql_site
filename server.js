@@ -47,6 +47,8 @@ var listener = io.listen(server);
 // statistic
 var Statistic = require('./app/models/statistic');
 
+var FastSpring = require('./app/fastspring');
+
 // settings
 app.locals.site = {
     title: public_settings_config.site.name,
@@ -333,6 +335,7 @@ function is_subscribed(args, opt, callback) {
     }
 
     console.log("is_subscribed:", args);
+    var fastSpring = new FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
     var mongoose = require('mongoose');
     var User = mongoose.model("User");
     User.findOne({'email': args.email}, function (err, user) {
@@ -348,6 +351,25 @@ function is_subscribed(args, opt, callback) {
 
         if (!user.validHexedPassword(args.password)) {
             return callback('Oops! Wrong password.', null);
+        }
+
+        if (user.subscription) {
+            var subscription = JSON.parse(this.subscription);
+
+            fastSpring.checkSubscriptionState('active', subscription.subscriptionId)
+                .then(function (result) {
+                    if (result) {
+                        user.subscription_state = 'active';
+                        user.save(function (error) {
+                          if (!error) {
+                            // success
+                          }
+                          // error
+                        })
+                    }
+                }).catch(function (error) {
+                    // error
+                });
         }
 
         return callback(null, 'OK');
