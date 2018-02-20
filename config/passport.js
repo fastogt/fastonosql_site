@@ -7,9 +7,28 @@ var User = require('../app/models/user');
 // load the auth variables
 var configAuth = require('./auth'); // use this one for testing
 
-function validateEmail(email) {
+function validateEmail(email, done) {
     var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
+    var is_valid = re.test(email);
+    if (!is_valid) {
+        done('Invalid email input.');
+        return;
+    }
+
+    var domain = email.split('@')[1];
+    const dns = require('dns');
+    dns.resolve(domain, 'MX', function (err, addresses) {
+        if (err) {
+            done(err);
+            return
+        }
+
+        if (addresses && addresses.length > 0) {
+            done(null);
+            return
+        }
+        cb('Can\'t resolve domain.');
+    });
 }
 
 module.exports = function (nev, passport) {
@@ -46,12 +65,11 @@ module.exports = function (nev, passport) {
         }
 
         email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
-        if (!validateEmail(email)) {
-            return done(null, false, req.flash('loginMessage', 'Invalid email ' + email + '.'));
-        }
+        validateEmail(email, function (err) {
+            if (err) {
+                return done(null, false, req.flash('loginMessage', 'Invalid email ' + email + '.'));
+            }
 
-        // asynchronous
-        process.nextTick(function () {
             User.findOne({'email': email}, function (err, user) {
                 // if there are any errors, return the error
                 if (err) {
@@ -85,40 +103,41 @@ module.exports = function (nev, passport) {
             return done(null, false, req.flash('signupMessage', 'Invalid input.'));
         }
         email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
-        if (!validateEmail(email)) {
-            return done(null, false, req.flash('signupMessage', 'Invalid email ' + email + '.'));
-        }
-
-        var new_user = new User();
-        new_user.email = email;
-        new_user.password = new_user.generateHash(password);
-        new_user.created_date = new Date();
-        new_user.name = email;
-        nev.createTempUser(new_user, function (err, existingPersistentUser, newTempUser) {
-            // some sort of error
+        validateEmail(email, function (err) {
             if (err) {
-                return done(err);
+                return done(null, false, req.flash('signupMessage', 'Invalid email ' + email + '.'));
             }
 
-            // user already exists in persistent collection...
-            if (existingPersistentUser) {
-                return done(null, req.user);
-            }
-            // a new user
-            if (newTempUser) {
-                var URL = newTempUser[nev.options.URLFieldName];
-                nev.sendVerificationEmail(email, URL, function (err, info) {
-                    console.log("verfy email message sended to: " + email + ", error: " + err);
-                    if (err) {
-                        return done(err);
-                    }
+            var new_user = new User();
+            new_user.email = email;
+            new_user.password = new_user.generateHash(password);
+            new_user.name = email;
+            nev.createTempUser(new_user, function (err, existingPersistentUser, newTempUser) {
+                // some sort of error
+                if (err) {
+                    return done(err);
+                }
 
-                    return done(null, false, req.flash('signupMessage', 'Please check ' + email + ' to verify your account.'));
-                });
-                // user already exists in temporary collection...
-            } else {
-                // flash message of failure...
-            }
+                // user already exists in persistent collection...
+                if (existingPersistentUser) {
+                    return done(null, req.user);
+                }
+                // a new user
+                if (newTempUser) {
+                    var URL = newTempUser[nev.options.URLFieldName];
+                    nev.sendVerificationEmail(email, URL, function (err, info) {
+                        console.log("verfy email message sended to: " + email + ", error: " + err);
+                        if (err) {
+                            return done(err);
+                        }
+
+                        return done(null, false, req.flash('signupMessage', 'Please check ' + email + ' to verify your account.'));
+                    });
+                    // user already exists in temporary collection...
+                } else {
+                    // flash message of failure...
+                }
+            });
         });
     }));
 };

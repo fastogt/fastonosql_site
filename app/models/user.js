@@ -8,7 +8,7 @@ var FastSpring = require('./../fastspring');
 var userSchema = mongoose.Schema({
     email: String,
     password: String,
-    created_date: Date,
+    created_date: {type: Date, default: Date.now},
     subscription: {
         type: String,
         default: ''
@@ -78,7 +78,7 @@ userSchema.statics.isSubscribed = function (app, state) {
                     }
                     res.redirect('/profile');
                 }).catch(function (error) {
-                    console.error(error);
+                console.error(error);
                 res.redirect('/profile');
             })
         } else {
