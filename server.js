@@ -354,21 +354,21 @@ function is_subscribed(args, opt, callback) {
         }
 
         if (user.subscription) {
-            var subscription = JSON.parse(this.subscription);
+            var subscription = JSON.parse(user.subscription);
 
-            fastSpring.checkSubscriptionState('active', subscription.subscriptionId)
-                .then(function (result) {
-                    if (result) {
-                        user.subscription_state = 'active';
+            fastSpring.getActualSubscription(user.subscription_state, subscription.subscriptionId)
+                .then(function (state) {
+                    if (state) {
+                        user.subscription_state = state;
                         user.save(function (error) {
-                          if (!error) {
-                            // success
-                          }
-                          // error
+                            if (!error) {
+                              // success. May be - return callback(null, 'OK') ?
+                            }
+                            // error return callback(null, 'Error') ?
                         })
                     }
                 }).catch(function (error) {
-                    // error
+                    // error return callback(null, 'Error') ?
                 });
         }
 
