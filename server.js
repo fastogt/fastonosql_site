@@ -356,23 +356,16 @@ function is_subscribed(args, opt, callback) {
         if (user.subscription) {
             var subscription = JSON.parse(user.subscription);
 
-            fastSpring.getActualSubscription(user.subscription_state, subscription.subscriptionId)
-                .then(function (state) {
-                    if (state) {
-                        user.subscription_state = state;
-                        user.save(function (error) {
-                            if (!error) {
-                              // success. May be - return callback(null, 'OK') ?
-                            }
-                            // error return callback(null, 'Error') ?
-                        })
+            fastSpring.checkSubscriptionState('active', subscription.subscriptionId)
+                .then(function (isSubscribed) {
+                    if (isSubscribed) {
+                        return callback(null, 'OK');
                     }
+                    return callback('invalid subscription', null);
                 }).catch(function (error) {
-                    // error return callback(null, 'Error') ?
+                    return callback(error, null);
                 });
         }
-
-        return callback(null, 'OK');
     });
 }
 
