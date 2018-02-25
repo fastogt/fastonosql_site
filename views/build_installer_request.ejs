@@ -75,7 +75,7 @@
             update_bar(response_json.progress, response_json.message);
         });
 
-        function send_build_request(id, password) {
+        function send_build_request(id, email) {
             var platform = $('.nav-tabs .active > a').attr('aria-controls');
             var os_ctrl = $('input[name=' + platform + ']:checked');
             var package_type = os_ctrl.attr('package_type');
@@ -92,7 +92,7 @@
                 "id": id,
                 "platform": platform,
                 "package_type": package_type,
-                "password": password,
+                "email": email,
                 "arch": arch,
                 "databases": databases
             };
