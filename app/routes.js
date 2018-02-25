@@ -55,11 +55,27 @@ module.exports = function (app, passport, nev) {
         res.render('registered_users_downloads.ejs');
     });
 
-    app.get('/subscribed_users_downloads', User.isSubscribed(app, 'active'), function (req, res) {
+    app.get('/subscribed_users_downloads', function (req, res, next) {
+        var subscr = req.user.getSubscription();
+        if (!subscr) {
+            res.redirect('/profile');
+        }
+
+        fastSpring.checkSubscriptionState('active', subscr.subscriptionId)
+            .then(function (result) {
+                if (result) {
+                    return next();
+                }
+
+                res.redirect('/profile');
+            }).catch(function (error) {
+                res.redirect('/profile');
+            });
+    }, function (req, res) {
         res.render('subscribed_users_downloads.ejs');
     });
 
-    app.get('/build_installer_request', User.isSubscribed(app, 'active'), function (req, res) {
+    app.get('/build_installer_request', User.checkSubscriptionStatus(app, 'active'), function (req, res) {
         var user = req.user;
 
         var walk = function (dir, done) {
@@ -117,7 +133,7 @@ module.exports = function (app, passport, nev) {
     });
 
     // CLEAR user packages
-    app.post('/clear_packages', User.isSubscribed(app, 'active'), function (req, res) {
+    app.post('/clear_packages', User.checkSubscriptionStatus(app, 'active'), function (req, res) {
         var user = req.user;
         deleteFolderRecursive(app.locals.site.users_directory + '/' + user.email);
         res.render('build_installer_request.ejs', {
@@ -203,7 +219,7 @@ module.exports = function (app, passport, nev) {
     })
 
     // CANCEL_SUBSCRIPTION ==============================
-    app.post('/cancel_subscription', User.isSubscribed(app, 'active'), function (req, res) {
+    app.post('/cancel_subscription', User.checkSubscriptionStatus(app, 'active'), function (req, res) {
         var user = req.user;
         var subscr = user.getSubscription();
         fastSpring.cancelSubscription(subscr.subscriptionId)
