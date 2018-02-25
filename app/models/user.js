@@ -59,11 +59,12 @@ userSchema.methods.getSubscriptionState = function () {
 };
 
 /**
+ * Check subscription status by param
  *
  * @param app {Object} - application object
  * @param state {String} - 'canceled', 'active' & etc.
  */
-userSchema.statics.isSubscribed = function (app, state) {
+userSchema.statics.checkSubscriptionStatus = function (app, state) {
     var fastSpring = new FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
 
     return function (req, res, next) {
