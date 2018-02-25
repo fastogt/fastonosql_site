@@ -50,7 +50,7 @@ module.exports = {
         name: 'FastoGT',
         description: 'Fasto Great Technology',
         domain: 'http://fastogt.com',
-        copyright: 'Copyright © 2014-2017 FastoGT. All rights reserved.'
+        copyright: 'Copyright © 2014-2018 FastoGT. All rights reserved.'
     }
 };
 
