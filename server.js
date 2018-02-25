@@ -363,8 +363,10 @@ function is_subscribed(args, opt, callback) {
                     }
                     return callback('invalid subscription', null);
                 }).catch(function (error) {
-                    return callback(error, null);
-                });
+                return callback(error, null);
+            });
+        } else {
+            return callback('Please subscribe to app in your profile page.', null);
         }
     });
 }
