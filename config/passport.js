@@ -112,8 +112,8 @@ module.exports = function (nev, passport) {
             new_user.email = email;
             new_user.password = new_user.generateHash(password);
             new_user.name = email;
-            new_user.first_name = req.body.firstName.toLowerCase().trim();
-            new_user.last_name = req.body.lastName.toLowerCase().trim();
+            new_user.first_name = req.body.firstName.trim();
+            new_user.last_name = req.body.lastName.trim();
 
             nev.createTempUser(new_user, function (err, existingPersistentUser, newTempUser) {
                 // some sort of error
