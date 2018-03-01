@@ -8,11 +8,11 @@ var FastSpring = require('./../fastspring');
 var userSchema = mongoose.Schema({
     first_name: {
       type: String,
-      default: ''
+      default: 'Unknown'
     },
     last_name: {
       type: String,
-      default: ''
+      default: 'Unknown'
     },
     email: String,
     password: String,
