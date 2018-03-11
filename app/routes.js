@@ -27,6 +27,7 @@ function checkIsValidDomain(domain) {
 
 module.exports = function (app, passport, nev) {
     var fastSpring = new FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
+    var mailerLite = new MailerLite();
 
 // normal routes ===============================================================
 
@@ -250,7 +251,7 @@ module.exports = function (app, passport, nev) {
             }).catch(function (error) {
             console.log('cancelSubscription: ', error);
         });
-    })
+    });
 
     // LOGOUT ==============================
     app.get('/logout', function (req, res) {
@@ -305,8 +306,7 @@ module.exports = function (app, passport, nev) {
             var email = user.email;
 
             if (user.email_subscription) {
-                var mailer = new MailerLite();
-                mailer.addNewSubscriberToGroup('9116984', {
+                mailerLite.addNewSubscriberToGroup('9116984', {
                     email: email,
                     name: user.first_name,
                     fields: {
@@ -314,12 +314,12 @@ module.exports = function (app, passport, nev) {
                     }
                 }).then(function () {
                     console.log("Email subscription is completed!");
-                }).catch(function (err) {
-                    console.error("Email subscription failed, error: " + err);
+                }).catch(function (err_mailer) {
+                    console.error("Email subscription failed, error: " + err_mailer);
                 });
             }
 
-            console.log("confirm message sended to: " + email + ", error: " + err);
+            console.log("confirm message sent to: " + email);
             res.render('after_confirm.ejs');
         });
     });
