@@ -233,7 +233,7 @@ module.exports = function (app, passport, nev) {
         } else {
             return res.status(500).send('ERROR: Subscription is already exist!');
         }
-    })
+    });
 
     // CANCEL_SUBSCRIPTION ==============================
     app.post('/cancel_subscription', User.checkSubscriptionStatus(app, 'active'), function (req, res) {
@@ -308,9 +308,9 @@ module.exports = function (app, passport, nev) {
                 var mailer = new MailerLite();
                 mailer.addNewSubscriberToGroup('9116984', {
                     email: email,
-                    name: req.body.firstName.trim(),
+                    name: user.first_name,
                     fields: {
-                        last_name: req.body.lastName.trim()
+                        last_name: user.last_name
                     }
                 }).then(function () {
                     console.log("Email subscription is completed!");
