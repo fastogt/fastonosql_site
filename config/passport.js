@@ -7,6 +7,8 @@ var User = require('../app/models/user');
 // load the auth variables
 var configAuth = require('./auth'); // use this one for testing
 
+var MailerLite = require('../app/mailerLite')
+
 function validateEmail(email, done) {
     var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var is_valid = re.test(email);
@@ -128,9 +130,24 @@ module.exports = function (nev, passport) {
                 if (newTempUser) {
                     var URL = newTempUser[nev.options.URLFieldName];
                     nev.sendVerificationEmail(email, URL, function (err, info) {
-                        console.log("verfy email message sended to: " + email + ", error: " + err);
+                        console.log("verify email message sended to: " + email + ", error: " + err);
                         if (err) {
                             return done(err);
+                        }
+
+                        if (req.body.mailSubscribe) {
+                            var mailer = new MailerLite();
+                            mailer.addNewSubscriberToGroup('9116984', {
+                                email: email,
+                                name: req.body.firstName.trim(),
+                                fields: {
+                                    last_name: req.body.lastName.trim()
+                                }
+                            }).then(function() {
+                                console.log("Subscribe is completed!");
+                            }).catch(function (err) {
+                                console.log("Subscribe is error!", err);
+                            });
                         }
 
                         return done(null, false, req.flash('signupMessage', 'Please check ' + email + ' to verify your account.'));

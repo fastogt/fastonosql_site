@@ -175,6 +175,22 @@ module.exports = function (app, passport, nev) {
         }
     });
 
+    app.post('/updateProfile', isLoggedIn, function (req, res) {
+        var user = req.user;
+
+        user.set({
+            first_name: req.body.firstName.trim(),
+            last_name: req.body.lastName.trim()
+        });
+
+        user.save(function (err) {
+            if (err) {
+                console.error('Update profile error!');
+            }
+            res.redirect('/profile');
+        });
+    });
+
     // SUBSCRIPTION =============================
     app.post('/subscription', isLoggedIn, function (req, res) {
         var user = req.user;
