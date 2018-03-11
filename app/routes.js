@@ -2,8 +2,9 @@
 var User = require('../app/models/user');
 
 var fs = require('fs');
-var path = require('path');
+var path_module = require('path');
 var FastSpring = require('./fastspring');
+var MailerLite = require('./mailer_lite');
 
 function deleteFolderRecursive(path) {
     if (fs.existsSync(path)) {
@@ -69,8 +70,8 @@ module.exports = function (app, passport, nev) {
 
                 res.redirect('/profile');
             }).catch(function (error) {
-                res.redirect('/profile');
-            });
+            res.redirect('/profile');
+        });
     }, function (req, res) {
         res.render('subscribed_users_downloads.ejs');
     });
@@ -91,7 +92,7 @@ module.exports = function (app, passport, nev) {
                 }
                 list.forEach(function (file) {
                     var file_name = file;
-                    file = path.resolve(dir, file);
+                    file = path_module.resolve(dir, file);
                     fs.stat(file, function (err, stat) {
                         if (err) {
                             return done(err, []);
@@ -164,8 +165,8 @@ module.exports = function (app, passport, nev) {
                         message: req.flash('statusProfileMessage')
                     });
                 }).catch(function (error) {
-                    console.error('getSubscription: ', error);
-                });
+                console.error('getSubscription: ', error);
+            });
         } else {
             console.error('Not found `subscr`.', subscr);
             res.render('profile.ejs', {
@@ -302,6 +303,22 @@ module.exports = function (app, passport, nev) {
             }
 
             var email = user.email;
+
+            if (user.email_subscription) {
+                var mailer = new MailerLite();
+                mailer.addNewSubscriberToGroup('9116984', {
+                    email: email,
+                    name: req.body.firstName.trim(),
+                    fields: {
+                        last_name: req.body.lastName.trim()
+                    }
+                }).then(function () {
+                    console.log("Email subscription is completed!");
+                }).catch(function (err) {
+                    console.error("Email subscription failed, error: " + err);
+                });
+            }
+
             console.log("confirm message sended to: " + email + ", error: " + err);
             res.render('after_confirm.ejs');
         });

@@ -7,12 +7,12 @@ var FastSpring = require('./../fastspring');
 // define the schema for our user model
 var userSchema = mongoose.Schema({
     first_name: {
-      type: String,
-      default: 'Unknown'
+        type: String,
+        default: 'Unknown'
     },
     last_name: {
-      type: String,
-      default: 'Unknown'
+        type: String,
+        default: 'Unknown'
     },
     email: String,
     password: String,
@@ -29,7 +29,8 @@ var userSchema = mongoose.Schema({
         type: String,
         enum: ['USER', 'FOUNDER', 'SUPPORT'],
         default: 'USER'
-    }
+    },
+    email_subscription: Boolean
 });
 
 // generating a hash
