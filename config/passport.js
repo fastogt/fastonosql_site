@@ -118,7 +118,7 @@ module.exports = function (nev, passport) {
             if (req.body.mailSubscribe) {
                 new_user.email_subscription = true;
             } else {
-                new_user.email_subscription = true;
+                new_user.email_subscription = false;
             }
             nev.createTempUser(new_user, function (err, existingPersistentUser, newTempUser) {
                 // some sort of error
