@@ -143,7 +143,7 @@ module.exports = function (nev, passport) {
                                 fields: {
                                     last_name: req.body.lastName.trim()
                                 }
-                            }).then(function() {
+                            }).then(function () {
                                 console.log("Subscribe is completed!");
                             }).catch(function (err) {
                                 console.log("Subscribe is error!", err);

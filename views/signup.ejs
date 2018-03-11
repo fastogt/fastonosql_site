@@ -59,7 +59,14 @@
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="mailSubscribe"> E-Mail subscribe
+                    <input type="checkbox" name="mailSubscribe" checked="checked">
+                    <strong>I agree to my email address being used by <%- company.name %> to send me educational
+                        materials about the product I evaluate, including commercial communications, and to process my
+                        personal data for this purpose. I agree that <%- company.name %> to may send the data to
+                        third-party services for this purpose in accordance with the <%- company.name %> to Privacy
+                        Policy. I can revoke my consent at any time in my profile. In addition, an unsubscribe link is
+                        included in each email.
+                    </strong>
                 </label>
             </div>
             <button type="submit" class="btn btn-warning btn-lg">Signup</button>
@@ -73,7 +80,7 @@
     function validateForm() {
         var elements = document.forms['signUpForm'].getElementsByTagName('input');
         var valid = true;
-        Array.prototype.forEach.call(elements, function(element) {
+        Array.prototype.forEach.call(elements, function (element) {
             if (!element.value) {
                 element.parentNode.classList.add('has-error');
                 valid = false;

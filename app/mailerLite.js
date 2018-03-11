@@ -81,10 +81,10 @@ MailerLite.prototype.addNewSubscriberToGroup = function (groupId, params) {
  * @returns {Promise}
  */
 MailerLite.prototype.addNewSubscriber = function (params) {
-  var path = '/api/v2/subscribers';
-  var data = JSON.stringify(params);
+    var path = '/api/v2/subscribers';
+    var data = JSON.stringify(params);
 
-  return this._request('POST', path, data);
+    return this._request('POST', path, data);
 }
 
 module.exports = MailerLite;
