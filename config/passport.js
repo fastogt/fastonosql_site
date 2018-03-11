@@ -115,7 +115,11 @@ module.exports = function (nev, passport) {
             new_user.name = email;
             new_user.first_name = req.body.firstName.trim();
             new_user.last_name = req.body.lastName.trim();
-            new_user.email_subscription = req.body.mailSubscribe;
+            if (req.body.mailSubscribe) {
+                new_user.email_subscription = true;
+            } else {
+                new_user.email_subscription = true;
+            }
             nev.createTempUser(new_user, function (err, existingPersistentUser, newTempUser) {
                 // some sort of error
                 if (err) {
