@@ -2,8 +2,9 @@
 var User = require('../app/models/user');
 
 var fs = require('fs');
-var path = require('path');
+var path_module = require('path');
 var FastSpring = require('./fastspring');
+var MailerLite = require('./mailer_lite');
 
 function deleteFolderRecursive(path) {
     if (fs.existsSync(path)) {
@@ -26,6 +27,7 @@ function checkIsValidDomain(domain) {
 
 module.exports = function (app, passport, nev) {
     var fastSpring = new FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
+    var mailerLite = new MailerLite();
 
 // normal routes ===============================================================
 
@@ -69,8 +71,8 @@ module.exports = function (app, passport, nev) {
 
                 res.redirect('/profile');
             }).catch(function (error) {
-                res.redirect('/profile');
-            });
+            res.redirect('/profile');
+        });
     }, function (req, res) {
         res.render('subscribed_users_downloads.ejs');
     });
@@ -91,7 +93,7 @@ module.exports = function (app, passport, nev) {
                 }
                 list.forEach(function (file) {
                     var file_name = file;
-                    file = path.resolve(dir, file);
+                    file = path_module.resolve(dir, file);
                     fs.stat(file, function (err, stat) {
                         if (err) {
                             return done(err, []);
@@ -164,8 +166,8 @@ module.exports = function (app, passport, nev) {
                         message: req.flash('statusProfileMessage')
                     });
                 }).catch(function (error) {
-                    console.error('getSubscription: ', error);
-                });
+                console.error('getSubscription: ', error);
+            });
         } else {
             console.error('Not found `subscr`.', subscr);
             res.render('profile.ejs', {
@@ -232,7 +234,7 @@ module.exports = function (app, passport, nev) {
         } else {
             return res.status(500).send('ERROR: Subscription is already exist!');
         }
-    })
+    });
 
     // CANCEL_SUBSCRIPTION ==============================
     app.post('/cancel_subscription', User.checkSubscriptionStatus(app, 'active'), function (req, res) {
@@ -249,7 +251,7 @@ module.exports = function (app, passport, nev) {
             }).catch(function (error) {
             console.log('cancelSubscription: ', error);
         });
-    })
+    });
 
     // LOGOUT ==============================
     app.get('/logout', function (req, res) {
@@ -302,7 +304,22 @@ module.exports = function (app, passport, nev) {
             }
 
             var email = user.email;
-            console.log("confirm message sended to: " + email + ", error: " + err);
+
+            if (user.email_subscription) {
+                mailerLite.addNewSubscriberToGroup('9116984', {
+                    email: email,
+                    name: user.first_name,
+                    fields: {
+                        last_name: user.last_name
+                    }
+                }).then(function () {
+                    console.log("Email subscription is completed!");
+                }).catch(function (err_mailer) {
+                    console.error("Email subscription failed, error: " + err_mailer);
+                });
+            }
+
+            console.log("confirm message sent to: " + email);
             res.render('after_confirm.ejs');
         });
     });
@@ -329,8 +346,9 @@ module.exports = function (app, passport, nev) {
 
 // route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated())
+    if (req.isAuthenticated()) {
         return next();
+    }
 
     res.redirect('/');
 }

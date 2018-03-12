@@ -44,40 +44,44 @@
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <a class="navbar-brand" href="#" style="padding: 10px 15px;">
-                            <img alt="Brand" src="logo32x32.png" />
+                            <img alt="Brand" src="logo32x32.png"/>
                             <%= site.title %>
                         </a>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <a href="/logout" class="btn btn-warning navbar-btn pull-right navbar-right"><span class="fa fa-sign-out"></span> Sign out</a>
+                        <a href="/logout" class="btn btn-warning navbar-btn pull-right navbar-right"><span
+                                    class="fa fa-sign-out"></span> Sign out</a>
                     </div>
                 </div>
             </nav>
             <div class="row">
                 <div class="col-md-6">
-                    <form class="form-horizontal" action="/updateProfile" method="post" name="profileInfo" onsubmit="return validateProfileForm()">
+                    <form class="form-horizontal" action="/updateProfile" method="post" name="profileInfo"
+                          onsubmit="return validateProfileForm()">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Id</label>
+                            <label class="col-sm-3 control-label">Id:</label>
                             <div class="col-sm-9">
                                 <p class="form-control-static"><%= user._id %></p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Email</label>
+                            <label class="col-sm-3 control-label">Email:</label>
                             <div class="col-sm-9">
                                 <p class="form-control-static"><%= user.email %></p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="firstName" class="col-sm-3 control-label">First Name</label>
+                            <label for="firstName" class="col-sm-3 control-label">First Name:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="firstName" name="firstName" value="<%= user.first_name %>" />
+                                <input type="text" class="form-control" id="firstName" name="firstName"
+                                       value="<%= user.first_name %>"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="lastName" class="col-sm-3 control-label">Last Name</label>
+                            <label for="lastName" class="col-sm-3 control-label">Last Name:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="lastName" name="lastName" value="<%= user.last_name %>" />
+                                <input type="text" class="form-control" id="lastName" name="lastName"
+                                       value="<%= user.last_name %>"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -144,10 +148,10 @@
                                 <span>Free forever</span>
                             </li>
                         </ul>
-                        <a href="/registered_users_downloads"
-                           class="btn btn-success download btn-subscription" disabled>Not available</br> ONLY SUBSCRIPTION</a>
                         <!--<a href="/registered_users_downloads"
-                           class="btn btn-success download btn-subscription">Download</a>-->
+                           class="btn btn-success download btn-subscription" disabled>Not available</br> ONLY SUBSCRIPTION</a>-->
+                        <a href="/registered_users_downloads"
+                           class="btn btn-success download btn-subscription">Download</a>
                     </div>
                 </div>
                 <div class="col-sm-3 box-subscription">
@@ -312,7 +316,7 @@
             We started from <strong>FastoRedis</strong> which worked only with <strong>Redis</strong> database and then
             we understood
             that there are a lot of <strong>NoSQL databases</strong> which need our solution.
-            At the moment we support <strong>9</strong> databases:
+            At the moment we support <strong>10</strong> databases:
             <ul>
                 <li><a href="https://redis.io" target="_blank">Redis</a></li>
                 <li><a href="http://memcached.org" target="_blank">Memcached</a></li>
@@ -418,7 +422,7 @@
     function validateProfileForm() {
         var elements = document.forms['profileInfo'].getElementsByTagName('input');
         var valid = true;
-        Array.prototype.forEach.call(elements, function(element) {
+        Array.prototype.forEach.call(elements, function (element) {
             if (!element.value) {
                 element.parentNode.classList.add('has-error');
                 valid = false;
@@ -427,7 +431,7 @@
             }
         });
 
-      return valid
+        return valid
     }
 </script>
 
