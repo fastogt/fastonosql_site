@@ -107,6 +107,11 @@ app.locals.fastspring_config = {
     password: settings_config.fastspring_password
 };
 
+// mailer lite
+app.locals.mailer_lite_config = {
+  group: settings_config.mailer_lite_group
+};
+
 // rabbitmq
 var rabbit_connection = amqp.createConnection({
     host: settings_config.rabbitmq_host,

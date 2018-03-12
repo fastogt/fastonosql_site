@@ -87,4 +87,18 @@ MailerLite.prototype.addNewSubscriber = function (params) {
     return this._request('POST', path, data);
 }
 
+/**
+ * Update single subscriber
+ *
+ * @param {Object} id/email
+ * @param {Object} params - {"type": "unsubscribed", "fields": {"name": "Demo", "company": "MailerLite"}}
+ * @returns {Promise}
+ */
+MailerLite.prototype.updateSubscriber = function (id, params) {
+  var path = '/api/v2/subscribers/' + id;
+  var data = JSON.stringify(params);
+
+  return this._request('PUT', path, data);
+}
+
 module.exports = MailerLite;

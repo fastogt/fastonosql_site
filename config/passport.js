@@ -7,7 +7,7 @@ var User = require('../app/models/user');
 // load the auth variables
 var configAuth = require('./auth'); // use this one for testing
 
-var MailerLite = require('../app/mailerLite')
+var MailerLite = require('../app/mailer_lite')
 
 function validateEmail(email, done) {
     var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -33,7 +33,7 @@ function validateEmail(email, done) {
     });
 }
 
-module.exports = function (nev, passport) {
+module.exports = function (app, nev, passport) {
 
     // =========================================================================
     // passport session setup ==================================================
@@ -144,7 +144,7 @@ module.exports = function (nev, passport) {
 
                         if (req.body.mailSubscribe) {
                             var mailer = new MailerLite();
-                            mailer.addNewSubscriberToGroup('9116984', {
+                            mailer.addNewSubscriberToGroup(app.mailer_lite_config.group, {
                                 email: email,
                                 name: req.body.firstName.trim(),
                                 fields: {
