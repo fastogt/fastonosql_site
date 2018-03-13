@@ -191,15 +191,15 @@ module.exports = function (app, passport, nev) {
             }
 
             mailerLite.updateSubscriber(user.email, {
-                type: 'active', // TODO: update subscription status
+                type: 'active',
                 fields: {
                    name: user.first_name,
                    last_name: user.last_name
                 }
             }).then(function() {
-               console.log("Subscribe is completed!");
+               console.log("Update subscribe is completed!");
             }).catch(function (err) {
-               console.log("Subscribe is error!", err);
+               console.log("Update subscribe is error!", err);
             });
 
             res.redirect('/profile');

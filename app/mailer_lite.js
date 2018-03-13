@@ -56,7 +56,8 @@ function MailerLite() {
 
     return {
         addNewSubscriber: MailerLite.prototype.addNewSubscriber.bind(this),
-        addNewSubscriberToGroup: MailerLite.prototype.addNewSubscriberToGroup.bind(this)
+        addNewSubscriberToGroup: MailerLite.prototype.addNewSubscriberToGroup.bind(this),
+        updateSubscriber: MailerLite.prototype.updateSubscriber.bind(this)
     }
 }
 
