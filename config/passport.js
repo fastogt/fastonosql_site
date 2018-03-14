@@ -33,7 +33,7 @@ function validateEmail(email, done) {
     });
 }
 
-module.exports = function (app, nev, passport) {
+module.exports = function (nev, passport) {
 
     // =========================================================================
     // passport session setup ==================================================
@@ -140,21 +140,6 @@ module.exports = function (app, nev, passport) {
                         console.log("verify email message sended to: " + email + ", error: " + err);
                         if (err) {
                             return done(err);
-                        }
-
-                        if (req.body.mailSubscribe) {
-                            var mailer = new MailerLite();
-                            mailer.addNewSubscriberToGroup(app.mailer_lite_config.group, {
-                                email: email,
-                                name: req.body.firstName.trim(),
-                                fields: {
-                                    last_name: req.body.lastName.trim()
-                                }
-                            }).then(function() {
-                                console.log("Subscribe is completed!");
-                            }).catch(function (err) {
-                                console.log("Subscribe is error!", err);
-                            });
                         }
 
                         return done(null, false, req.flash('signupMessage', 'Please check ' + email + ' to verify your account.'));

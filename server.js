@@ -109,7 +109,7 @@ app.locals.fastspring_config = {
 
 // mailer lite
 app.locals.mailer_lite_config = {
-  group: settings_config.mailer_lite_group
+    group: settings_config.mailer_lite_group
 };
 
 // rabbitmq
