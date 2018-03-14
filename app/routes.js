@@ -319,7 +319,7 @@ module.exports = function (app, passport, nev) {
             var email = user.email;
 
             if (user.email_subscription) {
-                mailerLite.addNewSubscriberToGroup(app.locals.mailer_lite_config.groupId, {
+                mailerLite.addNewSubscriberToGroup(app.mailer_lite_config.group, {
                     email: email,
                     name: user.first_name,
                     fields: {

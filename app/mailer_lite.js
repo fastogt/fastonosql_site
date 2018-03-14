@@ -31,7 +31,7 @@ function MailerLite() {
                     reject(new Error('Failed response: ' + response.statusCode));
                 }
 
-                var str = ''
+                var str = '';
                 response.on('data', function (chunk) {
                     str += chunk;
                 });
@@ -73,7 +73,7 @@ MailerLite.prototype.addNewSubscriberToGroup = function (groupId, params) {
     var data = JSON.stringify(params);
 
     return this._request('POST', path, data);
-}
+};
 
 /**
  * Add new single subscriber
@@ -86,7 +86,7 @@ MailerLite.prototype.addNewSubscriber = function (params) {
     var data = JSON.stringify(params);
 
     return this._request('POST', path, data);
-}
+};
 
 /**
  * Update single subscriber
@@ -100,6 +100,6 @@ MailerLite.prototype.updateSubscriber = function (id, params) {
     var data = JSON.stringify(params);
 
     return this._request('PUT', path, data);
-}
+};
 
 module.exports = MailerLite;
