@@ -7,7 +7,6 @@ var User = require('../app/models/user');
 // load the auth variables
 var configAuth = require('./auth'); // use this one for testing
 
-var MailerLite = require('../app/mailer_lite')
 
 function validateEmail(email, done) {
     var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -121,8 +120,6 @@ module.exports = function (nev, passport) {
             } else {
                 new_user.email_subscription = false;
             }
-            new_user.first_name = req.body.firstName.trim();
-            new_user.last_name = req.body.lastName.trim();
             nev.createTempUser(new_user, function (err, existingPersistentUser, newTempUser) {
                 // some sort of error
                 if (err) {
