@@ -364,7 +364,8 @@ function is_subscribed(args, opt, callback) {
             fastSpring.checkSubscriptionState('active', subscription.subscriptionId)
                 .then(function (isSubscribed) {
                     if (isSubscribed) {
-                        return callback(null, 'OK');
+                        var result = {'first_name': user.first_name, 'last_name': user.last_name};
+                        return callback(null, result);
                     }
                     return callback('Invalid subscription', null);
                 }).catch(function (error) {
