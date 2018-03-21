@@ -355,6 +355,10 @@ module.exports = function (app, passport, nev) {
         failureFlash: true // allow flash messages
     }));
 
+    // seo 301 to home
+    app.get('*', function (req, res) {
+        res.redirect('/');
+    });
 };
 
 // route middleware to ensure user is logged in
