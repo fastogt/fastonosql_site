@@ -362,10 +362,12 @@ function is_subscribed(args, opt, callback) {
             return callback('Wrong password', null);
         }
 
+        if (user.exec_count === 0) {
+            var end_date = new Date();
+            end_date.setDate(end_date.getDate() + TRIAL_DAYS_COUNT);
+            user.application_end_date = end_date;
+        }
         user.exec_count = user.exec_count + 1;
-        var end_date = new Date();
-        end_date.setDate(end_date.getDate() + TRIAL_DAYS_COUNT);
-        user.application_end_date = end_date;
         user.save();
 
         if (user.subscription) {

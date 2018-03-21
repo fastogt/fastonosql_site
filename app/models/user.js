@@ -32,7 +32,7 @@ var userSchema = mongoose.Schema({
     },
     email_subscription: Boolean,
     exec_count: {type: Number, default: 0},
-    application_end_date: Date
+    application_end_date: {type: Date, default: Date.now}
 });
 
 // generating a hash
