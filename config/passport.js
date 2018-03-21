@@ -112,7 +112,6 @@ module.exports = function (nev, passport) {
             var new_user = new User();
             new_user.email = email;
             new_user.password = new_user.generateHash(password);
-            new_user.name = email;
             new_user.first_name = req.body.firstName.trim();
             new_user.last_name = req.body.lastName.trim();
             if (req.body.mailSubscribe) {

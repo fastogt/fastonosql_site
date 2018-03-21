@@ -30,7 +30,9 @@ var userSchema = mongoose.Schema({
         enum: ['USER', 'FOUNDER', 'SUPPORT'],
         default: 'USER'
     },
-    email_subscription: Boolean
+    email_subscription: Boolean,
+    exec_count: {type: Number, default: 0},
+    application_end_date: Date
 });
 
 // generating a hash

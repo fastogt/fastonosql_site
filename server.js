@@ -336,6 +336,7 @@ function statistic(args, opt, callback) {
 function is_subscribed(args, opt, callback) {
     const UNSUBSCRIBED_USER = 0;
     const SUBSCRIBED_USER = 1;
+    const TRIAL_DAYS_COUNT = 15;
 
     if (!args || !args.hasOwnProperty('email') || !args.hasOwnProperty('password')) {
         callback('invalid arguments', null);
@@ -361,6 +362,12 @@ function is_subscribed(args, opt, callback) {
             return callback('Wrong password', null);
         }
 
+        user.exec_count = user.exec_count + 1;
+        var end_date = new Date();
+        end_date.setDate(end_date.getDate() + TRIAL_DAYS_COUNT);
+        user.application_end_date = end_date;
+        user.save();
+
         if (user.subscription) {
             var subscription = JSON.parse(user.subscription);
 
@@ -372,8 +379,8 @@ function is_subscribed(args, opt, callback) {
                             'last_name': user.last_name,
                             "id": user._id,
                             "subscription_state": SUBSCRIBED_USER,
-                            "exec_count": 0,
-                            "expire_time": 1521601955
+                            "exec_count": user.exec_count,
+                            "expire_time": Math.floor(user.end_date.getTime() / 1000)
                         };
                         return callback(null, result);
                     }
