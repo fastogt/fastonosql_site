@@ -1,4 +1,4 @@
-var https = require('https')
+var https = require('https');
 
 function FastSpring(login, password) {
     var self = this;
@@ -31,7 +31,7 @@ function FastSpring(login, password) {
                     reject(new Error('Failed response: ' + response.statusCode));
                 }
 
-                var str = ''
+                var str = '';
                 response.on('data', function (chunk) {
                     str += chunk;
                 });
@@ -67,7 +67,7 @@ FastSpring.prototype.getOrder = function (id) {
     var path = '/orders/' + id;
 
     return this._request('GET', path);
-}
+};
 
 /**
  * Get subscriptions by id
@@ -79,7 +79,7 @@ FastSpring.prototype.getSubscription = function (id) {
     var path = '/subscriptions/' + id;
 
     return this._request('GET', path);
-}
+};
 
 /**
  * Delete subscriptions by id
@@ -91,7 +91,7 @@ FastSpring.prototype.cancelSubscription = function (id) {
     var path = '/subscriptions/' + id;
 
     return this._request('DELETE', path);
-}
+};
 
 /**
  * Check subscription state
@@ -103,10 +103,10 @@ FastSpring.prototype.cancelSubscription = function (id) {
 FastSpring.prototype.checkSubscriptionState = function (state, id) {
   return this.getSubscription(id)
       .then(function (data) {
-          var subscription = JSON.parse(data)
+          var subscription = JSON.parse(data);
           return subscription.state === state
       })
-}
+};
 
 /**
  * Get current subscription
@@ -118,9 +118,9 @@ FastSpring.prototype.checkSubscriptionState = function (state, id) {
 FastSpring.prototype.getActualSubscription = function (state, id) {
   return this.getSubscription(id)
       .then(function (data) {
-          var subscription = JSON.parse(data)
+          var subscription = JSON.parse(data);
           return subscription.state !== state ? subscription.state : false
       })
-}
+};
 
 module.exports = FastSpring;

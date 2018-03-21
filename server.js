@@ -334,6 +334,9 @@ function statistic(args, opt, callback) {
 }
 
 function is_subscribed(args, opt, callback) {
+    const UNSUBSCRIBED_USER = 0;
+    const SUBSCRIBED_USER = 1;
+
     if (!args || !args.hasOwnProperty('email') || !args.hasOwnProperty('password')) {
         callback('invalid arguments', null);
         return;
@@ -364,7 +367,14 @@ function is_subscribed(args, opt, callback) {
             fastSpring.checkSubscriptionState('active', subscription.subscriptionId)
                 .then(function (isSubscribed) {
                     if (isSubscribed) {
-                        var result = {'first_name': user.first_name, 'last_name': user.last_name};
+                        var result = {
+                            'first_name': user.first_name,
+                            'last_name': user.last_name,
+                            "id": user._id,
+                            "subscription_state": SUBSCRIBED_USER,
+                            "exec_count": 0,
+                            "expire_time": 1521601955
+                        };
                         return callback(null, result);
                     }
                     return callback('Invalid subscription', null);
