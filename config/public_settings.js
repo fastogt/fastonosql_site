@@ -13,8 +13,8 @@ module.exports = {
         domain: 'https://fastonosql.com',
         keywords: 'fastonosql, nosql, gui, manager, redis, client, memcached, ssdb, leveldb, rocksdb, lmdb, unqlite, upscaledb, forestdb, pika, admin, tool',
         description: 'FastoNoSQL it is GUI platform for NoSQL databases.',
-        small_description: 'FastoNoSQL - cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, UpscaleDB, Unqlite, ForestDB and Pika databases.',
-        large_description: 'FastoNoSQL — is a cross-platform GUI Manager for Redis, Memcached, SSDB, RocksDB, LMDB, UpscaleDB, Unqlite, ForestDB and Pika databases(i.e. Admin GUI Client). Our Desktop Client works on the most amount of Linux systems, also on Windows, Mac OS X, FreeBSD and Android platforms.',
+        small_description: 'FastoNoSQL - cross-platform GUI Manager for Redis, Memcached, SSDB, LevelDB, RocksDB, LMDB, UpscaleDB, Unqlite, ForestDB and Pika databases.',
+        large_description: 'FastoNoSQL — is a cross-platform GUI Manager for Redis, Memcached, SSDB, LevelDB, RocksDB, LMDB, UpscaleDB, Unqlite, ForestDB and Pika databases(i.e. Admin GUI Client). Our Desktop Client works on the most amount of Linux systems, also on Windows, Mac OS X, FreeBSD and Android platforms.',
 
         github_link: 'https://github.com/fastogt/fastonosql',
         github_issues_link: 'https://github.com/fastogt/fastonosql/issues',
