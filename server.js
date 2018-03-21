@@ -370,29 +370,32 @@ function is_subscribed(args, opt, callback) {
         user.exec_count = user.exec_count + 1;
         user.save();
 
-        if (user.subscription) {
-            var subscription = JSON.parse(user.subscription);
-
-            fastSpring.checkSubscriptionState('active', subscription.subscriptionId)
-                .then(function (isSubscribed) {
-                    if (isSubscribed) {
-                        var result = {
-                            'first_name': user.first_name,
-                            'last_name': user.last_name,
-                            "id": user._id,
-                            "subscription_state": SUBSCRIBED_USER,
-                            "exec_count": user.exec_count,
-                            "expire_time": Math.floor(user.application_end_date.getTime() / 1000)
-                        };
-                        return callback(null, result);
-                    }
-                    return callback('Invalid subscription', null);
-                }).catch(function (error) {
-                return callback(error, null);
-            });
-        } else {
-            return callback('Please subscribe to app in your profile page', null);
+        function generate_response(state) {
+            var result = {
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                "id": user._id,
+                "subscription_state": state,
+                "exec_count": user.exec_count,
+                "expire_time": Math.floor(user.application_end_date.getTime() / 1000)
+            };
+            return result;
         }
+
+        if (!user.subscription) {
+            return callback(null, generate_response(UNSUBSCRIBED_USER));
+        }
+
+        var subscription = JSON.parse(user.subscription);
+        fastSpring.checkSubscriptionState('active', subscription.subscriptionId)
+            .then(function (isSubscribed) {
+                if (isSubscribed) {
+                    return callback(null, generate_response(SUBSCRIBED_USER));
+                }
+                return callback(null, generate_response(UNSUBSCRIBED_USER));
+            }).catch(function (error) {
+            return callback(error, null);
+        });
     });
 }
 
