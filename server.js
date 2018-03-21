@@ -382,7 +382,7 @@ function is_subscribed(args, opt, callback) {
                             "id": user._id,
                             "subscription_state": SUBSCRIBED_USER,
                             "exec_count": user.exec_count,
-                            "expire_time": Math.floor(user.end_date.getTime() / 1000)
+                            "expire_time": Math.floor(user.application_end_date.getTime() / 1000)
                         };
                         return callback(null, result);
                     }
