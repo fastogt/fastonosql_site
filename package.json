@@ -23,6 +23,7 @@
     "method-override": "latest",
     "express-session": "latest",
     "email-verification": "latest",
-    "json-rpc2": "latest"
+    "json-rpc2": "latest",
+    "compression": "latest"
   }
 }

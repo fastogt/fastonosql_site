@@ -17,6 +17,7 @@ var public_downloads_users_dir_abs_path = public_downloads_dir_abs_path + '/user
 // set up ======================================================================
 // get all the tools we need
 var express = require('express');
+var compression = require('compression')
 var app = express();
 var port = settings_config.http_server_port;
 var mongoose = require('mongoose');
@@ -268,6 +269,7 @@ nev.generateTempUserModel(User, function (err, tempUserModel) {
 require('./config/passport')(nev, passport); // pass passport for configuration
 
 // set up our express application
+app.use(compression())
 app.use(express.static(public_dir_abs_path));
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
