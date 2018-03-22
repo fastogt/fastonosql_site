@@ -3,14 +3,32 @@ upstream app_fastonosql {
 }
 
 server {
-    # Redirect non-https traffic to https
-    if ($scheme != "https") {
-         return 301 https://$host$request_uri;
-    } # managed by Certbot
+    listen 80;
+    server_name fastonosql.com;
+    access_log /var/log/nginx/fastonosql.log;
+    return 301 https://$server_name$request_uri;
 }
 
 server {
-    server_name www.fastonosql.com fastonosql.com;
+    listen 443 ssl;
+    server_name www.fastonosql.com;
+    return 301 https://fastonosql.com$request_uri;
+
+    ssl_certificate /etc/letsencrypt/live/fastonosql.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/fastonosql.com/privkey.pem; # managed by Certbot
+
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_prefer_server_ciphers on;
+    ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
+    ssl_ecdh_curve secp384r1;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_tickets off;
+    ssl_stapling on;
+    ssl_stapling_verify on;
+}
+
+server {
+    server_name fastonosql.com;
     access_log /var/log/nginx/fastonosql.log;
 
     listen 443 ssl;

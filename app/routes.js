@@ -341,10 +341,10 @@ module.exports = function (app, passport, nev) {
         res.render('after_confirm.ejs');
     });
 
-    // seo 301 to home
-    /*app.get('*', function (req, res) {
-        res.redirect('/');
-    });*/
+    // seo 404
+    app.get('*', function (req, res) {
+        res.redirect('custom_404.ejs');
+    });
 };
 
 // route middleware to ensure user is logged in
