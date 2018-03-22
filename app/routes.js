@@ -342,6 +342,10 @@ module.exports = function (app, passport, nev) {
     });
 
     // seo 404
+    app.get('/custom_404', function (req, res) {
+        res.render('custom_404.ejs');
+    });
+
     app.get('*', function (req, res) {
         res.redirect('custom_404');
     });
