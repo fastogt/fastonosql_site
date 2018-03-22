@@ -190,17 +190,19 @@ module.exports = function (app, passport, nev) {
                 console.error('Update profile error!');
             }
 
-            mailerLite.updateSubscriber(user.email, {
-                type: 'active',
-                fields: {
-                    name: user.first_name,
-                    last_name: user.last_name
-                }
-            }).then(function () {
-                console.log("Update subscribe is completed!");
-            }).catch(function (err) {
-                console.log("Update subscribe is error!", err);
-            });
+            if (user.email_subscription) {
+                mailerLite.updateSubscriber(user.email, {
+                    type: 'active',
+                    fields: {
+                        name: user.first_name,
+                        last_name: user.last_name
+                    }
+                }).then(function () {
+                    console.log("Update subscribe is completed!");
+                }).catch(function (err) {
+                    console.log("Update subscribe is error!", err);
+                });
+            }
 
             res.redirect('/profile');
         });
