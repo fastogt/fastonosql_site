@@ -1,2 +1,10 @@
-User-agent: *
-Allow: /
+User-Agent: *
+Disallow: /login
+Disallow: /signup
+
+User-Agent: Yandex
+Disallow: /login
+Disallow: /signup
+
+Host: https://fastonosql.com
+Sitemap: https://fastonosql.com/sitemap.xml

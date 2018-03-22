@@ -342,9 +342,9 @@ module.exports = function (app, passport, nev) {
     });
 
     // seo 301 to home
-    app.get('*', function (req, res) {
+    /*app.get('*', function (req, res) {
         res.redirect('/');
-    });
+    });*/
 };
 
 // route middleware to ensure user is logged in
