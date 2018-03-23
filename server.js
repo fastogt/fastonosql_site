@@ -337,7 +337,7 @@ function statistic(args, opt, callback) {
                 return;
             }
 
-            var new_stat = new Statistic({os: os, project: proj});
+            var new_stat = {create_date: Date(), os: os, project: proj};
             user.statistic.push(new_stat);
             user.save(function (err) {
                 if (err) {
