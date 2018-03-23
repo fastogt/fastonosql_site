@@ -62,7 +62,6 @@ app.locals.site = {
     public_directory: public_dir_abs_path,
     users_directory: public_downloads_users_dir_abs_path,
 
-    paypal_token: public_settings_config.site.paypal_token,
     google_analitics_token: public_settings_config.site.google_analitics_token,
 
     github_link: public_settings_config.site.github_link,

@@ -142,38 +142,6 @@
                     <h4>E-mail:</h4>
                     <p><a href="mailto:<%- author.contact_mail %>"><%- author.contact_mail %></a><br/>
                 </div>
-                <div class="widget meta-social column three">
-                    <h4>Donate</h4>
-                    <table style="padding: 0px; margin: 0px;">
-                        <tr>
-                            <td>
-                                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"
-                                      float="center">
-                                    <input type="hidden" name="cmd" value="_s-xclick">
-                                    <input type="hidden" name="hosted_button_id" value="<%- site.paypal_token %>">
-                                    <input type="image"
-                                           src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0"
-                                           name="submit" alt="PayPal - The safer, easier way to pay online!">
-                                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif"
-                                         width="1" height="1">
-                                </form>
-                            </td>
-                            <td>
-                                <form action="https://merchant.wmtransfer.com/lmi/payment.asp" method="POST"><input
-                                            type="hidden"
-                                            name="LMI_PAYMENT_AMOUNT"
-                                            value="10.00">
-                                    <input type="hidden" name="LMI_PAYMENT_DESC_BASE64"
-                                           value="RG9uYXRlIGZvciBGYXN0b05vU1FM"> <input
-                                            type="hidden" name="LMI_PAYEE_PURSE" value="Z330657777229"> <input
-                                            type="submit" class="wmbtn"
-                                            style="font-famaly:Verdana, Helvetica, sans-serif!important;padding:0 10px;height:25px;font-size:12px!important;border:1px solid #538ec1!important;background:#2A3198!important;color:#fff!important; border-radius: 5px;"
-                                            value=" pay 10.00 WMZ ">
-                                </form>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
             </section><!-- top-footer -->
             <section id="bottom-footer">
                 <p class="keep-left"><%- company.copyright %></p>
