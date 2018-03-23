@@ -306,46 +306,45 @@ function version(args, opt, callback) {
 }
 
 function statistic(args, opt, callback) {
-    if (!args || !args.hasOwnProperty('os') || !args.hasOwnProperty('project')) {
+    if (!args || !args.hasOwnProperty('os') || !args.hasOwnProperty('project') || !args.hasOwnProperty("email")) {
         callback('invalid arguments', null);
         return;
     }
 
     console.log("statistic:", args);
-    if (args.project.hasOwnProperty("email")) {
-        var os = {
-            name: args.os.name,
-            version: args.os.version,
-            arch: args.os.arch
-        };
-        var proj = {
-            name: args.project.name,
-            version: args.project.version,
-            arch: args.project.arch,
-            exec_count: args.project.exec_count
-        };
+    var os = {
+        name: args.os.name,
+        version: args.os.version,
+        arch: args.os.arch
+    };
+    var proj = {
+        name: args.project.name,
+        version: args.project.version,
+        arch: args.project.arch,
+        exec_count: args.project.exec_count
+    };
 
-        var User = mongoose.model("User");
-        User.findOne({'email': args.project.email}, function (err, user) {
+    var User = mongoose.model("User");
+    User.findOne({'email': args.email}, function (err, user) {
+        if (err) {
+            console.error('failed to find user for statistic: ', err);
+            return;
+        }
+
+        if (!user) {
+            console.error('User for statistic not found');
+            return;
+        }
+
+        var new_stat = {create_date: Date(), os: os, project: proj};
+        user.statistic.push(new_stat);
+        user.save(function (err) {
             if (err) {
-                console.error('failed to find user for statistic: ', err);
-                return;
+                console.error('failed to save statistic request: ', err);
             }
-
-            if (!user) {
-                console.error('User for statistic not found');
-                return;
-            }
-
-            var new_stat = {create_date: Date(), os: os, project: proj};
-            user.statistic.push(new_stat);
-            user.save(function (err) {
-                if (err) {
-                    console.error('failed to save statistic request: ', err);
-                }
-            });
+            return;
         });
-    }
+    });
     callback(null, 'OK');
 }
 
