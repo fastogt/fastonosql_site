@@ -269,7 +269,7 @@ nev.generateTempUserModel(User, function (err, tempUserModel) {
 require('./config/passport')(nev, passport); // pass passport for configuration
 
 // set up our express application
-app.use(compression())
+app.use(compression());
 app.use(express.static(public_dir_abs_path));
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
@@ -312,26 +312,40 @@ function statistic(args, opt, callback) {
     }
 
     console.log("statistic:", args);
-    var os = {
-        name: args.os.name,
-        version: args.os.version,
-        arch: args.os.arch
-    };
-    var proj = {
-        name: args.project.name,
-        version: args.project.version,
-        arch: args.project.arch,
-        exec_count: args.project.exec_count
-    };
-    if (args.project.hasOwnProperty("owner")) {
-        proj.owner = args.project.owner;
+    if (args.project.hasOwnProperty("email")) {
+        var os = {
+            name: args.os.name,
+            version: args.os.version,
+            arch: args.os.arch
+        };
+        var proj = {
+            name: args.project.name,
+            version: args.project.version,
+            arch: args.project.arch,
+            exec_count: args.project.exec_count
+        };
+
+        var User = mongoose.model("User");
+        User.findOne({'email': args.project.email}, function (err, user) {
+            if (err) {
+                console.error('failed to find user for statistic: ', err);
+                return;
+            }
+
+            if (!user) {
+                console.error('User for statistic not found');
+                return;
+            }
+
+            var new_stat = new Statistic({os: os, project: proj});
+            user.statistic.push(new_stat);
+            user.save(function (err) {
+                if (err) {
+                    console.error('failed to save statistic request: ', err);
+                }
+            });
+        });
     }
-    var new_stat = new Statistic({os: os, project: proj});
-    new_stat.save(function (err) {
-        if (err) {
-            console.error('failed to save statistic request: ', err);
-        }
-    });
     callback(null, 'OK');
 }
 
@@ -370,7 +384,11 @@ function is_subscribed(args, opt, callback) {
             user.application_end_date = end_date;
         }
         user.exec_count = user.exec_count + 1;
-        user.save();
+        user.save(function (err) {
+            if (err) {
+                console.error('failed to save user application data: ', err);
+            }
+        });
 
         function generate_response(state) {
             var result = {

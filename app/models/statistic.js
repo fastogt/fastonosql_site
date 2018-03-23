@@ -14,7 +14,7 @@ var StatisticSchema = mongoose.Schema({
     project: ProjectSchema
 });
 
-// create the model for users and expose it to our app
-module.exports = mongoose.model('Statistic', StatisticSchema);
+// create the model for statistics and expose it to our app
+module.exports = StatisticSchema;
 
 

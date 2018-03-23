@@ -7,7 +7,7 @@ var OperationSystemSchema = mongoose.Schema({
     arch: String
 });
 
-// create the model for users and expose it to our app
+// create the model for os and expose it to our app
 module.exports = OperationSystemSchema;
 
 

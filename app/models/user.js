@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var crypto = require('crypto');
 var FastSpring = require('./../fastspring');
 
+var StatisticSchema = require('./statistic');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
@@ -32,7 +33,8 @@ var userSchema = mongoose.Schema({
     },
     email_subscription: Boolean,
     exec_count: {type: Number, default: 0},
-    application_end_date: {type: Date, default: Date.now}
+    application_end_date: {type: Date, default: Date.now},
+    statistic: [StatisticSchema]
 });
 
 // generating a hash
