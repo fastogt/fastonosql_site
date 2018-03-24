@@ -17,7 +17,7 @@ var public_downloads_users_dir_abs_path = public_downloads_dir_abs_path + '/user
 // set up ======================================================================
 // get all the tools we need
 var express = require('express');
-var compression = require('compression')
+var compression = require('compression');
 var app = express();
 var port = settings_config.http_server_port;
 var mongoose = require('mongoose');
@@ -48,7 +48,7 @@ var listener = io.listen(server);
 // statistic
 var Statistic = require('./app/models/statistic');
 
-var FastSpring = require('./app/fastspring');
+var FastSpring = require('./app/modules/fastspring');
 
 // settings
 app.locals.site = {
@@ -152,7 +152,7 @@ listener.on('connection', function (socket) {
                 'message': 'Send request to build server'
             }); //
 
-            var rpc = new (require('./app/amqprpc'))(rabbit_connection);
+            var rpc = new (require('./app/modules/amqprpc'))(rabbit_connection);
             var branding_variables = '-DIS_PUBLIC_BUILD=OFF -DUSER_LOGIN=' + in_json.email + ' -DUSER_FIRST_NAME=' + in_json.first_name + ' -DUSER_LAST_NAME=' + in_json.last_name;
             for (var i = 0; i < app.locals.site.supported_databases.length; ++i) {
                 var sup_db = app.locals.site.supported_databases[i];

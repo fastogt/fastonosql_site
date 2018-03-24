@@ -1,7 +1,7 @@
 // load the things we need
 var mongoose = require('mongoose');
 var crypto = require('crypto');
-var FastSpring = require('./../fastspring');
+var FastSpring = require('./../modules/fastspring');
 
 var StatisticSchema = require('./statistic');
 

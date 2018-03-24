@@ -3,8 +3,8 @@ var User = require('../app/models/user');
 
 var fs = require('fs');
 var path_module = require('path');
-var FastSpring = require('./fastspring');
-var MailerLite = require('./mailer_lite');
+var FastSpring = require('./modules/fastspring');
+var MailerLite = require('./modules/mailerlite');
 
 function deleteFolderRecursive(path) {
     if (fs.existsSync(path)) {
