@@ -11,7 +11,9 @@ var configAuth = require('./auth'); // use this one for testing
 function validateEmail(email, done) {
     var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var is_valid = re.test(email);
-    if (!is_valid) {
+    var invalid_domains = /(mvrht|nwytg)\./
+
+    if (!is_valid || invalid_domains.test(email)) {
         done('Invalid email input.');
         return;
     }
