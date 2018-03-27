@@ -139,15 +139,19 @@
                                 <span>Data-visualization</span>
                             </li>
                             <li>
-                                <i class="material-icons icon-conditions">timer_off</i>
-                                <span>Free forever</span>
+                                <i class="material-icons icon-conditions">vpn_key</i>
+                                <span>Secure protected application</span>
+                            </li>
+                            <li>
+                                <i class="material-icons icon-conditions">devices</i>
+                                <span>Can be used on single device</span>
                             </li>
                         </ul>
-                        <a href="/registered_users_downloads"
-                           class="btn btn-success download btn-subscription" disabled>Not available</br> ONLY
-                            SUBSCRIPTION</a>
                         <!--<a href="/registered_users_downloads"
-                           class="btn btn-success download btn-subscription">Download</a>-->
+                           class="btn btn-success download btn-subscription" disabled>Not available</br> ONLY
+                            SUBSCRIPTION</a>-->
+                        <a href="/registered_users_downloads"
+                           class="btn btn-success download btn-subscription">Download</a>
                     </div>
                 </div>
                 <div class="col-sm-3 box-subscription">
@@ -186,16 +190,16 @@
                                 <span>Data-visualization</span>
                             </li>
                             <li>
-                                <i class="material-icons icon-conditions">timer_off</i>
-                                <span>Free forever</span>
+                                <i class="material-icons icon-conditions">vpn_key</i>
+                                <span>Secure protected application</span>
+                            </li>
+                            <li>
+                                <i class="material-icons icon-conditions">devices</i>
+                                <span style="color:red">Unlimeted devices count</span>
                             </li>
                             <li>
                                 <i class="material-icons icon-conditions">accessibility</i>
                                 <span style="color:red">Individual builds without limitations</span>
-                            </li>
-                            <li>
-                                <i class="material-icons icon-conditions">vpn_key</i>
-                                <span style="color:red">Secure protected application</span>
                             </li>
                             <li>
                                 <i class="material-icons icon-conditions">bug_report</i>
@@ -250,16 +254,16 @@
                                 <span>Data-visualization</span>
                             </li>
                             <li>
-                                <i class="material-icons icon-conditions">timer_off</i>
-                                <span>Free forever</span>
+                                <i class="material-icons icon-conditions">vpn_key</i>
+                                <span>Secure protected application</span>
+                            </li>
+                            <li>
+                                <i class="material-icons icon-conditions">devices</i>
+                                <span style="color:red">Unlimeted devices count</span>
                             </li>
                             <li>
                                 <i class="material-icons icon-conditions">accessibility</i>
                                 <span style="color:red">Individual builds without limitations</span>
-                            </li>
-                            <li>
-                                <i class="material-icons icon-conditions">vpn_key</i>
-                                <span style="color:red">Secure protected application</span>
                             </li>
                             <li>
                                 <i class="material-icons icon-conditions">bug_report</i>
@@ -285,7 +289,6 @@
         </div>
         <% } else if (user.getSubscriptionState() === 'active') { %>
         <div class="col-sm-4">
-            <!-- <a href="/subscribed_users_downloads" class="btn btn-success download">Download</a> -->
             <form action="/build_installer_request" method="get" class="btn-verification">
                 <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version</button>
             </form>
@@ -347,7 +350,7 @@
                                 limitations</a>
                         </strong>.
                     </li>
-                    <li>Application starts only after user verification</li>
+                    <li>Without devices limitations</li>
                     <li>For subscribed people we can build any package you like, for any platform architecture.</li>
                     <li>Bugs/features requests priority</li>
                     <li>Support services, realtime or via emals, we can help you with understanding <strong>NoSQL

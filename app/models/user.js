@@ -28,7 +28,7 @@ var userSchema = mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['USER', 'FOUNDER', 'SUPPORT'],
+        enum: ['USER', 'SUPPORT'],
         default: 'USER'
     },
     email_subscription: Boolean,

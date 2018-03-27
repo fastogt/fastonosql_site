@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title><%- site.title %> - How to use</title>
+    <title>Download | <%- site.title %></title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -37,8 +37,8 @@
 
         function download(os, platform, package_extension) {
             ga('send', 'event', 'Download', 'Anonim user download for ' + os, 'Download Page');
-            // location.href = '/trial_users_downloads/' + os + '/<%= project.name_lowercase %>-<%= project.version %>-' + platform + package_extension;
-            location.href = '/login';
+            location.href = '/trial_users_downloads/' + os + '/<%= project.name_lowercase %>-<%= project.version %>-' + platform + package_extension;
+            // location.href = '/login';
         }
     </script>
 </head>
@@ -82,8 +82,8 @@
         <div class="container">
             <h3>
                 <p>Download <%= site.small_description %></p>
-                <!-- <span style="color:red">This is trial version, after subscription you can get unlimited version.</span> -->
-                <span style="color:red">Trials are not available. Only after subscription you can get application.</span>
+                <span style="color:red">This is trial version, after subscription you can get unlimited version.</span>
+                <!-- <span style="color:red">Trials are not available. Only after subscription you can get application.</span>  -->
             </h3>
             <div class="row">
                 <div class="row">

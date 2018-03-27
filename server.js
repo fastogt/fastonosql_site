@@ -153,7 +153,7 @@ listener.on('connection', function (socket) {
             }); //
 
             var rpc = new (require('./app/modules/amqprpc'))(rabbit_connection);
-            var branding_variables = '-DIS_PUBLIC_BUILD=OFF -DUSER_LOGIN=' + in_json.email + ' -DUSER_FIRST_NAME=' + in_json.first_name + ' -DUSER_LAST_NAME=' + in_json.last_name;
+            var branding_variables = '-DIS_PUBLIC_BUILD=OFF -DUSER_LOGIN=' + in_json.email;
             for (var i = 0; i < app.locals.site.supported_databases.length; ++i) {
                 var sup_db = app.locals.site.supported_databases[i];
                 var found = false;
@@ -341,7 +341,6 @@ function statistic(args, opt, callback) {
             if (err) {
                 console.error('failed to save statistic request: ', err);
             }
-            return;
         });
     });
     callback(null, 'OK');
