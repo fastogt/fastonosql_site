@@ -24,8 +24,6 @@ module.exports = {
         twitter_link: 'https://twitter.com/FastoNoSQL',
         
         google_analitics_token: 'UA-56403848-4',
-        //data_ad_client: 'ca-pub-4299795201353238',
-        //data_ad_slot: '1261996191',
 
         supported_databases: [{'name': 'Redis', 'option': 'BUILD_WITH_REDIS', 'active': true},
             {'name': 'Memcached', 'option': 'BUILD_WITH_MEMCACHED', 'active': true},

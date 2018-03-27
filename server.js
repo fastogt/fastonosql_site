@@ -341,7 +341,6 @@ function statistic(args, opt, callback) {
             if (err) {
                 console.error('failed to save statistic request: ', err);
             }
-            return;
         });
     });
     callback(null, 'OK');
