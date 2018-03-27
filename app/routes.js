@@ -57,26 +57,6 @@ module.exports = function (app, passport, nev) {
         res.render('registered_users_downloads.ejs');
     });
 
-    app.get('/subscribed_users_downloads', function (req, res, next) {
-        var subscr = req.user.getSubscription();
-        if (!subscr) {
-            res.redirect('/profile');
-        }
-
-        fastSpring.checkSubscriptionState('active', subscr.subscriptionId)
-            .then(function (result) {
-                if (result) {
-                    return next();
-                }
-
-                res.redirect('/profile');
-            }).catch(function (error) {
-            res.redirect('/profile');
-        });
-    }, function (req, res) {
-        res.render('subscribed_users_downloads.ejs');
-    });
-
     app.get('/build_installer_request', User.checkSubscriptionStatus(app, 'active'), function (req, res) {
         var user = req.user;
 
