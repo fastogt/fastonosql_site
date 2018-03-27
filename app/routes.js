@@ -188,6 +188,26 @@ module.exports = function (app, passport, nev) {
         });
     });
 
+    app.get('/deleteProfile', isLoggedIn, function (req, res) {
+        var user = req.user;
+        // TODO: check pay subscription
+
+        if (user.email_subscription) {
+            mailerLite.updateSubscriber(user.email, { // un subscribed
+                type: 'unsubscribed'
+            }).then(function () {
+                user.remove(function (err) {
+                    if (!err) {
+                        res.redirect('/logout');
+                    }
+                    // render profile with message
+                })
+            }).catch(function (err) {
+                // render profile with message
+            });
+        }
+    });
+
     // SUBSCRIPTION =============================
     app.post('/subscription', isLoggedIn, function (req, res) {
         var user = req.user;
