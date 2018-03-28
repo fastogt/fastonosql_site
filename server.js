@@ -369,7 +369,7 @@ function is_subscribed(args, opt, callback) {
 
         // if no user is found, return the message
         if (!user) {
-            return callback('User not found', null);
+            return callback('User(' + user.email + ') not found', null);
         }
 
         if (!user.validHexedPassword(args.password)) {
@@ -402,7 +402,7 @@ function is_subscribed(args, opt, callback) {
 
         if (!user.subscription) {
             if (user.application_state === BANNED_STATE) { // if banned
-                return callback('User banned, please write to ' + app.locals.support.contact_email + ' to unban, or subscribe.', null);
+                return callback('User(' + user.email + ') banned, please write to ' + app.locals.support.contact_email + ' to unban, or subscribe', null);
             }
 
             return callback(null, generate_response(UNSUBSCRIBED_USER));
@@ -416,7 +416,7 @@ function is_subscribed(args, opt, callback) {
                 }
 
                 if (user.application_state === BANNED_STATE) {  // if banned
-                    return callback('User banned, please write to ' + app.locals.support.contact_email + ' to unban, or subscribe.', null);
+                    return callback('User(' + user.email + ') banned, please write to ' + app.locals.support.contact_email + ' to unban, or subscribe', null);
                 }
                 return callback(null, generate_response(UNSUBSCRIBED_USER));
             }).catch(function (error) {
@@ -431,6 +431,7 @@ function ban_user(args, opt, callback) {
         return;
     }
 
+    console.log("ban_user:", args);
     var User = mongoose.model("User");
     User.findOne({'email': args.email}, function (err, user) {
         // if there are any errors, return the error
@@ -480,7 +481,7 @@ function ban_user(args, opt, callback) {
 json_rpc2_server.expose('version', version);
 json_rpc2_server.expose('statistic', statistic);
 json_rpc2_server.expose('is_subscribed', is_subscribed);
-json_rpc2_server.expose('ban_user', is_subscribed);
+json_rpc2_server.expose('ban_user', ban_user);
 
 // listen creates an HTTP server on localhost only
 json_rpc2_server.listenRaw(app.locals.project.port, app.locals.project.domain);
