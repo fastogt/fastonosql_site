@@ -302,57 +302,6 @@ json_rpc2_server.on('error', function (err) {
 
 const BANNED_STATE = 'BANNED';
 
-function ban_user(args, opt, callback) {
-    if (!args || !args.hasOwnProperty('email') || !args.hasOwnProperty('collision_id')) {
-        callback('invalid arguments', null);
-        return;
-    }
-
-    var User = mongoose.model("User");
-    User.findOne({'email': args.email}, function (err, user) {
-        // if there are any errors, return the error
-        if (err) {
-            console.error('Failed to find user: ', err);
-            return;
-        }
-
-        // if no user is found, return the message
-        if (!user) {
-            console.error('User not found');
-            return;
-        }
-
-        user.application_state = BANNED_STATE;
-        user.save(function (err) {
-            if (err) {
-                console.error('Failed to save user application state: ', err);
-            }
-        });
-    });
-
-    User.findById(args.collision_id, function (err, user) {
-        // if there are any errors, return the error
-        if (err) {
-            console.error('Failed to find user: ', err);
-            return;
-        }
-
-        // if no user is found, return the message
-        if (!user) {
-            console.error('User not found');
-            return;
-        }
-
-        user.application_state = BANNED_STATE;
-        user.save(function (err) {
-            if (err) {
-                console.error('Failed to save user application state: ', err);
-            }
-        });
-    });
-    callback(null, 'OK');
-}
-
 function version(args, opt, callback) {
     callback(null, app.locals.project.version);
 }
@@ -427,10 +376,6 @@ function is_subscribed(args, opt, callback) {
             return callback('Wrong password', null);
         }
 
-        if (user.application_state === BANNED_STATE && !user.subscription) {
-            return callback('User banned, please write to ' + app.locals.support.contact_email + ' to unban, or subscribe.', null);
-        }
-
         if (user.exec_count === 0) {
             var end_date = new Date();
             end_date.setDate(end_date.getDate() + TRIAL_DAYS_COUNT);
@@ -456,6 +401,10 @@ function is_subscribed(args, opt, callback) {
         }
 
         if (!user.subscription) {
+            if (user.application_state === BANNED_STATE) { // if banned
+                return callback('User banned, please write to ' + app.locals.support.contact_email + ' to unban, or subscribe.', null);
+            }
+
             return callback(null, generate_response(UNSUBSCRIBED_USER));
         }
 
@@ -465,6 +414,10 @@ function is_subscribed(args, opt, callback) {
                 if (isSubscribed) {
                     return callback(null, generate_response(SUBSCRIBED_USER));
                 }
+
+                if (user.application_state === BANNED_STATE) {  // if banned
+                    return callback('User banned, please write to ' + app.locals.support.contact_email + ' to unban, or subscribe.', null);
+                }
                 return callback(null, generate_response(UNSUBSCRIBED_USER));
             }).catch(function (error) {
             return callback(error, null);
@@ -472,9 +425,62 @@ function is_subscribed(args, opt, callback) {
     });
 }
 
+function ban_user(args, opt, callback) {
+    if (!args || !args.hasOwnProperty('email') || !args.hasOwnProperty('collision_id')) {
+        callback('invalid arguments', null);
+        return;
+    }
+
+    var User = mongoose.model("User");
+    User.findOne({'email': args.email}, function (err, user) {
+        // if there are any errors, return the error
+        if (err) {
+            console.error('Failed to find user: ', err);
+            return;
+        }
+
+        // if no user is found, return the message
+        if (!user) {
+            console.error('User not found');
+            return;
+        }
+
+        user.application_state = BANNED_STATE;
+        user.save(function (err) {
+            if (err) {
+                console.error('Failed to save user application state: ', err);
+            }
+        });
+    });
+
+    User.findById(args.collision_id, function (err, user) {
+        // if there are any errors, return the error
+        if (err) {
+            console.error('Failed to find user: ', err);
+            return;
+        }
+
+        // if no user is found, return the message
+        if (!user) {
+            console.error('User not found');
+            return;
+        }
+
+        user.application_state = BANNED_STATE;
+        user.save(function (err) {
+            if (err) {
+                console.error('Failed to save user application state: ', err);
+            }
+        });
+    });
+    callback(null, 'OK');
+}
+
+
 json_rpc2_server.expose('version', version);
 json_rpc2_server.expose('statistic', statistic);
 json_rpc2_server.expose('is_subscribed', is_subscribed);
+json_rpc2_server.expose('ban_user', is_subscribed);
 
 // listen creates an HTTP server on localhost only
 json_rpc2_server.listenRaw(app.locals.project.port, app.locals.project.domain);
