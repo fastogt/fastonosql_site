@@ -39,7 +39,7 @@ module.exports = {
 
     support: {
         author: 'Topilski Alexandr',
-        contact_mail: 'support@fastogt.com',
+        contact_email: 'support@fastogt.com',
         contact_skype: 'support.fastogt'
     },
 

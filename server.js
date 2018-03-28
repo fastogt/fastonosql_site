@@ -85,9 +85,9 @@ app.locals.project = {
     port: settings_config.app_port,
     domain: public_settings_config.project.domain
 };
-app.locals.author = {
+app.locals.support = {
     name: public_settings_config.support.name,
-    contact_mail: public_settings_config.support.contact_mail,
+    contact_email: public_settings_config.support.contact_email,
     contact_skype: public_settings_config.support.contact_skype
 };
 app.locals.company = {
@@ -300,6 +300,59 @@ json_rpc2_server.on('error', function (err) {
     console.log(err);
 });
 
+const BANNED_STATE = 'BANNED';
+
+function ban_user(args, opt, callback) {
+    if (!args || !args.hasOwnProperty('email') || !args.hasOwnProperty('collision_id')) {
+        callback('invalid arguments', null);
+        return;
+    }
+
+    var User = mongoose.model("User");
+    User.findOne({'email': args.email}, function (err, user) {
+        // if there are any errors, return the error
+        if (err) {
+            console.error('Failed to find user: ', err);
+            return;
+        }
+
+        // if no user is found, return the message
+        if (!user) {
+            console.error('User not found');
+            return;
+        }
+
+        user.application_state = BANNED_STATE;
+        user.save(function (err) {
+            if (err) {
+                console.error('Failed to save user application state: ', err);
+            }
+        });
+    });
+
+    User.findById(args.collision_id, function (err, user) {
+        // if there are any errors, return the error
+        if (err) {
+            console.error('Failed to find user: ', err);
+            return;
+        }
+
+        // if no user is found, return the message
+        if (!user) {
+            console.error('User not found');
+            return;
+        }
+
+        user.application_state = BANNED_STATE;
+        user.save(function (err) {
+            if (err) {
+                console.error('Failed to save user application state: ', err);
+            }
+        });
+    });
+    callback(null, 'OK');
+}
+
 function version(args, opt, callback) {
     callback(null, app.locals.project.version);
 }
@@ -358,7 +411,6 @@ function is_subscribed(args, opt, callback) {
 
     console.log("is_subscribed:", args);
     var fastSpring = new FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
-    var mongoose = require('mongoose');
     var User = mongoose.model("User");
     User.findOne({'email': args.email}, function (err, user) {
         // if there are any errors, return the error
@@ -373,6 +425,10 @@ function is_subscribed(args, opt, callback) {
 
         if (!user.validHexedPassword(args.password)) {
             return callback('Wrong password', null);
+        }
+
+        if (user.application_state === BANNED_STATE && !user.subscription) {
+            return callback('User banned, please write to ' + app.locals.support.contact_email + ' to unban, or subscribe.', null);
         }
 
         if (user.exec_count === 0) {
