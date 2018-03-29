@@ -369,7 +369,7 @@ function is_subscribed(args, opt, callback) {
 
         // if no user is found, return the message
         if (!user) {
-            return callback('User(' + user.email + ') not found', null);
+            return callback('User(' + args.email + ') not found', null);
         }
 
         if (!user.validHexedPassword(args.password)) {

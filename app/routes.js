@@ -149,7 +149,6 @@ module.exports = function (app, passport, nev) {
                 console.error('getSubscription: ', error);
             });
         } else {
-            console.error('Not found `subscr`.', subscr);
             res.render('profile.ejs', {
                 user: req.user,
                 message: req.flash('statusProfileMessage')
