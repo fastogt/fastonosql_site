@@ -190,7 +190,6 @@ module.exports = function (app, passport, nev) {
 
     app.get('/deleteProfile', isLoggedIn, function (req, res) {
         var user = req.user;
-        // TODO: check pay subscription
 
         if (user.email_subscription) {
             mailerLite.updateSubscriber(user.email, { // un subscribed
@@ -200,11 +199,18 @@ module.exports = function (app, passport, nev) {
                     if (!err) {
                         res.redirect('/logout');
                     }
-                    // render profile with message
+                    res.redirect('/profile');
                 })
             }).catch(function (err) {
-                // render profile with message
+                res.redirect('/profile');
             });
+        } else {
+            user.remove(function (err) {
+                if (!err) {
+                    res.redirect('/logout');
+                }
+                res.redirect('/profile');
+            })
         }
     });
 

@@ -53,8 +53,15 @@
                         <a href="/logout" class="btn btn-warning navbar-btn pull-right navbar-right"><span
                                     class="fa fa-sign-out"></span> Sign out</a>
 
-                        <!--<a href="/deleteProfile" class="btn btn-danger navbar-btn pull-right navbar-right" style="margin-right: 20px;"><span-->
-                                    <!--class="fas fa-trash"></span> Delete Profile</a>-->
+                        <% if (user.enableSubscription()) { %>
+                            <a href=""
+                               class="btn btn-danger navbar-btn pull-right navbar-right"
+                               style="margin-right: 20px;"
+                               onClick="handleDeleteProfile(event)"
+                            >
+                                <span class="fas fa-trash"></span> Delete Profile
+                            </a>
+                        <% } %>
                     </div>
                 </div>
             </nav>
@@ -434,6 +441,14 @@
         });
 
         return valid
+    }
+
+    function handleDeleteProfile (e) {
+        e.preventDefault()
+        var result = confirm('Delete profile?');
+        if (result) {
+            window.location.href = '/deleteProfile';
+        }
     }
 </script>
 
