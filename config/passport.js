@@ -6,9 +6,11 @@ var User = require('../app/models/user');
 
 // load the auth variables
 var configAuth = require('./auth'); // use this one for testing
+var KickBox = require('../app/modules/kickbox'); // use this one for testing
 
 
 function validateEmail(email, done) {
+    var kick_box = new KickBox()
     var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var is_valid = re.test(email);
 
@@ -18,12 +20,6 @@ function validateEmail(email, done) {
     }
 
     var domain = email.split('@')[1];
-    var invalid_domains = ['nwytg.com', 'mvrht.net']
-
-    if (invalid_domains.find(function (d) {return d === domain})) {
-        done('Invalid domains.');
-        return;
-    }
 
     const dns = require('dns');
     dns.resolve(domain, 'MX', function (err, addresses) {
@@ -34,6 +30,13 @@ function validateEmail(email, done) {
 
         if (addresses && addresses.length > 0) {
             done(null);
+            /* kick_box.verifyEmail(email)
+                .then(function (data) {
+                    console.log('------', data)
+                }).catch(function (err) {
+                console.log('------ERROR ', err)
+            }); */
+
             return
         }
         cb('Can\'t resolve domain.');
