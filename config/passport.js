@@ -18,13 +18,6 @@ function validateEmail(email, done) {
     }
 
     var domain = email.split('@')[1];
-    var invalid_domains = ['nwytg.com', 'mvrht.net']
-
-    if (invalid_domains.find(function (d) {return d === domain})) {
-        done('Invalid domains.');
-        return;
-    }
-
     const dns = require('dns');
     dns.resolve(domain, 'MX', function (err, addresses) {
         if (err) {
