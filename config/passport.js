@@ -11,12 +11,20 @@ var configAuth = require('./auth'); // use this one for testing
 function validateEmail(email, done) {
     var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var is_valid = re.test(email);
+
     if (!is_valid) {
         done('Invalid email input.');
         return;
     }
 
     var domain = email.split('@')[1];
+    var invalid_domains = ['nwytg.com', 'mvrht.net']
+
+    if (invalid_domains.find(function (d) {return d === domain})) {
+        done('Invalid domains.');
+        return;
+    }
+
     const dns = require('dns');
     dns.resolve(domain, 'MX', function (err, addresses) {
         if (err) {

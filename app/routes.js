@@ -187,6 +187,32 @@ module.exports = function (app, passport, nev) {
         });
     });
 
+    app.get('/deleteProfile', isLoggedIn, function (req, res) {
+        var user = req.user;
+
+        if (user.email_subscription) {
+            mailerLite.updateSubscriber(user.email, { // un subscribed
+                type: 'unsubscribed'
+            }).then(function () {
+                user.remove(function (err) {
+                    if (!err) {
+                        res.redirect('/logout');
+                    }
+                    res.redirect('/profile');
+                })
+            }).catch(function (err) {
+                res.redirect('/profile');
+            });
+        } else {
+            user.remove(function (err) {
+                if (!err) {
+                    res.redirect('/logout');
+                }
+                res.redirect('/profile');
+            })
+        }
+    });
+
     // SUBSCRIPTION =============================
     app.post('/subscription', isLoggedIn, function (req, res) {
         var user = req.user;
