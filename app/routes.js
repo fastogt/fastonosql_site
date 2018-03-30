@@ -197,6 +197,7 @@ module.exports = function (app, passport, nev) {
                 user.remove(function (err) {
                     if (!err) {
                         res.redirect('/logout');
+                        return;
                     }
                     res.redirect('/profile');
                 })
@@ -207,6 +208,7 @@ module.exports = function (app, passport, nev) {
             user.remove(function (err) {
                 if (!err) {
                     res.redirect('/logout');
+                    return;
                 }
                 res.redirect('/profile');
             })
