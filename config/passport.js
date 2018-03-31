@@ -35,7 +35,6 @@ function validateEmail(email, done) {
                 }).catch(function (err) {
                     done(err);
                 });
-
             return
         }
         cb('Can\'t resolve domain.');
