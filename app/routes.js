@@ -324,7 +324,7 @@ module.exports = function (app, passport, nev) {
                 }).then(function () {
                     console.log("Email subscription is completed!");
                 }).catch(function (err_mailer) {
-                    console.error("Email subscription failed, error! ", err_mailer);
+                    console.error("Email subscription failed, error: " + err_mailer);
                 });
             }
 
