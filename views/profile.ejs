@@ -54,13 +54,13 @@
                                     class="fa fa-sign-out"></span> Sign out</a>
 
                         <% if (user.enableSubscription()) { %>
-                        <a href=""
-                           class="btn btn-danger navbar-btn pull-right navbar-right"
-                           style="margin-right: 20px;"
-                           onClick="handleDeleteProfile(event)"
-                        >
-                            <span class="fas fa-trash"></span> Delete Profile
-                        </a>
+                            <a href=""
+                               class="btn btn-danger navbar-btn pull-right navbar-right"
+                               style="margin-right: 20px;"
+                               onClick="handleDeleteProfile(event)"
+                            >
+                                <span class="fas fa-trash"></span> Delete Profile
+                            </a>
                         <% } %>
                     </div>
                 </div>
@@ -443,7 +443,7 @@
         return valid
     }
 
-    function handleDeleteProfile(e) {
+    function handleDeleteProfile (e) {
         e.preventDefault()
         var result = confirm('Delete profile?');
         if (result) {
