@@ -10,7 +10,7 @@ var KickBox = require('../app/modules/kickbox'); // use this one for testing
 
 
 function validateEmail(email, done) {
-    var kickBox = new KickBox()
+    var kickBox = new KickBox();
     var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var is_valid = re.test(email);
 
@@ -33,8 +33,8 @@ function validateEmail(email, done) {
                 .then(function () {
                     done(null);
                 }).catch(function (err) {
-                    done(err);
-                });
+                done(err);
+            });
             return
         }
         cb('Can\'t resolve domain.');
