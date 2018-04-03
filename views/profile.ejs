@@ -66,37 +66,87 @@
                 </div>
             </nav>
             <div class="row">
-                <div class="col-md-6">
-                    <form class="form-horizontal" action="/updateProfile" method="post" name="profileInfo"
+                <div class="col-md-12">
+                    <form action="/updateProfile" method="post" name="profileInfo"
                           onsubmit="return validateProfileForm()">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Email:</label>
-                            <div class="col-sm-9">
-                                <p class="form-control-static"><%= user.email %></p>
+                        <div class="row">
+                            <div class="col-md-6 mb30">
+                                <div class="form-group">
+                                    <label for="firstName">First Name:</label>
+                                        <input type="text" class="form-control" id="firstName" name="firstName"
+                                               value="<%= user.first_name %>"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb30">
+                                <div class="form-group">
+                                    <label for="lastName" >Last Name:</label>
+                                        <input type="text" class="form-control" id="lastName" name="lastName"
+                                               value="<%= user.last_name %>"/>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="firstName" class="col-sm-3 control-label">First Name:</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="firstName" name="firstName"
-                                       value="<%= user.first_name %>"/>
+
+                        <hr/>
+
+                        <div class="row">
+                            <div class="col-md-6 mb30">
+                                <div class="form-group">
+                                    <label for="lastName" >Email:</label>
+                                    <input type="text" disabled class="form-control" placeholder="<%= user.email %>" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="lastName" >Password:</label>
+                                    <div class="input-group">
+                                        <input type="text" disabled class="form-control" placeholder="**********" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button">Change Password</button>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="lastName" class="col-sm-3 control-label">Last Name:</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="lastName" name="lastName"
-                                       value="<%= user.last_name %>"/>
+
+                        <div class="row hidden">
+                            <div class="col-md-6 mb30">
+                                <div class="form-group">
+                                    <label for="currentPassword" >Current password:</label>
+                                    <input type="text" class="form-control" id="currentPassword" name="currentPassword" />
+                                </div>
                             </div>
+                            <div class="col-lg-6"></div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <button type="submit" class="btn btn-default">Update</button>
+
+                        <div class="row hidden">
+                            <div class="col-md-6 mb30">
+                                <div class="form-group">
+                                    <label for="newPassword" >New password:</label>
+                                    <input type="text" class="form-control" id="newPassword" name="newPassword" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6"></div>
+                        </div>
+
+                        <div class="row hidden">
+                            <div class="col-md-6 mb30">
+                                <div class="form-group">
+                                    <label for="repeatPassword" >Repeat password:</label>
+                                    <input type="text" class="form-control" id="repeatPassword" name="repeatPassword" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="submit-group">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn pull-left btn-warning btn-lg">Update</button>
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="col-md-6"></div>
             </div>
         </div>
     </div>
