@@ -73,14 +73,14 @@
                             <div class="col-md-6 mb30">
                                 <div class="form-group">
                                     <label for="firstName">First Name:</label>
-                                        <input type="text" class="form-control" id="firstName" name="firstName"
+                                        <input type="text" class="form-control check" id="firstName" name="firstName"
                                                value="<%= user.first_name %>"/>
                                 </div>
                             </div>
                             <div class="col-md-6 mb30">
                                 <div class="form-group">
                                     <label for="lastName" >Last Name:</label>
-                                        <input type="text" class="form-control" id="lastName" name="lastName"
+                                        <input type="text" class="form-control check" id="lastName" name="lastName"
                                                value="<%= user.last_name %>"/>
                                 </div>
                             </div>
@@ -96,52 +96,58 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="form-group">
+                                <div class="form-group" id="fakePass">
                                     <label for="lastName" >Password:</label>
                                     <div class="input-group">
                                         <input type="text" disabled class="form-control" placeholder="**********" />
                                         <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button">Change Password</button>
+                                            <button class="btn btn-default" type="button" onClick="managePassword(event)">Change Password</button>
                                         </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row hidden">
-                            <div class="col-md-6 mb30">
-                                <div class="form-group">
-                                    <label for="currentPassword" >Current password:</label>
-                                    <input type="text" class="form-control" id="currentPassword" name="currentPassword" />
+                        <div class="hidden" id="groupPass">
+                            <div class="row">
+                                <div class="col-md-6 mb30">
+                                    <div class="form-group">
+                                        <label for="currentPassword" >Current password:</label>
+                                        <input type="text" class="form-control" id="currentPassword" name="currentPassword" />
+                                    </div>
                                 </div>
+                                <div class="col-lg-6"></div>
                             </div>
-                            <div class="col-lg-6"></div>
-                        </div>
 
-                        <div class="row hidden">
-                            <div class="col-md-6 mb30">
-                                <div class="form-group">
-                                    <label for="newPassword" >New password:</label>
-                                    <input type="text" class="form-control" id="newPassword" name="newPassword" />
+                            <div class="row">
+                                <div class="col-md-6 mb30">
+                                    <div class="form-group">
+                                        <label for="newPassword" >New password:</label>
+                                        <input type="text" class="form-control" id="newPassword" name="newPassword" />
+                                    </div>
                                 </div>
+                                <div class="col-lg-6"></div>
                             </div>
-                            <div class="col-lg-6"></div>
-                        </div>
 
-                        <div class="row hidden">
-                            <div class="col-md-6 mb30">
-                                <div class="form-group">
-                                    <label for="repeatPassword" >Repeat password:</label>
-                                    <input type="text" class="form-control" id="repeatPassword" name="repeatPassword" />
+                            <div class="row">
+                                <div class="col-md-6 mb30">
+                                    <div class="form-group">
+                                        <label for="repeatPassword" >Repeat password:</label>
+                                        <input type="text" class="form-control" id="repeatPassword" name="repeatPassword" />
+                                    </div>
                                 </div>
+                                <div class="col-lg-6"></div>
                             </div>
-                            <div class="col-lg-6"></div>
                         </div>
 
                         <div class="row">
                             <div class="submit-group">
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn pull-left btn-warning btn-lg">Update</button>
+                                    <div class="pull-left no-show hidden" id="discard">
+                                        <span class="or">or</span>
+                                        <a class="back" href="javascript:;" onclick="discardManagePassword()" type="button">Don't change the password</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -482,6 +488,10 @@
         var elements = document.forms['profileInfo'].getElementsByTagName('input');
         var valid = true;
         Array.prototype.forEach.call(elements, function (element) {
+            if (['firstName', 'lastName'].indexOf(element.name) === -1) {
+                return;
+            }
+
             if (!element.value) {
                 element.parentNode.classList.add('has-error');
                 valid = false;
@@ -499,6 +509,26 @@
         if (result) {
             window.location.href = '/deleteProfile';
         }
+    }
+    
+    function managePassword () {
+        var fakePass = document.getElementById('fakePass');
+        var groupPass = document.getElementById('groupPass');
+        var discard = document.getElementById('discard');
+
+        fakePass.classList.add('hidden');
+        groupPass.classList.remove('hidden');
+        discard.classList.remove('hidden');
+    }
+
+    function discardManagePassword () {
+        var fakePass = document.getElementById('fakePass');
+        var groupPass = document.getElementById('groupPass');
+        var discard = document.getElementById('discard');
+
+        fakePass.classList.remove('hidden');
+        groupPass.classList.add('hidden');
+        discard.classList.add('hidden');
     }
 </script>
 
