@@ -9,7 +9,7 @@ module.exports = {
 
     site: {
         name: 'FastoNoSQL',
-        version: '1.0.0',
+        version: '1.1.0',
         domain: 'https://fastonosql.com',
         keywords: 'fastonosql, nosql, gui, manager, redis, client, memcached, ssdb, leveldb, rocksdb, lmdb, unqlite, upscaledb, forestdb, pika, admin, tool',
         description: 'FastoNoSQL - GUI manager for NoSQL databases.',

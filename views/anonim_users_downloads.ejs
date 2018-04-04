@@ -37,7 +37,7 @@
 
         function download(os, platform, package_extension) {
             ga('send', 'event', 'Download', 'Anonim user download for ' + os, 'Download Page');
-            location.href = '/trial_users_downloads/' + os + '/<%= project.name_lowercase %>-<%= project.version %>-' + platform + package_extension;
+            location.href = '/downloads/' + os + '/<%= project.name_lowercase %>-<%= project.version %>-' + platform + package_extension;
             // location.href = '/login';
         }
     </script>

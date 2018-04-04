@@ -20,11 +20,6 @@ function deleteFolderRecursive(path) {
     }
 }
 
-function checkIsValidDomain(domain) {
-    var re = new RegExp(/^((?:(?:(?:\w[\.\-\+]?)*)\w)+)((?:(?:(?:\w[\.\-\+]?){0,62})\w)+)\.(\w{2,6})$/);
-    return domain.match(re);
-}
-
 module.exports = function (app, passport, nev) {
     var fastSpring = new FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
     var mailerLite = new MailerLite();

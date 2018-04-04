@@ -12,8 +12,7 @@ var auth_config = require('./config/auth.js');
 
 var root_abs_path = __dirname;
 var public_dir_abs_path = root_abs_path + '/public';
-var public_downloads_dir_abs_path = public_dir_abs_path + '/subscribed_users_downloads';
-var public_downloads_users_dir_abs_path = public_downloads_dir_abs_path + '/users';
+var public_downloads_users_dir_abs_path = public_dir_abs_path + '/users';
 // set up ======================================================================
 // get all the tools we need
 var express = require('express');
