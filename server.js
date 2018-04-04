@@ -44,9 +44,6 @@ var server = https.createServer({
 var io = require('socket.io');
 var listener = io.listen(server);
 
-// statistic
-var Statistic = require('./app/models/statistic');
-
 var FastSpring = require('./app/modules/fastspring');
 
 // settings
