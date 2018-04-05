@@ -71,3 +71,17 @@
     padding: 0.6em;
     text-decoration: none;
 }
+
+.submit-group .or {
+    float: left;
+    line-height: 45px;
+    margin: 0 10px;
+    color: #666;
+}
+
+.submit-group .back {
+    float: left;
+    line-height: 45px;
+    color: #666;
+    text-decoration: underline;
+}
