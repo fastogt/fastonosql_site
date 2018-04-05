@@ -211,8 +211,8 @@ module.exports = function (app, passport, nev) {
                 .then(function () {
                     removeUser(user, res);
                 }).catch(function (err) {
-                   removeUser(user, res);
-                });
+                removeUser(user, res);
+            });
         } else {
             removeUser(user, res);
         }
@@ -382,7 +382,7 @@ function isSubscribed(req, res, next) {
 }
 
 // Note: remove user
-function removeUser (user, res) {
+function removeUser(user, res) {
     user.remove(function (err) {
         if (!err) {
             res.redirect('/logout');

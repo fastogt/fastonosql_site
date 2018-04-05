@@ -73,15 +73,15 @@
                             <div class="col-md-6 mb30">
                                 <div class="form-group">
                                     <label for="firstName">First Name:</label>
-                                        <input type="text" class="form-control check" id="firstName" name="firstName"
-                                               value="<%= user.first_name %>"/>
+                                    <input type="text" class="form-control check" id="firstName" name="firstName"
+                                           value="<%= user.first_name %>"/>
                                 </div>
                             </div>
                             <div class="col-md-6 mb30">
                                 <div class="form-group">
-                                    <label for="lastName" >Last Name:</label>
-                                        <input type="text" class="form-control check" id="lastName" name="lastName"
-                                               value="<%= user.last_name %>"/>
+                                    <label for="lastName">Last Name:</label>
+                                    <input type="text" class="form-control check" id="lastName" name="lastName"
+                                           value="<%= user.last_name %>"/>
                                 </div>
                             </div>
                         </div>
@@ -91,17 +91,18 @@
                         <div class="row">
                             <div class="col-md-6 mb30">
                                 <div class="form-group">
-                                    <label for="lastName" >Email:</label>
-                                    <input type="text" disabled class="form-control" placeholder="<%= user.email %>" />
+                                    <label for="lastName">Email:</label>
+                                    <input type="text" disabled class="form-control" placeholder="<%= user.email %>"/>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group" id="fakePass">
-                                    <label for="lastName" >Password:</label>
+                                    <label for="lastName">Password:</label>
                                     <div class="input-group">
-                                        <input type="text" disabled class="form-control" placeholder="**********" />
+                                        <input type="password" disabled class="form-control" placeholder="**********"/>
                                         <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button" onClick="managePassword(event)">Change Password</button>
+                                            <button class="btn btn-default" type="button"
+                                                    onClick="managePassword(event)">Change Password</button>
                                         </span>
                                     </div>
                                 </div>
@@ -112,8 +113,9 @@
                             <div class="row">
                                 <div class="col-md-6 mb30">
                                     <div class="form-group">
-                                        <label for="currentPassword" >Current password:</label>
-                                        <input type="text" class="form-control" id="currentPassword" name="currentPassword" />
+                                        <label for="currentPassword">Current password:</label>
+                                        <input type="password" class="form-control" id="currentPassword"
+                                               name="currentPassword"/>
                                     </div>
                                 </div>
                                 <div class="col-lg-6"></div>
@@ -122,8 +124,9 @@
                             <div class="row">
                                 <div class="col-md-6 mb30">
                                     <div class="form-group">
-                                        <label for="newPassword" >New password:</label>
-                                        <input type="text" class="form-control" id="newPassword" name="newPassword" />
+                                        <label for="newPassword">New password:</label>
+                                        <input type="password" class="form-control" id="newPassword"
+                                               name="newPassword"/>
                                     </div>
                                 </div>
                                 <div class="col-lg-6"></div>
@@ -132,8 +135,9 @@
                             <div class="row">
                                 <div class="col-md-6 mb30">
                                     <div class="form-group">
-                                        <label for="repeatPassword" >Repeat password:</label>
-                                        <input type="text" class="form-control" id="repeatPassword" name="repeatPassword" />
+                                        <label for="repeatPassword">Repeat password:</label>
+                                        <input type="password" class="form-control" id="repeatPassword"
+                                               name="repeatPassword"/>
                                     </div>
                                 </div>
                                 <div class="col-lg-6"></div>
@@ -146,7 +150,8 @@
                                     <button type="submit" class="btn pull-left btn-warning btn-lg">Update</button>
                                     <div class="pull-left no-show hidden" id="discard">
                                         <span class="or">or</span>
-                                        <a class="back" href="javascript:;" onclick="discardManagePassword()" type="button">Don't change the password</a>
+                                        <a class="back" href="javascript:;" onclick="discardManagePassword()"
+                                           type="button">Don't change the password</a>
                                     </div>
                                 </div>
                             </div>
@@ -510,8 +515,8 @@
             window.location.href = '/deleteProfile';
         }
     }
-    
-    function managePassword () {
+
+    function managePassword() {
         var fakePass = document.getElementById('fakePass');
         var groupPass = document.getElementById('groupPass');
         var discard = document.getElementById('discard');
@@ -521,7 +526,7 @@
         discard.classList.remove('hidden');
     }
 
-    function discardManagePassword () {
+    function discardManagePassword() {
         var fakePass = document.getElementById('fakePass');
         var groupPass = document.getElementById('groupPass');
         var discard = document.getElementById('discard');
