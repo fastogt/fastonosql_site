@@ -81,7 +81,7 @@ module.exports = function (nev, passport) {
         email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
         var is_valid = validateEmailInput(email);
         if (!is_valid) {
-            return done(null, false, req.flash('loginMessage', 'Invalid email ' + email + '.'));
+            return done(null, false, req.flash('loginMessage', 'Invalid email: ' + email + '.'));
         }
 
         User.findOne({'email': email}, function (err, user) {
@@ -92,7 +92,7 @@ module.exports = function (nev, passport) {
 
             // if no user is found, return the message
             if (!user) {
-                return done(null, false, req.flash('loginMessage', 'No user found.'));
+                return done(null, false, req.flash('loginMessage', 'Not found user with email: ' + email + '.'));
             }
 
             if (!user.validPassword(password)) {
@@ -118,7 +118,7 @@ module.exports = function (nev, passport) {
         email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
         validateEmail(email, function (err) {
             if (err) {
-                return done(null, false, req.flash('signupMessage', 'Invalid email ' + email + '.'));
+                return done(null, false, req.flash('signupMessage', 'Invalid email: ' + email + '.'));
             }
 
             var new_user = new User();
@@ -130,12 +130,12 @@ module.exports = function (nev, passport) {
             nev.createTempUser(new_user, function (err, existingPersistentUser, newTempUser) {
                 // some sort of error
                 if (err) {
-                    return done(err);
+                    return done(null, false, req.flash('signupMessage', err));
                 }
 
                 // user already exists in persistent collection...
                 if (existingPersistentUser) {
-                    return done(null, req.user);
+                    return done(null, false, req.flash('signupMessage', 'User with email:' + email + ' already exists.'));
                 }
                 // a new user
                 if (newTempUser) {
@@ -150,6 +150,7 @@ module.exports = function (nev, passport) {
                     });
                     // user already exists in temporary collection...
                 } else {
+                     return done(null, false, req.flash('signupMessage', 'You have already signed up. Please check your email to verify your account.'));
                     // flash message of failure...
                 }
             });
