@@ -7,17 +7,19 @@ var FastSpring = require('./modules/fastspring');
 var MailerLite = require('./modules/mailerlite');
 
 function deleteFolderRecursive(path) {
-    if (fs.existsSync(path)) {
-        fs.readdirSync(path).forEach(function (file, index) {
-            var curPath = path + "/" + file;
-            if (fs.lstatSync(curPath).isDirectory()) { // recurse
-                deleteFolderRecursive(curPath);
-            } else { // delete file
-                fs.unlinkSync(curPath);
-            }
-        });
-        fs.rmdirSync(path);
+    if (!fs.existsSync(path)) {
+        return;
     }
+
+    fs.readdirSync(path).forEach(function (file, index) {
+        var curPath = path + "/" + file;
+        if (fs.lstatSync(curPath).isDirectory()) { // recurse
+            deleteFolderRecursive(curPath);
+        } else { // delete file
+            fs.unlinkSync(curPath);
+        }
+    });
+    fs.rmdirSync(path);
 }
 
 module.exports = function (app, passport, nev) {
