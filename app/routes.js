@@ -25,7 +25,10 @@ module.exports = function (app, passport, nev) {
     var mailerLite = new MailerLite();
 
     function walk(dir, done) {
-        console.log('scan folder: ', dir);
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir);
+        }
+
         var results = [];
         fs.readdir(dir, function (err, list) {
             if (err) {
