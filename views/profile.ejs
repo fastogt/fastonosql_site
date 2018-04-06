@@ -59,7 +59,7 @@
                            style="margin-right: 20px;"
                            onClick="handleDeleteProfile(event)"
                         >
-                            <span class="fas fa-trash"></span> Delete Profile
+                            <span class="fas fa-trash"></span> Delete account
                         </a>
                         <% } %>
                     </div>
@@ -358,49 +358,7 @@
                 </div>
             </div>
         </div>
-        <% } else if (user.getSubscriptionState() === 'active') { %>
-        <div class="col-sm-4">
-            <form action="/build_installer_request" method="get" class="btn-verification">
-                <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version</button>
-            </form>
-            <a href="skype:<%- support.contact_skype %>"><%- support.contact_skype %></a>
-            <a href="mailto:<%- support.contact_email %>"><%- support.contact_email %></a>
-        </div>
-        <div class="col-sm-8">
-            <div class="row">
-                <div class="col-sm-12 text-right">
-                    <form action="/cancel_subscription" method="post">
-                        <button type="submit" class="btn btn-primary">Cancel Subscription</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <% } %>
-    </div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Hot link</th>
-            <th>Wget link</th>
-            <th>Size KB</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% if (packages.length > 0) { %>
-        <% for (i = 0; i < packages.length; i++) { %>
-        <tr>
-            <td><%= i + 1 %></td>
-            <td><a href="<%= packages[i].path %>"><%= packages[i].file_name %></a></td>
-            <td><code class="text-muted">wget <%= packages[i].path %></code></td>
-            <td><%= packages[i].size %></td>
-        </tr>
-        <% } %>
-        <% } %>
-        </tbody>
-    </table>
-    <br/>
-    <div class="row">
+
         <div class="well">
             <h3>Why do we need subscriptions?</h3>
             <strong><%- site.title %></strong> was founded in Jule 2015 and since that time more than 40 releases had
@@ -461,7 +419,48 @@
             We are waiting for your feedback! Please write any issues and proposals to <a
                     href="<%- site.github_issues_link %>" alt="NoSQL GUI">GitHub Issues</a>.
         </div>
+        <% } else if (user.getSubscriptionState() === 'active') { %>
+        <div class="col-sm-4">
+            <form action="/build_installer_request" method="get" class="btn-verification">
+                <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version</button>
+            </form>
+            <a href="skype:<%- support.contact_skype %>"><%- support.contact_skype %></a>
+            <a href="mailto:<%- support.contact_email %>"><%- support.contact_email %></a>
+        </div>
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-12 text-right">
+                    <form action="/cancel_subscription" method="post">
+                        <button type="submit" class="btn btn-primary">Cancel Subscription</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <% } %>
     </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Hot link</th>
+            <th>Wget link</th>
+            <th>Size KB</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% if (packages.length > 0) { %>
+        <% for (i = 0; i < packages.length; i++) { %>
+        <tr>
+            <td><%= i + 1 %></td>
+            <td><a href="<%= packages[i].path %>"><%= packages[i].file_name %></a></td>
+            <td><code class="text-muted">wget <%= packages[i].path %></code></td>
+            <td><%= packages[i].size %></td>
+        </tr>
+        <% } %>
+        <% } %>
+        </tbody>
+    </table>
+    <br/>
 </div>
 <!-- Fastspring actions -->
 <script>
@@ -532,7 +531,7 @@
 
     function handleDeleteProfile(e) {
         e.preventDefault()
-        var result = confirm('Delete profile?');
+        var result = confirm('Delete account?');
         if (result) {
             window.location.href = '/deleteProfile';
         }

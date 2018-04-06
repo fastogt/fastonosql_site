@@ -69,7 +69,19 @@ module.exports = function (app, passport, nev) {
         });
     }
 
-// normal routes ===============================================================
+    // Note: remove user
+    function removeUser(user, res) {
+        deleteFolderRecursive(app.locals.site.users_directory + '/' + user.email);
+        user.remove(function (err) {
+            if (!err) {
+                res.redirect('/logout');
+            } else {
+                res.redirect('/profile');
+            }
+        })
+    }
+
+    // normal routes ===============================================================
 
     // show the home page (will also have our login links)
     app.get('/', function (req, res) {
@@ -397,15 +409,4 @@ function isSubscribed(req, res, next) {
     }
 
     res.redirect('/profile');
-}
-
-// Note: remove user
-function removeUser(user, res) {
-    user.remove(function (err) {
-        if (!err) {
-            res.redirect('/logout');
-        } else {
-            res.redirect('/profile');
-        }
-    })
 }
