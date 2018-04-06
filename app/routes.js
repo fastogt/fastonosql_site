@@ -20,51 +20,51 @@ function deleteFolderRecursive(path) {
     }
 }
 
-function walk(dir, done) {
-    console.log('scan folder: ', dir);
-    var results = [];
-    fs.readdir(dir, function (err, list) {
-        if (err) {
-            return done(err, []);
-        }
-        var pending = list.length;
-        if (!pending) {
-            return done(null, results);
-        }
-        list.forEach(function (file) {
-            var file_name = file;
-            file = path_module.resolve(dir, file);
-            fs.stat(file, function (err, stat) {
-                if (err) {
-                    return done(err, []);
-                }
-
-                if (stat && stat.isDirectory()) {
-                    walk(file, function (err, res) {
-                        results = results.concat(res);
-                        if (!--pending) {
-                            done(null, results);
-                        }
-                    });
-                } else {
-                    var path = file.replace(app.locals.site.public_directory, '');
-                    results.push({
-                        'path': app.locals.site.domain + path,
-                        'file_name': file_name,
-                        'size': parseInt(stat.size / 1024)
-                    });
-                    if (!--pending) {
-                        done(null, results);
-                    }
-                }
-            });
-        });
-    });
-}
-
 module.exports = function (app, passport, nev) {
     var fastSpring = new FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
     var mailerLite = new MailerLite();
+
+    function walk(dir, done) {
+        console.log('scan folder: ', dir);
+        var results = [];
+        fs.readdir(dir, function (err, list) {
+            if (err) {
+                return done(err, []);
+            }
+            var pending = list.length;
+            if (!pending) {
+                return done(null, results);
+            }
+            list.forEach(function (file) {
+                var file_name = file;
+                file = path_module.resolve(dir, file);
+                fs.stat(file, function (err, stat) {
+                    if (err) {
+                        return done(err, []);
+                    }
+
+                    if (stat && stat.isDirectory()) {
+                        walk(file, function (err, res) {
+                            results = results.concat(res);
+                            if (!--pending) {
+                                done(null, results);
+                            }
+                        });
+                    } else {
+                        var path = file.replace(app.locals.site.public_directory, '');
+                        results.push({
+                            'path': app.locals.site.domain + path,
+                            'file_name': file_name,
+                            'size': parseInt(stat.size / 1024)
+                        });
+                        if (!--pending) {
+                            done(null, results);
+                        }
+                    }
+                });
+            });
+        });
+    }
 
 // normal routes ===============================================================
 
