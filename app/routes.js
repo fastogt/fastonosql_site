@@ -20,6 +20,48 @@ function deleteFolderRecursive(path) {
     }
 }
 
+function walk(dir, done) {
+    console.log('scan folder: ', dir);
+    var results = [];
+    fs.readdir(dir, function (err, list) {
+        if (err) {
+            return done(err, []);
+        }
+        var pending = list.length;
+        if (!pending) {
+            return done(null, results);
+        }
+        list.forEach(function (file) {
+            var file_name = file;
+            file = path_module.resolve(dir, file);
+            fs.stat(file, function (err, stat) {
+                if (err) {
+                    return done(err, []);
+                }
+
+                if (stat && stat.isDirectory()) {
+                    walk(file, function (err, res) {
+                        results = results.concat(res);
+                        if (!--pending) {
+                            done(null, results);
+                        }
+                    });
+                } else {
+                    var path = file.replace(app.locals.site.public_directory, '');
+                    results.push({
+                        'path': app.locals.site.domain + path,
+                        'file_name': file_name,
+                        'size': parseInt(stat.size / 1024)
+                    });
+                    if (!--pending) {
+                        done(null, results);
+                    }
+                }
+            });
+        });
+    });
+}
+
 module.exports = function (app, passport, nev) {
     var fastSpring = new FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
     var mailerLite = new MailerLite();
@@ -54,49 +96,6 @@ module.exports = function (app, passport, nev) {
 
     app.get('/build_installer_request', User.checkSubscriptionStatus(app, 'active'), function (req, res) {
         var user = req.user;
-
-        var walk = function (dir, done) {
-            console.log('scan folder: ', dir);
-            var results = [];
-            fs.readdir(dir, function (err, list) {
-                if (err) {
-                    return done(err, []);
-                }
-                var pending = list.length;
-                if (!pending) {
-                    return done(null, results);
-                }
-                list.forEach(function (file) {
-                    var file_name = file;
-                    file = path_module.resolve(dir, file);
-                    fs.stat(file, function (err, stat) {
-                        if (err) {
-                            return done(err, []);
-                        }
-
-                        if (stat && stat.isDirectory()) {
-                            walk(file, function (err, res) {
-                                results = results.concat(res);
-                                if (!--pending) {
-                                    done(null, results);
-                                }
-                            });
-                        } else {
-                            var path = file.replace(app.locals.site.public_directory, '');
-                            results.push({
-                                'path': app.locals.site.domain + path,
-                                'file_name': file_name,
-                                'size': parseInt(stat.size / 1024)
-                            });
-                            if (!--pending) {
-                                done(null, results);
-                            }
-                        }
-                    });
-                });
-            });
-        };
-
         walk(app.locals.site.users_directory + '/' + user.email, function (err, results) {
             if (err) {
                 console.error(err);
@@ -121,39 +120,48 @@ module.exports = function (app, passport, nev) {
 
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function (req, res) {
-        var subscr = req.user.getSubscription();
+        var user = req.user;
 
-        if (subscr) {
-            fastSpring.getSubscription(subscr.subscriptionId)
-                .then(function (data) {
-                    var subscription = JSON.parse(data);
+        walk(app.locals.site.users_directory + '/' + user.email, function (err, results) {
+            if (err) {
+                console.error(err);
+            }
 
-                    req.user.set({subscription_state: subscription.state});
-                    req.user.save(function (err) {
-                        if (err) {
-                            console.error('getSubscription: ', err);
-                        }
-                    });
+            var subscr = user.getSubscription();
+            if (subscr) {
+                fastSpring.getSubscription(subscr.subscriptionId)
+                    .then(function (data) {
+                        var subscription = JSON.parse(data);
 
-                    console.log('Success. Set subscription.');
-                    res.render('profile.ejs', {
-                        user: req.user,
-                        message: req.flash('statusProfileMessage')
-                    });
-                }).catch(function (error) {
-                console.error('getSubscription: ', error);
-            });
-        } else {
-            res.render('profile.ejs', {
-                user: req.user,
-                message: req.flash('statusProfileMessage')
-            });
-        }
+                        user.set({subscription_state: subscription.state});
+                        user.save(function (err) {
+                            if (err) {
+                                console.error('getSubscription: ', err);
+                            }
+                        });
+
+                        console.log('Success. Set subscription.');
+                        res.render('profile.ejs', {
+                            user: user,
+                            message: req.flash('statusProfileMessage'),
+                            packages: results
+                        });
+                    }).catch(function (error) {
+                    console.error('getSubscription: ', error);
+                });
+            } else {
+                res.render('profile.ejs', {
+                    user: user,
+                    message: req.flash('statusProfileMessage'),
+                    packages: results
+                });
+            }
+        });
     });
 
     app.post('/updateProfile', isLoggedIn, function (req, res) {
         var user = req.user;
-        var message = ''
+        var message = '';
 
         // Note: manage password.
         if (req.body.currentPassword) {
@@ -196,10 +204,11 @@ module.exports = function (app, passport, nev) {
                 });
             }
 
-            res.render('profile.ejs', {
+            /*res.render('profile.ejs', {
                 user: req.user,
                 message: message || req.flash('statusProfileMessage')
-            });
+            });*/
+            res.redirect('/profile');
         });
     });
 
@@ -329,6 +338,12 @@ module.exports = function (app, passport, nev) {
             }
 
             var email = user.email;
+
+            // user folder
+            var dir = app.locals.site.users_directory + '/' + user.email;
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir);
+            }
 
             if (user.email_subscription) {
                 mailerLite.addNewSubscriberToGroup(app.locals.mailer_lite_config.group, {
