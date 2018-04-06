@@ -8,6 +8,7 @@ var User = require('../app/models/user');
 var configAuth = require('./auth'); // use this one for testing
 var KickBox = require('../app/modules/kickbox'); // use this one for testing
 
+var fs = require('fs');
 
 function validateEmailInput(email) {
     var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -144,6 +145,12 @@ module.exports = function (nev, passport) {
                         console.log("verify email message sended to: " + email + ", error: " + err);
                         if (err) {
                             return done(err);
+                        }
+
+                        // Note: create folder
+                        var dir = './public/users/' + email;
+                        if (!fs.existsSync(dir)){
+                            fs.mkdirSync(dir);
                         }
 
                         return done(null, false, req.flash('signupMessage', 'Please check ' + email + ' to verify your account.'));
