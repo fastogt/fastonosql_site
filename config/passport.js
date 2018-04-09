@@ -6,44 +6,7 @@ var User = require('../app/models/user');
 
 // load the auth variables
 var configAuth = require('./auth'); // use this one for testing
-var KickBox = require('../app/modules/kickbox'); // use this one for testing
-
-
-function validateEmailInput(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
-
-function validateEmail(email, done) {
-    var kickBox = new KickBox();
-    var is_valid = validateEmailInput(email);
-
-    if (!is_valid) {
-        done('Invalid email input.');
-        return;
-    }
-
-    var domain = email.split('@')[1];
-
-    const dns = require('dns');
-    dns.resolve(domain, 'MX', function (err, addresses) {
-        if (err) {
-            done(err);
-            return
-        }
-
-        if (addresses && addresses.length > 0) {
-            kickBox.verifyEmail(email)
-                .then(function () {
-                    done(null);
-                }).catch(function (err) {
-                done(err);
-            });
-            return
-        }
-        done('Can\'t resolve domain.');
-    });
-}
+var validate_email = require('../app/modules/validate_email'); // use this one for testing
 
 module.exports = function (nev, passport) {
 
@@ -79,7 +42,7 @@ module.exports = function (nev, passport) {
         }
 
         email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
-        var is_valid = validateEmailInput(email);
+        var is_valid = validate_email.validateEmailInput(email);
         if (!is_valid) {
             return done(null, false, req.flash('loginMessage', 'Invalid email: ' + email + '.'));
         }
@@ -116,7 +79,7 @@ module.exports = function (nev, passport) {
             return done(null, false, req.flash('signupMessage', 'Invalid input.'));
         }
         email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
-        validateEmail(email, function (err) {
+        validate_email.validateEmail(email, function (err) {
             if (err) {
                 return done(null, false, req.flash('signupMessage', 'Invalid email: ' + email + '.'));
             }
@@ -150,7 +113,7 @@ module.exports = function (nev, passport) {
                     });
                     // user already exists in temporary collection...
                 } else {
-                     return done(null, false, req.flash('signupMessage', 'You have already signed up. Please check your email to verify your account.'));
+                    return done(null, false, req.flash('signupMessage', 'You have already signed up. Please check your email to verify your account.'));
                     // flash message of failure...
                 }
             });
