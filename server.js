@@ -8,7 +8,6 @@ function gen_routing_key(platform, arch) {
 var config_db = require('./config/database.js');
 var public_settings_config = require('./config/public_settings.js');
 var settings_config = require('./config/settings.js');
-var auth_config = require('./config/auth.js');
 
 var root_abs_path = __dirname;
 var public_dir_abs_path = root_abs_path + '/public';

@@ -3,9 +3,6 @@ var LocalStrategy = require('passport-local').Strategy;
 
 // load up the user model
 var User = require('../app/models/user');
-
-// load the auth variables
-var configAuth = require('./auth'); // use this one for testing
 var validate_email = require('../app/modules/validate_email'); // use this one for testing
 
 module.exports = function (nev, passport) {

@@ -106,7 +106,7 @@ userSchema.statics.checkSubscriptionStatus = function (app, state) {
             res.redirect('/profile');
         }
     }
-}
+};
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);

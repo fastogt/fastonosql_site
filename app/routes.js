@@ -403,12 +403,3 @@ function isLoggedIn(req, res, next) {
 
     res.redirect('/');
 }
-
-// Note: will be deleted
-function isSubscribed(req, res, next) {
-    if (req.user.getSubscriptionState() === 'active') {
-        return next();
-    }
-
-    res.redirect('/profile');
-}
