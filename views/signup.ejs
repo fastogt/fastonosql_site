@@ -36,11 +36,11 @@
 <div class="container" style="margin-top: 25px;">
     <div class="col-sm-6 col-sm-offset-3">
         <h1><span class="fa fa-sign-in"></span> Sign up</h1>
-        <% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
+        <% if (success_messages && success_messages.length > 0) { %>
+        <div class="alert alert-success"><%= success_messages %></div>
         <% } %>
-        <% if (successMessage.length > 0) { %>
-        <div class="alert alert-success"><%= successMessage %></div>
+        <% if (error_messages && error_messages.length > 0) { %>
+        <div class="alert alert-danger"><%= error_messages %></div>
         <% } %>
 
         <!-- LOGIN FORM -->

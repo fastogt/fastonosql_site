@@ -1,6 +1,8 @@
 // load all the things we need
 var LocalStrategy = require('passport-local').Strategy;
 
+// https://php-academy.kiev.ua/uk/blog/site-authentication-in-nodejs-user-signup
+
 // load up the user model
 var User = require('../app/models/user');
 var validate_email = require('../app/modules/validate_email'); // use this one for testing
@@ -35,28 +37,33 @@ module.exports = function (nev, passport) {
         passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     }, function (req, email, password, done) {
         if (!email) {
-            return done(null, false, req.flash('loginMessage', 'Invalid input.'));
+            req.flash('error', 'Invalid input.');
+            return done(null, false);
         }
 
         email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
         var is_valid = validate_email.validateEmailInput(email);
         if (!is_valid) {
-            return done(null, false, req.flash('loginMessage', 'Invalid email: ' + email + '.'));
+            req.flash('error', 'Invalid email: ' + email + '.');
+            return done(null, false);
         }
 
         User.findOne({'email': email}, function (err, user) {
             // if there are any errors, return the error
             if (err) {
+                req.flash('error', err);
                 return done(err);
             }
 
             // if no user is found, return the message
             if (!user) {
-                return done(null, false, req.flash('loginMessage', 'Not found user with email: ' + email + '.'));
+                req.flash('error', 'Not found user with email: ' + email + '.');
+                return done(null, false);
             }
 
             if (!user.validPassword(password)) {
-                return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+                req.flash('error', 'Oops! Wrong password.');
+                return done(null, false);
             }
 
             return done(null, user);
@@ -73,12 +80,14 @@ module.exports = function (nev, passport) {
         passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     }, function (req, email, password, done) {
         if (!email) {
-            return done(null, false, req.flash('signupMessage', 'Invalid input.'));
+            req.flash('error', 'Invalid input.');
+            return done(null, false);
         }
         email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
         validate_email.validateEmail(email, function (err) {
             if (err) {
-                return done(null, false, req.flash('signupMessage', 'Invalid email: ' + email + '.'));
+                req.flash('error', 'Invalid email: ' + email + '.');
+                return done(null, false);
             }
 
             var new_user = new User();
@@ -90,12 +99,14 @@ module.exports = function (nev, passport) {
             nev.createTempUser(new_user, function (err, existingPersistentUser, newTempUser) {
                 // some sort of error
                 if (err) {
-                    return done(null, false, req.flash('signupMessage', err));
+                    req.flash('error', err);
+                    return done(null, false);
                 }
 
                 // user already exists in persistent collection...
                 if (existingPersistentUser) {
-                    return done(null, false, req.flash('signupMessage', 'User with email:' + email + ' already exists.'));
+                    req.flash('error', 'User with email:' + email + ' already exists.');
+                    return done(null, false);
                 }
                 // a new user
                 if (newTempUser) {
@@ -106,11 +117,13 @@ module.exports = function (nev, passport) {
                             return done(err);
                         }
 
-                        return done(null, false, req.flash('signupSuccess', 'Please check ' + email + ' to verify your account.'));
+                        req.flash('success', 'Please check ' + email + ' to verify your account.');
+                        return done(null, false);
                     });
                     // user already exists in temporary collection...
                 } else {
-                    return done(null, false, req.flash('signupMessage', 'You have already signed up. Please check your email to verify your account.'));
+                    req.flash('error', 'You have already signed up. Please check your email to verify your account.');
+                    return done(null, false);
                     // flash message of failure...
                 }
             });
