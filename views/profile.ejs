@@ -40,6 +40,13 @@
 <div class="container">
     <div class="alert hide" role="alert" id="alert"></div>
     <div class="page-header text-left">
+        <% if (success_messages && success_messages.length > 0) { %>
+        <div class="alert alert-success"><%= success_messages %></div>
+        <% } %>
+        <% if (error_messages && success_messages.length > 0) { %>
+        <div class="alert alert-danger"><%= error_messages %></div>
+        <% } %>
+
         <div class="well">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
@@ -159,13 +166,6 @@
             </div>
         </div>
     </div>
-
-    <% if (success_messages) { %>
-    <div class="alert alert-success"><%= success_messages %></div>
-    <% } %>
-    <% if (error_messages) { %>
-    <div class="alert alert-danger"><%= error_messages %></div>
-    <% } %>
 
     <% if (user.getSubscriptionState() && user.getSubscriptionState() !== 'active') { %>
     <div class="alert alert-warning">Your subscription is <%= user.getSubscriptionState() %>. Resubscribe or contact the

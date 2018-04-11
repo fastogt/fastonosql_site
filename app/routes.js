@@ -222,7 +222,7 @@ module.exports = function (app, passport, nev) {
                 });
             }
 
-            req.flash('error', 'Information was successfully saved');
+            req.flash('success', 'Information was successfully saved');
             res.redirect('/profile');
         });
     });
