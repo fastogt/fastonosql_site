@@ -36,8 +36,11 @@
     <div class="col-sm-6 col-sm-offset-3">
         <h1><span class="fa fa-sign-in"></span> Sign in</h1>
 
-        <% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
+        <% if (success_messages) { %>
+        <div class="alert alert-success"><%= success_messages %></div>
+        <% } %>
+        <% if (error_messages) { %>
+        <div class="alert alert-danger"><%= error_messages %></div>
         <% } %>
 
         <!-- LOGIN FORM -->

@@ -160,7 +160,6 @@ module.exports = function (app, passport, nev) {
                         console.log('Success. Set subscription.');
                         res.render('profile.ejs', {
                             user: user,
-                            message: req.flash('statusProfileMessage'),
                             packages: results
                         });
                     }).catch(function (error) {
@@ -169,7 +168,6 @@ module.exports = function (app, passport, nev) {
             } else {
                 res.render('profile.ejs', {
                     user: user,
-                    message: req.flash('statusProfileMessage'),
                     packages: results
                 });
             }
@@ -178,23 +176,24 @@ module.exports = function (app, passport, nev) {
 
     app.post('/updateProfile', isLoggedIn, function (req, res) {
         var user = req.user;
-        var message = '';
 
         // Note: manage password.
         if (req.body.currentPassword) {
             if (!user.validPassword(req.body.currentPassword)) {
-                message = 'Invalid password!';
+                req.flash('error', 'Invalid password!');
+                res.redirect('/profile');
+                return;
             }
 
             if (req.body.newPassword && req.body.newPassword !== req.body.repeatPassword) {
-                message = 'The passwords are different!';
+                req.flash('error', 'The passwords are different!');
+                res.redirect('/profile');
+                return;
             }
 
-            if (!message) {
-                user.set({
-                    password: user.generateHash(req.body.newPassword)
-                });
-            }
+            user.set({
+                password: user.generateHash(req.body.newPassword)
+            });
         }
 
         user.set({
@@ -204,7 +203,9 @@ module.exports = function (app, passport, nev) {
 
         user.save(function (err) {
             if (err) {
-                console.error('Update profile error!');
+                req.flash('error', err);
+                res.redirect('/profile');
+                return;
             }
 
             if (user.email_subscription) {
@@ -221,10 +222,7 @@ module.exports = function (app, passport, nev) {
                 });
             }
 
-            /*res.render('profile.ejs', {
-                user: req.user,
-                message: message || req.flash('statusProfileMessage')
-            });*/
+            req.flash('error', 'Information was successfully saved');
             res.redirect('/profile');
         });
     });
@@ -318,7 +316,7 @@ module.exports = function (app, passport, nev) {
     // LOGIN ===============================
     // show the login form
     app.get('/login', function (req, res) {
-        res.render('login.ejs', {message: req.flash('loginMessage')});
+        res.render('login.ejs');
     });
 
     // process the login form

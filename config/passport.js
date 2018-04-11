@@ -37,28 +37,33 @@ module.exports = function (nev, passport) {
         passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     }, function (req, email, password, done) {
         if (!email) {
-            return done(null, false, req.flash('loginMessage', 'Invalid input.'));
+            req.flash('error', 'Invalid input.');
+            return done(null, false);
         }
 
         email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
         var is_valid = validate_email.validateEmailInput(email);
         if (!is_valid) {
-            return done(null, false, req.flash('loginMessage', 'Invalid email: ' + email + '.'));
+            req.flash('error', 'Invalid email: ' + email + '.');
+            return done(null, false);
         }
 
         User.findOne({'email': email}, function (err, user) {
             // if there are any errors, return the error
             if (err) {
+                req.flash('error', err);
                 return done(err);
             }
 
             // if no user is found, return the message
             if (!user) {
-                return done(null, false, req.flash('loginMessage', 'Not found user with email: ' + email + '.'));
+                req.flash('error', 'Not found user with email: ' + email + '.');
+                return done(null, false);
             }
 
             if (!user.validPassword(password)) {
-                return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+                req.flash('error', 'Oops! Wrong password.');
+                return done(null, false);
             }
 
             return done(null, user);
