@@ -39,6 +39,9 @@
         <% if (message.length > 0) { %>
         <div class="alert alert-danger"><%= message %></div>
         <% } %>
+        <% if (successMessage.length > 0) { %>
+        <div class="alert alert-success"><%= successMessage %></div>
+        <% } %>
 
         <!-- LOGIN FORM -->
         <form name="signUpForm" action="/signup" onsubmit="return validateForm()" method="post">
