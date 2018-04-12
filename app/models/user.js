@@ -78,6 +78,11 @@ userSchema.methods.getSubscriptionState = function () {
     return this.subscription_state;
 };
 
+// get subscription state
+userSchema.methods.isBanned = function () {
+    return this.application_state === 'BANNED';
+};
+
 /**
  * Check subscription status by param
  *
