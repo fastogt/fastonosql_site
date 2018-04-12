@@ -60,6 +60,7 @@
                         <a href="/logout" class="btn btn-warning navbar-btn pull-right navbar-right"><span
                                     class="fa fa-sign-out"></span> Sign out</a>
 
+                        <% if (user.isActive()) { %>
                         <a href=""
                            class="btn btn-danger navbar-btn pull-right navbar-right"
                            style="margin-right: 20px;"
@@ -67,6 +68,7 @@
                         >
                             <span class="fas fa-trash"></span> Delete account
                         </a>
+                        <% } %>
                     </div>
                 </div>
             </nav>

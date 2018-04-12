@@ -42,6 +42,11 @@ var userSchema = mongoose.Schema({
     }
 });
 
+// checking if password is valid
+userSchema.methods.isActive = function () {
+    return this.application_state === 'ACTIVE';
+};
+
 // generating a hash
 userSchema.methods.generateHash = function (password) {
     var hash = crypto.createHash('md5').update(password).digest('hex');
