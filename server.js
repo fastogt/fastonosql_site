@@ -381,7 +381,9 @@ function is_subscribed(args, opt, callback) {
 
         var cur_date = new Date();
         if (user.exec_count === 0) {
-            user.application_end_date = new Date(cur_date.getDate() + TRIAL_DAYS_COUNT);
+            var d = new Date();
+            d.setDate(cur_date.getDate() + TRIAL_DAYS_COUNT);
+            user.application_end_date = d;
         }
 
         if (user.application_state === user_constants.ACTIVE) {
