@@ -358,7 +358,6 @@ function is_subscribed(args, opt, callback) {
         return;
     }
 
-    console.log("is_subscribed:", args);
     var fastSpring = new FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
     var User = mongoose.model("User");
     User.findOne({'email': args.email}, function (err, user) {
@@ -389,6 +388,13 @@ function is_subscribed(args, opt, callback) {
         });
 
         function generate_response(state) {
+            if (state === UNSUBSCRIBED_USER) {
+                var cur_date = new Date();
+                if (user.application_end_date < cur_date) {
+                    console.log('trial finished for:', user.email);
+                }
+            }
+
             var result = {
                 'first_name': user.first_name,
                 'last_name': user.last_name,
