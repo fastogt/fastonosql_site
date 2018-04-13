@@ -386,7 +386,7 @@ function is_subscribed(args, opt, callback) {
             user.application_end_date = d;
         }
 
-        if (user.application_state === user_constants.ACTIVE) {
+        if (user.application_state === user_constants.ACTIVE && !user.subscription) {
             if (user.application_end_date < cur_date) {
                 user.application_state = user_constants.TRIAL_FINISHED;
                 var transporter = nodemailer.createTransport(transport_options);
