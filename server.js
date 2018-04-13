@@ -224,6 +224,7 @@ mongoose.connect(config_db.url, {useMongoClient: true}); // connect to our datab
 // NEV configuration =====================
 // our persistent user model
 var User = require('./app/models/user');
+var user_constants = require('./user_constants');
 
 nev.configure({
     persistentUserModel: User,
@@ -383,9 +384,9 @@ function is_subscribed(args, opt, callback) {
             user.application_end_date = new Date(cur_date.getDate() + TRIAL_DAYS_COUNT);
         }
 
-        if (user.application_state === User.ACTIVE) {
+        if (user.application_state === user_constants.ACTIVE) {
             if (user.application_end_date < cur_date) {
-                user.application_state = User.TRIAL_FINISHED;
+                user.application_state = user_constants.TRIAL_FINISHED;
                 var transporter = nodemailer.createTransport(transport_options);
                 const mailOptions = {
                     from: app.locals.site.support_email, // sender address
@@ -423,7 +424,7 @@ function is_subscribed(args, opt, callback) {
         }
 
         if (!user.subscription) {
-            if (user.application_state === User.BANNED) { // if banned
+            if (user.application_state === user_constants.BANNED) { // if banned
                 return callback('User(' + user.email + ') banned, please write to ' + app.locals.support.contact_email + ' to unban, or subscribe', null);
             }
 
@@ -437,7 +438,7 @@ function is_subscribed(args, opt, callback) {
                     return callback(null, generate_response(SUBSCRIBED_USER));
                 }
 
-                if (user.application_state === User.BANNED) {  // if banned
+                if (user.application_state === user_constants.BANNED) {  // if banned
                     return callback('User(' + user.email + ') banned, please write to ' + app.locals.support.contact_email + ' to unban, or subscribe', null);
                 }
                 return callback(null, generate_response(UNSUBSCRIBED_USER));
@@ -468,7 +469,7 @@ function ban_user(args, opt, callback) {
             return;
         }
 
-        user.application_state = User.BANNED;
+        user.application_state = user_constants.BANNED;
         user.save(function (err) {
             if (err) {
                 console.error('Failed to save user application state: ', err);
@@ -489,7 +490,7 @@ function ban_user(args, opt, callback) {
             return;
         }
 
-        user.application_state = User.BANNED;
+        user.application_state = user_constants.BANNED;
         user.save(function (err) {
             if (err) {
                 console.error('Failed to save user application state: ', err);
