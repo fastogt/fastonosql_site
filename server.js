@@ -224,11 +224,11 @@ mongoose.connect(config_db.url, {useMongoClient: true}); // connect to our datab
 // NEV configuration =====================
 // our persistent user model
 var User = require('./app/models/user');
-var user_constants = require('./user_constants');
+var user_constants = require('./app/models/user_constants');
 
 nev.configure({
     persistentUserModel: User,
-    expirationTime: 3600 * 24, // 10 minutes
+    expirationTime: 3600 * 24,
 
     verificationURL: app.locals.site.domain + '/email-verification/${URL}',
     transportOptions: transport_options,
