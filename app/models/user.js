@@ -3,20 +3,25 @@ var mongoose = require('mongoose');
 var crypto = require('crypto');
 var FastSpring = require('./../modules/fastspring');
 
+var APPLICATION_STATE = {
+    ACTIVE: 'ACTIVE',
+    BANNED: 'BANNED',
+    TRIAL_FINISHED: 'TRIAL_FINISHED'
+};
+
+var UserType = {
+    USER: 'USER',
+    SUPPORT: 'SUPPORT'
+};
+
 var StatisticSchema = require('./statistic');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
-    first_name: {
-        type: String,
-        default: 'Unknown'
-    },
-    last_name: {
-        type: String,
-        default: 'Unknown'
-    },
     email: String,
     password: String,
+    first_name: String,
+    last_name: String,
     created_date: {type: Date, default: Date.now},
     subscription: {
         type: String,
@@ -28,23 +33,24 @@ var userSchema = mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['USER', 'SUPPORT'],
-        default: 'USER'
+        enum: [UserType.USER, UserType.SUPPORT],
+        default: UserType.USER
     },
     email_subscription: Boolean,
     exec_count: {type: Number, default: 0},
     application_end_date: {type: Date, default: Date.now},
+    application_last_start_date: {type: Date, default: Date.now},
     statistic: [StatisticSchema],
     application_state: {
         type: String,
-        enum: ['ACTIVE', 'BANNED'],
-        default: 'ACTIVE'
+        enum: [APPLICATION_STATE.ACTIVE, APPLICATION_STATE.BANNED, APPLICATION_STATE.TRIAL_FINISHED],
+        default: APPLICATION_STATE.ACTIVE
     }
 });
 
 // checking if password is valid
 userSchema.methods.isActive = function () {
-    return this.application_state === 'ACTIVE';
+    return this.application_state === APPLICATION_STATE.ACTIVE;
 };
 
 // generating a hash
@@ -115,3 +121,4 @@ userSchema.statics.checkSubscriptionStatus = function (app, state) {
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);
+module.exports = Object.freeze(APPLICATION_STATE);

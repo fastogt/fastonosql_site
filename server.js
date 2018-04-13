@@ -43,6 +43,8 @@ var server = https.createServer({
 var io = require('socket.io');
 var listener = io.listen(server);
 
+var nodemailer = require('nodemailer');
+
 var FastSpring = require('./app/modules/fastspring');
 
 // settings
@@ -105,6 +107,19 @@ app.locals.fastspring_config = {
 // mailer lite
 app.locals.mailer_lite_config = {
     group: settings_config.mailer_lite_group
+};
+
+// email
+const transport_options = {
+    host: app.locals.site.support_email_service_host,
+    port: app.locals.site.support_email_service_port,
+    secure: app.locals.site.support_email_service_secure, // secure:true for port 465, secure:false for port 587
+    auth: {
+        user: app.locals.site.support_email,
+        pass: app.locals.site.support_email_password
+    }, tls: {
+        ciphers: 'SSLv3'
+    }
 };
 
 // rabbitmq
@@ -215,17 +230,7 @@ nev.configure({
     expirationTime: 3600 * 24, // 10 minutes
 
     verificationURL: app.locals.site.domain + '/email-verification/${URL}',
-    transportOptions: {
-        host: app.locals.site.support_email_service_host,
-        port: app.locals.site.support_email_service_port,
-        secure: app.locals.site.support_email_service_secure, // secure:true for port 465, secure:false for port 587
-        auth: {
-            user: app.locals.site.support_email,
-            pass: app.locals.site.support_email_password
-        }, tls: {
-            ciphers: 'SSLv3'
-        }
-    },
+    transportOptions: transport_options,
     verifyMailOptions: {
         from: 'Do Not Reply <' + app.locals.site.support_email + '>',
         subject: 'Confirm your account',
@@ -300,8 +305,6 @@ json_rpc2_server.on('error', function (err) {
     console.log(err);
 });
 
-const BANNED_STATE = 'BANNED';
-
 function version(args, opt, callback) {
     callback(null, app.locals.project.version);
 }
@@ -375,12 +378,32 @@ function is_subscribed(args, opt, callback) {
             return callback('Wrong password', null);
         }
 
+        var cur_date = new Date();
         if (user.exec_count === 0) {
-            var end_date = new Date();
-            end_date.setDate(end_date.getDate() + TRIAL_DAYS_COUNT);
-            user.application_end_date = end_date;
+            user.application_end_date = new Date(cur_date.getDate() + TRIAL_DAYS_COUNT);
+        }
+
+        if (user.application_state === User.ACTIVE) {
+            if (user.application_end_date < cur_date) {
+                user.application_state = User.TRIAL_FINISHED;
+                var transporter = nodemailer.createTransport(transport_options);
+                const mailOptions = {
+                    from: app.locals.site.support_email, // sender address
+                    to: user.email, // list of receivers
+                    subject: 'Your ' + app.locals.site.title + ' trial period finished', // Subject line
+                    html: '<p>Hi <b>' + user.first_name + '</b> your <b>' + app.locals.site.title + '</b> trial period finished.</p>'
+                };
+                transporter.sendMail(mailOptions, function (err, info) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('end trial email sent to:', user.email);
+                    }
+                });
+            }
         }
         user.exec_count = user.exec_count + 1;
+        user.application_last_start_date = cur_date;
         user.save(function (err) {
             if (err) {
                 console.error('failed to save user application data: ', err);
@@ -388,13 +411,6 @@ function is_subscribed(args, opt, callback) {
         });
 
         function generate_response(state) {
-            if (state === UNSUBSCRIBED_USER) {
-                var cur_date = new Date();
-                if (user.application_end_date < cur_date) {
-                    console.log('trial finished for:', user.email);
-                }
-            }
-
             var result = {
                 'first_name': user.first_name,
                 'last_name': user.last_name,
@@ -407,7 +423,7 @@ function is_subscribed(args, opt, callback) {
         }
 
         if (!user.subscription) {
-            if (user.application_state === BANNED_STATE) { // if banned
+            if (user.application_state === User.BANNED) { // if banned
                 return callback('User(' + user.email + ') banned, please write to ' + app.locals.support.contact_email + ' to unban, or subscribe', null);
             }
 
@@ -421,7 +437,7 @@ function is_subscribed(args, opt, callback) {
                     return callback(null, generate_response(SUBSCRIBED_USER));
                 }
 
-                if (user.application_state === BANNED_STATE) {  // if banned
+                if (user.application_state === User.BANNED) {  // if banned
                     return callback('User(' + user.email + ') banned, please write to ' + app.locals.support.contact_email + ' to unban, or subscribe', null);
                 }
                 return callback(null, generate_response(UNSUBSCRIBED_USER));
@@ -452,7 +468,7 @@ function ban_user(args, opt, callback) {
             return;
         }
 
-        user.application_state = BANNED_STATE;
+        user.application_state = User.BANNED;
         user.save(function (err) {
             if (err) {
                 console.error('Failed to save user application state: ', err);
@@ -473,7 +489,7 @@ function ban_user(args, opt, callback) {
             return;
         }
 
-        user.application_state = BANNED_STATE;
+        user.application_state = User.BANNED;
         user.save(function (err) {
             if (err) {
                 console.error('Failed to save user application state: ', err);
