@@ -389,10 +389,10 @@ function is_subscribed(args, opt, callback) {
                 user.application_state = user_constants.TRIAL_FINISHED;
                 var transporter = nodemailer.createTransport(transport_options);
                 const mailOptions = {
-                    from: app.locals.site.support_email, // sender address
-                    to: user.email, // list of receivers
-                    subject: 'Your ' + app.locals.site.title + ' trial period finished', // Subject line
-                    html: '<p>Hi <b>' + user.first_name + '</b> your <b>' + app.locals.site.title + '</b> trial period finished.</p>'
+                    from: app.locals.site.title + ' Support<' + app.locals.site.support_email + '>',
+                    to: user.email,
+                    subject: 'Your ' + app.locals.site.title + ' trial period finished',
+                    html: '<p>Hi <b>' + user.first_name + '</b> your <b>' + app.locals.site.title + '</b> trial period finished. If you like this application please <a href="' + app.locals.site.domain + '/login">subscribe</a>. If not, please send your feedback, what we should to fix, than you subscribe?</p>'
                 };
                 transporter.sendMail(mailOptions, function (err, info) {
                     if (err) {
