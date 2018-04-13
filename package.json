@@ -8,9 +8,6 @@
     "mongoose": "latest",
     "passport": "latest",
     "passport-local": "latest",
-    "passport-facebook": "latest",
-    "passport-twitter": "latest",
-    "passport-google-oauth": "latest",
     "connect-flash": "latest",
     "crypto": "latest",
     "redis": "latest",
@@ -24,6 +21,7 @@
     "express-session": "latest",
     "email-verification": "latest",
     "json-rpc2": "latest",
-    "compression": "latest"
+    "compression": "latest",
+    "nodemailer": "latest"
   }
 }
