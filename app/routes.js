@@ -157,7 +157,6 @@ module.exports = function (app, passport, nev) {
                             }
                         });
 
-                        console.log('Success. Set subscription.');
                         res.render('profile.ejs', {
                             user: user,
                             packages: results

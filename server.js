@@ -316,7 +316,6 @@ function statistic(args, opt, callback) {
         return;
     }
 
-    console.log("statistic:", args);
     var os = {
         name: args.os.name,
         version: args.os.version,

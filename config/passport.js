@@ -112,7 +112,7 @@ module.exports = function (nev, passport) {
                 if (newTempUser) {
                     var URL = newTempUser[nev.options.URLFieldName];
                     nev.sendVerificationEmail(email, URL, function (err, info) {
-                        console.log("verify email message sended to: " + email + ", error: " + err);
+                        console.log("verify email message sent to: " + email + ", error: " + err);
                         if (err) {
                             return done(err);
                         }
