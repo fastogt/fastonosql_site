@@ -507,5 +507,5 @@ json_rpc2_server.expose('statistic', statistic);
 json_rpc2_server.expose('is_subscribed', is_subscribed);
 json_rpc2_server.expose('ban_user', ban_user);
 
-// listen creates an HTTP server on localhost only
-json_rpc2_server.listenRaw(app.locals.project.port, app.locals.project.domain);
+// listen creates an tcp server on localhost only
+json_rpc2_server.listenRaw(app.locals.project.port, 'localhost'/*app.locals.project.domain*/);

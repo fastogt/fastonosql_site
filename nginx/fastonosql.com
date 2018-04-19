@@ -1,5 +1,5 @@
-upstream app_fastonosql {
-    server 127.0.0.1:8080;
+upstream app_http_server {
+    server localhost:8080;
 }
 
 server {
@@ -60,7 +60,7 @@ server {
       proxy_set_header Host $http_host;
       proxy_set_header X-NginX-Proxy true;
 
-      proxy_pass http://app_fastonosql;
+      proxy_pass http://app_http_server;
       proxy_redirect off;
     }
 }
