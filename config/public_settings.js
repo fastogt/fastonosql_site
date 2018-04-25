@@ -4,7 +4,8 @@ module.exports = {
         name: 'FastoNoSQL',
         name_lowercase: 'fastonosql',
         version: '1.17.4',
-        domain: 'fastonosql.com'
+        domain: 'fastonosql.com',
+        trial_days: 3
     },
 
     site: {
@@ -22,7 +23,7 @@ module.exports = {
 
         twitter_name: 'FastoNoSQL',
         twitter_link: 'https://twitter.com/FastoNoSQL',
-        
+
         google_analitics_token: 'UA-56403848-4',
 
         supported_databases: [{'name': 'Redis', 'option': 'BUILD_WITH_REDIS', 'active': true},

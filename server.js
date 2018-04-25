@@ -80,7 +80,8 @@ app.locals.project = {
     name_lowercase: public_settings_config.project.name_lowercase,
     version: public_settings_config.project.version,
     port: settings_config.app_port,
-    domain: public_settings_config.project.domain
+    domain: public_settings_config.project.domain,
+    trial_days: public_settings_config.project.trial_days
 };
 app.locals.support = {
     name: public_settings_config.support.name,
@@ -354,7 +355,6 @@ function statistic(args, opt, callback) {
 function is_subscribed(args, opt, callback) {
     const UNSUBSCRIBED_USER = 0;
     const SUBSCRIBED_USER = 1;
-    const TRIAL_DAYS_COUNT = 15;
 
     if (!args || !args.hasOwnProperty('email') || !args.hasOwnProperty('password')) {
         callback('invalid arguments', null);
@@ -381,7 +381,7 @@ function is_subscribed(args, opt, callback) {
         var cur_date = new Date();
         if (user.exec_count === 0) {
             var d = new Date();
-            d.setDate(cur_date.getDate() + TRIAL_DAYS_COUNT);
+            d.setDate(cur_date.getDate() + app.locals.project.trial_days);
             user.application_end_date = d;
         }
 
