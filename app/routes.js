@@ -87,7 +87,43 @@ module.exports = function (app, passport, nev) {
 
     // show the home page (will also have our login links)
     app.get('/', function (req, res) {
-        res.render('index.ejs');
+        User.find({}, function (err, users) {
+            var exec_count = 0;
+            var active_users = 0;
+            var banned_users = 0;
+            var registered_users = 0;
+            var trial_finished = 0;
+            var supported_users = 0;
+
+            if (err) {
+                console.error("Statistic error: ", err);
+            } else {
+                users.forEach(function (user) {
+                    exec_count += user.exec_count;
+                    var app_state = user.application_state;
+                    if (app_state === 'ACTIVE') {
+                        active_users += 1;
+                    } else if (app_state === 'BANNED') {
+                        banned_users += 1;
+                    } else if (app_state === 'TRIAL_FINISHED') {
+                        trial_finished += 1;
+                    }
+                    if (user.subscription) {
+                        supported_users += 1;
+                    }
+                    registered_users += 1;
+                });
+            }
+
+
+            var stat = {
+                "exec_count": exec_count,
+                "registered_users": registered_users,
+                "active_users": active_users,
+                "supported_users": supported_users
+            };
+            res.render('index.ejs', {statistics: stat});
+        });
     });
 
     app.get('/help', function (req, res) {

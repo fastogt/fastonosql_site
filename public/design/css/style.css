@@ -40,8 +40,7 @@
 
 html {
     font-size: 100%;
-    /* font-size: 16px; */
-    ;
+    /* font-size: 16px; */;
 }
 
 body {
@@ -145,7 +144,6 @@ section {
     margin-right: 0% !important;
 }
 
-
 /*----------------------------------------------------------------
     Perfect Fourth (http://type-scale.com)
 ----------------------------------------------------------------*/
@@ -177,10 +175,8 @@ h6 {
 .row-content.buffer,
 .row-content.buffer-top {
     padding-top: 3.8%;
-    /* This overwrites a layers.css rule */
-    ;
+    /* This overwrites a layers.css rule */;
 }
-
 
 /*----------------------------------------------------------------
     Loaders
@@ -226,7 +222,7 @@ h6 {
     user-select: none;
 }
 
-.spinner>div {
+.spinner > div {
     display: inline-block;
     width: 1em;
     height: 1em;
@@ -241,11 +237,11 @@ h6 {
     animation-fill-mode: both;
 }
 
-.landing-slider .spinner>div {
+.landing-slider .spinner > div {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-.landing-els .spinner>div {
+.landing-els .spinner > div {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
@@ -285,7 +281,6 @@ h6 {
     }
 }
 
-
 /*----------------------------------------------------------------
     Header menu
 ----------------------------------------------------------------*/
@@ -317,7 +312,7 @@ header {
 }
 
 .no-parallax header.transparent.light #brand a,
-.no-parallax header.transparent.light nav>ul>li>a {
+.no-parallax header.transparent.light nav > ul > li > a {
     color: #333 !important;
 }
 
@@ -337,7 +332,7 @@ header.transparent {
 }
 
 header.transparent.light #brand a,
-header.transparent.light nav>ul>li>a,
+header.transparent.light nav > ul > li > a,
 .caption {
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
@@ -403,27 +398,27 @@ nav a {
 }
 
 header.transparent.light #brand a,
-header.transparent.light nav>ul>li>a {
+header.transparent.light nav > ul > li > a {
     color: #fff;
 }
 
 header.fixed-header.transparent.light #brand a,
-header.fixed-header.transparent.light nav>ul>li>a {
+header.fixed-header.transparent.light nav > ul > li > a {
     color: #333;
     text-shadow: none;
 }
 
-header.fixed-header.transparent.light nav>ul>li:hover>a {
+header.fixed-header.transparent.light nav > ul > li:hover > a {
     border-bottom: 2px solid #333;
 }
 
-nav>ul,
-nav>ul>li {
+nav > ul,
+nav > ul > li {
     float: left;
     clear: none;
 }
 
-nav>ul>li {
+nav > ul > li {
     padding: 0 0.778em;
     text-transform: uppercase;
     font-weight: 700;
@@ -432,19 +427,19 @@ nav>ul>li {
     cursor: pointer;
 }
 
-nav>ul>li:last-child {
+nav > ul > li:last-child {
     padding: 0 0 0 0.778em;
 }
 
-nav>ul>li>a {
+nav > ul > li > a {
     line-height: 3rem;
 }
 
-nav>ul>li:hover>a {
+nav > ul > li:hover > a {
     border-bottom: 2px solid #333;
 }
 
-header.transparent.light nav>ul>li:hover>a {
+header.transparent.light nav > ul > li:hover > a {
     border-bottom: 2px solid #fff;
 }
 
@@ -453,10 +448,9 @@ nav li {
     white-space: nowrap;
 }
 
-nav>ul li:hover>ul.sub-menu {
+nav > ul li:hover > ul.sub-menu {
     display: block;
-    /* show the submenu */
-    ;
+    /* show the submenu */;
 }
 
 nav .sub-arrow {
@@ -488,23 +482,23 @@ nav ul.sub-menu ul.sub-menu {
     padding-top: 0;
 }
 
-nav ul.sub-menu>li>a {
+nav ul.sub-menu > li > a {
     display: block;
     padding: 0.5rem 1rem;
     background-color: #F6F6F6;
     font-size: 0.786em;
 }
 
-nav ul.sub-menu>li>a:hover {
+nav ul.sub-menu > li > a:hover {
     background-color: #FD685B;
     color: #fff;
 }
 
-nav ul.sub-menu>li:first-child>a {
+nav ul.sub-menu > li:first-child > a {
     border-radius: 2px 2px 0 0;
 }
 
-nav ul.sub-menu>li:last-child>a {
+nav ul.sub-menu > li:last-child > a {
     border-radius: 0 0 2px 2px;
 }
 
@@ -533,7 +527,6 @@ nav ul.sub-menu>li:last-child>a {
 #menu-toggle:hover {
     color: #FD685B;
 }
-
 
 /*----------------------------------------------------------------
     Intro
@@ -594,7 +587,6 @@ nav ul.sub-menu>li:last-child>a {
 .photocaption {
     z-index: 2;
 }
-
 
 /*.caption,*/
 
@@ -713,8 +705,7 @@ F .photocaption {
 #intro-wrap:hover .preload .more a {
     opacity: 0;
     filter: Alpha(Opacity=0);
-    /* IE7 fix */
-    ;
+    /* IE7 fix */;
 }
 
 #intro-wrap .more a {
@@ -730,15 +721,13 @@ F .photocaption {
 #intro-wrap:hover .more a {
     opacity: 1;
     filter: Alpha(Opacity=100);
-    /* IE7 fix */
-    ;
+    /* IE7 fix */;
 }
 
 .subtitle {
     color: #fff;
     font-size: 1.25em;
 }
-
 
 /*----------------------------------------------------------------
     Blog & Portfolio
@@ -1269,7 +1258,6 @@ F .photocaption {
     }
 }
 
-
 /*----------------------------------------------------------------
     Masonry
 ----------------------------------------------------------------*/
@@ -1318,8 +1306,7 @@ F .photocaption {
 
 .dribbble-items .item {
     -webkit-transform: scale3d(1, 1, 1);
-    /* Fix some Chrome flikering on hover */
-    ;
+    /* Fix some Chrome flikering on hover */;
 }
 
 .grid-items.preload .item,
@@ -1327,22 +1314,22 @@ F .photocaption {
     display: none;
 }
 
-@media handheld,
-only screen and (max-width: 48em) {
+@media handheld, only screen and (max-width: 48em) {
     .shuffle-sizer-four {
         margin-left: 3.8%;
         width: 48%;
     }
+
     .grid-items.shuffle .column {
         width: 100% !important;
     }
+
     .grid-items .item,
     .dribbble-items .item {
         position: relative;
         margin-bottom: 3.8%;
     }
 }
-
 
 /*----------------------------------------------------------------
     Comments
@@ -1370,7 +1357,7 @@ only screen and (max-width: 48em) {
     padding-left: 4.444em;
 }
 
-.comment-list li.comment>div img.avatar {
+.comment-list li.comment > div img.avatar {
     position: absolute;
     top: 0;
     left: 0;
@@ -1419,14 +1406,13 @@ a.reply:hover {
     padding-left: 2em;
 }
 
-
 /*----------------------------------------------------------------
     Error pages
 ----------------------------------------------------------------*/
 
 .error404 h2,
 .search-no-results h2,
-.search-results>h4 {
+.search-results > h4 {
     margin-top: 0;
 }
 
@@ -1435,7 +1421,6 @@ a.reply:hover {
 .search-results {
     margin-top: 3em;
 }
-
 
 /*----------------------------------------------------------------
     Sidebar
@@ -1477,7 +1462,6 @@ a.reply:hover {
     line-height: 1.8 !important;
 }
 
-
 /*----------------------------------------------------------------
     Widgets
 ----------------------------------------------------------------*/
@@ -1486,128 +1470,6 @@ a.reply:hover {
     text-transform: uppercase;
     font-size: 0.875rem;
 }
-
-
-/*----------------------------------------------------------------
-    Social widgets
-----------------------------------------------------------------*/
-
-.meta-social ul li,
-ul.meta-social li {
-    padding: 0 0.278em;
-    text-align: center;
-}
-
-.meta-social ul li a,
-ul.meta-social li a {
-    display: inline-block;
-    width: 2.667em;
-    height: 2.667em;
-    border: 1px solid;
-    border-color: rgba(0, 0, 0, 0.1);
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    color: rgba(0, 0, 0, 0.18);
-}
-
-.text-light .meta-social ul li a,
-.text-light ul.meta-social li a {
-    border-color: rgba(255, 255, 255, 0.5);
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.meta-social ul li a i,
-ul.meta-social li a i {
-    line-height: 2em;
-}
-
-.meta-social ul li a:hover,
-ul.meta-social li a:hover {
-    color: #fff;
-}
-
-.meta-social ul li a.dribbble-share:hover,
-ul.meta-social li a.dribbble-share:hover {
-    border-color: #ea4c89;
-    background-color: #ea4c89;
-}
-
-.meta-social ul li a.facebook-share:hover,
-ul.meta-social li a.facebook-share:hover {
-    border-color: #3b5998;
-    background-color: #3b5998;
-}
-
-.meta-social ul li a.flickr-share:hover,
-ul.meta-social li a.flickr-share:hover {
-    border-color: #0063dc;
-    background-color: #0063dc;
-}
-
-.meta-social ul li a.github-share:hover,
-ul.meta-social li a.github-share:hover {
-    border-color: #171515;
-    background-color: #171515;
-}
-
-.meta-social ul li a.gplus-share:hover,
-ul.meta-social li a.gplus-share:hover {
-    border-color: #dd4b39;
-    background-color: #dd4b39;
-}
-
-.meta-social ul li a.instagram-share:hover,
-ul.meta-social li a.instagram-share:hover {
-    border-color: #3f729b;
-    background-color: #3f729b;
-}
-
-.meta-social ul li a.linkedin-share:hover,
-ul.meta-social li a.linkedin-share:hover {
-    border-color: #0e76a8;
-    background-color: #0e76a8;
-}
-
-.meta-social ul li a.pinterest-share:hover,
-ul.meta-social li a.pinterest-share:hover {
-    border-color: #c8232c;
-    background-color: #c8232c;
-}
-
-.meta-social ul li a.skype-share:hover,
-ul.meta-social li a.skype-share:hover {
-    border-color: #00aff0;
-    background-color: #00aff0;
-}
-
-.meta-social ul li a.twitter-share:hover,
-ul.meta-social li a.twitter-share:hover {
-    border-color: #00acee;
-    background-color: #00acee;
-}
-
-.meta-social ul li a.vimeo-share:hover,
-ul.meta-social li a.vimeo-share:hover {
-    border-color: #44bbff;
-    background-color: #44bbff;
-}
-
-.meta-social ul li a.youtube-share:hover,
-ul.meta-social li a.youtube-share:hover {
-    border-color: #c4302b;
-    background-color: #c4302b;
-}
-
-footer .meta-social ul li {
-    padding-right: 0.5em;
-    padding-left: 0;
-}
-
-.widget.meta-social ul li a i {
-    vertical-align: -15%;
-}
-
 
 /*----------------------------------------------------------------
     Sections
@@ -1638,7 +1500,6 @@ section {
     background-color: #2C2D54;
 }
 
-
 /*----------------------------------------------------------------
     CTA
 ----------------------------------------------------------------*/
@@ -1661,7 +1522,6 @@ section {
     margin-left: 1em;
     margin-bottom: 0;
 }
-
 
 /*----------------------------------------------------------------
     Featured columns
@@ -1744,7 +1604,6 @@ section {
     color: #fff;
 }
 
-
 /*----------------------------------------------------------------
     Profile section
 ----------------------------------------------------------------*/
@@ -1757,7 +1616,6 @@ section {
     display: inline-block;
 }
 
-
 /*----------------------------------------------------------------
     Portfolio section
 ----------------------------------------------------------------*/
@@ -1765,7 +1623,6 @@ section {
 .more-btn {
     text-align: center;
 }
-
 
 /*----------------------------------------------------------------
     Skills rings
@@ -1841,7 +1698,6 @@ section {
     border-color: rgba(255, 255, 255, 0.5);
 }
 
-
 /*----------------------------------------------------------------
     Milestone
 ----------------------------------------------------------------*/
@@ -1860,7 +1716,6 @@ section {
     color: #999;
     opacity: 0;
 }
-
 
 /*----------------------------------------------------------------
     Timeline
@@ -1949,7 +1804,6 @@ section {
     margin-left: 4.444em;
 }
 
-
 /*----------------------------------------------------------------
     Contact forms
 ----------------------------------------------------------------*/
@@ -2023,7 +1877,6 @@ section {
     float: right;
 }
 
-
 /*----------------------------------------------------------------
     Team
 ----------------------------------------------------------------*/
@@ -2050,7 +1903,6 @@ section {
     font-size: 0.722em;
 }
 
-
 /*----------------------------------------------------------------
     Map
 ----------------------------------------------------------------*/
@@ -2059,7 +1911,7 @@ section {
     height: 15em;
 }
 
-.gm-style>div>div {
+.gm-style > div > div {
     /* Overlay color */
     height: 100%;
 }
@@ -2074,11 +1926,11 @@ section {
     border-style: none;
 }
 
-.gm-style>div.gmnoprint {
+.gm-style > div.gmnoprint {
     /* display: none; */
 }
 
-.gm-style>div>a {
+.gm-style > div > a {
     /* display: none !important; */
 }
 
@@ -2127,7 +1979,6 @@ section {
     border-bottom-color: #fff;
 }
 
-
 /*----------------------------------------------------------------
     Testimonial
 ----------------------------------------------------------------*/
@@ -2165,7 +2016,6 @@ section {
     content: ' -';
 }
 
-
 /*----------------------------------------------------------------
     Slogan
 ----------------------------------------------------------------*/
@@ -2177,7 +2027,6 @@ section {
 .slogan p {
     font-size: 1.111em;
 }
-
 
 /*----------------------------------------------------------------
     onScreen animations
@@ -2440,7 +2289,6 @@ section {
         transform: translateX(3em);
     }
 }
-
 
 /*----------------------------------------------------------------
     Buttons
@@ -2784,7 +2632,6 @@ input.button.transparent.dark-grey:hover {
     color: #fff !important;
 }
 
-
 /*----------------------------------------------------------------
     Icons
 ----------------------------------------------------------------*/
@@ -2866,7 +2713,6 @@ i.fa.dark-grey {
     color: #fff !important;
 }
 
-
 /*----------------------------------------------------------------
     Download
 ----------------------------------------------------------------*/
@@ -2895,7 +2741,6 @@ i.fa.dark-grey {
     position: fixed;
     top: 100px;
 }
-
 
 /*----------------------------------------------------------------
     Footer
@@ -2957,7 +2802,6 @@ footer .row-content.buffer {
 #bottom-footer {
     font-size: 0.667em;
 }
-
 
 /*----------------------------------------------------------------
     LineIcon font - Made with Fontastic.me - Icons: http://graphicburger.com/line-icon-set-for-ui/
@@ -3484,7 +3328,6 @@ footer .row-content.buffer {
     content: "\e07b";
 }
 
-
 /*----------------------------------------------------------------
     Align Fontawesome and LineIcon fonts
 ----------------------------------------------------------------*/
@@ -3498,10 +3341,8 @@ footer .row-content.buffer {
 
 .icon,
 .fa {
-    /* vertical-align: middle; */
-    ;
+    /* vertical-align: middle; */;
 }
-
 
 /*----------------------------------------------------------------
     Hide icons underline
@@ -3511,111 +3352,129 @@ footer .row-content.buffer {
     display: inline-block;
 }
 
-
 /*----------------------------------------------------------------
     640px Breakpoint
 ----------------------------------------------------------------*/
 
-@media handheld,
-only screen and (max-width: 40em) {
+@media handheld, only screen and (max-width: 40em) {
     #intro .caption h2,
     #intro .caption-mockup h2 {
         font-size: 2.4em;
     }
+
     #intro .caption p,
     #intro .caption-mockup p {
         font-size: 0.8em;
     }
+
     .photocaption {
         display: none;
     }
 }
 
-
 /*----------------------------------------------------------------
     768px Breakpoint
 ----------------------------------------------------------------*/
 
-@media handheld,
-only screen and (max-width: 48em) {
+@media handheld, only screen and (max-width: 48em) {
     header {
         position: relative !important;
         background-color: #fff !important;
     }
+
     #brand a,
     nav a {
         color: #333 !important;
     }
+
     nav a:hover {
         color: #fff !important;
     }
+
     #brand,
     nav,
     #menu-toggle {
         display: block;
     }
+
     #menu-toggle {
         float: right;
         clear: none;
     }
+
     nav {
         float: none;
         clear: both;
     }
-    nav>ul {
+
+    nav > ul {
         margin-top: 2em;
     }
+
     #brand h1 {
         line-height: 1.8;
     }
-    nav>ul {
+
+    nav > ul {
         display: none;
     }
-    nav>ul,
-    nav>ul>li {
+
+    nav > ul,
+    nav > ul > li {
         float: none;
     }
+
     .sub-arrow {
         display: none;
     }
-    nav>ul li>a {
+
+    nav > ul li > a {
         display: block;
         margin: 0;
         padding: 0.625rem 0;
         border-bottom: 1px solid #DDD !important;
         line-height: 1.250rem;
     }
-    nav>ul>li>a:hover {
+
+    nav > ul > li > a:hover {
         -webkit-border-radius: 0 !important;
         -moz-border-radius: 0 !important;
         border-radius: 0 !important;
     }
-    nav>ul li.last>a,
-    nav>ul li.last>a:hover {
+
+    nav > ul li.last > a,
+    nav > ul li.last > a:hover {
         border-bottom: none !important;
     }
-    nav>ul>li.menu-item {
+
+    nav > ul > li.menu-item {
         padding: 0 !important;
     }
-    nav ul.sub-menu>li>a {
+
+    nav ul.sub-menu > li > a {
         -webkit-border-radius: 0 !important;
         -moz-border-radius: 0 !important;
         border-radius: 0 !important;
     }
-    nav ul.sub-menu>li>a {
+
+    nav ul.sub-menu > li > a {
         color: #666 !important;
         font-size: 0.688rem;
     }
-    nav ul.sub-menu>li>a,
-    nav ul li>a:hover {
+
+    nav ul.sub-menu > li > a,
+    nav ul li > a:hover {
         background-color: transparent !important;
     }
-    nav ul li>a:hover {
+
+    nav ul li > a:hover {
         color: #FD685B !important;
     }
-    nav>ul>li:hover>a {
+
+    nav > ul > li:hover > a {
         border-bottom: none;
     }
+
     nav ul.sub-menu {
         position: static;
         display: block;
@@ -3625,41 +3484,52 @@ only screen and (max-width: 48em) {
         -moz-box-shadow: none;
         box-shadow: none;
     }
+
     #intro {
         position: relative;
     }
+
     .more {
         display: none;
     }
+
     .column .count-item {
         margin-bottom: 2em;
     }
+
     .column.last .count-item {
         margin-bottom: 0;
     }
+
     .carousel-item {
         text-align: center;
     }
+
     .carousel-item img,
     .about-us img,
     .testimonial-img img {
         margin: 0 auto;
     }
+
     .carousel-item img {
         max-width: 12.5em;
     }
+
     .about-us img {
         max-width: 20em;
         width: 100%;
     }
+
     .testimonial-img img {
         margin-bottom: 1em;
         max-width: 10em;
         width: 100%;
     }
+
     .testimonial-slider {
         text-align: center;
     }
+
     .blog.list-style article figure,
     .blog-section.list-style article figure,
     .search.list-style article figure {
@@ -3667,24 +3537,23 @@ only screen and (max-width: 48em) {
     }
 }
 
-
 /*----------------------------------------------------------------
     320px Breakpoint - Fix some mockups
 ----------------------------------------------------------------*/
 
-@media handheld,
-only screen and (min-width: 20em) and (max-width: 20em) {
+@media handheld, only screen and (min-width: 20em) and (max-width: 20em) {
     .side-mockup .ipad-slider {
         margin-left: -21px;
     }
+
     .side-mockup .iphone-slider {
         margin-left: -18px;
     }
+
     .side-mockup .dasktop-slider {
         margin-left: -29px;
     }
 }
-
 
 /*----------------------------------------------------------------
     Lightbox
@@ -3844,10 +3713,9 @@ only screen and (min-width: 20em) and (max-width: 20em) {
     z-index: 9997;
 }
 
-.landing-els.lightbox .spinner>div {
+.landing-els.lightbox .spinner > div {
     background-color: rgba(255, 255, 255, 0.5);
 }
-
 
 /*----------------------------------------------------------------
     Owl Carousel mockups
@@ -3857,12 +3725,12 @@ only screen and (min-width: 20em) and (max-width: 20em) {
     clear: none;
 }
 
-.owl-item>div {
+.owl-item > div {
     padding: 10px;
 }
 
-#intro .owl-item>div,
-.gallery .owl-item>div {
+#intro .owl-item > div,
+.gallery .owl-item > div {
     padding: 0;
 }
 
@@ -4074,19 +3942,21 @@ only screen and (min-width: 20em) and (max-width: 20em) {
     transition: none;
 }
 
-@media handheld,
-only screen and (max-width: 48em) {
+@media handheld, only screen and (max-width: 48em) {
     .iphone-slider {
         min-height: 600px;
         width: 300px;
     }
+
     .iphone-slider .owl-item {
         margin: 75px 0;
         height: 426px;
     }
+
     .iphone-slider .owl-item div {
         padding: 0 30px;
     }
+
     .iphone-mockup,
     .iphone-mockup.black,
     .iphone-mockup.white,
@@ -4095,6 +3965,7 @@ only screen and (max-width: 48em) {
         width: 300px;
         background-size: 300px 600px !important;
     }
+
     .iphone-mockup,
     .iphone-mockup.black,
     .iphone-mockup.white,
@@ -4102,17 +3973,21 @@ only screen and (max-width: 48em) {
     .iphone-slider .owl-wrapper-outer {
         height: 600px;
     }
+
     .ipad-slider {
         min-height: 240px;
         width: 310px;
     }
+
     .ipad-slider .owl-item {
         margin: 30px 0;
         height: 180px;
     }
+
     .ipad-slider .owl-item div {
         padding: 0 35px;
     }
+
     .ipad-mockup,
     .ipad-mockup.black,
     .ipad-mockup.white,
@@ -4121,6 +3996,7 @@ only screen and (max-width: 48em) {
         width: 300px;
         background-size: 300px 240px !important;
     }
+
     .ipad-mockup,
     .ipad-mockup.black,
     .ipad-mockup.white,
@@ -4128,41 +4004,52 @@ only screen and (max-width: 48em) {
     .ipad-slider .owl-wrapper-outer {
         height: 240px;
     }
+
     .desktop-slider {
         min-height: 220px;
         width: 326px;
     }
+
     .desktop-slider .owl-item {
         margin: 12px 0;
         height: 151px;
     }
+
     .desktop-slider .owl-item div {
         padding: 0 26px;
     }
+
     .desktop-mockup {
         margin-left: -150px;
         width: 300px;
         background-size: 300px 220px !important;
     }
+
     .desktop-mockup,
     .desktop-slider .owl-wrapper-outer {
         height: 220px;
     }
+
     .iphone-slider .owl-theme .owl-controls .owl-buttons .owl-prev {
         left: -22px;
     }
+
     .iphone-slider .owl-theme .owl-controls .owl-buttons .owl-next {
         right: -22px;
     }
+
     .ipad-slider .owl-theme .owl-controls .owl-buttons .owl-prev {
         left: -28px;
     }
+
     .ipad-slider .owl-theme .owl-controls .owl-buttons .owl-next {
         right: -28px;
     }
+
     .desktop-slider .owl-theme .owl-controls .owl-buttons .owl-prev {
         left: -20px;
     }
+
     .desktop-slider .owl-theme .owl-controls .owl-buttons .owl-next {
         right: -20px;
     }
@@ -4172,12 +4059,12 @@ only screen and (max-width: 48em) {
     .owl-buttons {
         display: none;
     }
+
     .side-mockup .owl-buttons,
     .side-mockup .owl-pagination {
         display: block;
     }
 }
-
 
 /*----------------------------------------------------------------
     Owl Carousel general
@@ -4207,20 +4094,17 @@ only screen and (max-width: 48em) {
     text-shadow: none;
     font-size: 2.667em;
     opacity: 0;
-    filter: Alpha(Opacity=0);
-    ;
+    filter: Alpha(Opacity=0);;
 }
 
 #intro-wrap:hover .owl-controls .owl-buttons div {
     opacity: 0.3;
-    filter: Alpha(Opacity=30);
-    ;
+    filter: Alpha(Opacity=30);;
 }
 
 #intro-wrap:hover .owl-controls .owl-buttons div:hover {
     opacity: 1;
-    filter: Alpha(Opacity=100);
-    ;
+    filter: Alpha(Opacity=100);;
 }
 
 .dark-controls .owl-theme .owl-controls .owl-buttons div {
@@ -4313,15 +4197,16 @@ only screen and (max-width: 48em) {
     overflow: hidden;
 }
 
-@media handheld,
-only screen and (min-width: 48em) {
+@media handheld, only screen and (min-width: 48em) {
     .owl-theme .owl-controls .owl-buttons div {
         margin-top: -25px;
         font-size: 50px;
     }
+
     .gallery .owl-controls .owl-buttons div {
         font-size: 2em;
     }
+
     .carousel-item h1,
     .carousel-item h2,
     .carousel-item h3,
@@ -4330,24 +4215,30 @@ only screen and (min-width: 48em) {
     .carousel-item h6 {
         margin-top: 0.67em;
     }
+
     .caption-mockup h2 {
         margin-top: 0;
     }
+
     #intro .intro-mockup-wrapper {
         margin-top: 6em;
     }
+
     .caption-mockup.caption-left,
     .caption-mockup.caption-right {
         margin-top: 2em;
         text-align: left;
     }
+
     .caption-mockup.caption-left h2,
     .caption-mockup.caption-right h2 {
         font-size: 2.667em;
     }
+
     aside.sidebar {
         margin-top: 3em;
     }
+
     .blog.masonry-style article.three .blog-excerpt-inner:after,
     .blog.masonry-style article.four .blog-excerpt-inner:after,
     .blog-section.masonry-style article.three .blog-excerpt-inner:after,
@@ -4361,17 +4252,14 @@ only screen and (min-width: 48em) {
         background: rgba(255, 255, 255, 0);
         background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
         background: linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-        content: " ";
-        ;
+        content: " ";;
     }
 }
-
 
 /*----------------------------------------------------------------
     Core Owl Carousel CSS File
     v1.24 Customized for Beetle
 ----------------------------------------------------------------*/
-
 
 /* clearfix */
 
@@ -4383,7 +4271,6 @@ only screen and (min-width: 48em) {
     content: ".";
     line-height: 0;
 }
-
 
 /* display none until init */
 
@@ -4437,7 +4324,6 @@ only screen and (min-width: 48em) {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-
 /* fix */
 
 .owl-carousel .owl-wrapper,
@@ -4453,7 +4339,6 @@ only screen and (min-width: 48em) {
     -o-backface-visibility: hidden;
     backface-visibility: hidden;
 }
-
 
 /* CSS3 Transitions */
 
@@ -4475,7 +4360,6 @@ only screen and (min-width: 48em) {
     perspective-origin-y: 50%;
 }
 
-
 /* fade */
 
 .owl-fade-out {
@@ -4491,7 +4375,6 @@ only screen and (min-width: 48em) {
     -moz-animation: fadeIn .7s both ease;
     animation: fadeIn .7s both ease;
 }
-
 
 /* backSlide */
 
@@ -4509,7 +4392,6 @@ only screen and (min-width: 48em) {
     animation: backSlideIn 1s both ease;
 }
 
-
 /* goDown */
 
 .owl-goDown-out {
@@ -4526,7 +4408,6 @@ only screen and (min-width: 48em) {
     animation: goDown .6s ease both;
 }
 
-
 /* scaleUp */
 
 .owl-fadeUp-in {
@@ -4542,7 +4423,6 @@ only screen and (min-width: 48em) {
     -moz-animation: scaleUpTo .5s ease both;
     animation: scaleUpTo .5s ease both;
 }
-
 
 /* scaleDown */
 
@@ -4563,7 +4443,6 @@ only screen and (min-width: 48em) {
     animation: scaleDownTo .5s ease both;
 }
 
-
 /* scaleDownRight */
 
 .owl-scaleDownRight-in {
@@ -4579,7 +4458,6 @@ only screen and (min-width: 48em) {
     -moz-animation: scaleDownRightTo .6s ease both;
     animation: scaleDownRightTo .6s ease both;
 }
-
 
 /* scaleUpLeft */
 
@@ -4597,7 +4475,6 @@ only screen and (min-width: 48em) {
     animation: scaleUpLeftTo .6s ease both;
 }
 
-
 /* fadeTop */
 
 .owl-fadeTop-in {
@@ -4613,7 +4490,6 @@ only screen and (min-width: 48em) {
     -moz-animation: fadeTopTo .7s ease both;
     animation: fadeTopTo .7s ease both;
 }
-
 
 /* overlap */
 
@@ -4631,9 +4507,7 @@ only screen and (min-width: 48em) {
     animation: overlapTo .7s ease both;
 }
 
-
 /* Keyframes */
-
 
 /*empty*/
 
@@ -5081,8 +4955,7 @@ only screen and (min-width: 48em) {
     }
 }
 
-@media handheld,
-only screen and (max-width: 48em) {
+@media handheld, only screen and (max-width: 48em) {
     .column.one,
     .column.two,
     .column.sixth,
@@ -5113,8 +4986,7 @@ only screen and (max-width: 48em) {
     }
 }
 
-@media handheld,
-only screen and (max-width: 48em) {
+@media handheld, only screen and (max-width: 48em) {
     body {
         font-size: 0.9em;
         -webkit-text-size-adjust: none;
