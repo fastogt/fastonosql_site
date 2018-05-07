@@ -87,7 +87,7 @@ module.exports = function (app, passport, nev) {
 
     // show the home page (will also have our login links)
     app.get('/', function (req, res) {
-        User.find({}, function (err, users) {
+        /*User.find({}, function (err, users) {
             var exec_count = 0;
             var active_users = 0;
             var banned_users = 0;
@@ -123,7 +123,14 @@ module.exports = function (app, passport, nev) {
                 "supported_users": supported_users
             };
             res.render('index.ejs', {statistics: stat});
-        });
+        });*/
+        var stat = {
+            "exec_count": 0,
+            "registered_users": 0,
+            "active_users": 0,
+            "supported_users": 0
+        };
+        res.render('index.ejs', {statistics: stat});
     });
 
     app.get('/help', function (req, res) {
