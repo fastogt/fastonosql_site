@@ -430,7 +430,7 @@ module.exports = function (app, passport, nev) {
     });
 
     app.get('*', function (req, res) {
-        res.redirect('custom_404');
+        res.redirect('/custom_404');
     });
 };
 
