@@ -107,6 +107,7 @@ module.exports = function (nev, passport) {
             new_backup_user.first_name = new_user.first_name;
             new_backup_user.last_name = new_user.last_name;
             new_backup_user.email_subscription = new_user.email_subscription;
+            new_backup_user.created_date = new_user.created_date;
             UserBackups.findOneAndUpdate({'email': email}, new_backup_user, {upsert: true}, function (err, doc) {
                 if (err) {
                     console.error(err);
