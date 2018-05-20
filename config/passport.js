@@ -5,6 +5,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 // load up the user model
 var User = require('../app/models/user');
+var UserBackups = require('../app/models/user_backups');
 var validate_email = require('../app/modules/validate_email'); // use this one for testing
 
 module.exports = function (nev, passport) {
@@ -95,7 +96,23 @@ module.exports = function (nev, passport) {
             new_user.password = new_user.generateHash(password);
             new_user.first_name = req.body.firstName.trim();
             new_user.last_name = req.body.lastName.trim();
-            new_user.email_subscription = req.body.mailSubscribe;
+            var email_subscription = false;
+            if (req.body.hasOwnProperty('mailSubscribe')) {
+                email_subscription = req.body.mailSubscribe;
+            }
+            new_user.email_subscription = email_subscription;
+
+            var new_backup_user = new UserBackups();
+            new_backup_user.email = new_user.email;
+            new_backup_user.first_name = new_user.first_name;
+            new_backup_user.last_name = new_user.last_name;
+            new_backup_user.email_subscription = new_user.email_subscription;
+            UserBackups.findOneAndUpdate({'email': email}, new_backup_user, {upsert: true}, function (err, doc) {
+                if (err) {
+                    console.error(err);
+                }
+            });
+
             nev.createTempUser(new_user, function (err, existingPersistentUser, newTempUser) {
                 // some sort of error
                 if (err) {

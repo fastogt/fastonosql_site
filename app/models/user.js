@@ -34,7 +34,7 @@ var userSchema = mongoose.Schema({
     exec_count: {type: Number, default: 0},
     application_end_date: {type: Date, default: Date.now},
     application_last_start_date: {type: Date, default: Date.now},
-    statistic: [StatisticSchema],
+    statistic: {type: [StatisticSchema], default: []},
     application_state: {
         type: String,
         enum: [user_constants.ACTIVE, user_constants.BANNED, user_constants.TRIAL_FINISHED],
