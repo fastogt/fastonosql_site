@@ -110,7 +110,7 @@ module.exports = function (nev, passport) {
             new_backup_user.created_date = new_user.created_date;
             UsersBackup.findOneAndUpdate({'email': email}, new_backup_user, {upsert: true}, function (err, doc) {
                 if (err) {
-                    console.error(err);
+                    console.error('findOneAndUpdate email: ' + email + ' , error: ' + err);
                 }
             });
 
