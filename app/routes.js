@@ -424,13 +424,17 @@ module.exports = function (app, passport, nev) {
         res.render('after_confirm.ejs');
     });
 
+    function not_found(res) {
+        res.status(404).render('custom_404.ejs');
+    }
+
     // seo 404
     app.get('/custom_404', function (req, res) {
-        res.status(404).render('custom_404.ejs');
+        not_found(res);
     });
 
     app.get('*', function (req, res) {
-        res.redirect('/custom_404');
+        not_found(res)
     });
 };
 
