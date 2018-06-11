@@ -7,7 +7,8 @@ var StatisticSchema = require('./statistic');
 
 var UserType = {
     USER: 'USER',
-    SUPPORT: 'SUPPORT'
+    SUPPORT: 'SUPPORT',
+    OPEN_SOURCE: 'OPEN_SOURCE'
 };
 
 // define the schema for our user model
@@ -27,7 +28,7 @@ var userSchema = mongoose.Schema({
     },
     type: {
         type: String,
-        enum: [UserType.USER, UserType.SUPPORT],
+        enum: [UserType.USER, UserType.SUPPORT, UserType.SUPPORT],
         default: UserType.USER
     },
     email_subscription: Boolean,
