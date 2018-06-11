@@ -427,7 +427,7 @@ function is_subscribed(args, opt, callback) {
             return result;
         }
 
-        if (user.type === user.SUPPORT || user.type === user.OPEN_SOURCE) {
+        if (user.type === 'SUPPORT' || user.type === 'OPEN_SOURCE') {
             return callback(null, generate_response(SUBSCRIBED_USER));
         }
 
