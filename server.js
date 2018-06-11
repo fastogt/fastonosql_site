@@ -385,7 +385,7 @@ function is_subscribed(args, opt, callback) {
             user.application_end_date = d;
         }
 
-        if (user.type === user.USER) {
+        if (user.type === 'USER') {
             if (user.application_state === user_constants.ACTIVE && !user.subscription) {
                 if (user.application_end_date < cur_date) {
                     user.application_state = user_constants.TRIAL_FINISHED;
