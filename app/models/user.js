@@ -28,7 +28,7 @@ var userSchema = mongoose.Schema({
     },
     type: {
         type: String,
-        enum: [UserType.USER, UserType.SUPPORT, UserType.SUPPORT],
+        enum: [UserType.USER, UserType.SUPPORT, UserType.OPEN_SOURCE],
         default: UserType.USER
     },
     email_subscription: Boolean,
