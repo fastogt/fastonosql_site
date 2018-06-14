@@ -16,6 +16,7 @@ var stat = {
 };
 
 scheduler.scheduleJob({hour: 00, minute: 00, second: 00}, function () {
+    console.log('Statistic time.');
     User.find({}, function (err, users) {
         var exec_count = 0;
         var active_users = 0;
