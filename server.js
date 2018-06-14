@@ -236,14 +236,32 @@ nev.configure({
     verifyMailOptions: {
         from: 'Do Not Reply <' + app.locals.site.support_email + '>',
         subject: 'Confirm your account',
-        html: '<p>Please verify your <b>' + app.locals.site.title + '</b> account by clicking <a href="${URL}">this link</a>. If you are unable to do so, copy and paste the following link into your browser:</p><p>${URL}</p>',
+        html: '<p>Please verify your <b>' + app.locals.site.title + '</b> account by clicking <a href="${URL}">this link</a>. If you are unable to do so, copy and paste the following link into your browser:</p><p>${URL}</p>' +
+        '<p><b>BR,</b></p>\n' +
+        '<p><b>' + app.locals.company.name + '</b></p>\n' +
+        '<br>\n' +
+        '<p>Our projects:</p>\n' +
+        '<p><a href="http://fastogt.com">https://fastonosql.com</a></p>\n' +
+        '<p><a href="http://fastogt.com">https://fastoredis.com</a></p>\n' +
+        '<p><a href="http://fastogt.com">https://fastotv.com</a></p>\n' +
+        '<p><a href="http://fastogt.com">https://moneyflow.online</a></p>\n' +
+        '<p><a href="http://fastogt.com">http://fastogt.com</a></p>',
         text: 'Please verify your account by clicking the following link, or by copying and pasting it into your browser: ${URL}'
     },
     shouldSendConfirmation: true,
     confirmMailOptions: {
         from: 'Do Not Reply <' + app.locals.site.support_email + '>',
         subject: 'Successfully verified!',
-        html: '<p>Your <b>' + app.locals.site.title + '</b> account has been successfully verified.</p>',
+        html: '<p>Your <b>' + app.locals.site.title + '</b> account has been successfully verified.</p>' +
+        '<p><b>BR,</b></p>\n' +
+        '<p><b>' + app.locals.company.name + '</b></p>\n' +
+        '<br>\n' +
+        '<p>Our projects:</p>\n' +
+        '<p><a href="http://fastogt.com">https://fastonosql.com</a></p>\n' +
+        '<p><a href="http://fastogt.com">https://fastoredis.com</a></p>\n' +
+        '<p><a href="http://fastogt.com">https://fastotv.com</a></p>\n' +
+        '<p><a href="http://fastogt.com">https://moneyflow.online</a></p>\n' +
+        '<p><a href="http://fastogt.com">http://fastogt.com</a></p>',
         text: 'Your account has been successfully verified.'
     },
 
