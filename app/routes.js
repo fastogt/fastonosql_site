@@ -15,8 +15,7 @@ var stat = {
     "supported_users": 0
 };
 
-scheduler.scheduleJob({hour: 00, minute: 00, second: 00}, function () {
-    console.log('Statistic time.');
+scheduler.scheduleJob('0 * * * *', function () {
     User.find({}, function (err, users) {
         var exec_count = 0;
         var active_users = 0;
