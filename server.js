@@ -237,6 +237,7 @@ nev.configure({
         from: 'Do Not Reply <' + app.locals.site.support_email + '>',
         subject: 'Confirm your account',
         html: '<p>Please verify your <b>' + app.locals.site.title + '</b> account by clicking <a href="${URL}">this link</a>. If you are unable to do so, copy and paste the following link into your browser:</p><p>${URL}</p>' +
+        '<p>We are always here to help if you have any questions or just want some guidance on getting started. <a href="' + app.locals.support.contact_email + '>Contact us</a><br>If you did not sign up for ' + app.locals.site.title + ', please ignore this email.</p>' +
         '<p>--<br><b>BR,</b><br><b>' + app.locals.company.name + ' Team</b></p>' +
         '<p>Our projects:<br><a href="http://fastogt.com">https://fastonosql.com</a><br><a href="http://fastogt.com">https://fastoredis.com</a><br><a href="http://fastogt.com">https://fastotv.com</a><br><a href="http://fastogt.com">https://moneyflow.online</a><br><a href="http://fastogt.com">http://fastogt.com</a></p>',
         text: 'Please verify your account by clicking the following link, or by copying and pasting it into your browser: ${URL}'
@@ -246,6 +247,7 @@ nev.configure({
         from: 'Do Not Reply <' + app.locals.site.support_email + '>',
         subject: 'Successfully verified!',
         html: '<p>Your <b>' + app.locals.site.title + '</b> account has been successfully verified.</p>' +
+        '<p>We are always here to help if you have any questions or just want some guidance on getting started. <a href="' + app.locals.support.contact_email + '>Contact us</a>' +
         '<p>--<br><b>BR,</b><br><b>' + app.locals.company.name + ' Team</b></p>' +
         '<p>Our projects:<br><a href="http://fastogt.com">https://fastonosql.com</a><br><a href="http://fastogt.com">https://fastoredis.com</a><br><a href="http://fastogt.com">https://fastotv.com</a><br><a href="http://fastogt.com">https://moneyflow.online</a><br><a href="http://fastogt.com">http://fastogt.com</a></p>',
         text: 'Your account has been successfully verified.'
