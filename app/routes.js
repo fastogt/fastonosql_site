@@ -5,6 +5,55 @@ var fs = require('fs');
 var path_module = require('path');
 var FastSpring = require('./modules/fastspring');
 var MailerLite = require('./modules/mailerlite');
+var scheduler = require('node-schedule');
+var user_constants = require('./models/user_constants');
+// global
+var stat = {
+    "exec_count": 0,
+    "registered_users": 0,
+    "active_users": 0,
+    "supported_users": 0
+};
+
+schedule.scheduleJob({hour: 00, minute: 00, second: 00}, function () {
+    User.find({}, function (err, users) {
+        var exec_count = 0;
+        var active_users = 0;
+        var banned_users = 0;
+        var registered_users = 0;
+        var trial_finished = 0;
+        var supported_users = 0;
+
+        if (err) {
+            console.error("Statistic error: ", err);
+        } else {
+            users.forEach(function (user) {
+                exec_count += user.exec_count;
+                var app_state = user.application_state;
+                if (app_state === user_constants.ACTIVE) {
+                    active_users += 1;
+                } else if (app_state === user_constants.BANNED) {
+                    banned_users += 1;
+                } else if (app_state === user_constants.TRIAL_FINISHED) {
+                    trial_finished += 1;
+                }
+
+                if (user.subscription || user.type === 'SUPPORT' || user.type === 'OPEN_SOURCE' || user.type === 'ENTERPRISE') {
+                    supported_users += 1;
+                }
+                registered_users += 1;
+            });
+        }
+
+
+        stat = {
+            "exec_count": exec_count,
+            "registered_users": registered_users,
+            "active_users": active_users,
+            "supported_users": supported_users
+        };
+    });
+});
 
 function deleteFolderRecursive(path) {
     if (!fs.existsSync(path)) {
@@ -87,49 +136,6 @@ module.exports = function (app, passport, nev) {
 
     // show the home page (will also have our login links)
     app.get('/', function (req, res) {
-        /*User.find({}, function (err, users) {
-            var exec_count = 0;
-            var active_users = 0;
-            var banned_users = 0;
-            var registered_users = 0;
-            var trial_finished = 0;
-            var supported_users = 0;
-
-            if (err) {
-                console.error("Statistic error: ", err);
-            } else {
-                users.forEach(function (user) {
-                    exec_count += user.exec_count;
-                    var app_state = user.application_state;
-                    if (app_state === 'ACTIVE') {
-                        active_users += 1;
-                    } else if (app_state === 'BANNED') {
-                        banned_users += 1;
-                    } else if (app_state === 'TRIAL_FINISHED') {
-                        trial_finished += 1;
-                    }
-                    if (user.subscription) {
-                        supported_users += 1;
-                    }
-                    registered_users += 1;
-                });
-            }
-
-
-            var stat = {
-                "exec_count": exec_count,
-                "registered_users": registered_users,
-                "active_users": active_users,
-                "supported_users": supported_users
-            };
-            res.render('index.ejs', {statistics: stat});
-        });*/
-        var stat = {
-            "exec_count": 0,
-            "registered_users": 0,
-            "active_users": 0,
-            "supported_users": 0
-        };
         res.render('index.ejs', {statistics: stat});
     });
 
