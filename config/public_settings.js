@@ -5,7 +5,7 @@ module.exports = {
         name_lowercase: 'fastonosql',
         version: '1.17.5',
         domain: 'fastonosql.com',
-        trial_days: 1
+        trial_days: 7
     },
 
     site: {
