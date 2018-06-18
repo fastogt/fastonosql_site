@@ -6,7 +6,7 @@ var path_module = require('path');
 var FastSpring = require('./modules/fastspring');
 var MailerLite = require('./modules/mailerlite');
 var scheduler = require('node-schedule');
-const {UserType, ApplicationState} = require('./app/models/user');
+const {UserType, ApplicationState} = require('../app/models/user');
 // global
 var stat = {
     "exec_count": 0,
