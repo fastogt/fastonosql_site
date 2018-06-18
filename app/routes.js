@@ -6,7 +6,7 @@ var path_module = require('path');
 var FastSpring = require('./modules/fastspring');
 var MailerLite = require('./modules/mailerlite');
 var scheduler = require('node-schedule');
-var user_constants = require('./models/user_constants');
+const {UserType, ApplicationState} = require('./app/models/user');
 // global
 var stat = {
     "exec_count": 0,
@@ -30,11 +30,11 @@ scheduler.scheduleJob('0 * * * *', function () {
             users.forEach(function (user) {
                 exec_count += user.exec_count;
                 var app_state = user.application_state;
-                if (app_state === user_constants.ACTIVE) {
+                if (app_state === UserType.ACTIVE) {
                     active_users += 1;
-                } else if (app_state === user_constants.BANNED) {
+                } else if (app_state === UserType.BANNED) {
                     banned_users += 1;
-                } else if (app_state === user_constants.TRIAL_FINISHED) {
+                } else if (app_state === UserType.TRIAL_FINISHED) {
                     trial_finished += 1;
                 }
 

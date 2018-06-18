@@ -56,7 +56,7 @@ Object.assign(UserSchema.statics, {
 
 // checking if password is valid
 UserSchema.methods.isActive = function () {
-    return this.application_state === user_constants.ACTIVE;
+    return this.application_state === UserType.ACTIVE;
 };
 
 // FIX ME
