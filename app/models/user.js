@@ -45,7 +45,7 @@ var UserSchema = mongoose.Schema({
     statistic: {type: [StatisticSchema], default: []},
     application_state: {
         type: String,
-        enum: Object.values(UserType),
+        enum: Object.values(ApplicationState),
         default: ApplicationState.ACTIVE
     }
 });
