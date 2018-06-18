@@ -23,6 +23,7 @@
     "json-rpc2": "latest",
     "compression": "latest",
     "nodemailer": "latest",
-    "node-schedule": "latest"
+    "node-schedule": "latest",
+    "moment":"latest"
   }
 }

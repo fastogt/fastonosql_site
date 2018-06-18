@@ -30,15 +30,15 @@ scheduler.scheduleJob('0 * * * *', function () {
             users.forEach(function (user) {
                 exec_count += user.exec_count;
                 var app_state = user.application_state;
-                if (app_state === UserType.ACTIVE) {
+                if (app_state === ApplicationState.ACTIVE) {
                     active_users += 1;
-                } else if (app_state === UserType.BANNED) {
+                } else if (app_state === ApplicationState.BANNED) {
                     banned_users += 1;
-                } else if (app_state === UserType.TRIAL_FINISHED) {
+                } else if (app_state === ApplicationState.TRIAL_FINISHED) {
                     trial_finished += 1;
                 }
 
-                if (user.subscription || user.type === 'SUPPORT' || user.type === 'OPEN_SOURCE' || user.type === 'ENTERPRISE') {
+                if (user.subscription || user.type === UserType.SUPPORT || user.type === UserType.OPEN_SOURCE || user.type === UserType.ENTERPRISE) {
                     supported_users += 1;
                 }
                 registered_users += 1;
