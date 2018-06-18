@@ -2,7 +2,6 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var FastSpring = require('./../modules/fastspring');
-var user_constants = require('./user_constants');
 var StatisticSchema = require('./statistic');
 
 
@@ -11,6 +10,12 @@ const UserType = Object.freeze({
     SUPPORT: 'SUPPORT',
     OPEN_SOURCE: 'OPEN_SOURCE',
     ENTERPRISE: 'ENTERPRISE'
+});
+
+const ApplicationState = Object.freeze({
+    ACTIVE: 'ACTIVE',
+    BANNED: 'BANNED',
+    TRIAL_FINISHED: 'TRIAL_FINISHED'
 });
 
 // define the schema for our user model
@@ -40,13 +45,13 @@ var UserSchema = mongoose.Schema({
     statistic: {type: [StatisticSchema], default: []},
     application_state: {
         type: String,
-        enum: [user_constants.ACTIVE, user_constants.BANNED, user_constants.TRIAL_FINISHED],
-        default: user_constants.ACTIVE
+        enum: Object.values(UserType),
+        default: ApplicationState.ACTIVE
     }
 });
 
 Object.assign(UserSchema.statics, {
-    UserType
+    UserType, ApplicationState
 });
 
 // checking if password is valid
@@ -54,6 +59,7 @@ UserSchema.methods.isActive = function () {
     return this.application_state === user_constants.ACTIVE;
 };
 
+// FIX ME
 UserSchema.methods.getType = function () {
     if (this.type === UserType.USER) {
         return 0;
