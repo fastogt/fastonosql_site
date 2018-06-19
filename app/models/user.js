@@ -38,7 +38,7 @@ var UserSchema = mongoose.Schema({
         enum: Object.values(UserType),
         default: UserType.USER
     },
-    email_subscription: Boolean,
+    email_subscription: {type: Boolean, default: true},
     exec_count: {type: Number, default: 0},
     application_end_date: {type: Date, default: Date.now},
     application_last_start_date: {type: Date, default: Date.now},

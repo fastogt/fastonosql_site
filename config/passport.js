@@ -97,7 +97,7 @@ module.exports = function (nev, passport) {
             new_user.last_name = req.body.lastName.trim();
             var email_subscription = false;
             if (req.body.hasOwnProperty('mailSubscribe')) {
-                email_subscription = req.body.mailSubscribe;
+                email_subscription = true;
             }
             new_user.email_subscription = email_subscription;
 
