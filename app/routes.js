@@ -12,6 +12,7 @@ var stat = {
     "exec_count": 0,
     "registered_users": 0,
     "active_users": 0,
+    "banned_users": 0,
     "supported_users": 0
 };
 
@@ -50,6 +51,7 @@ scheduler.scheduleJob('0 * * * *', function () {
             "exec_count": exec_count,
             "registered_users": registered_users,
             "active_users": active_users,
+            "banned_users": banned_users,
             "supported_users": supported_users
         };
     });
