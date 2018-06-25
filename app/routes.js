@@ -79,7 +79,6 @@ scheduler.scheduleJob('0 * * * *', function () {
             "supported_users": supported_users,
             "statistics": statistics
         };
-        console.log("stat", stat);
     });
 });
 
