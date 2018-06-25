@@ -345,6 +345,9 @@
                     <p>Subscribed users</p>
                 </div>
             </div>
+            <div id="canvas-holder" style="width:50%">
+                <canvas id="chart-area"></canvas>
+            </div>
         </section>
     </div>
 </main>
@@ -427,5 +430,37 @@
 <script src="/design/js/beetle.js"></script>
 <script src="/design/js/slider.js"></script>
 <script src="/scripts/jivosite.js"></script>
+<script src="/scripts/Chart.bundle.min"></script>
+<script>
+    var config = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [<%- statistics.statistics.data %>],
+                backgroundColor: [<%- statistics.statistics.colors %>],
+                label: 'Usage by OS' // for legend
+            }],
+            labels: [<%- statistics.statistics.labels %>]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top'
+            },
+            title: {
+                display: true,
+                text: 'Usage by OS'
+            },
+            animation: {
+                animateRotate: true,
+                animateScale: true
+            }
+        }
+    };
+    window.onload = function () {
+        var ctx = document.getElementById('chart-area');
+        window.myPolarArea = new Chart(ctx, config);
+    };
+</script>
 </body>
 </html>

@@ -14,7 +14,7 @@ var stat = {
     "active_users": 0,
     "banned_users": 0,
     "supported_users": 0,
-    "statistics": {}
+    "statistics": {"data": [], "labels": [], "colors": []}
 };
 
 scheduler.scheduleJob('* * * * *', function () {
@@ -25,13 +25,14 @@ scheduler.scheduleJob('* * * * *', function () {
         var registered_users = 0;
         var trial_finished = 0;
         var supported_users = 0;
-        var statistics = {};
+        var statistics = {"data": [], "labels": [], "colors": []};
+        var local_statistics = {};
+        var colors = ['#FF0000', '#008000', '#0000FF', '#FFFF00', ' #00FFFF', '#FF7F50'];
 
         if (err) {
             console.error("Statistic error: ", err);
         } else {
             users.forEach(function (user) {
-                exec_count += user.exec_count;
                 var app_state = user.application_state;
                 if (app_state === ApplicationState.ACTIVE) {
                     active_users += 1;
@@ -46,16 +47,25 @@ scheduler.scheduleJob('* * * * *', function () {
                 }
                 registered_users += 1;
 
+                // statistics
                 for (var i = 0; i < user.statistic.length; ++i) {
                     var stat = user.statistic[i];
-                    if (!statistics.hasOwnProperty(stat.os.name)){
-                        statistics[stat.os.name] = 0;
+                    if (!local_statistics.hasOwnProperty(stat.os.name)) {
+                        local_statistics[stat.os.name] = 0;
                     }
-                    statistics[stat.os.name] += 1
+                    local_statistics[stat.os.name] += 1;
+                    exec_count += 1;
                 }
             });
         }
 
+
+        for (var key in local_statistics) {
+            var value = local_statistics[key];
+            statistics.data.push(value);
+            statistics.labels.push(key);
+            statistics.colors.push(colors[statistics.data.length - 1]);
+        }
 
         stat = {
             "exec_count": exec_count,
