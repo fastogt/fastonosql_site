@@ -27,7 +27,7 @@ scheduler.scheduleJob('* * * * *', function () {
         var supported_users = 0;
         var statistics = {"data": [], "labels": [], "colors": []};
         var local_statistics = {};
-        var colors = ['#FF0000', '#008000', '#0000FF', '#FFFF00', ' #00FFFF', '#FF7F50'];
+        var colors = ['Brown', 'Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Gray'];
 
         if (err) {
             console.error("Statistic error: ", err);
