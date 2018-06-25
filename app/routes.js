@@ -14,7 +14,7 @@ var stat = {
     "active_users": 0,
     "banned_users": 0,
     "supported_users": 0,
-    "statistics": {"data": [], "labels": [], "colors": []}
+    "statistics": {"data": [1, 1, 1], "labels": ["Windows NT", "Mac OS X", "Linux"], "colors": ["Red", "Green", "Blue"]}
 };
 
 scheduler.scheduleJob('* * * * *', function () {
