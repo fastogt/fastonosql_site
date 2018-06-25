@@ -48,6 +48,9 @@ scheduler.scheduleJob('* * * * *', function () {
 
                 for (var i = 0; i < user.statistic.length; ++i) {
                     var stat = user.statistic[i];
+                    if (!statistics.hasOwnProperty(stat.os.name){
+                        statistics[stat.os.name] = 0;
+                    }
                     statistics[stat.os.name] += 1
                 }
             });
