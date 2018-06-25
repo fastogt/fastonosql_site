@@ -13,10 +13,11 @@ var stat = {
     "registered_users": 0,
     "active_users": 0,
     "banned_users": 0,
-    "supported_users": 0
+    "supported_users": 0,
+    "statistics": {}
 };
 
-scheduler.scheduleJob('0 * * * *', function () {
+scheduler.scheduleJob('* * * * *', function () {
     User.find({}, function (err, users) {
         var exec_count = 0;
         var active_users = 0;
@@ -24,6 +25,7 @@ scheduler.scheduleJob('0 * * * *', function () {
         var registered_users = 0;
         var trial_finished = 0;
         var supported_users = 0;
+        var statistics = {};
 
         if (err) {
             console.error("Statistic error: ", err);
@@ -43,6 +45,11 @@ scheduler.scheduleJob('0 * * * *', function () {
                     supported_users += 1;
                 }
                 registered_users += 1;
+
+                for (var i = 0; i < user.statistic.length; ++i) {
+                    var stat = user.statistic[i];
+                    statistics[stat.os.name] += 1
+                }
             });
         }
 
@@ -52,8 +59,10 @@ scheduler.scheduleJob('0 * * * *', function () {
             "registered_users": registered_users,
             "active_users": active_users,
             "banned_users": banned_users,
-            "supported_users": supported_users
+            "supported_users": supported_users,
+            "statistics": statistics
         };
+        console.log("stat", stat);
     });
 });
 
