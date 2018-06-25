@@ -21,7 +21,7 @@ var stat = {
     }
 };
 
-scheduler.scheduleJob('* * * * *', function () {
+scheduler.scheduleJob('0 * * * *', function () {
     User.find({}, function (err, users) {
         var exec_count = 0;
         var active_users = 0;
