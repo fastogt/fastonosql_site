@@ -27,7 +27,7 @@ scheduler.scheduleJob('* * * * *', function () {
         var supported_users = 0;
         var statistics = {"data": [], "labels": [], "colors": []};
         var local_statistics = {};
-        var colors = ['\'Red\'', '\'Green\'', '\'Blue\'', '\'Brown\'', '\'Orange\'', '\'Yellow\'', '\'Gray\''];
+        var colors = ['Red', 'Green', 'Blue', 'Brown', 'Orange', 'Yellow', 'Gray'];
 
         if (err) {
             console.error("Statistic error: ", err);
@@ -63,8 +63,8 @@ scheduler.scheduleJob('* * * * *', function () {
         for (var key in local_statistics) {
             var value = local_statistics[key];
             statistics.data.push(value);
-            statistics.labels.push(key);
-            statistics.colors.push(colors[statistics.data.length - 1]);
+            statistics.labels.push('"' + key + '"');
+            statistics.colors.push('"' + colors[statistics.data.length - 1] + '"');
         }
 
         stat = {
