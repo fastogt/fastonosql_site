@@ -2,6 +2,11 @@
     General Rules
 ----------------------------------------------------------------*/
 
+#canvas-holder {
+    display: block;
+    margin: 0 auto;
+}
+
 ::selection {
     background: #FD685B;
     color: #fff;
