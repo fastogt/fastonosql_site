@@ -60,7 +60,6 @@
                         <a href="/logout" class="btn btn-warning navbar-btn pull-right navbar-right"><span
                                     class="fa fa-sign-out"></span> Sign out</a>
 
-                        <% if (user.isActive()) { %>
                         <a href=""
                            class="btn btn-danger navbar-btn pull-right navbar-right"
                            style="margin-right: 20px;"
@@ -68,7 +67,6 @@
                         >
                             <span class="fa fa-trash"></span> Delete account
                         </a>
-                        <% } %>
                     </div>
                 </div>
             </nav>
@@ -103,7 +101,8 @@
                             <div class="col-md-6 mb30">
                                 <div class="form-group">
                                     <label for="lastName">Application state:</label>
-                                    <input type="text" disabled class="form-control check" id="application_state" name="application_state"
+                                    <input type="text" disabled class="form-control check" id="application_state"
+                                           name="application_state"
                                            value="<%= user.application_state %>"/>
                                 </div>
                             </div>

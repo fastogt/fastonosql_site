@@ -420,6 +420,7 @@ module.exports = function (app, passport, nev) {
         var url = req.params.URL;
         nev.confirmTempUser(url, function (err, user) {
             if (err) {
+                console.error(err);
                 return res.status(404).send('ERROR: sending confirmation email FAILED');
             }
 
