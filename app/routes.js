@@ -187,6 +187,7 @@ module.exports = function (app, passport, nev) {
         res.render('registered_users_downloads.ejs');
     });
 
+    /*
     app.get('/build_installer_request', User.checkSubscriptionStatus(app, 'active'), function (req, res) {
         var user = req.user;
         walk(app.locals.site.users_directory + '/' + user.email, function (err, results) {
@@ -203,6 +204,31 @@ module.exports = function (app, passport, nev) {
 
     // CLEAR user packages
     app.post('/clear_packages', User.checkSubscriptionStatus(app, 'active'), function (req, res) {
+        var user = req.user;
+        deleteFolderRecursive(app.locals.site.users_directory + '/' + user.email);
+        res.render('build_installer_request.ejs', {
+            user: user,
+            builded_packages: []
+        });
+    });
+    */
+
+    app.get('/build_installer_request', isLoggedIn, function (req, res) {
+        var user = req.user;
+        walk(app.locals.site.users_directory + '/' + user.email, function (err, results) {
+            if (err) {
+                console.error(err);
+            }
+
+            res.render('build_installer_request.ejs', {
+                user: user,
+                builded_packages: results
+            });
+        });
+    });
+
+    // CLEAR user packages
+    app.post('/clear_packages', isLoggedIn, function (req, res) {
         var user = req.user;
         deleteFolderRecursive(app.locals.site.users_directory + '/' + user.email);
         res.render('build_installer_request.ejs', {

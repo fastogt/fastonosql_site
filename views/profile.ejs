@@ -190,6 +190,14 @@
     <% } %>
 
     <div class="row">
+        <div class="col-sm-4">
+            <form action="/build_installer_request" method="get" class="btn-verification">
+                <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version</button>
+            </form>
+            <a href="skype:<%- support.contact_skype %>"><%- support.contact_skype %></a>
+            <a href="mailto:<%- support.contact_email %>"><%- support.contact_email %></a>
+        </div>
+        </br>
         <% if (user.enableSubscription()) { %>
         <div class="row-content clear-after">
             <div class="container-subscription">
@@ -435,13 +443,6 @@
                     href="<%- site.github_issues_link %>" alt="NoSQL GUI">GitHub Issues</a>.
         </div>
         <% } else if (user.getSubscriptionState() === 'active') { %>
-        <div class="col-sm-4">
-            <form action="/build_installer_request" method="get" class="btn-verification">
-                <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version</button>
-            </form>
-            <a href="skype:<%- support.contact_skype %>"><%- support.contact_skype %></a>
-            <a href="mailto:<%- support.contact_email %>"><%- support.contact_email %></a>
-        </div>
         <div class="col-sm-8">
             <div class="row">
                 <div class="col-sm-12 text-right">
