@@ -445,12 +445,15 @@
             </div>
         </div>
         <% } %>
-        <div class="col-sm-4">
-            <form action="/build_installer_request" method="get" class="btn-verification">
-                <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version</button>
-            </form>
-            <a href="skype:<%- support.contact_skype %>"><%- support.contact_skype %></a>
-            <a href="mailto:<%- support.contact_email %>"><%- support.contact_email %></a>
+        </br>
+        <div class="well">
+            <div class="col-sm-4">
+                <form action="/build_installer_request" method="get" class="btn-verification">
+                    <button type="submit" class="btn btn-primary">Build last stable <%= project.name %> version</button>
+                </form>
+                <a href="skype:<%- support.contact_skype %>"><%- support.contact_skype %></a>
+                <a href="mailto:<%- support.contact_email %>"><%- support.contact_email %></a>
+            </div>
         </div>
     </div>
     <table class="table">
