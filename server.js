@@ -377,11 +377,11 @@ function is_subscribed(args, opt, callback) {
 
         // if no user is found, return the message
         if (!user) {
-            return callback('User(' + args.email + ') not found', null);
+            return callback('User not found.', null);
         }
 
         if (!user.validHexedPassword(args.password)) {
-            return callback('Wrong password', null);
+            return callback('Wrong password.', null);
         }
 
         var cur_date = new Date();
@@ -423,7 +423,7 @@ function is_subscribed(args, opt, callback) {
 
         function generate_response(state) {
             var type = user.getType();
-            var result = {
+            return {
                 'first_name': user.first_name,
                 'last_name': user.last_name,
                 "id": user._id,
@@ -432,7 +432,6 @@ function is_subscribed(args, opt, callback) {
                 "exec_count": user.exec_count,
                 "expire_time": Math.floor(user.application_end_date.getTime() / 1000)
             };
-            return result;
         }
 
         if (user.type === UserType.SUPPORT || user.type === UserType.OPEN_SOURCE) {
@@ -441,7 +440,7 @@ function is_subscribed(args, opt, callback) {
 
         if (!user.subscription) {
             if (user.application_state === ApplicationState.BANNED) { // if banned
-                return callback('User(' + user.email + ') banned, please write to <a href="mailto:' + app.locals.support.contact_email + '">' + app.locals.support.contact_email + '</a> to unban, or <a href="' + app.locals.site.domain + '/login"><b>subscribe</b></a>.', null);
+                return callback('You banned, please write to <a href="mailto:' + app.locals.support.contact_email + '">' + app.locals.support.contact_email + '</a> to unban, or <a href="' + app.locals.site.domain + '/login"><b>subscribe</b></a>.', null);
             }
 
             return callback(null, generate_response(UNSUBSCRIBED_USER));
@@ -455,7 +454,7 @@ function is_subscribed(args, opt, callback) {
                 }
 
                 if (user.application_state === ApplicationState.BANNED) {  // if banned
-                    return callback('User(' + user.email + ') banned, please write to <a href="mailto:' + app.locals.support.contact_email + '">' + app.locals.support.contact_email + '</a> to unban, or <a href="' + app.locals.site.domain + '/login"><b>subscribe</b></a>.', null);
+                    return callback('You banned, please write to <a href="mailto:' + app.locals.support.contact_email + '">' + app.locals.support.contact_email + '</a> to unban, or <a href="' + app.locals.site.domain + '/login"><b>subscribe</b></a>.', null);
                 }
                 return callback(null, generate_response(UNSUBSCRIBED_USER));
             }).catch(function (error) {
@@ -466,7 +465,7 @@ function is_subscribed(args, opt, callback) {
 
 function ban_user(args, opt, callback) {
     if (!args || !args.hasOwnProperty('email') || !args.hasOwnProperty('collision_id')) {
-        callback('invalid arguments', null);
+        callback('invalid arguments.', null);
         return;
     }
 
