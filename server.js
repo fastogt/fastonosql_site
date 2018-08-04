@@ -441,7 +441,7 @@ function is_subscribed(args, opt, callback) {
 
         if (!user.subscription) {
             if (user.application_state === ApplicationState.BANNED) { // if banned
-                return callback('User(' + user.email + ') banned, please write to ' + app.locals.support.contact_email + ' to unban, or subscribe', null);
+                return callback('User(' + user.email + ') banned, please write to <a href="mailto:' + app.locals.support.contact_email + '">' + app.locals.support.contact_email + '</a> to unban, or subscribe.', null);
             }
 
             return callback(null, generate_response(UNSUBSCRIBED_USER));
@@ -455,7 +455,7 @@ function is_subscribed(args, opt, callback) {
                 }
 
                 if (user.application_state === ApplicationState.BANNED) {  // if banned
-                    return callback('User(' + user.email + ') banned, please write to ' + app.locals.support.contact_email + ' to unban, or subscribe', null);
+                    return callback('User(' + user.email + ') banned, please write to <a href="mailto:' + app.locals.support.contact_email + '">' + app.locals.support.contact_email + '</a> to unban, or subscribe.', null);
                 }
                 return callback(null, generate_response(UNSUBSCRIBED_USER));
             }).catch(function (error) {
