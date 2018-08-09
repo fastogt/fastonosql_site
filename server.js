@@ -333,9 +333,9 @@ function statistic(args, opt, callback) {
     };
     var proj = {
         name: args.project.name,
+        build_strategy: args.project.build_strategy,
         version: args.project.version,
-        arch: args.project.arch,
-        exec_count: args.project.exec_count
+        arch: args.project.arch
     };
 
     User.findOne({'email': args.email}, function (err, user) {
