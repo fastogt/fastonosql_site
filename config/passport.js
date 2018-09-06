@@ -86,7 +86,7 @@ module.exports = function (nev, passport) {
         email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
         validate_email.validateEmail(email, function (err) {
             if (err) {
-                req.flash('error', 'Invalid email: ' + email + '.');
+                req.flash('error', 'Invalid email: ' + email + ', (error: ' + err + ').');
                 return done(null, false);
             }
 
