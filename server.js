@@ -360,6 +360,28 @@ function statistic(args, opt, callback) {
     callback(null, 'OK');
 }
 
+function anonymous_statistic(args, opt, callback) {
+    if (!args || !args.hasOwnProperty('os') || !args.hasOwnProperty('project')) {
+        callback('invalid arguments', null);
+        return;
+    }
+
+    var os = {
+        name: args.os.name,
+        version: args.os.version,
+        arch: args.os.arch
+    };
+    var proj = {
+        name: args.project.name,
+        version: args.project.version,
+        arch: args.project.arch
+    };
+
+    var new_stat = {create_date: Date(), os: os, project: proj};
+    console.log('anonymous_statistic: ', new_stat);
+    callback(null, 'OK');
+}
+
 function is_subscribed(args, opt, callback) {
     const UNSUBSCRIBED_USER = 0;
     const SUBSCRIBED_USER = 1;
@@ -519,6 +541,7 @@ function ban_user(args, opt, callback) {
 // handlers
 json_rpc2_server.expose('version', version);
 json_rpc2_server.expose('statistic', statistic);
+json_rpc2_server.expose('anonymous_statistic', anonymous_statistic);
 json_rpc2_server.expose('is_subscribed', is_subscribed);
 json_rpc2_server.expose('ban_user', ban_user);
 
