@@ -397,7 +397,9 @@ module.exports = function (app, passport, nev) {
                 if (answer.result === 'error') {
                     throw new Error('Cancel subscription was failed.');
                 }
-                res.redirect('/profile');
+                setTimeout(function () { // Note: redirect with timeout. Profile page not render with new data from fastspring...
+                    res.redirect('/profile');
+                }, 5000);
             }).catch(function (error) {
             console.log('cancelSubscription: ', error);
         });

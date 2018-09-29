@@ -510,16 +510,6 @@
             We are waiting for your feedback! Please write any issues and proposals to <a
                     href="<%- site.github_issues_link %>" alt="NoSQL GUI">GitHub Issues</a>.
         </div>
-        <% } else if (user.getSubscriptionState() === 'active') { %>
-        <div class="col-sm-8">
-            <div class="row">
-                <div class="col-sm-12 text-right">
-                    <form action="/cancel_subscription" method="post">
-                        <button type="submit" class="btn btn-primary">Cancel Subscription</button>
-                    </form>
-                </div>
-            </div>
-        </div>
         <% } %>
         <div class="well">
             <div class="row">
@@ -531,6 +521,17 @@
                     <a href="skype:<%- support.contact_skype %>"><%- support.contact_skype %></a>
                     <a href="mailto:<%- support.contact_email %>"><%- support.contact_email %></a>
                 </div>
+                <% if (user.getSubscriptionState() === 'active') { %>
+                    <div class="col-sm-7">
+                        <div class="row">
+                            <div class="col-sm-12 text-right">
+                                <form action="/cancel_subscription" method="post">
+                                    <button type="submit" class="btn btn-primary">Cancel Subscription</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
             </div>
         </div>
     </div>
