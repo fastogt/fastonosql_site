@@ -522,15 +522,15 @@
                     <a href="mailto:<%- support.contact_email %>"><%- support.contact_email %></a>
                 </div>
                 <% if (user.getSubscriptionState() === 'active') { %>
-                    <div class="col-sm-7">
-                        <div class="row">
-                            <div class="col-sm-12 text-right">
-                                <form action="/cancel_subscription" method="post">
-                                    <button type="submit" class="btn btn-primary">Cancel Subscription</button>
-                                </form>
-                            </div>
+                <div class="col-sm-7">
+                    <div class="row">
+                        <div class="col-sm-12 text-right">
+                            <form action="/cancel_subscription" method="post">
+                                <button type="submit" class="btn btn-primary">Cancel Subscription</button>
+                            </form>
                         </div>
                     </div>
+                </div>
                 <% } %>
             </div>
         </div>
