@@ -3,11 +3,11 @@ module.exports = {
     project: {
         name: 'FastoNoSQL',
         name_lowercase: 'fastonosql',
-        version: '1.19.3',
+        version: '1.20.0',
         domain: 'fastonosql.com',
         trial_days: 30,
-        price_per_month: 4.99,
-        price_per_year: 49.99
+        price_per_month: 5.99,
+        price_per_year: 59.99
     },
 
     site: {
