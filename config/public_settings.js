@@ -32,7 +32,7 @@ module.exports = {
             {'name': 'Memcached', 'option': 'BUILD_WITH_MEMCACHED', 'active': true},
             {'name': 'SSDB', 'option': 'BUILD_WITH_SSDB', 'active': true},
             {'name': 'LevelDB', 'option': 'BUILD_WITH_LEVELDB', 'active': true},
-            {'name': 'RocksDB', 'option': 'BUILD_WITH_ROCKSDB', 'active': false},
+            {'name': 'RocksDB', 'option': 'BUILD_WITH_ROCKSDB', 'active': true},
             {'name': 'LMDB', 'option': 'BUILD_WITH_LMDB', 'active': true},
             {'name': 'Unqlite', 'option': 'BUILD_WITH_UNQLITE', 'active': true},
             {'name': 'UpscaleDB', 'option': 'BUILD_WITH_UPSCALEDB', 'active': false},
