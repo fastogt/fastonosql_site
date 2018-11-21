@@ -3,7 +3,7 @@ module.exports = {
     project: {
         name: 'FastoNoSQL',
         name_lowercase: 'fastonosql',
-        version: '1.22.1',
+        version: '1.22.2',
         domain: 'fastonosql.com',
         trial_days: 30,
         price_per_month: 5.99,
@@ -42,8 +42,7 @@ module.exports = {
 
     support: {
         author: 'Topilski Alexandr',
-        contact_email: 'support@fastogt.com',
-        contact_skype: 'support.fastogt'
+        contact_email: 'support@fastogt.com'
     },
 
     company: {

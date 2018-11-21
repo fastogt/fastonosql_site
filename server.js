@@ -87,8 +87,7 @@ app.locals.project = {
 };
 app.locals.support = {
     name: public_settings_config.support.name,
-    contact_email: public_settings_config.support.contact_email,
-    contact_skype: public_settings_config.support.contact_skype
+    contact_email: public_settings_config.support.contact_email
 };
 app.locals.company = {
     name: public_settings_config.company.name,
@@ -201,8 +200,7 @@ listener.on('connection', function (socket) {
                         return;
                     }
 
-                    var response_json = response;
-                    console.log("response", response_json);
+                    console.log("response", response);
                     if (response.hasOwnProperty('error')) {
                         socket.emit('message_rabbitmq', {'email': in_json.email, 'error': response.error});
                     } else {
