@@ -83,6 +83,7 @@ app.locals.project = {
     domain: public_settings_config.project.domain,
     trial_days: public_settings_config.project.trial_days,
     price_per_month: public_settings_config.project.price_per_month,
+    price_per_6_month: public_settings_config.project.price_per_6_month,
     price_per_year: public_settings_config.project.price_per_year
 };
 app.locals.support = {
