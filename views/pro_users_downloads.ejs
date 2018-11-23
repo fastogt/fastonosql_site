@@ -34,8 +34,8 @@
         ga('send', 'pageview');
 
         function download(os, platform, package_extension) {
-            ga('send', 'event', 'Download', 'Anonim user download for ' + os, 'Download Page');
-            location.href = '/downloads/' + os + '/<%= project.name_lowercase %>-<%= project.version %>-' + platform + package_extension;
+            ga('send', 'event', 'Download', 'PRO user download for ' + os, 'Download Page');
+            location.href = '/downloads_pro/' + os + '/<%= project.name_lowercase %>_pro-<%= project.version %>-' + platform + package_extension;
             // location.href = '/login';
         }
     </script>
@@ -84,10 +84,8 @@
             <span style="color:red">
                 <p>Limitations:</p>
                 <ul>
-                    <li>Without Redis cluster.</li>
-                    <li>Without Redis sentinels.</li>
-                    <li>Without Redis modules.</li>
-                    <li>Other minor limitations.</li>
+                    <li>You are able to start this version on only one device.</li>
+                    <li>Trial time <%= project.trial_days %> day(s).</li>
                 </ul>
             </span>
             <div class="row">

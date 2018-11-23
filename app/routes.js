@@ -183,6 +183,11 @@ module.exports = function (app, passport, nev) {
         //res.render('login.ejs', {message: req.flash('loginMessage')});
     });
 
+    app.get('/pro_users_downloads', function (req, res) {
+        res.render('pro_users_downloads.ejs');
+        //res.render('login.ejs', {message: req.flash('loginMessage')});
+    });
+
     app.get('/registered_users_downloads', isLoggedIn, function (req, res) {
         res.render('registered_users_downloads.ejs');
     });
