@@ -3,9 +3,9 @@ module.exports = {
     project: {
         name: 'FastoNoSQL',
         name_lowercase: 'fastonosql',
-        version: '1.24.1',
+        version: '1.24.2',
         domain: 'fastonosql.com',
-        trial_days: 30,
+        trial_days: 15,
         price_per_month: 5.99,
         price_per_6_month: 32.99,
         price_per_year: 59.99
@@ -31,15 +31,15 @@ module.exports = {
 
         supported_databases: [{'name': 'Redis', 'option': 'BUILD_WITH_REDIS', 'active': true},
             {'name': 'Memcached', 'option': 'BUILD_WITH_MEMCACHED', 'active': true},
-            {'name': 'SSDB', 'option': 'BUILD_WITH_SSDB', 'active': true},
+            {'name': 'SSDB', 'option': 'BUILD_WITH_SSDB', 'active': false},
             {'name': 'LevelDB', 'option': 'BUILD_WITH_LEVELDB', 'active': true},
             {'name': 'RocksDB', 'option': 'BUILD_WITH_ROCKSDB', 'active': true},
             {'name': 'LMDB', 'option': 'BUILD_WITH_LMDB', 'active': true},
             {'name': 'Unqlite', 'option': 'BUILD_WITH_UNQLITE', 'active': true},
             {'name': 'UpscaleDB', 'option': 'BUILD_WITH_UPSCALEDB', 'active': false},
             {'name': 'ForestDB', 'option': 'BUILD_WITH_FORESTDB', 'active': false},
-            {'name': 'Pika', 'option': 'BUILD_WITH_PIKA', 'active': true},
-            {'name': 'Dynomite', 'option': 'BUILD_WITH_DYNOMITE', 'active': true}]
+            {'name': 'Pika', 'option': 'BUILD_WITH_PIKA', 'active': false},
+            {'name': 'Dynomite', 'option': 'BUILD_WITH_DYNOMITE', 'active': false}]
     },
 
     support: {
