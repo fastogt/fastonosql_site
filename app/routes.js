@@ -46,7 +46,7 @@ scheduler.scheduleJob('0 * * * *', function () {
                     trial_finished += 1;
                 }
 
-                if (user.subscription || user.type === UserType.SUPPORT || user.type === UserType.OPEN_SOURCE || user.type === UserType.ENTERPRISE) {
+                if (user.subscription || user.isPrimary() || user.type === UserType.ENTERPRISE) {
                     supported_users += 1;
                 }
                 registered_users += 1;
@@ -345,6 +345,25 @@ module.exports = function (app, passport, nev) {
             });
         } else {
             removeUser(user, res);
+        }
+    });
+
+    app.post('/product', isLoggedIn, function (req, res) {
+        var user = req.user;
+        var body = JSON.parse(req.body.data);
+        if (body.hasOwnProperty('id') && body.hasOwnProperty('reference')) {
+            user.set({
+                status: UserType.PERMANENT,
+            });
+            user.save(function (err) {
+                if (err) {
+                    return res.status(500).send('ERROR: Buy product was failed!');
+                }
+            });
+
+            res.status(200).send('SUCCESS: Buy product success!');
+        } else {
+          return res.status(400).send('ERROR: Invalid data!');
         }
     });
 

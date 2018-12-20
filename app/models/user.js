@@ -9,7 +9,8 @@ const UserType = Object.freeze({
     USER: 'USER',
     SUPPORT: 'SUPPORT',
     OPEN_SOURCE: 'OPEN_SOURCE',
-    ENTERPRISE: 'ENTERPRISE'
+    ENTERPRISE: 'ENTERPRISE',
+    PERMANENT: 'PERMANENT'
 });
 
 const ApplicationState = Object.freeze({
@@ -107,6 +108,11 @@ UserSchema.methods.getSubscription = function () {
 // get subscription state
 UserSchema.methods.getSubscriptionState = function () {
     return this.subscription_state;
+};
+
+// checking user status
+UserSchema.methods.isPrimary = function () {
+  return user.type === UserType.SUPPORT || user.type === UserType.OPEN_SOURCE || user.type === UserType.PERMANENT;
 };
 
 /**

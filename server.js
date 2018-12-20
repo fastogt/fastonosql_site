@@ -461,7 +461,7 @@ function is_subscribed(args, opt, callback) {
             };
         }
 
-        if (user.type === UserType.SUPPORT || user.type === UserType.OPEN_SOURCE) {
+        if (user.isPrimary()) {
             return callback(null, generate_response(SUBSCRIBED_USER));
         }
 
