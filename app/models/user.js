@@ -70,6 +70,8 @@ UserSchema.methods.getType = function () {
         return 2;
     } else if (this.type === UserType.ENTERPRISE) {
         return 3;
+    } else if (this.type === UserType.PERMANENT) {
+        return 4;
     }
     return 0;
 };
@@ -112,7 +114,7 @@ UserSchema.methods.getSubscriptionState = function () {
 
 // checking user status
 UserSchema.methods.isPrimary = function () {
-  return user.type === UserType.SUPPORT || user.type === UserType.OPEN_SOURCE || user.type === UserType.PERMANENT;
+  return this.type === UserType.SUPPORT || this.type === UserType.OPEN_SOURCE || this.type === UserType.PERMANENT;
 };
 
 /**

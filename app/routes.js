@@ -353,7 +353,7 @@ module.exports = function (app, passport, nev) {
         var body = JSON.parse(req.body.data);
         if (body.hasOwnProperty('id') && body.hasOwnProperty('reference')) {
             user.set({
-                status: UserType.PERMANENT,
+                type: UserType.PERMANENT,
             });
             user.save(function (err) {
                 if (err) {
@@ -361,7 +361,7 @@ module.exports = function (app, passport, nev) {
                 }
             });
 
-            res.status(200).send('SUCCESS: Buy product success!');
+            return res.status(200).send('SUCCESS: Buy product success!');
         } else {
           return res.status(400).send('ERROR: Invalid data!');
         }
