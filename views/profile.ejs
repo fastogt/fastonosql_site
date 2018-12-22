@@ -191,68 +191,72 @@
 
     <% if (user.getSubscriptionState() !== 'active' && !user.isPrimary()) { %>
     <div class="row">
-        <div class="col-md-3">
-            <div class="subscription">
-                <img src="/images/crown.png" alt="" title="" width="150" style="float: top;">
-                <h1 class="title-subscription">FOREVER</h1>
-                <p class="price">
-                    <span data-fsc-item-path="permanent-fastonosql" data-fsc-item-price></span>
-                </p>
+        <div class="row-content clear-after">
+            <div class="container-subscription">
+                <div class="col-md-3">
+                    <div class="subscription">
+                        <img src="/images/crown.png" alt="" title="" width="150" style="float: top;">
+                        <h1 class="title-subscription">FOREVER</h1>
+                        <p class="price">
+                            <span data-fsc-item-path="permanent-fastonosql" data-fsc-item-price></span>
+                        </p>
 
-                <ul class="list-conditions">
-                    <li>
-                        <i class="material-icons icon-conditions">storage</i>
-                        <span style="color:red">11 Databases</span>
-                    </li>
-                    <li>
-                        <i class="material-icons icon-conditions">polymer</i>
-                        <span>Database Instance</span>
-                    </li>
-                    <li>
-                        <i class="material-icons icon-conditions">edit</i>
-                        <span>Key batch editing</span>
-                    </li>
-                    <li>
-                        <i class="material-icons icon-conditions">alarm_on</i>
-                        <span>Real-time atomic editor</span>
-                    </li>
-                    <li>
-                        <i class="material-icons icon-conditions">screen_share</i>
-                        <span>Real-time monitoring</span>
-                    </li>
-                    <li>
-                        <i class="material-icons icon-conditions">search</i>
-                        <span>Key filters</span>
-                    </li>
-                    <li>
-                        <i class="material-icons icon-conditions">data_usage</i>
-                        <span>Data-visualization</span>
-                    </li>
-                    <li>
-                        <i class="material-icons icon-conditions">vpn_key</i>
-                        <span>Secure protected application</span>
-                    </li>
-                    <li>
-                        <i class="material-icons icon-conditions">devices</i>
-                        <span style="color:red">Unlimeted devices count</span>
-                    </li>
-                    <li>
-                        <i class="material-icons icon-conditions">accessibility</i>
-                        <span style="color:red">Individual builds without limitations</span>
-                    </li>
-                    <li>
-                        <i class="material-icons icon-conditions">bug_report</i>
-                        <span style="color:red">Bugs/features requests priority</span>
-                    </li>
-                    <li>
-                        <i class="material-icons icon-conditions">build</i>
-                        <span style="color:red">Support services</span>
-                    </li>
-                </ul>
-                <button type="submit" class="btn btn-success" id="permanent_fastonosql"
-                        onclick="checkout('product', 'permanent-fastonosql');">
-                    BUY
-                </button>
+                        <ul class="list-conditions">
+                            <li>
+                                <i class="material-icons icon-conditions">storage</i>
+                                <span style="color:red">11 Databases</span>
+                            </li>
+                            <li>
+                                <i class="material-icons icon-conditions">polymer</i>
+                                <span>Database Instance</span>
+                            </li>
+                            <li>
+                                <i class="material-icons icon-conditions">edit</i>
+                                <span>Key batch editing</span>
+                            </li>
+                            <li>
+                                <i class="material-icons icon-conditions">alarm_on</i>
+                                <span>Real-time atomic editor</span>
+                            </li>
+                            <li>
+                                <i class="material-icons icon-conditions">screen_share</i>
+                                <span>Real-time monitoring</span>
+                            </li>
+                            <li>
+                                <i class="material-icons icon-conditions">search</i>
+                                <span>Key filters</span>
+                            </li>
+                            <li>
+                                <i class="material-icons icon-conditions">data_usage</i>
+                                <span>Data-visualization</span>
+                            </li>
+                            <li>
+                                <i class="material-icons icon-conditions">vpn_key</i>
+                                <span>Secure protected application</span>
+                            </li>
+                            <li>
+                                <i class="material-icons icon-conditions">devices</i>
+                                <span style="color:red">Unlimeted devices count</span>
+                            </li>
+                            <li>
+                                <i class="material-icons icon-conditions">accessibility</i>
+                                <span style="color:red">Individual builds without limitations</span>
+                            </li>
+                            <li>
+                                <i class="material-icons icon-conditions">bug_report</i>
+                                <span style="color:red">Bugs/features requests priority</span>
+                            </li>
+                            <li>
+                                <i class="material-icons icon-conditions">build</i>
+                                <span style="color:red">Support services</span>
+                            </li>
+                        </ul>
+                        <button type="submit" class="btn btn-success" id="permanent_fastonosql"
+                                onclick="checkout('product', 'permanent-fastonosql');">
+                            BUY
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
