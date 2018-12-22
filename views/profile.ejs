@@ -190,7 +190,7 @@
     <% } %>
 
     <div class="row">
-        <% if (!user.isPrimary() && user.enableSubscription()) { %>
+        <% if (user.enableSubscription()) { %>
         <div class="row-content clear-after">
             <div class="container-subscription">
                 <div class="col-sm-3 box-subscription">

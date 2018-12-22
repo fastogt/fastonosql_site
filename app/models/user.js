@@ -95,6 +95,10 @@ UserSchema.methods.validPassword = function (password) {
 
 // enable subscription
 UserSchema.methods.enableSubscription = function () {
+    if (isPrimary()) {
+        return false;
+    }
+
     return (!this.subscription_state ||
         this.subscription_state === 'canceled' ||
         this.subscription_state === 'deactivated');
