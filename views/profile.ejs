@@ -189,8 +189,27 @@
     </div>
     <% } %>
 
+    <% if (user.getSubscriptionState() !== 'active' && !user.isPrimary()) { %>
     <div class="row">
-        <% if (user.enableSubscription()) { %>
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img src="/images/crown.png" alt="" title="" width="150" style="float: left;">
+                        <p style="margin: 25px 0 10px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua!</p>
+                        <button type="submit" class="btn btn-success" id="permanent_fastonosql"
+                                onclick="checkout('product', 'permanent-fastonosql');">
+                            BUY LICENSE
+                        </button>
+                    </div>
+                </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <% } %>
+
+    <div class="row">
+        <% if (!user.isPrimary() && user.enableSubscription()) { %>
         <div class="row-content clear-after">
             <div class="container-subscription">
                 <div class="col-md-3 box-subscription">
@@ -305,8 +324,7 @@
                             </li>
                         </ul>
                         <button type="submit" class="btn btn-primary" id="subscription"
-                                data-fsc-action="Add,Checkout"
-                                data-fsc-item-path-value="fastonosql-subscription-1-month">
+                                onclick="checkout('subscription', 'fastonosql-subscription-1-month');">
                             Subscribe
                         </button>
                     </div>
@@ -373,8 +391,7 @@
                             </li>
                         </ul>
                         <button type="submit" class="btn btn-primary" id="subscription"
-                                data-fsc-action="Add,Checkout"
-                                data-fsc-item-path-value="fastonosql-subscription-6-month">
+                                onclick="checkout('subscription', 'fastonosql-subscription-6-month');">
                             Subscribe
                         </button>
                     </div>
@@ -441,8 +458,7 @@
                             </li>
                         </ul>
                         <button type="submit" class="btn btn-primary" id="subscription"
-                                data-fsc-action="Add,Checkout"
-                                data-fsc-item-path-value="fastonosql-subscription-12-month">
+                                onclick="checkout('subscription', 'fastonosql-subscription-12-month');">
                             Subscribe
                         </button>
                     </div>
@@ -518,7 +534,7 @@
                     </form>
                     <a href="mailto:<%- support.contact_email %>"><%- support.contact_email %></a>
                 </div>
-                <% if (user.getSubscriptionState() === 'active') { %>
+                <% if (user.getSubscriptionState() === 'active' && !user.isPrimary()) { %>
                 <div class="col-sm-7">
                     <div class="row">
                         <div class="col-sm-12 text-right">
@@ -564,7 +580,7 @@
      */
     function viewAlert(status, message) {
         var el = document.getElementById('alert');
-        var btn = document.getElementById('subscription');
+        var btn = document.getElementById('subscription'); // TODO: fix it! Disable all button!
         var classList = el.classList;
 
         el.innerHTML = message;
@@ -586,11 +602,22 @@
         }, 3000);
     }
 
+    var checkoutType = ''
+    function checkout(type, product) {
+      checkoutType = type;
+      var params = {
+        'reset':true,
+        'products' : [{ 'path': product, 'quantity': 1 }],
+        'checkout': true
+      }
+      window.fastspring.builder.push(params);
+    }
+
     function onPopupClose(data) {
-        if (data) {
+        if (data && checkoutType) {
             $.ajax({
                 type: 'POST',
-                url: '/subscription',
+                url: '/' + checkoutType,
                 data: {data: JSON.stringify(data)},
                 success: function (response) {
                     viewAlert('success', response);

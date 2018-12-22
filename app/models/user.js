@@ -9,7 +9,8 @@ const UserType = Object.freeze({
     USER: 'USER',
     SUPPORT: 'SUPPORT',
     OPEN_SOURCE: 'OPEN_SOURCE',
-    ENTERPRISE: 'ENTERPRISE'
+    ENTERPRISE: 'ENTERPRISE',
+    PERMANENT: 'PERMANENT'
 });
 
 const ApplicationState = Object.freeze({
@@ -69,6 +70,8 @@ UserSchema.methods.getType = function () {
         return 2;
     } else if (this.type === UserType.ENTERPRISE) {
         return 3;
+    } else if (this.type === UserType.PERMANENT) {
+        return 4;
     }
     return 0;
 };
@@ -107,6 +110,11 @@ UserSchema.methods.getSubscription = function () {
 // get subscription state
 UserSchema.methods.getSubscriptionState = function () {
     return this.subscription_state;
+};
+
+// checking user status
+UserSchema.methods.isPrimary = function () {
+  return this.type === UserType.SUPPORT || this.type === UserType.OPEN_SOURCE || this.type === UserType.PERMANENT;
 };
 
 /**
