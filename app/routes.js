@@ -46,7 +46,7 @@ scheduler.scheduleJob('0 * * * *', function () {
                     trial_finished += 1;
                 }
 
-                if (user.subscription || user.isPrimary() || user.type === UserType.ENTERPRISE) {
+                if (user.subscription || user.isPrimary()) {
                     supported_users += 1;
                 }
                 registered_users += 1;
@@ -348,13 +348,12 @@ module.exports = function (app, passport, nev) {
         }
     });
 
+    // PRODUCT =============================
     app.post('/product', isLoggedIn, function (req, res) {
         var user = req.user;
         var body = JSON.parse(req.body.data);
         if (body.hasOwnProperty('id') && body.hasOwnProperty('reference')) {
-            user.set({
-                type: UserType.PERMANENT,
-            });
+            user.type = UserType.PERMANENT;
             user.save(function (err) {
                 if (err) {
                     return res.status(500).send('ERROR: Buy product was failed!');
@@ -363,7 +362,7 @@ module.exports = function (app, passport, nev) {
 
             return res.status(200).send('SUCCESS: Buy product success!');
         } else {
-          return res.status(400).send('ERROR: Invalid data!');
+            return res.status(400).send('ERROR: Invalid data!');
         }
     });
 

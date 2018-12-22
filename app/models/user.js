@@ -114,7 +114,7 @@ UserSchema.methods.getSubscriptionState = function () {
 
 // checking user status
 UserSchema.methods.isPrimary = function () {
-  return this.type === UserType.SUPPORT || this.type === UserType.OPEN_SOURCE || this.type === UserType.PERMANENT;
+    return this.type === UserType.SUPPORT || this.type === UserType.OPEN_SOURCE || this.type === UserType.PERMANENT || user.type === UserType.ENTERPRISE;
 };
 
 /**
