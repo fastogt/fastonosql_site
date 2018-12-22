@@ -95,7 +95,7 @@ UserSchema.methods.validPassword = function (password) {
 
 // enable subscription
 UserSchema.methods.enableSubscription = function () {
-    if (isPrimary()) {
+    if (this.isPrimary()) {
         return false;
     }
 
