@@ -93,6 +93,11 @@ UserSchema.methods.validPassword = function (password) {
     return this.validHexedPassword(hash);
 };
 
+// checking user status
+UserSchema.methods.isPrimary = function () {
+    return this.type === UserType.SUPPORT || this.type === UserType.OPEN_SOURCE || this.type === UserType.PERMANENT || this.type === UserType.ENTERPRISE;
+};
+
 // enable subscription
 UserSchema.methods.enableSubscription = function () {
     if (this.isPrimary()) {
@@ -114,11 +119,6 @@ UserSchema.methods.getSubscription = function () {
 // get subscription state
 UserSchema.methods.getSubscriptionState = function () {
     return this.subscription_state;
-};
-
-// checking user status
-UserSchema.methods.isPrimary = function () {
-    return this.type === UserType.SUPPORT || this.type === UserType.OPEN_SOURCE || this.type === UserType.PERMANENT || user.type === UserType.ENTERPRISE;
 };
 
 /**
