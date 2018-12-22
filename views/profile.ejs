@@ -183,7 +183,7 @@
         </div>
     </div>
 
-    <% if (user.enableSubscription()) { %>
+    <% if (user.getSubscriptionState() && user.getSubscriptionState() !== 'active') { %>
     <div class="alert alert-warning">Your subscription is <%= user.getSubscriptionState() %>. Resubscribe or contact the
         administrator.
     </div>
@@ -586,7 +586,7 @@
                     </form>
                     <a href="mailto:<%- support.contact_email %>"><%- support.contact_email %></a>
                 </div>
-                <% if (user.getSubscriptionState() === 'active') { %>
+                <% if (user.canCancelSubscription()) { %>
                 <div class="col-sm-7">
                     <div class="row">
                         <div class="col-sm-12 text-right">
