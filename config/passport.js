@@ -122,7 +122,7 @@ module.exports = function (nev, passport) {
                             return done(err);
                         }
 
-                        req.flash('success', 'Please check ' + email + ' to verify your account.');
+                        req.flash('success', 'Please check ' + email + ' to verify your account (can be in spam folder).');
                         return done(null, false);
                     });
                     // user already exists in temporary collection...
