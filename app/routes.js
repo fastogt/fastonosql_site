@@ -387,6 +387,7 @@ module.exports = function (app, passport, nev) {
                         }
 
                         user.set({
+                            application_state: ApplicationState.ACTIVE,
                             subscription: JSON.stringify(Object.assign(body, {subscriptionId: order.items[0].subscription}))
                         });
                         user.save(function (err) {
