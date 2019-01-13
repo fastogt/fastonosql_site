@@ -3,13 +3,13 @@ module.exports = {
     project: {
         name: 'FastoNoSQL',
         name_lowercase: 'fastonosql',
-        version: '1.26.0',
+        version: '1.26.1',
         domain: 'fastonosql.com',
         trial_days: 15,
         price_per_month: 5.99,
         price_per_6_month: 32.99,
         price_per_year: 59.99,
-        permanent: 99.99
+        permanent: 199.99
     },
 
     site: {
@@ -32,7 +32,7 @@ module.exports = {
 
         supported_databases: [{'name': 'Redis', 'option': 'BUILD_WITH_REDIS', 'active': true},
             {'name': 'Memcached', 'option': 'BUILD_WITH_MEMCACHED', 'active': true},
-            {'name': 'SSDB', 'option': 'BUILD_WITH_SSDB', 'active': false},
+            {'name': 'SSDB', 'option': 'BUILD_WITH_SSDB', 'active': true},
             {'name': 'LevelDB', 'option': 'BUILD_WITH_LEVELDB', 'active': true},
             {'name': 'RocksDB', 'option': 'BUILD_WITH_ROCKSDB', 'active': true},
             {'name': 'LMDB', 'option': 'BUILD_WITH_LMDB', 'active': true},
