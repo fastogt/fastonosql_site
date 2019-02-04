@@ -377,7 +377,7 @@ module.exports = function (app, passport, nev) {
                 fastSpring.getOrder(body.id)
                     .then(function (data) {
                         var order = JSON.parse(data);
-
+                        console.log('subscription order: ', order);
                         if (order.hasOwnProperty('error')) {
                             return res.status(500).send('ERROR: Subscription was failed!');
                         }
@@ -399,7 +399,7 @@ module.exports = function (app, passport, nev) {
 
                         res.status(200).send('SUCCESS: Subscription success!');
                     }).catch(function (error) {
-                    console.error('getOrder: ', error);
+                    console.error('subscription catch: ', error);
                     return res.status(500).send('ERROR: Subscription was failed!');
                 });
                 // =====
