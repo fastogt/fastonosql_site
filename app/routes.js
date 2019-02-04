@@ -392,6 +392,7 @@ module.exports = function (app, passport, nev) {
                         });
                         user.save(function (err) {
                             if (err) {
+                                console.error('subscription: ', err);
                                 return res.status(500).send('ERROR: Subscription was failed!');
                             }
                         });
