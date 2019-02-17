@@ -377,12 +377,14 @@ module.exports = function (app, passport, nev) {
                 fastSpring.getOrder(body.id)
                     .then(function (data) {
                         var order = JSON.parse(data);
-                        console.log('subscription order: ', order);
+                        console.log('***Subscription order: ', order);
                         if (order.hasOwnProperty('error')) {
+                            console.error('Order error: ', order.error);
                             return res.status(500).send('ERROR: Subscription was failed!');
                         }
 
                         if (!order.items.length) {
+                            console.error('Order invalid length items.');
                             return res.status(500).send('ERROR: Subscription was failed!');
                         }
 
@@ -392,11 +394,12 @@ module.exports = function (app, passport, nev) {
                         });
                         user.save(function (err) {
                             if (err) {
-                                console.error('subscription: ', err);
+                                console.error('Save subscription error: ', err);
                                 return res.status(500).send('ERROR: Subscription was failed!');
                             }
                         });
 
+                        console.log('***Subscription SUCCESS!');
                         res.status(200).send('SUCCESS: Subscription success!');
                     }).catch(function (error) {
                     console.error('subscription catch: ', error);
@@ -404,9 +407,11 @@ module.exports = function (app, passport, nev) {
                 });
                 // =====
             } else {
+                console.error('Body invalid data');
                 return res.status(400).send('ERROR: Invalid data!');
             }
         } else {
+            console.error('Subscription is already exist!');
             return res.status(500).send('ERROR: Subscription is already exist!');
         }
     });
