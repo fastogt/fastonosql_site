@@ -4,7 +4,6 @@ var User = require('../app/models/user');
 var fs = require('fs');
 var path_module = require('path');
 var FastSpring = require('./modules/fastspring');
-var MailerLite = require('./modules/mailerlite');
 var scheduler = require('node-schedule');
 const {UserType, ApplicationState} = require('../app/models/user');
 // global
@@ -100,7 +99,6 @@ function deleteFolderRecursive(path) {
 
 module.exports = function (app, passport, nev) {
     var fastSpring = new FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
-    var mailerLite = new MailerLite();
 
     function walk(dir, done) {
         if (!fs.existsSync(dir)) {
@@ -314,20 +312,6 @@ module.exports = function (app, passport, nev) {
                 return;
             }
 
-            if (user.email_subscription) {
-                mailerLite.updateSubscriber(user.email, {
-                    type: 'active',
-                    fields: {
-                        name: user.first_name,
-                        last_name: user.last_name
-                    }
-                }).then(function () {
-                    console.log("Update subscribe is completed!");
-                }).catch(function (err) {
-                    console.log("Update subscribe is error!", err);
-                });
-            }
-
             req.flash('success', 'Information was successfully saved');
             res.redirect('/profile');
         });
@@ -335,17 +319,7 @@ module.exports = function (app, passport, nev) {
 
     app.get('/deleteProfile', isLoggedIn, function (req, res) {
         var user = req.user;
-
-        if (user.email_subscription) {
-            mailerLite.removeSubscriberFromGroup(app.locals.mailer_lite_config.group, user.email)
-                .then(function () {
-                    removeUser(user, res);
-                }).catch(function (err) {
-                removeUser(user, res);
-            });
-        } else {
-            removeUser(user, res);
-        }
+        removeUser(user, res);
     });
 
     // PRODUCT =============================
@@ -492,19 +466,6 @@ module.exports = function (app, passport, nev) {
             var dir = app.locals.site.users_directory + '/' + user.email;
             if (!fs.existsSync(dir)) {
                 fs.mkdirSync(dir);
-            }
-
-            if (user.email_subscription) {
-                mailerLite.addNewSubscriberToGroup(app.locals.mailer_lite_config.group, {
-                    email: email,
-                    name: user.first_name,
-                    fields: {
-                        last_name: user.last_name
-                    }
-                }).then(function () {
-                }).catch(function (err_mailer) {
-                    console.error("Email subscription failed, error: " + err_mailer);
-                });
             }
 
             console.log("confirm message sent to: " + email);
