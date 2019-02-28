@@ -89,7 +89,7 @@
                 }
             }
 
-            var build_strategy = document.getElementsByName('build_strategy');
+            var build_strategy = document.getElementById('build_strategy');
             var build_args = {
                 "platform": platform,
                 "package_type": package_type,
@@ -240,7 +240,7 @@
                         </div>
                     </div>
                     <div role="tabpane2" class="tab-pane form-inline" id="advanced">
-                        <select name="build_strategy">
+                        <select id="build_strategy">
                             <option value="community">Community</option>
                             <option value="public" selected="selected">Public</option>
                             <% if (user.isPrimary()) { %>
