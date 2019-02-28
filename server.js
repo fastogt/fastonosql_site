@@ -167,8 +167,10 @@ listener.on('connection', function (socket) {
             }); //
 
             var rpc = new (require('./app/modules/amqprpc'))(rabbit_connection);
-            // in_json.strategy
-            var branding_variables = '-DPRO_VERSION=ON -DBUILD_STRATEGY:STRING=public -DUSER_LOGIN:STRING=' + in_json.email; // + ' -DUSER_PASSWORD:STRING=' + in_json.password;
+            var branding_variables = '-DPRO_VERSION=ON -DBUILD_STRATEGY:STRING=' + in_json.strategy + ' -DUSER_LOGIN:STRING=' + in_json.email;
+            if (in_json.strategy === 'private') {
+                branding_variables += ' -DUSER_PASSWORD:STRING=' + in_json.password + ' -DUSER_FIRST_NAME:STRING=' + in_json.first_name + ' -DUSER_LAST_NAME:STRING=' + in_json.last_name;
+            }
             for (var i = 0; i < app.locals.site.supported_databases.length; ++i) {
                 var sup_db = app.locals.site.supported_databases[i];
                 var found = false;
