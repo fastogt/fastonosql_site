@@ -76,7 +76,7 @@
             update_bar(response_json.progress, response_json.message);
         });
 
-        function send_build_request(email, password, first_name, last_namt) {
+        function send_build_request(email, password, first_name, last_name) {
             var platform = $('.nav-tabs .active > a').attr('aria-controls');
             var os_ctrl = $('input[name=' + platform + ']:checked');
             var package_type = os_ctrl.attr('package_type');
@@ -96,7 +96,7 @@
                 "email": email,
                 "password": password,
                 "first_name": first_name,
-                "last_namt": last_namt,
+                "last_name": last_name,
                 "strategy": build_strategy.options[build_strategy.selectedIndex].value,
                 "arch": arch,
                 "databases": databases
