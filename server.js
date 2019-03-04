@@ -435,8 +435,8 @@ function is_subscribed(args, opt, callback) {
                         subject: 'Trial finished',
                         html: '<p>' +
                         'First name: ' + user.first_name + '<br>' +
-                        'last name: ' + user.last_name + '<br>' +
-                        'user email: ' + user.email +
+                        'Last name: ' + user.last_name + '<br>' +
+                        'Email: ' + user.email +
                         '</p>'
                     };
                     transporter.sendMail(mailOptions, function (err, info) {
@@ -505,6 +505,9 @@ function ban_user(args, opt, callback) {
     }
 
     console.log("ban_user:", args);
+    var first_name = '';
+    var last_name = '';
+    var email = args.email;
     User.findOne({'email': args.email}, function (err, user) {
         // if there are any errors, return the error
         if (err) {
@@ -519,6 +522,8 @@ function ban_user(args, opt, callback) {
         }
 
         user.application_state = ApplicationState.BANNED;
+        first_name = user.first_name;
+        last_name = user.last_name;
         user.save(function (err) {
             if (err) {
                 console.error('Failed to save user application state: ', err);
@@ -526,6 +531,7 @@ function ban_user(args, opt, callback) {
         });
     });
 
+    var collision_email = '';
     User.findById(args.collision_id, function (err, user) {
         // if there are any errors, return the error
         if (err) {
@@ -545,6 +551,24 @@ function ban_user(args, opt, callback) {
                 console.error('Failed to save user application state: ', err);
             }
         });
+    });
+
+    var transporter = nodemailer.createTransport(transport_options);
+    const mailOptions = {
+        from: app.locals.site.support_email,
+        to: app.locals.site.support_email,
+        subject: 'Banned user',
+        html: '<p>' +
+        'First name: ' + first_name + '<br>' +
+        'Last name: ' + last_name + '<br>' +
+        'Email: ' + email + '<br>' +
+        'Collision Email:' + collision_email +
+        '</p>'
+    };
+    transporter.sendMail(mailOptions, function (err, info) {
+        if (err) {
+            console.error(err);
+        }
     });
     callback(null, 'OK');
 }
