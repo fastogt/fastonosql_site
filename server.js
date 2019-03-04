@@ -428,7 +428,7 @@ function is_subscribed(args, opt, callback) {
             if (user.application_state === ApplicationState.ACTIVE && !user.subscription) {
                 if (user.application_end_date < cur_date) {
                     user.application_state = ApplicationState.TRIAL_FINISHED;
-                    var transporter = nodemailer.createTransport(transport_options);
+                    /*var transporter = nodemailer.createTransport(transport_options);
                     const mailOptions = {
                         from: app.locals.site.title + ' Support<' + app.locals.site.support_email + '>',
                         to: user.email,
@@ -441,7 +441,7 @@ function is_subscribed(args, opt, callback) {
                         } else {
                             console.log('trial message sent to:', user.email);
                         }
-                    });
+                    });*/
                 }
             }
         }
