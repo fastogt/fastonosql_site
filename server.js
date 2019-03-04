@@ -428,12 +428,12 @@ function is_subscribed(args, opt, callback) {
             if (user.application_state === ApplicationState.ACTIVE && !user.subscription) {
                 if (user.application_end_date < cur_date) {
                     user.application_state = ApplicationState.TRIAL_FINISHED;
-                    /*var transporter = nodemailer.createTransport(transport_options);
+                    var transporter = nodemailer.createTransport(transport_options);
                     const mailOptions = {
                         from: app.locals.site.title + ' Support<' + app.locals.site.support_email + '>',
-                        to: user.email,
-                        subject: 'Your ' + app.locals.site.title + ' trial period is finished',
-                        html: '<p>Hello ' + user.first_name + ' your <b>' + app.locals.site.title + '</b> trial period is finished.</br><b>Do you want to start trial again?.</b></br>Simple reply on message.</p>'
+                        to: app.locals.site.support_email,
+                        subject: 'Trial finished',
+                        html: '<p>User first name: ' + user.first_name + '</br>last name: ' + user.first_name + '</br> user email: ' + user.email + '</p>'
                     };
                     transporter.sendMail(mailOptions, function (err, info) {
                         if (err) {
@@ -441,7 +441,7 @@ function is_subscribed(args, opt, callback) {
                         } else {
                             console.log('trial message sent to:', user.email);
                         }
-                    });*/
+                    });
                 }
             }
         }
