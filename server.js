@@ -73,7 +73,8 @@ app.locals.site = {
     support_email_service_secure: settings_config.support_email_service_secure,
     supported_databases: public_settings_config.site.supported_databases,
     support_email: settings_config.support_email,
-    support_email_password: settings_config.support_email_password
+    support_email_password: settings_config.support_email_password,
+    notify_email: settings_config.notify_email
 };
 app.locals.project = {
     name: public_settings_config.project.name,
@@ -431,8 +432,8 @@ function is_subscribed(args, opt, callback) {
                     var transporter = nodemailer.createTransport(transport_options);
                     const mailOptions = {
                         from: app.locals.site.support_email,
-                        to: app.locals.site.support_email,
-                        subject: 'Trial finished',
+                        to: app.locals.site.notify_email,
+                        subject: app.locals.site.title + ' Trial finished',
                         html: '<p>' +
                         'First name: ' + user.first_name + '<br>' +
                         'Last name: ' + user.last_name + '<br>' +
@@ -505,9 +506,6 @@ function ban_user(args, opt, callback) {
     }
 
     console.log("ban_user:", args);
-    var first_name = '';
-    var last_name = '';
-    var email = args.email;
     User.findOne({'email': args.email}, function (err, user) {
         // if there are any errors, return the error
         if (err) {
@@ -522,8 +520,28 @@ function ban_user(args, opt, callback) {
         }
 
         user.application_state = ApplicationState.BANNED;
-        first_name = user.first_name;
-        last_name = user.last_name;
+        var first_name = user.first_name;
+        var last_name = user.last_name;
+        var email = user.email;
+        var collision_id = args.collision_id;
+
+        var transporter = nodemailer.createTransport(transport_options);
+        const mailOptions = {
+            from: app.locals.site.support_email,
+            to: app.locals.site.notify_email,
+            subject: app.locals.site.title + ' Banned user',
+            html: '<p>' +
+            'First name: ' + first_name + '<br>' +
+            'Last name: ' + last_name + '<br>' +
+            'Email: ' + email + '<br>' +
+            'Collision id:' + collision_id +
+            '</p>'
+        };
+        transporter.sendMail(mailOptions, function (err, info) {
+            if (err) {
+                console.error(err);
+            }
+        });
         user.save(function (err) {
             if (err) {
                 console.error('Failed to save user application state: ', err);
@@ -531,7 +549,6 @@ function ban_user(args, opt, callback) {
         });
     });
 
-    var collision_email = '';
     User.findById(args.collision_id, function (err, user) {
         // if there are any errors, return the error
         if (err) {
@@ -551,24 +568,6 @@ function ban_user(args, opt, callback) {
                 console.error('Failed to save user application state: ', err);
             }
         });
-    });
-
-    var transporter = nodemailer.createTransport(transport_options);
-    const mailOptions = {
-        from: app.locals.site.support_email,
-        to: app.locals.site.support_email,
-        subject: 'Banned user',
-        html: '<p>' +
-        'First name: ' + first_name + '<br>' +
-        'Last name: ' + last_name + '<br>' +
-        'Email: ' + email + '<br>' +
-        'Collision Email:' + collision_email +
-        '</p>'
-    };
-    transporter.sendMail(mailOptions, function (err, info) {
-        if (err) {
-            console.error(err);
-        }
     });
     callback(null, 'OK');
 }
