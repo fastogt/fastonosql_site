@@ -430,16 +430,18 @@ function is_subscribed(args, opt, callback) {
                     user.application_state = ApplicationState.TRIAL_FINISHED;
                     var transporter = nodemailer.createTransport(transport_options);
                     const mailOptions = {
-                        from: app.locals.site.title + ' Support<' + app.locals.site.support_email + '>',
+                        from: app.locals.site.support_email,
                         to: app.locals.site.support_email,
                         subject: 'Trial finished',
-                        html: '<p>User first name: ' + user.first_name + '</br>last name: ' + user.first_name + '</br> user email: ' + user.email + '</p>'
+                        html: '<p>' +
+                        'First name: ' + user.first_name + '<br>' +
+                        'last name: ' + user.last_name + '<br>' +
+                        'user email: ' + user.email +
+                        '</p>'
                     };
                     transporter.sendMail(mailOptions, function (err, info) {
                         if (err) {
                             console.error(err);
-                        } else {
-                            console.log('trial message sent to:', user.email);
                         }
                     });
                 }
