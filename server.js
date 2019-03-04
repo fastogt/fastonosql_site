@@ -433,7 +433,7 @@ function is_subscribed(args, opt, callback) {
                     const mailOptions = {
                         from: app.locals.site.support_email,
                         to: app.locals.site.notify_email,
-                        subject: app.locals.site.title + ' Trial finished',
+                        subject: app.locals.site.title + ' trial finished',
                         html: '<p>' +
                         'First name: ' + user.first_name + '<br>' +
                         'Last name: ' + user.last_name + '<br>' +
@@ -529,7 +529,7 @@ function ban_user(args, opt, callback) {
         const mailOptions = {
             from: app.locals.site.support_email,
             to: app.locals.site.notify_email,
-            subject: app.locals.site.title + ' Banned user',
+            subject: app.locals.site.title + ' banned user',
             html: '<p>' +
             'First name: ' + first_name + '<br>' +
             'Last name: ' + last_name + '<br>' +
