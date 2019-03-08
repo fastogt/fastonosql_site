@@ -2,7 +2,8 @@
 
 import os
 from shutil import copyfile
-from config import versions, welcome_file_name, welcome_file_pro_name, welcome_file_extension, welcome_file_enterprise_name
+from config import versions, welcome_file_name, welcome_file_pro_name, welcome_file_extension, \
+    welcome_file_enterprise_name
 
 welcome_app_folder = '../public/welcome_app'
 welcome_app_pro_folder = '../public/welcome_app_pro'
@@ -24,7 +25,8 @@ if __name__ == "__main__":
         copyfile(master_file_pro, welcome_file_pro_path_absolute)
         print(welcome_file_pro_path_absolute)
 
-        welcome_file_enterprise_path = os.path.join(welcome_app_enterprise_folder, version + '.' + welcome_file_extension)
+        welcome_file_enterprise_path = os.path.join(welcome_app_enterprise_folder,
+                                                    version + '.' + welcome_file_extension)
         welcome_file_enterprise_path_absolute = os.path.abspath(welcome_file_enterprise_path)
         copyfile(master_file_enterprise, welcome_file_enterprise_path_absolute)
         print(welcome_file_enterprise_path_absolute)
