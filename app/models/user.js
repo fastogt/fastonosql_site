@@ -60,6 +60,10 @@ UserSchema.methods.isActive = function () {
     return this.application_state === ApplicationState.ACTIVE;
 };
 
+UserSchema.methods.isBanned = function () {
+    return this.application_state === ApplicationState.BANNED;
+};
+
 // FIX ME
 UserSchema.methods.getType = function () {
     if (this.type === UserType.USER) {
