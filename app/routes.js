@@ -168,6 +168,10 @@ module.exports = function (app, passport, nev) {
         res.render('help.ejs');
     });
 
+    app.get('/community_about_us', function (req, res) {
+        res.render('community_about_us.ejs');
+    });
+
     app.get('/private_policy', function (req, res) {
         res.render('private_policy.ejs');
     });
