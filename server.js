@@ -109,11 +109,6 @@ app.locals.fastspring_config = {
     password: settings_config.fastspring_password
 };
 
-// mailerlite
-app.locals.mailer_lite_config = {
-    group: settings_config.mailer_lite_group
-};
-
 // email
 const transport_options = {
     host: app.locals.site.support_email_service_host,
