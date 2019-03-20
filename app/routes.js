@@ -161,6 +161,9 @@ module.exports = function (app, passport, nev) {
 
     // show the home page (will also have our login links)
     app.get('/', function (req, res) {
+        const ipInfo = req.ipInfo;
+        var message = `Hey, you are browsing from ${ipInfo.city}, ${ipInfo.country}`;
+        console.log(message);
         res.render('index.ejs', {statistics: stat});
     });
 

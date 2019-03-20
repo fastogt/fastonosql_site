@@ -29,6 +29,7 @@
     "compression": "latest",
     "nodemailer": "latest",
     "node-schedule": "latest",
-    "moment":"latest"
+    "moment":"latest",
+    "express-ip":"latest"
   }
 }

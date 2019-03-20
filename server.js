@@ -8,7 +8,7 @@ var public_settings_config = require('./config/public_settings.js');
 var settings_config = require('./config/settings.js');
 
 const http_port = settings_config.http_server_port;
-const app_host = public_settings_config.project.domain; // localhost
+const app_host = public_settings_config.project.domain; // 'localhost';
 const app_port = settings_config.app_port;
 
 var root_abs_path = __dirname;
@@ -17,6 +17,7 @@ var public_downloads_users_dir_abs_path = public_dir_abs_path + '/users';
 // set up ======================================================================
 // get all the tools we need
 var express = require('express');
+var expressip = require('express-ip');
 var compression = require('compression');
 var app = express();
 var mongoose = require('mongoose');
@@ -283,6 +284,7 @@ require('./config/passport')(nev, passport); // pass passport for configuration
 // set up our express application
 app.use(compression());
 app.use(express.static(public_dir_abs_path));
+app.use(expressip().getIpInfoMiddleware);
 app.use(morgan('dev')); // log every request to the console
 app.use(cookie_parser()); // read cookies (needed for auth)
 app.use(body_parser.json()); // get information from html forms
