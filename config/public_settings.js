@@ -9,7 +9,7 @@ module.exports = {
         price_per_month: 5.99,
         price_per_6_month: 32.99,
         price_per_year: 59.99,
-        permanent: 299.99
+        price_permanent: 299.99
     },
 
     site: {
@@ -24,9 +24,6 @@ module.exports = {
         github_link: 'https://github.com/fastogt/fastonosql',
         github_issues_link: 'https://github.com/fastogt/fastonosql/issues',
         github_link_without_host: 'fastogt/fastonosql',
-
-        twitter_name: 'FastoNoSQL',
-        twitter_link: 'https://twitter.com/FastoNoSQL',
 
         google_analitics_token: 'UA-56403848-4',
 
@@ -43,7 +40,7 @@ module.exports = {
     },
 
     support: {
-        author: 'Topilski Alexandr',
+        author: 'Alexandr Topilski',
         contact_email: 'support@fastogt.com'
     },
 
@@ -51,7 +48,7 @@ module.exports = {
         name: 'FastoGT',
         description: 'Fasto Great Technology',
         domain: 'http://fastogt.com',
-        copyright: 'Copyright © 2014-2018 FastoGT. All rights reserved.'
+        copyright: 'Copyright © 2014-2019 FastoGT. All rights reserved.'
     }
 };
 

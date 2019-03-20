@@ -1,5 +1,3 @@
-// server.js
-
 function gen_routing_key(platform, arch) {
     return platform + '_' + arch;
 }
@@ -9,6 +7,9 @@ var config_db = require('./config/database.js');
 var public_settings_config = require('./config/public_settings.js');
 var settings_config = require('./config/settings.js');
 
+const http_port = settings_config.http_server_port;
+const app_port = settings_config.app_port;
+
 var root_abs_path = __dirname;
 var public_dir_abs_path = root_abs_path + '/public';
 var public_downloads_users_dir_abs_path = public_dir_abs_path + '/users';
@@ -17,24 +18,24 @@ var public_downloads_users_dir_abs_path = public_dir_abs_path + '/users';
 var express = require('express');
 var compression = require('compression');
 var app = express();
-var port = settings_config.http_server_port;
 var mongoose = require('mongoose');
 var nev = require('email-verification')(mongoose);
 var passport = require('passport');
 var flash = require('connect-flash');
 var amqp = require('amqp');
 var mkdirp = require('mkdirp');
-const util = require('util');
+var util = require('util');
 var json_rpc2 = require('json-rpc2');
 
 var morgan = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var cookie_parser = require('cookie-parser');
+var body_parser = require('body-parser');
 var session = require('express-session');
 var fs = require('fs');
 
 // app_r
-
+/*var http = require('http');
+var server = http.createServer(app);*/
 var https = require('https');
 var server = https.createServer({
     key: fs.readFileSync(settings_config.ssl_key_path),
@@ -65,9 +66,6 @@ app.locals.site = {
     github_issues_link: public_settings_config.site.github_issues_link,
     github_link_without_host: public_settings_config.site.github_link_without_host,
 
-    twitter_name: public_settings_config.site.twitter_name,
-    twitter_link: public_settings_config.site.twitter_link,
-
     support_email_service_host: settings_config.support_email_service_host,
     support_email_service_port: settings_config.support_email_service_port,
     support_email_service_secure: settings_config.support_email_service_secure,
@@ -80,13 +78,12 @@ app.locals.project = {
     name: public_settings_config.project.name,
     name_lowercase: public_settings_config.project.name_lowercase,
     version: public_settings_config.project.version,
-    port: settings_config.app_port,
     domain: public_settings_config.project.domain,
     trial_days: public_settings_config.project.trial_days,
     price_per_month: public_settings_config.project.price_per_month,
     price_per_6_month: public_settings_config.project.price_per_6_month,
     price_per_year: public_settings_config.project.price_per_year,
-    permanent: public_settings_config.project.permanent
+    price_permanent: public_settings_config.project.price_permanent
 };
 app.locals.support = {
     name: public_settings_config.support.name,
@@ -223,8 +220,10 @@ listener.on('connection', function (socket) {
 });
 
 // configuration ===============================================================
-mongoose.Promise = global.Promise;
-mongoose.connect(config_db.url, {useNewUrlParser: true}); // connect to our database
+mongoose.connect(config_db.url, {
+    useCreateIndex: true,
+    useNewUrlParser: true
+});
 
 // NEV configuration =====================
 // our persistent user model
@@ -242,9 +241,9 @@ nev.configure({
         from: 'Do Not Reply <' + app.locals.site.support_email + '>',
         subject: 'Confirm your account',
         html: '<p>Please verify your <b>' + app.locals.site.title + '</b> account by clicking <a href="${URL}">this link</a>. If you are unable to do so, copy and paste the following link into your browser:</p><p>${URL}</p>' +
-        '<p>We are always here to help if you have any questions or just want some guidance on getting started. <a href=mailto:' + app.locals.support.contact_email + '>Contact us</a><br>If you did not sign up for ' + app.locals.site.title + ', please ignore this email.</p>' +
-        '<p><br>--<br><b>BR,</b><br><b>' + app.locals.company.name + ' Team</b></p>' +
-        '<p>Our projects:<br><a href="https://fastonosql.com">https://fastonosql.com</a><br><a href="https://fastoredis.com">https://fastoredis.com</a><br><a href="https://fastotv.com">https://fastotv.com</a><br><a href="https://idealtrust.by">https://idealtrust.by</a><br><a href="https://fastogt.com">https://fastogt.com</a></p>',
+            '<p>We are always here to help if you have any questions or just want some guidance on getting started. <a href=mailto:' + app.locals.support.contact_email + '>Contact us</a><br>If you did not sign up for ' + app.locals.site.title + ', please ignore this email.</p>' +
+            '<p><br>--<br><b>BR,</b><br><b>' + app.locals.company.name + ' Team</b></p>' +
+            '<p>Our projects:<br><a href="https://fastonosql.com">https://fastonosql.com</a><br><a href="https://fastoredis.com">https://fastoredis.com</a><br><a href="https://fastotv.com">https://fastotv.com</a><br><a href="https://idealtrust.by">https://idealtrust.by</a><br><a href="https://fastogt.com">https://fastogt.com</a></p>',
         text: 'Please verify your account by clicking the following link, or by copying and pasting it into your browser: ${URL}'
     },
     shouldSendConfirmation: true,
@@ -252,9 +251,9 @@ nev.configure({
         from: 'Do Not Reply <' + app.locals.site.support_email + '>',
         subject: 'Successfully verified!',
         html: '<p>Your <b>' + app.locals.site.title + '</b> account has been successfully verified.</p>' +
-        '<p>We are always here to help if you have any questions or just want some guidance on getting started. <a href=mailto:' + app.locals.support.contact_email + '>Contact us</a></p>' +
-        '<p><br>--<br><b>BR,</b><br><b>' + app.locals.company.name + ' Team</b></p>' +
-        '<p>Our projects:<br><a href="https://fastonosql.com">https://fastonosql.com</a><br><a href="https://fastoredis.com">https://fastoredis.com</a><br><a href="https://fastotv.com">https://fastotv.com</a><br><a href="https://idealtrust.by">https://idealtrust.by</a><br><a href="https://fastogt.com">https://fastogt.com</a></p>',
+            '<p>We are always here to help if you have any questions or just want some guidance on getting started. <a href=mailto:' + app.locals.support.contact_email + '>Contact us</a></p>' +
+            '<p><br>--<br><b>BR,</b><br><b>' + app.locals.company.name + ' Team</b></p>' +
+            '<p>Our projects:<br><a href="https://fastonosql.com">https://fastonosql.com</a><br><a href="https://fastoredis.com">https://fastoredis.com</a><br><a href="https://fastotv.com">https://fastotv.com</a><br><a href="https://idealtrust.by">https://idealtrust.by</a><br><a href="https://fastogt.com">https://fastogt.com</a></p>',
         text: 'Your account has been successfully verified.'
     },
 
@@ -284,9 +283,9 @@ require('./config/passport')(nev, passport); // pass passport for configuration
 app.use(compression());
 app.use(express.static(public_dir_abs_path));
 app.use(morgan('dev')); // log every request to the console
-app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser.json()); // get information from html forms
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookie_parser()); // read cookies (needed for auth)
+app.use(body_parser.json()); // get information from html forms
+app.use(body_parser.urlencoded({extended: true}));
 
 app.set('view engine', 'ejs'); // set up ejs for templating
 
@@ -309,7 +308,7 @@ app.use(function (req, res, next) {
 require('./app/routes.js')(app, passport, nev); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
-app.listen(port);
+app.listen(http_port);
 console.log('Http server ready for requests');
 server.listen(app.locals.back_end.socketio_port);
 
@@ -430,10 +429,10 @@ function is_subscribed(args, opt, callback) {
                         to: app.locals.site.notify_email,
                         subject: app.locals.site.title + ' trial finished',
                         html: '<p>' +
-                        'First name: ' + user.first_name + '<br>' +
-                        'Last name: ' + user.last_name + '<br>' +
-                        'Email: ' + user.email +
-                        '</p>'
+                            'First name: ' + user.first_name + '<br>' +
+                            'Last name: ' + user.last_name + '<br>' +
+                            'Email: ' + user.email +
+                            '</p>'
                     };
                     transporter.sendMail(mailOptions, function (err, info) {
                         if (err) {
@@ -526,11 +525,11 @@ function ban_user(args, opt, callback) {
             to: app.locals.site.notify_email,
             subject: app.locals.site.title + ' banned user',
             html: '<p>' +
-            'First name: ' + first_name + '<br>' +
-            'Last name: ' + last_name + '<br>' +
-            'Email: ' + email + '<br>' +
-            'Collision id:' + collision_id +
-            '</p>'
+                'First name: ' + first_name + '<br>' +
+                'Last name: ' + last_name + '<br>' +
+                'Email: ' + email + '<br>' +
+                'Collision id:' + collision_id +
+                '</p>'
         };
         transporter.sendMail(mailOptions, function (err, info) {
             if (err) {
@@ -576,4 +575,4 @@ json_rpc2_server.expose('is_subscribed', is_subscribed);
 json_rpc2_server.expose('ban_user', ban_user);
 
 // listen creates an tcp server on localhost only
-json_rpc2_server.listenRaw(app.locals.project.port, app.locals.project.domain);
+json_rpc2_server.listenRaw(app_port, 'localhost');

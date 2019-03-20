@@ -1,7 +1,7 @@
 {
   "name": "fastonosql_site",
-  "author": "Topilski Alexandr <atopilski@gmail.com>",
-  "license": "SEE LICENSE IN README.md",
+  "author": "Alexandr Topilski <atopilski@gmail.com>",
+  "license": "SEE LICENSE IN LICENSE FILE",
   "repository": {
     "type": "git",
     "url": "git+ssh://github.com/fastogt/fastonosql_site"
