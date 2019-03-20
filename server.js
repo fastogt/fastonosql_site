@@ -8,6 +8,7 @@ var public_settings_config = require('./config/public_settings.js');
 var settings_config = require('./config/settings.js');
 
 const http_port = settings_config.http_server_port;
+const app_host = public_settings_config.project.domain; // localhost
 const app_port = settings_config.app_port;
 
 var root_abs_path = __dirname;
@@ -575,4 +576,4 @@ json_rpc2_server.expose('is_subscribed', is_subscribed);
 json_rpc2_server.expose('ban_user', ban_user);
 
 // listen creates an tcp server on localhost only
-json_rpc2_server.listenRaw(app_port, 'localhost');
+json_rpc2_server.listenRaw(app_port, app_host);
