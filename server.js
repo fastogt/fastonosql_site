@@ -8,7 +8,7 @@ var public_settings_config = require('./config/public_settings.js');
 var settings_config = require('./config/settings.js');
 
 const http_port = settings_config.http_server_port;
-const app_host =  'localhost';
+const app_host = public_settings_config.project.domain; // 'localhost';
 const app_port = settings_config.app_port;
 
 var root_abs_path = __dirname;
@@ -36,13 +36,13 @@ var session = require('express-session');
 var fs = require('fs');
 
 // app_r
-var http = require('http');
-var server = http.createServer(app);
-/*var https = require('https');
+/*var http = require('http');
+var server = http.createServer(app);*/
+var https = require('https');
 var server = https.createServer({
     key: fs.readFileSync(settings_config.ssl_key_path),
     cert: fs.readFileSync(settings_config.ssl_cert_path)
-}, app);*/
+}, app);
 var io = require('socket.io');
 var listener = io.listen(server);
 
