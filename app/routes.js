@@ -19,6 +19,7 @@ var stat = {
         "colors": ["\"Red\"", "\"Green\"", "\"Blue\""]
     }
 };
+
 scheduler.scheduleJob('0 * * * *', function () {
     User.find({}, function (err, users) {
         var exec_count = 0;
