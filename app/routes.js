@@ -415,8 +415,7 @@ module.exports = function (app, passport, nev) {
     // show the signup form
     app.get('/signup', function (req, res) {
         var ipInfo = req.ipInfo;
-        console.log(ipInfo);
-        res.render('signup.ejs');
+        res.render('signup.ejs', {country: ipInfo.country});
     });
 
     // process the signup form
