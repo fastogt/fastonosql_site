@@ -93,10 +93,11 @@ module.exports = function (nev, passport) {
             var new_user = new User();
             new_user.email = email;
             new_user.password = new_user.generateHash(password);
-            new_user.first_name = req.body.firstName.trim();
-            new_user.last_name = req.body.lastName.trim();
+            new_user.first_name = req.body.first_name.trim();
+            new_user.last_name = req.body.last_name.trim();
+            new_user.country = req.body.country.trim();
             var email_subscription = false;
-            if (req.body.hasOwnProperty('mailSubscribe')) {
+            if (req.body.hasOwnProperty('mail_subscribe')) {
                 email_subscription = true;
             }
             new_user.email_subscription = email_subscription;

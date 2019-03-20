@@ -37,10 +37,10 @@
     <div class="col-sm-6 col-sm-offset-3">
         <h1><span class="fa fa-sign-in"></span> Sign up</h1>
         <% if (success_messages && success_messages.length > 0) { %>
-        <div class="alert alert-success"><%= success_messages %></div>
+            <div class="alert alert-success"><%= success_messages %></div>
         <% } %>
         <% if (error_messages && error_messages.length > 0) { %>
-        <div class="alert alert-danger"><%= error_messages %></div>
+            <div class="alert alert-danger"><%= error_messages %></div>
         <% } %>
 
         <!-- LOGIN FORM -->
@@ -55,15 +55,27 @@
             </div>
             <div class="form-group">
                 <label>First Name</label>
-                <input type="text" class="form-control" name="firstName">
+                <input type="text" class="form-control" name="first_name">
             </div>
             <div class="form-group">
                 <label>Last Name</label>
-                <input type="text" class="form-control" name="lastName">
+                <input type="text" class="form-control" name="last_name">
+            </div>
+            <div class="form-group">
+                <label>Country</label>
+                <select class="form-control" name="country">
+                    <% Object.keys(countries).forEach(function (key) { %>
+                        <% if (key == country) { %>
+                            <option value="<%- key %>" selected="selected"><%- countries[key] %></option>
+                        <% } else { %>
+                            <option value="<%- key %>"><%- countries[key] %></option>
+                        <% } %>
+                    <% }) %>
+                </select>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="mailSubscribe" checked="checked">
+                    <input type="checkbox" name="mail_subscribe" checked="checked">
                     <strong>I agree my email address being used by <%- company.name %> to send me educational materials
                         about the product I evaluate, including commercial communications, and to process my personal
                         data for this purpose. I agree that <%- company.name %> may send the data to third-party
@@ -96,7 +108,7 @@
             }
         });
 
-        return valid
+        return valid;
     }
 </script>
 </body>

@@ -25,6 +25,7 @@ var UserSchema = mongoose.Schema({
     password: String,
     first_name: String,
     last_name: String,
+    country: String,
     created_date: {type: Date, default: Date.now},
     subscription: {
         type: String,

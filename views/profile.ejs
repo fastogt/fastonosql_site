@@ -79,15 +79,15 @@
                         <div class="row">
                             <div class="col-md-6 mb30">
                                 <div class="form-group">
-                                    <label for="firstName">First Name:</label>
-                                    <input type="text" class="form-control check" id="firstName" name="firstName"
+                                    <label for="first_name">First Name:</label>
+                                    <input type="text" class="form-control check" id="first_name" name="first_name"
                                            value="<%= user.first_name %>"/>
                                 </div>
                             </div>
                             <div class="col-md-6 mb30">
                                 <div class="form-group">
-                                    <label for="lastName">Last Name:</label>
-                                    <input type="text" class="form-control check" id="lastName" name="lastName"
+                                    <label for="last_name">Last Name:</label>
+                                    <input type="text" class="form-control check" id="last_name" name="last_name"
                                            value="<%= user.last_name %>"/>
                                 </div>
                             </div>
@@ -95,14 +95,14 @@
                         <div class="row">
                             <div class="col-md-6 mb30">
                                 <div class="form-group">
-                                    <label for="firstName">Type:</label>
+                                    <label for="first_name">Type:</label>
                                     <input type="text" disabled class="form-control check" id="type" name="type"
                                            value="<%= user.type %>"/>
                                 </div>
                             </div>
                             <div class="col-md-6 mb30">
                                 <div class="form-group">
-                                    <label for="lastName">Application state:</label>
+                                    <label for="application_state">Application state:</label>
                                     <input type="text" disabled class="form-control check" id="application_state"
                                            name="application_state"
                                            value="<%= user.application_state %>"/>
@@ -114,13 +114,13 @@
                         <div class="row">
                             <div class="col-md-6 mb30">
                                 <div class="form-group">
-                                    <label for="lastName">Email:</label>
+                                    <label for="email">Email:</label>
                                     <input type="text" disabled class="form-control" placeholder="<%= user.email %>"/>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group" id="fakePass">
-                                    <label for="lastName">Password:</label>
+                                    <label for="password">Password:</label>
                                     <div class="input-group">
                                         <input type="password" disabled class="form-control" placeholder="**********"/>
                                         <span class="input-group-btn">
@@ -688,7 +688,7 @@
         var elements = document.forms['profileInfo'].getElementsByTagName('input');
         var valid = true;
         Array.prototype.forEach.call(elements, function (element) {
-            if (['firstName', 'lastName'].indexOf(element.name) === -1) {
+            if (['first_name', 'last_name'].indexOf(element.name) === -1) {
                 return;
             }
 
