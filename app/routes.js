@@ -191,7 +191,6 @@ module.exports = function (app, passport, nev) {
     });
 
     app.get('/registered_users_downloads', isLoggedIn, function (req, res) {
-        // const ipInfo = req.ipInfo;
         res.render('registered_users_downloads.ejs');
     });
 
@@ -415,6 +414,8 @@ module.exports = function (app, passport, nev) {
     // SIGNUP =================================
     // show the signup form
     app.get('/signup', function (req, res) {
+        var ipInfo = req.ipInfo;
+        console.log(ipInfo);
         res.render('signup.ejs');
     });
 
