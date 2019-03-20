@@ -221,8 +221,13 @@ module.exports = function (app, passport, nev) {
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function (req, res) {
         var user = req.user;
+        if (user.country === '') {
+            var ip_info = req.ipInfo;
+            user.country = ip_info.country;
+        }
 
-        walk(app.locals.site.users_directory + '/' + user.email, function (err, results) {
+        var user_dir_path = app.locals.site.users_directory + '/' + user.email;
+        walk(user_dir_path, function (err, results) {
             if (err) {
                 console.error(err);
             }
@@ -232,11 +237,11 @@ module.exports = function (app, passport, nev) {
                 fastSpring.getSubscription(subscr.subscriptionId)
                     .then(function (data) {
                         var subscription = JSON.parse(data);
-
-                        user.set({subscription_state: subscription.state});
+                        user.subscription_state = subscription.state;
+                        user.last_login_date = new Date();
                         user.save(function (err) {
                             if (err) {
-                                console.error('getSubscription: ', err);
+                                console.error('save user subscription state error: ', err);
                             }
                         });
 
@@ -248,6 +253,12 @@ module.exports = function (app, passport, nev) {
                     console.error('getSubscription: ', error);
                 });
             } else {
+                user.last_login_date = new Date();
+                user.save(function (err) {
+                    if (err) {
+                        console.error('save last_login_date error: ', err);
+                    }
+                });
                 res.render('profile.ejs', {
                     user: user,
                     packages: results
@@ -414,7 +425,7 @@ module.exports = function (app, passport, nev) {
     // SIGNUP =================================
     // show the signup form
     app.get('/signup', function (req, res) {
-        var ipInfo = req.ipInfo;
+        var ip_info = req.ipInfo;
         var countries = {
             'AF': 'Afghanistan',
             'AX': 'Åland Islands',
@@ -666,7 +677,7 @@ module.exports = function (app, passport, nev) {
             'ZM': 'Zambia',
             'ZW': 'Zimbabwe'
         };
-        res.render('signup.ejs', {country: ipInfo.country, countries: countries});
+        res.render('signup.ejs', {country: ip_info.country, countries: countries});
     });
 
     // process the signup form
