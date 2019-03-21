@@ -95,7 +95,7 @@ module.exports = function (nev, passport) {
             new_user.password = new_user.generateHash(password);
             new_user.first_name = req.body.first_name.trim();
             new_user.last_name = req.body.last_name.trim();
-            new_user.country = req.body.country.trim();
+            new_user.country = req.body.country;
             var email_subscription = false;
             if (req.body.hasOwnProperty('mail_subscribe')) {
                 email_subscription = true;
