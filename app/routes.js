@@ -171,7 +171,6 @@ module.exports = function (app, passport, nev) {
 
     // show the home page (will also have our login links)
     app.get('/', function (req, res) {
-        console.log(stat);
         res.render('index.ejs', {statistics: stat});
     });
 
