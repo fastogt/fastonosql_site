@@ -69,6 +69,8 @@
             <div class="intro-mockup-wrapper">
                 <div class="text-center">
                     <h1 class="white"><%- site.description %></h1>
+                    <h3 class="count white" data-value="<%- statistics.anonim_power %>"><%- statistics.anonim_power %></h3>
+                    <h3 class="white">COMMUNITY LAUNCHED APPLICATION</h3>
                 </div>
             </div>
         </div>
@@ -463,6 +465,16 @@
         var ctx = document.getElementById('chart-area');
         window.myPolarArea = new Chart(ctx, config);
     };
+    $('.count').each(function () {
+        var $this = $(this);
+        jQuery({ Counter: 0 }).animate({ Counter: $this.text() }, {
+            duration: 1000,
+            easing: 'swing',
+            step: function () {
+                $this.text(Math.ceil(this.Counter));
+            }
+        });
+    });
 </script>
 </body>
 </html>
