@@ -1,11 +1,12 @@
 // load up the user model
-var User = require('../app/models/user');
+var User = require('./models/user');
+var AnonymousStatistic = require('./models/anonymous_statistic');
 
 var fs = require('fs');
 var path_module = require('path');
 var FastSpring = require('./modules/fastspring');
 var scheduler = require('node-schedule');
-const {UserType, ApplicationState} = require('../app/models/user');
+const {UserType, ApplicationState} = require('./models/user');
 // global
 var stat = {
     "exec_count": 0,
@@ -17,10 +18,18 @@ var stat = {
         "data": [1, 1, 1],
         "labels": ["\"Windows NT\"", "\"Mac OS X\"", "\"Linux\""],
         "colors": ["\"Red\"", "\"Green\"", "\"Blue\""]
-    }
+    },
+    "anonim_power": 0
 };
 
 scheduler.scheduleJob('0 * * * *', function () {
+    var anonim_power = 0;
+    AnonymousStatistic.count({}, function (err, count){
+        if (err) {
+            return;
+        }
+        anonim_power = count;
+    });
     User.find({}, function (err, users) {
         var exec_count = 0;
         var active_users = 0;
@@ -76,7 +85,8 @@ scheduler.scheduleJob('0 * * * *', function () {
             "active_users": active_users,
             "banned_users": banned_users,
             "supported_users": supported_users,
-            "statistics": statistics
+            "statistics": statistics,
+            "anonim_power": anonim_power
         };
     });
 });
@@ -161,6 +171,7 @@ module.exports = function (app, passport, nev) {
 
     // show the home page (will also have our login links)
     app.get('/', function (req, res) {
+        console.log(stat);
         res.render('index.ejs', {statistics: stat});
     });
 
