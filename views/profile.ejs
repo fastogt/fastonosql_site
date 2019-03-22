@@ -658,6 +658,7 @@
     var checkoutType = ''
 
     function checkout(type, product) {
+        ga('send', 'event', 'Checkout', product, '<%= user.email %>');
         checkoutType = type;
         var params = {
             'reset': true,
