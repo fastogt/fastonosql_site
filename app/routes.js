@@ -728,6 +728,18 @@ module.exports = function (app, passport, nev) {
         res.render('after_confirm.ejs');
     });
 
+    app.get('/welcome_callback', function (req, res) {
+        res.render('welcome/welcome_callback.ejs');
+    });
+
+    app.get('/welcome_pro_callback', function (req, res) {
+        res.render('welcome/welcome_pro_callback.ejs');
+    });
+
+    app.get('/welcome_enterprise_callback', function (req, res) {
+        res.render('welcome/welcome_enterprise_callback.ejs');
+    });
+
     function not_found(res) {
         res.status(404).render('custom_404.ejs');
     }
