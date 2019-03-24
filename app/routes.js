@@ -763,12 +763,13 @@ module.exports = function (app, passport, nev) {
                                 });
                             }
                             emails.push(user.email);
+                            console.log(user.email);
                         }).catch(function (error) {
                             console.error('getSubscription: ', error);
                         }
                     );
                 }
-            }, this);
+            });
             res.status(200).send({emails: emails});
         });
     });
@@ -791,7 +792,7 @@ module.exports = function (app, passport, nev) {
                     });
                     emails.push(user.email);
                 }
-            }, this);
+            });
             res.status(200).send({emails: emails});
         });
     });
