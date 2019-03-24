@@ -762,7 +762,7 @@ module.exports = function (app, passport, nev) {
                                     }
                                 });
                             }
-                            emails.append(user.email);
+                            emails.push(user.email);
                         }).catch(function (error) {
                             console.error('getSubscription: ', error);
                         }
@@ -789,7 +789,7 @@ module.exports = function (app, passport, nev) {
                             console.error('save user exec_count state error: ', err);
                         }
                     });
-                    emails.append(user.email);
+                    emails.push(user.email);
                 }
             });
             res.status(200).send({emails: emails});
