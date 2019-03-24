@@ -768,7 +768,7 @@ module.exports = function (app, passport, nev) {
                         }
                     );
                 }
-            });
+            }, emails);
             res.status(200).send({emails: emails});
         });
     });
@@ -781,20 +781,17 @@ module.exports = function (app, passport, nev) {
             }
 
             var emails = [];
-            (function next() {
-                users.forEach(function (user) {
-                    if (user.exec_count === 0 && user.statistic.length !== 0) {
-                        user.exec_count = user.statistic.length;
-                        user.save(function (err) {
-                            if (err) {
-                                console.error('save user exec_count state error: ', err);
-                            }
-                        });
-                        emails.push(user.email);
-                    }
-                    next();
-                });
-            })();
+            users.forEach(function (user) {
+                if (user.exec_count === 0 && user.statistic.length !== 0) {
+                    user.exec_count = user.statistic.length;
+                    user.save(function (err) {
+                        if (err) {
+                            console.error('save user exec_count state error: ', err);
+                        }
+                    });
+                    emails.push(user.email);
+                }
+            }, emails);
             res.status(200).send({emails: emails});
         });
     });
