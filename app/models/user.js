@@ -167,16 +167,5 @@ UserSchema.statics.checkSubscriptionStatus = function (app, state) {
     }
 };
 
-UserSchema.statics.checkUserType = function (type) {
-    return function (req, res, next) {
-        var user = req.user;
-        if (user.type === type) {
-            return next();
-        } else {
-            res.redirect('/profile');
-        }
-    }
-};
-
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', UserSchema);
