@@ -24,7 +24,7 @@ var stat = {
 
 scheduler.scheduleJob('0 * * * *', function () {
     var anonim_power = 0;
-    AnonymousStatistic.count({}, function (err, count){
+    AnonymousStatistic.count({}, function (err, count) {
         if (err) {
             return;
         }
@@ -738,6 +738,37 @@ module.exports = function (app, passport, nev) {
 
     app.get('/welcome_enterprise_callback', function (req, res) {
         res.render('welcome/welcome_enterprise_callback.ejs');
+    });
+
+    app.get('/refresh_subscriptions', User.checkUserType(UserType.SUPPORT), function (req, res) {
+        User.find({}, function (err, users) {
+            if (err) {
+                return;
+            }
+
+            users.forEach(function (user) {
+                var subscr = user.getSubscription();
+                if (subscr) {
+                    fastSpring.getSubscription(subscr.subscriptionId)
+                        .then(function (data) {
+                            var subscription = JSON.parse(data);
+                            var old_state = user.subscription_state;
+                            if (old_state !== subscription.state) {
+                                user.subscription_state = subscription.state;
+                                user.save(function (err) {
+                                    if (err) {
+                                        console.error('save user subscription state error: ', err);
+                                    }
+                                });
+                            }
+                            console.log('Subscription checked for: ' + user.email + ', old state: ' + old_state + ', new state: ' + user.subscription_state);
+                        }).catch(function (error) {
+                            console.error('getSubscription: ', error);
+                        }
+                    );
+                }
+            });
+        });
     });
 
     function not_found(res) {
