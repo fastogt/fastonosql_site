@@ -763,14 +763,13 @@ module.exports = function (app, passport, nev) {
                                 });
                             }
                             emails.push(user.email);
-                            console.log(user.email);
                         }).catch(function (error) {
                             console.error('getSubscription: ', error);
                         }
                     );
                 }
+                res.status(200).send({emails: emails});
             });
-            res.status(200).send({emails: emails});
         });
     });
 
