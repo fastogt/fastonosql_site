@@ -769,6 +769,7 @@ module.exports = function (app, passport, nev) {
                 }
             });
         });
+        res.redirect('/profile');
     });
 
     function not_found(res) {
