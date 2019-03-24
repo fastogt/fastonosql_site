@@ -768,8 +768,12 @@ module.exports = function (app, passport, nev) {
                         }
                     );
                 }
-            });
-            res.status(200).send({emails: emails});
+            }).then(function () {
+                res.status(200).send({emails: emails});
+            }).catch(function (err) {
+                    res.status(200).send({error: err});
+                }
+            );
         });
     });
 
