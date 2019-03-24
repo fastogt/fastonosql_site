@@ -800,6 +800,9 @@ function isLoggedInAndSupport(req, res, next) {
         var user = req.user;
         if (user.type === UserType.SUPPORT) {
             return next();
+        } else {
+            res.redirect('/profile');
+            return;
         }
     }
 
