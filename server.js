@@ -224,8 +224,6 @@ listener.on('connection', function (socket) {
 // configuration ===============================================================
 mongoose.Promise = global.Promise;
 mongoose.connect(config_db.url, {
-    useCreateIndex: true,
-    useNewUrlParser: true,
     useMongoClient:true
 });
 
