@@ -741,6 +741,7 @@ module.exports = function (app, passport, nev) {
     });
 
     app.get('/refresh_subscriptions', isLoggedInAndSupport, function (req, res) {
+        var emails = [];
         User.find({}, function (err, users) {
             if (err) {
                 return;
@@ -752,8 +753,7 @@ module.exports = function (app, passport, nev) {
                     fastSpring.getSubscription(subscr.subscriptionId)
                         .then(function (data) {
                             var subscription = JSON.parse(data);
-                            var old_state = user.subscription_state;
-                            if (old_state !== subscription.state) {
+                            if (user.subscription_state !== subscription.state) {
                                 user.subscription_state = subscription.state;
                                 user.save(function (err) {
                                     if (err) {
@@ -761,7 +761,7 @@ module.exports = function (app, passport, nev) {
                                     }
                                 });
                             }
-                            console.log('Subscription checked for: ' + user.email + ', old state: ' + old_state + ', new state: ' + user.subscription_state);
+                            emails.append(user.email);
                         }).catch(function (error) {
                             console.error('getSubscription: ', error);
                         }
@@ -769,10 +769,11 @@ module.exports = function (app, passport, nev) {
                 }
             });
         });
-        res.redirect('/profile');
+        res.status(200).send({emails: emails});
     });
 
     app.get('/fix_exec_0', isLoggedInAndSupport, function (req, res) {
+        var emails = [];
         User.find({}, function (err, users) {
             if (err) {
                 return;
@@ -786,10 +787,11 @@ module.exports = function (app, passport, nev) {
                             console.error('save user exec_count state error: ', err);
                         }
                     });
+                    emails.append(user.email);
                 }
             });
         });
-        res.redirect('/profile');
+        res.status(200).send({emails: emails});
     });
 
     function not_found(res) {
