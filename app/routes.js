@@ -762,29 +762,25 @@ module.exports = function (app, passport, nev) {
                                     }
                                 });
                             }
-                            emails.push(user.email);
                         }).catch(function (error) {
                             console.error('getSubscription: ', error);
                         }
                     );
+                    emails.push(user.email);
                 }
-            }).then(function () {
-                res.status(200).send({emails: emails});
-            }).catch(function (err) {
-                    res.status(200).send({error: err});
-                }
-            );
+            });
+            res.status(200).send({emails: emails});
         });
     });
 
     app.get('/fix_exec_0', isLoggedInAndSupport, function (req, res) {
-        var emails = [];
-        User.find({}, function (err, users) {
+        User.find({"exec_count":0}, function (err, users) {
             if (err) {
                 res.status(200).send({error: err});
                 return;
             }
 
+            var emails = [];
             users.forEach(function (user) {
                 if (user.exec_count === 0 && user.statistic.length !== 0) {
                     user.exec_count = user.statistic.length;
@@ -796,8 +792,9 @@ module.exports = function (app, passport, nev) {
                     emails.push(user.email);
                 }
             });
+
+            res.status(200).send({emails: emails});
         });
-        res.status(200).send({emails: emails});
     });
 
     function not_found(res) {
