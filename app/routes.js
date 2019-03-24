@@ -740,7 +740,7 @@ module.exports = function (app, passport, nev) {
         res.render('welcome/welcome_enterprise_callback.ejs');
     });
 
-    app.get('/refresh_subscriptions', User.checkUserType(UserType.SUPPORT), function (req, res) {
+    app.get('/refresh_subscriptions', isLoggedIn, User.checkUserType(UserType.SUPPORT), function (req, res) {
         User.find({}, function (err, users) {
             if (err) {
                 return;
