@@ -772,6 +772,26 @@ module.exports = function (app, passport, nev) {
         res.redirect('/profile');
     });
 
+    app.get('/fix_exec_0', isLoggedInAndSupport, function (req, res) {
+        User.find({}, function (err, users) {
+            if (err) {
+                return;
+            }
+
+            users.forEach(function (user) {
+                if (user.exec_count === 0 && user.statistic.length !== 0) {
+                    user.exec_count = user.statistic.length;
+                    user.save(function (err) {
+                        if (err) {
+                            console.error('save user exec_count state error: ', err);
+                        }
+                    });
+                }
+            });
+        });
+        res.redirect('/profile');
+    });
+
     function not_found(res) {
         res.status(404).render('custom_404.ejs');
     }
