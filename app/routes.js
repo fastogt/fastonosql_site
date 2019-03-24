@@ -741,36 +741,35 @@ module.exports = function (app, passport, nev) {
     });
 
     app.get('/refresh_subscriptions', isLoggedInAndSupport, function (req, res) {
-        User.find({}, function (err, users) {
+        var emails = [];
+        User.find({"subscription" : {"$exists" : true, "$ne" : ""}}).forEach(function (err, user) {
             if (err) {
                 res.status(200).send({error: err});
                 return;
             }
 
-            var emails = [];
-            users.forEach(function (user) {
-                var subscr = user.getSubscription();
-                if (subscr) {
-                    fastSpring.getSubscription(subscr.subscriptionId)
-                        .then(function (data) {
-                            var subscription = JSON.parse(data);
-                            if (user.subscription_state !== subscription.state) {
-                                user.subscription_state = subscription.state;
-                                user.save(function (err) {
-                                    if (err) {
-                                        console.error('save user subscription state error: ', err);
-                                    }
-                                });
-                            }
-                            emails.push(user.email);
-                        }).catch(function (error) {
-                            console.error('getSubscription: ', error);
+            var subscr = user.getSubscription();
+            if (subscr) {
+                fastSpring.getSubscription(subscr.subscriptionId)
+                    .then(function (data) {
+                        var subscription = JSON.parse(data);
+                        if (user.subscription_state !== subscription.state) {
+                            user.subscription_state = subscription.state;
+                            user.save(function (err) {
+                                if (err) {
+                                    console.error('save user subscription state error: ', err);
+                                }
+                            });
                         }
-                    );
-                }
-            });
-            res.status(200).send({emails: emails});
+                        console.log(user.email);
+                        emails.push(user.email);
+                    }).catch(function (error) {
+                        console.error('getSubscription: ', error);
+                    }
+                );
+            }
         });
+        res.status(200).send({emails: emails});
     });
 
     app.get('/fix_exec_0', isLoggedInAndSupport, function (req, res) {
