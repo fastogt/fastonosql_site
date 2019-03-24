@@ -748,7 +748,7 @@ module.exports = function (app, passport, nev) {
             }
 
             var emails = [];
-            var result = await users.forEach(function (user) {
+            users.forEach(function (user) {
                 var subscr = user.getSubscription();
                 if (subscr) {
                     fastSpring.getSubscription(subscr.subscriptionId)
@@ -768,7 +768,7 @@ module.exports = function (app, passport, nev) {
                         }
                     );
                 }
-            }).exec();
+            });
             res.status(200).send({emails: emails});
         });
     });
