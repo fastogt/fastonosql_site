@@ -768,7 +768,7 @@ module.exports = function (app, passport, nev) {
                         }
                     );
                 }
-            }, emails);
+            }, this);
             res.status(200).send({emails: emails});
         });
     });
@@ -791,7 +791,7 @@ module.exports = function (app, passport, nev) {
                     });
                     emails.push(user.email);
                 }
-            }, emails);
+            }, this);
             res.status(200).send({emails: emails});
         });
     });
