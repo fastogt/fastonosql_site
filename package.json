@@ -15,7 +15,6 @@
     "passport": "latest",
     "passport-local": "latest",
     "connect-flash": "latest",
-    "redis": "latest",
     "socket.io": "latest",
     "amqp": "latest",
     "mkdirp": "latest",
@@ -30,6 +29,7 @@
     "nodemailer": "latest",
     "node-schedule": "latest",
     "moment":"latest",
-    "express-ip":"latest"
+    "express-ip":"latest",
+    "fastspring-fastogt-nodejs": "github:fastogt/fastspring-fastogt-nodejs"
   }
 }

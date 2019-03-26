@@ -185,14 +185,14 @@
         </div>
     </div>
 
-    <% if (user.getSubscriptionState() && user.getSubscriptionState() !== 'active') { %>
-    <div class="alert alert-warning">Your subscription is <%= user.getSubscriptionState() %>. Resubscribe or contact the
+    <% if (subscription_state && subscription_state !== 'active') { %>
+    <div class="alert alert-warning">Your subscription is <%= subscription_state %>. Resubscribe or contact the
         administrator.
     </div>
     <% } %>
 
     <div class="row">
-        <% if (user.enableSubscription()) { %>
+        <% if (subscription_state !== 'active') { %>
         <div class="row-content clear-after">
             <div class="container-subscription">
                 <div class="col-sm-3 box-subscription">
@@ -587,7 +587,7 @@
                     </form>
                     <a href="mailto:<%- support.contact_email %>"><%- support.contact_email %></a>
                 </div>
-                <% if (user.canCancelSubscription()) { %>
+                <% if (subscription_state === 'active') { %>
                 <div class="col-sm-7">
                     <div class="row">
                         <div class="col-sm-12 text-right">
