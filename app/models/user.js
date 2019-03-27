@@ -68,7 +68,6 @@ UserSchema.methods.updateSubscription = function (billing_service_creds, order_i
             return callback('Order invalid length items.');
         }
 
-        console.log(order.items[0]);
         self.application_state = ApplicationState.ACTIVE;
         self.subscription = {
             reference: order.reference,
@@ -88,7 +87,7 @@ UserSchema.methods.getSubscriptionState = function (billing_service_creds, callb
     }
 
     var fastSpring = new FastSpring(billing_service_creds.login, billing_service_creds.password);
-    return fastSpring.getSubscription(this.subscription.subscription_id, callback);
+    return fastSpring.getSubscriptionState(this.subscription.subscription_id, callback);
 };
 
 UserSchema.methods.cancelSubscription = function (billing_service_creds, callback) {
