@@ -1,7 +1,7 @@
 // load the things we need
 var mongoose = require('mongoose');
 var crypto = require('crypto');
-var FastSpring = require('./../modules/fastspring');
+var FastSpring = require('fastspring-fastogt-nodejs');
 var StatisticSchema = require('./statistic');
 
 
@@ -19,6 +19,11 @@ const ApplicationState = Object.freeze({
     TRIAL_FINISHED: 'TRIAL_FINISHED'
 });
 
+var SubscriptionSchema = mongoose.Schema({
+    reference: String,
+    subscription_id: String
+});
+
 // define the schema for our user model
 var UserSchema = mongoose.Schema({
     email: String,
@@ -28,14 +33,7 @@ var UserSchema = mongoose.Schema({
     country: String,
     created_date: {type: Date, default: Date.now},
     last_login_date: {type: Date, default: Date.now},
-    subscription: {
-        type: String,
-        default: ''
-    },
-    subscription_state: { // "active", "overdue", "canceled", "deactivated", "trial"
-        type: String,
-        default: ''
-    },
+    subscription: SubscriptionSchema,
     type: {
         type: String,
         enum: Object.values(UserType),
@@ -57,6 +55,52 @@ Object.assign(UserSchema.statics, {
     UserType, ApplicationState
 });
 
+// async
+UserSchema.methods.updateSubscription = function (billing_service_creds, order_id, callback) {
+    var fastSpring = new FastSpring(billing_service_creds.login, billing_service_creds.password);
+    var self = this;
+    return fastSpring.getOrder(order_id, function (err, order) {
+        if (err) {
+            return callback(err);
+        }
+
+        if (!order.items.length) {
+            return callback('Order invalid length items.');
+        }
+
+        self.application_state = ApplicationState.ACTIVE;
+        self.subscription = {
+            reference: order.reference,
+            subscription_id: order.items[0].subscription
+        };
+        self.save(function (err) {
+            if (err) {
+                return callback(err);
+            }
+        });
+    });
+};
+
+UserSchema.methods.getSubscriptionState = function (billing_service_creds, callback) {
+    if (!this.subscription) {
+        return callback(null, undefined);
+    }
+
+    var fastSpring = new FastSpring(billing_service_creds.login, billing_service_creds.password);
+    return fastSpring.getSubscriptionState(this.subscription.subscription_id, callback);
+};
+
+UserSchema.methods.cancelSubscription = function (billing_service_creds, callback) {
+    var subscr = this.subscription;
+    if (!this.subscription) {
+        return callback('Not subscribed.');
+    }
+
+    var fastSpring = new FastSpring(billing_service_creds.login, billing_service_creds.password);
+    return fastSpring.cancelSubscription(this.subscription.subscription_id, callback);
+};
+
+
 // checking if password is valid
 UserSchema.methods.isActive = function () {
     return this.application_state === ApplicationState.ACTIVE;
@@ -66,7 +110,7 @@ UserSchema.methods.isBanned = function () {
     return this.application_state === ApplicationState.BANNED;
 };
 
-// FIX ME
+// FIXME
 UserSchema.methods.getType = function () {
     if (this.type === UserType.USER) {
         return 0;
@@ -84,8 +128,7 @@ UserSchema.methods.getType = function () {
 
 // generating a hash
 UserSchema.methods.generateHash = function (password) {
-    var hash = crypto.createHash('md5').update(password).digest('hex');
-    return hash;
+    return crypto.createHash('md5').update(password).digest('hex');
 };
 
 // checking if hexed password is valid
@@ -104,67 +147,8 @@ UserSchema.methods.isPrimary = function () {
     return this.type === UserType.SUPPORT || this.type === UserType.OPEN_SOURCE || this.type === UserType.PERMANENT || this.type === UserType.ENTERPRISE;
 };
 
-// enable subscription
-UserSchema.methods.enableSubscription = function () {
-    if (this.isPrimary()) {
-        return false;
-    }
-
-    return (!this.subscription_state ||
-        this.subscription_state === 'canceled' ||
-        this.subscription_state === 'deactivated');
-};
-
-// get subscription info
-UserSchema.methods.getSubscription = function () {
-    return this.subscription
-        ? JSON.parse(this.subscription)
-        : null;
-};
-
-// get subscription state
-UserSchema.methods.getSubscriptionState = function () {
-    return this.subscription_state;
-};
-
-// can cancel subscription
-UserSchema.methods.canCancelSubscription = function () {
-    if (this.isPrimary()) {
-        return false;
-    }
-
-    return this.subscription_state === 'active';
-};
-
-
-/**
- * Check subscription status by param
- *
- * @param app {Object} - application object
- * @param state {String} - 'canceled', 'active' & etc.
- */
-UserSchema.statics.checkSubscriptionStatus = function (app, state) {
-    var fastSpring = new FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
-
-    return function (req, res, next) {
-        var subscr = req.user.getSubscription();
-
-        if (subscr) {
-            fastSpring.getSubscription(subscr.subscriptionId)
-                .then(function (data) {
-                    var subscription = JSON.parse(data);
-                    if (subscription.state === state) {
-                        return next();
-                    }
-                    res.redirect('/profile');
-                }).catch(function (error) {
-                console.error(error);
-                res.redirect('/profile');
-            })
-        } else {
-            res.redirect('/profile');
-        }
-    }
+UserSchema.statics.isSubscribed = function (state) {
+    return state === 'active' || state === 'canceled';
 };
 
 // create the model for users and expose it to our app

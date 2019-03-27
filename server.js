@@ -48,8 +48,6 @@ var listener = io.listen(server);
 
 var nodemailer = require('nodemailer');
 
-var FastSpring = require('./app/modules/fastspring');
-
 // settings
 app.locals.site = {
     title: public_settings_config.site.name,
@@ -243,9 +241,9 @@ nev.configure({
         from: 'Do Not Reply <' + app.locals.site.support_email + '>',
         subject: 'Confirm your account',
         html: '<p>Please verify your <b>' + app.locals.site.title + '</b> account by clicking <a href="${URL}">this link</a>. If you are unable to do so, copy and paste the following link into your browser:</p><p>${URL}</p>' +
-        '<p>We are always here to help if you have any questions or just want some guidance on getting started. <a href=mailto:' + app.locals.support.contact_email + '>Contact us</a><br>If you did not sign up for ' + app.locals.site.title + ', please ignore this email.</p>' +
-        '<p><br>--<br><b>BR,</b><br><b>' + app.locals.company.name + ' Team</b></p>' +
-        '<p>Our projects:<br><a href="https://fastonosql.com">https://fastonosql.com</a><br><a href="https://fastoredis.com">https://fastoredis.com</a><br><a href="https://fastotv.com">https://fastotv.com</a><br><a href="https://idealtrust.by">https://idealtrust.by</a><br><a href="https://fastogt.com">https://fastogt.com</a></p>',
+            '<p>We are always here to help if you have any questions or just want some guidance on getting started. <a href=mailto:' + app.locals.support.contact_email + '>Contact us</a><br>If you did not sign up for ' + app.locals.site.title + ', please ignore this email.</p>' +
+            '<p><br>--<br><b>BR,</b><br><b>' + app.locals.company.name + ' Team</b></p>' +
+            '<p>Our projects:<br><a href="https://fastonosql.com">https://fastonosql.com</a><br><a href="https://fastoredis.com">https://fastoredis.com</a><br><a href="https://fastotv.com">https://fastotv.com</a><br><a href="https://idealtrust.by">https://idealtrust.by</a><br><a href="https://fastogt.com">https://fastogt.com</a></p>',
         text: 'Please verify your account by clicking the following link, or by copying and pasting it into your browser: ${URL}'
     },
     shouldSendConfirmation: true,
@@ -253,9 +251,9 @@ nev.configure({
         from: 'Do Not Reply <' + app.locals.site.support_email + '>',
         subject: 'Successfully verified!',
         html: '<p>Your <b>' + app.locals.site.title + '</b> account has been successfully verified.</p>' +
-        '<p>We are always here to help if you have any questions or just want some guidance on getting started. <a href=mailto:' + app.locals.support.contact_email + '>Contact us</a></p>' +
-        '<p><br>--<br><b>BR,</b><br><b>' + app.locals.company.name + ' Team</b></p>' +
-        '<p>Our projects:<br><a href="https://fastonosql.com">https://fastonosql.com</a><br><a href="https://fastoredis.com">https://fastoredis.com</a><br><a href="https://fastotv.com">https://fastotv.com</a><br><a href="https://idealtrust.by">https://idealtrust.by</a><br><a href="https://fastogt.com">https://fastogt.com</a></p>',
+            '<p>We are always here to help if you have any questions or just want some guidance on getting started. <a href=mailto:' + app.locals.support.contact_email + '>Contact us</a></p>' +
+            '<p><br>--<br><b>BR,</b><br><b>' + app.locals.company.name + ' Team</b></p>' +
+            '<p>Our projects:<br><a href="https://fastonosql.com">https://fastonosql.com</a><br><a href="https://fastoredis.com">https://fastoredis.com</a><br><a href="https://fastotv.com">https://fastotv.com</a><br><a href="https://idealtrust.by">https://idealtrust.by</a><br><a href="https://fastogt.com">https://fastogt.com</a></p>',
         text: 'Your account has been successfully verified.'
     },
 
@@ -399,7 +397,6 @@ function is_subscribed(args, opt, callback) {
         return;
     }
 
-    var fastSpring = new FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
     User.findOne({'email': args.email}, function (err, user) {
         // if there are any errors, return the error
         if (err) {
@@ -432,10 +429,10 @@ function is_subscribed(args, opt, callback) {
                         to: app.locals.site.notify_email,
                         subject: app.locals.site.title + ' trial finished',
                         html: '<p>' +
-                        'First name: ' + user.first_name + '<br>' +
-                        'Last name: ' + user.last_name + '<br>' +
-                        'Email: ' + user.email +
-                        '</p>'
+                            'First name: ' + user.first_name + '<br>' +
+                            'Last name: ' + user.last_name + '<br>' +
+                            'Email: ' + user.email +
+                            '</p>'
                     };
                     transporter.sendMail(mailOptions, function (err, info) {
                         if (err) {
@@ -471,27 +468,20 @@ function is_subscribed(args, opt, callback) {
             return callback(null, generate_response(SUBSCRIBED_USER));
         }
 
-        if (!user.subscription) {
-            if (user.application_state === ApplicationState.BANNED) { // if banned
-                return callback('You banned, please write to <a href="mailto:' + app.locals.support.contact_email + '">' + app.locals.support.contact_email + '</a> to unban, or <a href="' + app.locals.site.domain + '/login"><b>subscribe</b></a>.', null);
+        user.getSubscriptionState(app.locals.fastspring_config, function (err, state) {
+            if (err) {
+                console.error(err);
+                return callback('Failed to check subscripton state, please try to login again.', null);
             }
 
+            if (User.isSubscribed(state)) {
+                return callback(null, generate_response(SUBSCRIBED_USER));
+            }
+
+            if (user.application_state === ApplicationState.BANNED) {  // if banned
+                return callback('You banned, please write to <a href="mailto:' + app.locals.support.contact_email + '">' + app.locals.support.contact_email + '</a> to unban, or <a href="' + app.locals.site.domain + '/login"><b>subscribe</b></a>.', null);
+            }
             return callback(null, generate_response(UNSUBSCRIBED_USER));
-        }
-
-        var subscription = JSON.parse(user.subscription);
-        fastSpring.checkSubscriptionState('active', subscription.subscriptionId)
-            .then(function (isSubscribed) {
-                if (isSubscribed) {
-                    return callback(null, generate_response(SUBSCRIBED_USER));
-                }
-
-                if (user.application_state === ApplicationState.BANNED) {  // if banned
-                    return callback('You banned, please write to <a href="mailto:' + app.locals.support.contact_email + '">' + app.locals.support.contact_email + '</a> to unban, or <a href="' + app.locals.site.domain + '/login"><b>subscribe</b></a>.', null);
-                }
-                return callback(null, generate_response(UNSUBSCRIBED_USER));
-            }).catch(function (error) {
-            return callback(error, null);
         });
     });
 }
@@ -528,11 +518,11 @@ function ban_user(args, opt, callback) {
             to: app.locals.site.notify_email,
             subject: app.locals.site.title + ' banned user',
             html: '<p>' +
-            'First name: ' + first_name + '<br>' +
-            'Last name: ' + last_name + '<br>' +
-            'Email: ' + email + '<br>' +
-            'Collision id:' + collision_id +
-            '</p>'
+                'First name: ' + first_name + '<br>' +
+                'Last name: ' + last_name + '<br>' +
+                'Email: ' + email + '<br>' +
+                'Collision id:' + collision_id +
+                '</p>'
         };
         transporter.sendMail(mailOptions, function (err, info) {
             if (err) {

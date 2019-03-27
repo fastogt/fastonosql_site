@@ -4,7 +4,6 @@ var AnonymousStatistic = require('./models/anonymous_statistic');
 
 var fs = require('fs');
 var path_module = require('path');
-var FastSpring = require('./modules/fastspring');
 var scheduler = require('node-schedule');
 const {UserType, ApplicationState} = require('./models/user');
 // global
@@ -108,8 +107,6 @@ function deleteFolderRecursive(path) {
 }
 
 module.exports = function (app, passport, nev) {
-    var fastSpring = new FastSpring(app.locals.fastspring_config.login, app.locals.fastspring_config.password);
-
     function walk(dir, done) {
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir);
@@ -242,38 +239,24 @@ module.exports = function (app, passport, nev) {
                 console.error(err);
             }
 
-            var subscr = user.getSubscription();
-            if (subscr) {
-                fastSpring.getSubscription(subscr.subscriptionId)
-                    .then(function (data) {
-                        var subscription = JSON.parse(data);
-                        user.subscription_state = subscription.state;
-                        user.last_login_date = new Date();
-                        user.save(function (err) {
-                            if (err) {
-                                console.error('save user subscription state error: ', err);
-                            }
-                        });
+            user.getSubscriptionState(app.locals.fastspring_config, function (err, state) {
+                if (err) {
+                    console.error(err);
+                }
 
-                        res.render('profile.ejs', {
-                            user: user,
-                            packages: results
-                        });
-                    }).catch(function (error) {
-                    console.error('getSubscription: ', error);
-                });
-            } else {
                 user.last_login_date = new Date();
                 user.save(function (err) {
                     if (err) {
-                        console.error('save last_login_date error: ', err);
+                        console.error('save user subscription state error: ', err);
                     }
                 });
+
                 res.render('profile.ejs', {
                     user: user,
-                    packages: results
+                    packages: results,
+                    subscription_state: state
                 });
-            }
+            });
         });
     });
 
@@ -342,69 +325,29 @@ module.exports = function (app, passport, nev) {
     // SUBSCRIPTION =============================
     app.post('/subscription', isLoggedIn, function (req, res) {
         var user = req.user;
-        if (user.enableSubscription()) {
-            var body = JSON.parse(req.body.data);
-
-            if (body.hasOwnProperty('id') && body.hasOwnProperty('reference')) {
-                // ===== fastSpring.getOrder
-                fastSpring.getOrder(body.id)
-                    .then(function (data) {
-                        var order = JSON.parse(data);
-                        console.log('***Subscription order: ', order);
-                        if (order.hasOwnProperty('error')) {
-                            console.error('Order error: ', order.error);
-                            return res.status(500).send('ERROR: Subscription was failed!');
-                        }
-
-                        if (!order.items.length) {
-                            console.error('Order invalid length items.');
-                            return res.status(500).send('ERROR: Subscription was failed!');
-                        }
-
-                        user.set({
-                            application_state: ApplicationState.ACTIVE,
-                            subscription: JSON.stringify(Object.assign(body, {subscriptionId: order.items[0].subscription}))
-                        });
-                        user.save(function (err) {
-                            if (err) {
-                                console.error('Save subscription error: ', err);
-                                return res.status(500).send('ERROR: Subscription was failed!');
-                            }
-                        });
-
-                        console.log('***Subscription SUCCESS!');
-                        res.status(200).send('SUCCESS: Subscription success!');
-                    }).catch(function (error) {
-                    console.error('subscription catch: ', error);
+        var body = JSON.parse(req.body.data);
+        if (body.hasOwnProperty('id') && body.hasOwnProperty('reference')) {
+            user.updateSubscription(app.locals.fastspring_config, body.id, function (err) {
+                if (err) {
+                    console.error('Order error: ', err);
                     return res.status(500).send('ERROR: Subscription was failed!');
-                });
-                // =====
-            } else {
-                console.error('Body invalid data');
-                return res.status(400).send('ERROR: Invalid data!');
-            }
+                }
+
+                res.status(200).send('SUCCESS: Subscription success!');
+            });
         } else {
-            console.error('Subscription is already exist!');
-            return res.status(500).send('ERROR: Subscription is already exist!');
+            return res.status(400).send('ERROR: Invalid data!');
         }
     });
 
     // CANCEL_SUBSCRIPTION ==============================
-    app.post('/cancel_subscription', User.checkSubscriptionStatus(app, 'active'), function (req, res) {
+    app.post('/cancel_subscription', isLoggedIn, function (req, res) {
         var user = req.user;
-        var subscr = user.getSubscription();
-        fastSpring.cancelSubscription(subscr.subscriptionId)
-            .then(function (data) {
-                var answer = JSON.parse(data);
-
-                if (answer.result === 'error') {
-                    throw new Error('Cancel subscription was failed.');
-                }
-                setTimeout(function () { // Note: redirect with timeout. Profile page not render with new data from fastspring...
-                    res.redirect('/profile');
-                }, 5000);
-            }).catch(function (error) {
-            console.log('cancelSubscription: ', error);
+        user.cancelSubscription(app.locals.fastspring_config, function (err) {
+            if (err) {
+                console.log(err);
+            }
+            res.redirect('/profile');
         });
     });
 
@@ -738,63 +681,6 @@ module.exports = function (app, passport, nev) {
 
     app.get('/welcome_enterprise_callback', function (req, res) {
         res.render('welcome/welcome_enterprise_callback.ejs');
-    });
-
-    app.get('/refresh_subscriptions', isLoggedInAndSupport, function (req, res) {
-        User.find({"subscription": {"$exists": true, "$ne": ""}}, function (err, users) {
-            if (err) {
-                res.status(200).send({error: err});
-                return;
-            }
-
-            var emails = [];
-            users.forEach(function (user) {
-                var subscr = user.getSubscription();
-                if (subscr) {
-                    fastSpring.getSubscription(subscr.subscriptionId)
-                        .then(function (data) {
-                            var subscription = JSON.parse(data);
-                            if (user.subscription_state !== subscription.state) {
-                                user.subscription_state = subscription.state;
-                                user.save(function (err) {
-                                    if (err) {
-                                        console.error('save user subscription state error: ', err);
-                                    }
-                                });
-                            }
-                        }).catch(function (error) {
-                            console.error('getSubscription: ', error);
-                        }
-                    );
-                    emails.push(user.email);
-                }
-            });
-            res.status(200).send({emails: emails});
-        });
-    });
-
-    app.get('/fix_exec_0', isLoggedInAndSupport, function (req, res) {
-        User.find({"exec_count":0}, function (err, users) {
-            if (err) {
-                res.status(200).send({error: err});
-                return;
-            }
-
-            var emails = [];
-            users.forEach(function (user) {
-                if (user.statistic.length !== 0) {
-                    user.exec_count = user.statistic.length;
-                    user.save(function (err) {
-                        if (err) {
-                            console.error('save user exec_count state error: ', err);
-                        }
-                    });
-                    emails.push(user.email);
-                }
-            });
-
-            res.status(200).send({emails: emails});
-        });
     });
 
     function not_found(res) {
