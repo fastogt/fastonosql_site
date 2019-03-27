@@ -58,6 +58,7 @@ Object.assign(UserSchema.statics, {
 // async
 UserSchema.methods.updateSubscription = function (billing_service_creds, order_id, callback) {
     var fastSpring = new FastSpring(billing_service_creds.login, billing_service_creds.password);
+    var self = this;
     return fastSpring.getOrder(order_id, function (err, order) {
         if (err) {
             return callback(err);
@@ -67,13 +68,13 @@ UserSchema.methods.updateSubscription = function (billing_service_creds, order_i
             return callback('Order invalid length items.');
         }
 
-        console.log(order);
-        this.application_state = ApplicationState.ACTIVE;
-        this.subscription = {
+        console.log(order.items[0]);
+        self.application_state = ApplicationState.ACTIVE;
+        self.subscription = {
             reference: order.reference,
             subscription_id: order.items[0].subscription
         };
-        this.save(function (err) {
+        self.save(function (err) {
             if (err) {
                 return callback(err);
             }
