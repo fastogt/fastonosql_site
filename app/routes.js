@@ -684,7 +684,7 @@ module.exports = function (app, passport, nev) {
     });
 
     app.get('/get_subscriptions', isLoggedInAndSupport, function (req, res) {
-        User.find({"subscription": { $exists: true }}, function (err, users) {
+        User.find({"subscription.subscription_id": { $exists: true }}, function (err, users) {
             if (err) {
                 res.status(200).send({error: err});
                 return;
