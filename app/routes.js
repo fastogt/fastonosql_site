@@ -684,7 +684,7 @@ module.exports = function (app, passport, nev) {
     });
 
     app.get('/get_subscriptions', isLoggedInAndSupport, function (req, res) {
-        User.find({"subscription.subscription_id": { $exists: true }}, function (err, users) {
+        User.find({"subscription.subscription_id": {$exists: true}}, function (err, users) {
             if (err) {
                 res.status(200).send({error: err});
                 return;
@@ -698,7 +698,9 @@ module.exports = function (app, passport, nev) {
                         return;
                     }
 
-                    emails_and_statuses.push({email: user.email, state: state});
+                    var user_state = {email: user.email, state: state};
+                    console.log(user_state);
+                    emails_and_statuses.push();
                 });
             });
             res.status(200).send({emails: emails_and_statuses});
