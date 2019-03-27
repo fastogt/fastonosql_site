@@ -67,6 +67,7 @@ UserSchema.methods.updateSubscription = function (billing_service_creds, order_i
             return callback('Order invalid length items.');
         }
 
+        console.log(order);
         this.application_state = ApplicationState.ACTIVE;
         this.subscription = {
             reference: order.reference,
