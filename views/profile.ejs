@@ -185,7 +185,7 @@
         </div>
     </div>
 
-    <% if (subscription_state && (subscription_state !== 'active' || subscription_state !== 'canceled')) { %>
+    <% if (subscription_state && !(subscription_state === 'active' || subscription_state === 'canceled')) { %>
         <div class="alert alert-warning">Your subscription is <%= subscription_state %>. Resubscribe or contact the
             administrator.
         </div>
