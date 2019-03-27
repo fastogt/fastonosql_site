@@ -701,7 +701,7 @@ module.exports = function (app, passport, nev) {
                     emails_and_statuses.push({email: user.email, state: state});
                 });
             });
-            res.status(200).send(emails_and_statuses);
+            res.status(200).send({emails: emails_and_statuses});
         });
     });
 
