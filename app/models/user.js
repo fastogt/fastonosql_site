@@ -4,7 +4,6 @@ var crypto = require('crypto');
 var FastSpring = require('fastspring-fastogt-nodejs');
 var StatisticSchema = require('./statistic');
 
-
 const UserType = Object.freeze({
     USER: 'USER',
     SUPPORT: 'SUPPORT',

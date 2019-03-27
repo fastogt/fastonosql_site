@@ -683,6 +683,28 @@ module.exports = function (app, passport, nev) {
         res.render('welcome/welcome_enterprise_callback.ejs');
     });
 
+    app.get('/get_subscriptions', isLoggedInAndSupport, function (req, res) {
+        User.find({"subscription": {"$exists": true, "$ne": ""}}, function (err, users) {
+            if (err) {
+                res.status(200).send({error: err});
+                return;
+            }
+
+            var emails_and_statuses = [];
+            users.forEach(function (user) {
+                user.getSubscriptionState(app.locals.fastspring_config, function (err, state) {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+
+                    emails_and_statuses.push({email: user.email, state: state});
+                });
+            });
+            res.status(200).send(emails_and_statuses);
+        });
+    });
+
     function not_found(res) {
         res.status(404).render('custom_404.ejs');
     }
