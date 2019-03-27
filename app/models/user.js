@@ -148,7 +148,7 @@ UserSchema.methods.isPrimary = function () {
 };
 
 UserSchema.statics.isSubscribed = function (state) {
-    return state === 'active';
+    return state === 'active' || state === 'canceled';
 };
 
 // create the model for users and expose it to our app
