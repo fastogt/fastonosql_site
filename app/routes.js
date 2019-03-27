@@ -325,26 +325,18 @@ module.exports = function (app, passport, nev) {
     // SUBSCRIPTION =============================
     app.post('/subscription', isLoggedIn, function (req, res) {
         var user = req.user;
-        if (user.enableSubscription()) {
-            var body = JSON.parse(req.body.data);
-            if (body.hasOwnProperty('id') && body.hasOwnProperty('reference')) {
-                // ===== fastSpring.getOrder
-                user.updateSubscription(app.locals.fastspring_config, body.id, function (err) {
-                    if (err) {
-                        console.error('Order error: ', err);
-                        return res.status(500).send('ERROR: Subscription was failed!');
-                    }
+        var body = JSON.parse(req.body.data);
+        if (body.hasOwnProperty('id') && body.hasOwnProperty('reference')) {
+            user.updateSubscription(app.locals.fastspring_config, body.id, function (err) {
+                if (err) {
+                    console.error('Order error: ', err);
+                    return res.status(500).send('ERROR: Subscription was failed!');
+                }
 
-                    res.status(200).send('SUCCESS: Subscription success!');
-                });
-                // =====
-            } else {
-                console.error('Body invalid data');
-                return res.status(400).send('ERROR: Invalid data!');
-            }
+                res.status(200).send('SUCCESS: Subscription success!');
+            });
         } else {
-            console.error('Subscription is already exist!');
-            return res.status(500).send('ERROR: Subscription is already exist!');
+            return res.status(400).send('ERROR: Invalid data!');
         }
     });
 
