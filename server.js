@@ -37,8 +37,8 @@ var fs = require('fs');
 
 // app_r
 /*var http = require('http');
-var server = http.createServer(app);
-var https = require('https');*/
+var server = http.createServer(app);*/
+var https = require('https');
 var server = https.createServer({
     key: fs.readFileSync(settings_config.ssl_key_path),
     cert: fs.readFileSync(settings_config.ssl_cert_path)
