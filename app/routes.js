@@ -188,7 +188,8 @@ module.exports = function (app, passport, nev) {
     });
 
     app.get('/anonim_users_downloads', function (req, res) {
-        res.render('anonim_users_downloads.ejs');
+        res.render('pro_users_downloads.ejs');
+        // res.render('anonim_users_downloads.ejs');
         //res.render('login.ejs', {message: req.flash('loginMessage')});
     });
 
