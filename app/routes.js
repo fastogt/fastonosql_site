@@ -686,12 +686,16 @@ module.exports = function (app, passport, nev) {
     app.get('/get_subscriptions', isLoggedInAndSupport, function (req, res) {
         User.find({"subscription.subscription_id": {$exists: true}}, function (err, users) {
             if (err) {
-                res.status(200).send({error: err});
-                return;
+                return res.status(200).send({error: err});
             }
 
             var emails_and_statuses = [];
-            users.forEach(function (user) {
+            if (users.length === 0) {
+                return res.status(200).send({emails: emails_and_statuses});
+            }
+
+            for (var i = 0; i < users.length; i++) {
+                var user = users[i];
                 user.getSubscriptionState(app.locals.fastspring_config, function (err, state) {
                     if (err) {
                         console.error(err);
@@ -699,11 +703,12 @@ module.exports = function (app, passport, nev) {
                     }
 
                     var user_state = {email: user.email, state: state};
-                    console.log(user_state);
-                    emails_and_statuses.push();
+                    emails_and_statuses.push(user_state);
                 });
-            });
-            res.status(200).send({emails: emails_and_statuses});
+                if (i === user.length - 1) {
+                    res.status(200).send({emails: emails_and_statuses});
+                }
+            }
         });
     });
 
