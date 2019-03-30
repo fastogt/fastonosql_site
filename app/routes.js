@@ -667,7 +667,7 @@ module.exports = function (app, passport, nev) {
 
             console.log("confirm message sent to: " + email);
             req.login(user, function (err) {
-                if (!err) {
+                if (err) {
                     console.error(err);
                     return res.status(404).send('ERROR: login to profile page FAILED');
                 }
