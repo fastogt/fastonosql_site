@@ -647,17 +647,17 @@ module.exports = function (app, passport, nev) {
     // user accesses the link that is sent
     app.get('/email-verification/:URL', function (req, res) {
         var url = req.params.URL;
-        nev.confirmTempUser(url, function (err, temp_user) {
+        nev.confirmTempUser(url, function (err, user) {
             if (err) {
                 console.error(err);
                 return res.status(404).send('ERROR: sending confirmation email FAILED');
             }
 
-            if (!temp_user) {
+            if (!user) {
                 return res.status(404).send('ERROR: confirming temp user FAILED');
             }
 
-            var email = temp_user.email;
+            var email = user.email;
 
             // user folder
             var dir = gen_user_save_folder_path(user);
