@@ -21,6 +21,10 @@ var stat = {
     "anonim_power": 0
 };
 
+function gen_user_save_folder_path(user) {
+    return app.locals.site.users_directory + '/' + user.email;
+}
+
 scheduler.scheduleJob('0 * * * *', function () {
     var anonim_power = 0;
     AnonymousStatistic.count({}, function (err, count) {
@@ -154,7 +158,7 @@ module.exports = function (app, passport, nev) {
 
     // Note: remove user
     function removeUser(user, res) {
-        deleteFolderRecursive(app.locals.site.users_directory + '/' + user.email);
+        deleteFolderRecursive(gen_user_save_folder_path(user.email));
         user.remove(function (err) {
             if (!err) {
                 res.redirect('/logout');
@@ -204,7 +208,7 @@ module.exports = function (app, passport, nev) {
 
     app.get('/build_installer_request', isLoggedIn, function (req, res) {
         var user = req.user;
-        walk(app.locals.site.users_directory + '/' + user.email, function (err, results) {
+        walk(gen_user_save_folder_path(user), function (err, results) {
             if (err) {
                 console.error(err);
             }
@@ -219,7 +223,7 @@ module.exports = function (app, passport, nev) {
     // CLEAR user packages
     app.post('/clear_packages', isLoggedIn, function (req, res) {
         var user = req.user;
-        deleteFolderRecursive(app.locals.site.users_directory + '/' + user.email);
+        deleteFolderRecursive(gen_user_save_folder_path(user));
         res.render('build_installer_request.ejs', {
             user: user,
             builded_packages: []
@@ -234,7 +238,7 @@ module.exports = function (app, passport, nev) {
             user.country = ip_info.country;
         }
 
-        var user_dir_path = app.locals.site.users_directory + '/' + user.email;
+        var user_dir_path = gen_user_save_folder_path(user);
         walk(user_dir_path, function (err, results) {
             if (err) {
                 console.error(err);
@@ -261,7 +265,7 @@ module.exports = function (app, passport, nev) {
         });
     });
 
-    app.post('/updateProfile', isLoggedIn, function (req, res) {
+    app.post('/update_profile', isLoggedIn, function (req, res) {
         var user = req.user;
 
         // Note: manage password.
@@ -300,7 +304,7 @@ module.exports = function (app, passport, nev) {
         });
     });
 
-    app.get('/deleteProfile', isLoggedIn, function (req, res) {
+    app.get('/delete_profile', isLoggedIn, function (req, res) {
         var user = req.user;
         removeUser(user, res);
     });
@@ -318,9 +322,8 @@ module.exports = function (app, passport, nev) {
             });
 
             return res.status(200).send('SUCCESS: Buy product success!');
-        } else {
-            return res.status(400).send('ERROR: Invalid data!');
         }
+        return res.status(400).send('ERROR: Invalid data!');
     });
 
     // SUBSCRIPTION =============================
@@ -336,9 +339,8 @@ module.exports = function (app, passport, nev) {
 
                 res.status(200).send('SUCCESS: Subscription success!');
             });
-        } else {
-            return res.status(400).send('ERROR: Invalid data!');
         }
+        return res.status(400).send('ERROR: Invalid data!');
     });
 
     // CANCEL_SUBSCRIPTION ==============================
@@ -658,13 +660,14 @@ module.exports = function (app, passport, nev) {
             var email = user.email;
 
             // user folder
-            var dir = app.locals.site.users_directory + '/' + user.email;
+            var dir = gen_user_save_folder_path(user);
             if (!fs.existsSync(dir)) {
                 fs.mkdirSync(dir);
             }
 
             console.log("confirm message sent to: " + email);
-            res.render('after_confirm.ejs');
+            res.redirect('/profile');
+            // res.render('after_confirm.ejs');
         });
     });
 
