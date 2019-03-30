@@ -668,17 +668,12 @@ module.exports = function (app, passport, nev) {
             console.log("confirm message sent to: " + email);
             req.login(user, function (err) {
                 if (!err) {
-                    res.redirect('/profile');
-                } else {
-                    //handle error
+                    console.error(err);
+                    return res.status(404).send('ERROR: login to profile page FAILED');
                 }
+                return res.redirect('/profile');
             });
-            // res.render('after_confirm.ejs');
         });
-    });
-
-    app.get('/after_confirm', function (req, res) {
-        res.render('after_confirm.ejs');
     });
 
     app.get('/welcome_callback', function (req, res) {
