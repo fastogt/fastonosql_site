@@ -161,7 +161,7 @@ listener.on('connection', function (socket) {
 
             var rpc = new (require('./app/modules/amqprpc'))(rabbit_connection);
             var branding_variables = '-DPRO_VERSION=ON -DBUILD_STRATEGY:STRING=' + in_json.strategy;
-            if (in_json.strategy === 'public') {
+            if (in_json.strategy === 'public' || in_json.strategy === 'private') {
                 branding_variables += ' -DUSER_LOGIN:STRING=' + in_json.email;
             }
             if (in_json.strategy === 'private') {
