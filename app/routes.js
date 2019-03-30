@@ -21,10 +21,6 @@ var stat = {
     "anonim_power": 0
 };
 
-function gen_user_save_folder_path(user) {
-    return app.locals.site.users_directory + '/' + user.email;
-}
-
 scheduler.scheduleJob('0 * * * *', function () {
     var anonim_power = 0;
     AnonymousStatistic.count({}, function (err, count) {
@@ -111,6 +107,10 @@ function deleteFolderRecursive(path) {
 }
 
 module.exports = function (app, passport, nev) {
+    function gen_user_save_folder_path(user) {
+        return app.locals.site.users_directory + '/' + user.email;
+    }
+
     function walk(dir, done) {
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir);
