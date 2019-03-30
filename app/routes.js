@@ -647,17 +647,17 @@ module.exports = function (app, passport, nev) {
     // user accesses the link that is sent
     app.get('/email-verification/:URL', function (req, res) {
         var url = req.params.URL;
-        nev.confirmTempUser(url, function (err, user) {
+        nev.confirmTempUser(url, function (err, temp_user) {
             if (err) {
                 console.error(err);
                 return res.status(404).send('ERROR: sending confirmation email FAILED');
             }
 
-            if (!user) {
+            if (!temp_user) {
                 return res.status(404).send('ERROR: confirming temp user FAILED');
             }
 
-            var email = user.email;
+            var email = temp_user.email;
 
             // user folder
             var dir = gen_user_save_folder_path(user);
@@ -666,7 +666,13 @@ module.exports = function (app, passport, nev) {
             }
 
             console.log("confirm message sent to: " + email);
-            res.redirect('/profile');
+            req.login(user, function (err) {
+                if (!err) {
+                    res.redirect('/profile');
+                } else {
+                    //handle error
+                }
+            });
             // res.render('after_confirm.ejs');
         });
     });
