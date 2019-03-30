@@ -192,7 +192,7 @@
     <% } %>
 
     <div class="row">
-        <% if (subscription_state !== 'active') { %>
+        <% if (subscription_state !== 'active' && !user.isPrimary()) { %>
             <div class="row-content clear-after">
                 <div class="container-subscription">
                     <div class="col-sm-3 box-subscription">
