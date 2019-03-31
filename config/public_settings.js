@@ -3,7 +3,7 @@ module.exports = {
     project: {
         name: 'FastoNoSQL',
         name_lowercase: 'fastonosql',
-        version: '2.1.1',
+        version: '2.2.0',
         domain: 'fastonosql.com',
         trial_days: 30,
         price_per_month: 5.99,
@@ -16,10 +16,10 @@ module.exports = {
         name: 'FastoNoSQL',
         version: '1.1.0',
         domain: 'https://fastonosql.com',
-        keywords: 'fastonosql, nosql, gui, manager, redis, client, memcached, ssdb, leveldb, rocksdb, lmdb, unqlite, forestdb, pika, dynomite, admin, tool',
+        keywords: 'fastonosql, nosql, gui, manager, redis, client, memcached, ssdb, leveldb, rocksdb, lmdb, unqlite, forestdb, pika, dynomite, keydb, admin, tool',
         description: 'FastoNoSQL - GUI manager for NoSQL databases.',
-        small_description: 'FastoNoSQL - cross-platform GUI Manager for Redis, Memcached, SSDB, LevelDB, RocksDB, LMDB, Unqlite, ForestDB, Pika and Dynomite databases.',
-        large_description: 'FastoNoSQL - is a cross-platform GUI Manager for Redis, Memcached, SSDB, LevelDB, RocksDB, LMDB, Unqlite, ForestDB, Pika and Dynomite databases(i.e. Admin GUI Client). Our Desktop Client works on the most amount of Linux systems, also on Windows, Mac OS X, FreeBSD and Android platforms.',
+        small_description: 'FastoNoSQL - cross-platform GUI Manager for Redis, Memcached, SSDB, LevelDB, RocksDB, LMDB, Unqlite, ForestDB, Pika, Dynomite and KeyDB databases.',
+        large_description: 'FastoNoSQL - is a cross-platform GUI Manager for Redis, Memcached, SSDB, LevelDB, RocksDB, LMDB, Unqlite, ForestDB, Pika, Dynomite and KeyDB databases(i.e. Admin GUI Client). Our Desktop Client works on the most amount of Linux systems, also on Windows, Mac OS X, FreeBSD and Android platforms.',
 
         github_link: 'https://github.com/fastogt/fastonosql',
         github_issues_link: 'https://github.com/fastogt/fastonosql/issues',
@@ -36,7 +36,8 @@ module.exports = {
             {'name': 'Unqlite', 'option': 'BUILD_WITH_UNQLITE', 'active': true},
             {'name': 'ForestDB', 'option': 'BUILD_WITH_FORESTDB', 'active': false},
             {'name': 'Pika', 'option': 'BUILD_WITH_PIKA', 'active': false},
-            {'name': 'Dynomite', 'option': 'BUILD_WITH_DYNOMITE', 'active': false}]
+            {'name': 'Dynomite', 'option': 'BUILD_WITH_DYNOMITE', 'active': false},
+            {'name': 'KeyDB', 'option': 'BUILD_WITH_KEYDB', 'active': true}]
     },
 
     support: {
