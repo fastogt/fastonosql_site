@@ -146,6 +146,16 @@ UserSchema.methods.isPrimary = function () {
     return this.type === UserType.SUPPORT || this.type === UserType.OPEN_SOURCE || this.type === UserType.PERMANENT || this.type === UserType.ENTERPRISE;
 };
 
+UserSchema.statics.getOrder = function (billing_service_creds, order_id, callback) {
+    var fastSpring = new FastSpring(billing_service_creds.login, billing_service_creds.password);
+    return fastSpring.getOrder(order_id, function (err, order) {
+        if (err) {
+            return callback(err);
+        }
+        return callback(null, order);
+    });
+};
+
 UserSchema.statics.isSubscribed = function (state) {
     return state === 'active' || state === 'canceled';
 };

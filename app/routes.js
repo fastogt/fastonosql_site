@@ -711,6 +711,18 @@ module.exports = function (app, passport, nev) {
         });
     });
 
+    app.get('/get_order/:ORDER', isLoggedInAndSupport, function (req, res) {
+        var order = req.params.ORDER;
+        User.getOrder(app.locals.fastspring_config, order, function (err, order_data) {
+            if (err) {
+                res.status(200).send({error: err});
+                return;
+            }
+
+            res.status(200).send({order: order_data});
+        });
+    });
+
     function not_found(res) {
         res.status(404).render('custom_404.ejs');
     }
