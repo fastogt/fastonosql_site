@@ -723,6 +723,28 @@ module.exports = function (app, passport, nev) {
         });
     });
 
+    app.get('/get_user_life', isLoggedInAndSupport, function (req, res) {
+        User.find({}, function (err, users) {
+            if (err) {
+                res.status(200).send({error: err});
+                return;
+            }
+
+            var users_ttl = [];
+            users.forEach(function (user) {
+                if (user.statistic.length) {
+                    var first = user.statistic[0];
+                    var last = user.statistic[user.statistic.length - 1];
+                    var user_ttl = last['created_date'] - first['created_date'];
+                    if (user_ttl) {
+                        users_ttl.push(user_ttl);
+                    }
+                }
+            });
+            res.status(200).send({users_ttl: users_ttl});
+        });
+    });
+
     function not_found(res) {
         res.status(404).render('custom_404.ejs');
     }
