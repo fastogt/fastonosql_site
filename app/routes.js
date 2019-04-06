@@ -723,7 +723,7 @@ module.exports = function (app, passport, nev) {
         });
     });
 
-    app.get('/get_user_life', isLoggedInAndSupport, function (req, res) {
+    app.get('/get_user_trial_life', isLoggedInAndSupport, function (req, res) {
         User.find({}, function (err, users) {
             if (err) {
                 res.status(200).send({error: err});
@@ -731,17 +731,19 @@ module.exports = function (app, passport, nev) {
             }
 
             var users_ttl = [];
+            var all_time = 0;
             users.forEach(function (user) {
-                if (user.statistic.length) {
+                if (user.statistic.length && !user.subscription && !user.isPrimary()) {
                     var first = user.statistic[0];
                     var last = user.statistic[user.statistic.length - 1];
                     var user_ttl = last['created_date'] - first['created_date'];
                     if (user_ttl) {
                         users_ttl.push(user_ttl);
+                        all_time += user_ttl;
                     }
                 }
             });
-            res.status(200).send({users_ttl: users_ttl});
+            res.status(200).send({users_ttl: users_ttl, all_time: all_time});
         });
     });
 
