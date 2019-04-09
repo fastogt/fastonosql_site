@@ -74,7 +74,7 @@
             </nav>
             <div class="row">
                 <div class="col-md-12">
-                    <form action="/updateProfile" method="post" name="profileInfo"
+                    <form action="/update_profile" method="post" name="profileInfo"
                           onsubmit="return validateProfileForm()">
                         <div class="row">
                             <div class="col-md-6 mb30">
@@ -586,10 +586,12 @@
         <div class="well">
             <div class="row">
                 <div class="col-sm-4">
+                    <% if (!user.isBanned()) { %>
                     <form action="/build_installer_request" method="get" class="btn-verification">
                         <button type="submit" class="btn btn-success">Build last stable <%= project.name %> version
                         </button>
                     </form>
+                    <% } %>
                     <a href="mailto:<%- support.contact_email %>"><%- support.contact_email %></a>
                 </div>
                 <% if (subscription_state === 'active') { %>
