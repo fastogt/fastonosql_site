@@ -146,6 +146,14 @@ UserSchema.methods.isPrimary = function () {
     return this.type === UserType.SUPPORT || this.type === UserType.OPEN_SOURCE || this.type === UserType.PERMANENT || this.type === UserType.ENTERPRISE;
 };
 
+UserSchema.methods.updateTrial = function (trial_days) {
+    if (this.exec_count === 0) {
+        var end_date = new Date();
+        end_date.setDate(end_date.getDate() + trial_days);
+        this.application_end_date = end_date;
+    }
+};
+
 UserSchema.statics.getOrder = function (billing_service_creds, order_id, callback) {
     var fastSpring = new FastSpring(billing_service_creds.login, billing_service_creds.password);
     return fastSpring.getOrder(order_id, function (err, order) {

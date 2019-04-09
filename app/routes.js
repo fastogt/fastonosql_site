@@ -212,10 +212,20 @@ module.exports = function (app, passport, nev) {
                 console.error(err);
             }
 
-            var expire_time = user.isPrimary() ? 0 : user.application_end_date.getTime() / 1000;
+            var expire_time = 0;
+            if (!user.isPrimary()) {
+                user.updateTrial(app.locals.project.trial_days);
+                user.save(function (err) {
+                    if (err) {
+                        console.error(err);
+                    }
+                });
+                expire_time = Math.round(user.application_end_date.getTime() / 1000);  // UTC
+            }
+
             res.render('build_installer_request.ejs', {
                 user: user,
-                builded_packages: results,
+                built_packages: results,
                 expire_time: expire_time
             });
         });
