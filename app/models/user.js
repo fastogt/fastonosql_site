@@ -125,6 +125,10 @@ UserSchema.methods.getType = function () {
     return 0;
 };
 
+UserSchema.methods.getExpireTime = function () {
+    return Math.floor(user.application_end_date.getTime() / 1000);
+};
+
 // generating a hash
 UserSchema.methods.generateHash = function (password) {
     return crypto.createHash('md5').update(password).digest('hex');

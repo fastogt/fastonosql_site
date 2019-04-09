@@ -214,7 +214,7 @@ module.exports = function (app, passport, nev) {
 
             var expire_time = 0;
             if (!user.isPrimary()) {
-                expire_time = Math.round(user.application_end_date.getTime() / 1000);  // UTC
+                expire_time = user.getExpireTime();
             }
 
             res.render('build_installer_request.ejs', {
