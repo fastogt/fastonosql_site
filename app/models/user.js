@@ -126,7 +126,7 @@ UserSchema.methods.getType = function () {
 };
 
 UserSchema.methods.getExpireTime = function () {
-    return Math.floor(user.application_end_date.getTime() / 1000);
+    return Math.floor(this.application_end_date.getTime() / 1000);
 };
 
 // generating a hash
