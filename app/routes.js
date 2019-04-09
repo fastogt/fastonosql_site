@@ -212,9 +212,11 @@ module.exports = function (app, passport, nev) {
                 console.error(err);
             }
 
+            var expire_time = user.isPrimary() ? 0 : user.application_end_date.getTime() / 1000;
             res.render('build_installer_request.ejs', {
                 user: user,
-                builded_packages: results
+                builded_packages: results,
+                expire_time: expire_time
             });
         });
     });
@@ -223,10 +225,7 @@ module.exports = function (app, passport, nev) {
     app.post('/clear_packages', isLoggedIn, function (req, res) {
         var user = req.user;
         deleteFolderRecursive(gen_user_save_folder_path(user));
-        res.render('build_installer_request.ejs', {
-            user: user,
-            builded_packages: []
-        });
+        res.redirect('/build_installer_request');
     });
 
     // PROFILE SECTION =========================
