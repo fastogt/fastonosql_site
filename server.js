@@ -164,7 +164,7 @@ listener.on('connection', function (socket) {
             if (in_json.strategy === 'public') {
                 branding_variables += ' -DUSER_LOGIN:STRING=' + in_json.email;
             } else if (in_json.strategy === 'private') {
-                branding_variables += ' -DUSER_LOGIN:STRING=' + in_json.email + ' -DUSER_PASSWORD:STRING=' + in_json.password + ' -DUSER_FIRST_NAME:STRING=' + in_json.first_name + ' -DUSER_LAST_NAME:STRING=' + in_json.last_name + ' -DUSER_EXPIRE_TIME=' + in_json.expire_time;
+                branding_variables += ' -DUSER_LOGIN:STRING=' + in_json.email + ' -DUSER_ID:STRING=' + in_json.id + ' -DUSER_PASSWORD:STRING=' + in_json.password + ' -DUSER_FIRST_NAME:STRING=' + in_json.first_name + ' -DUSER_LAST_NAME:STRING=' + in_json.last_name + ' -DUSER_EXPIRE_TIME=' + in_json.expire_time;
             }
 
             for (var i = 0; i < app.locals.site.supported_databases.length; ++i) {
