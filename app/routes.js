@@ -214,12 +214,6 @@ module.exports = function (app, passport, nev) {
 
             var expire_time = 0;
             if (!user.isPrimary()) {
-                user.updateTrial(app.locals.project.trial_days);
-                user.save(function (err) {
-                    if (err) {
-                        console.error(err);
-                    }
-                });
                 expire_time = Math.round(user.application_end_date.getTime() / 1000);  // UTC
             }
 
@@ -241,11 +235,6 @@ module.exports = function (app, passport, nev) {
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function (req, res) {
         var user = req.user;
-        if (user.country === '') {
-            var ip_info = req.ipInfo;
-            user.country = ip_info.country;
-        }
-
         var user_dir_path = gen_user_save_folder_path(user);
         walk(user_dir_path, function (err, results) {
             if (err) {
@@ -666,6 +655,14 @@ module.exports = function (app, passport, nev) {
             }
 
             var email = user.email;
+            var end_date = new Date();
+            end_date.setDate(end_date.getDate() + app.locals.project.trial_days);
+            user.application_end_date = end_date;
+            user.save(function (err) {
+                if (err) {
+                    console.error(err);
+                }
+            });
 
             // user folder
             var dir = gen_user_save_folder_path(user);

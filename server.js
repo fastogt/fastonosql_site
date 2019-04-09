@@ -413,7 +413,6 @@ function is_subscribed(args, opt, callback) {
         }
 
         var cur_date = new Date();
-        user.updateTrial(app.locals.project.trial_days);
         user.exec_count = user.exec_count + 1;
         user.application_last_start_date = cur_date;
 
