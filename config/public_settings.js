@@ -5,11 +5,11 @@ module.exports = {
         name_lowercase: 'fastonosql',
         version: '2.3.1',
         domain: 'fastonosql.com',
-        trial_days: 3,
-        price_per_month: 5.99,
-        price_per_6_month: 32.99,
-        price_per_year: 59.99,
-        price_permanent: 299.99
+        trial_days: 7,
+        price_per_month: 8,
+        price_per_6_month: 44,
+        price_per_year: 80,
+        price_permanent: 320
     },
 
     site: {
