@@ -24,6 +24,7 @@ module.exports = {
         github_link: 'https://github.com/fastogt/fastonosql',
         github_issues_link: 'https://github.com/fastogt/fastonosql/issues',
         github_link_without_host: 'fastogt/fastonosql',
+        discord_group: 'https://discord.gg/DzPyGxG',
 
         google_analitics_token: 'UA-56403848-4',
 

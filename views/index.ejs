@@ -69,7 +69,8 @@
             <div class="intro-mockup-wrapper">
                 <div class="text-center">
                     <h1 class="white"><%- site.description %></h1>
-                    <h3 class="count white" data-value="<%- statistics.anonim_power %>"><%- statistics.anonim_power %></h3>
+                    <h3 class="count white"
+                        data-value="<%- statistics.anonim_power %>"><%- statistics.anonim_power %></h3>
                     <h3 class="white">COMMUNITY LAUNCHED APPLICATION</h3>
                 </div>
             </div>
@@ -79,6 +80,9 @@
     <div id="main">
         <section class="row section call-to-action first">
             <div class="row-content" style="line-height: 0.8;">
+                <div class="discord">
+                    <a href="<%- site.discord_group %>" target="_blank">Our discord group</a>
+                </div>
                 <div class="github">
                     <!-- Place this tag where you want the button to render. -->
                     <a class="github-button" href="<%- site.github_link %>/subscription"
@@ -469,7 +473,7 @@
     };
     $('.count').each(function () {
         var $this = $(this);
-        jQuery({ Counter: 0 }).animate({ Counter: $this.text() }, {
+        jQuery({Counter: 0}).animate({Counter: $this.text()}, {
             duration: 3000,
             easing: 'swing',
             step: function () {
