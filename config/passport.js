@@ -48,6 +48,14 @@ module.exports = function (nev, passport) {
             return done(null, false);
         }
 
+        var banned_domains = ['@sk.com'];
+        for (var i = 0; i < banned_domains.length; ++i) {
+            if (email.endsWith(banned_domains[i])) {
+                req.flash('error', 'Banned domain, please go to manager and ask him to buy license  email: ' + email + '.');
+                return done(null, false);
+            }
+        }
+
         User.findOne({'email': email}, function (err, user) {
             // if there are any errors, return the error
             if (err) {
