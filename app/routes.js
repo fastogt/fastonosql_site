@@ -379,7 +379,7 @@ module.exports = function (app, passport, nev) {
     // show the signup form
     app.get('/signup', function (req, res) {
         var ip_info = req.ipInfo;
-        var countries = {
+        const countries = {
             'AF': 'Afghanistan',
             'AX': 'Åland Islands',
             'AL': 'Albania',
@@ -643,6 +643,66 @@ module.exports = function (app, passport, nev) {
 
     // user accesses the link that is sent
     app.get('/email-verification/:URL', function (req, res) {
+        const public_domains = ['gmail.com',
+            'googlemail.com',
+            'qq.com',
+            '163.com',
+            '139.com',
+            'hotmail.com',
+            'hotmail.de',
+            'hotmail.it',
+            'hotmail.fr',
+            '126.com',
+            'live.com',
+            'live.in',
+            'live.fr',
+            'live.ru',
+            'live.cn',
+            'yahoo.com',
+            'yahoo.com.br',
+            'yahoo.com.tw',
+            'yahoo.fr',
+            'yahoo.ca',
+            'yahoo.co.jp',
+            'yahoo.co.uk',
+            'yahoo.co.id',
+            'yahoo.co.in',
+            'yahoo.com.ar',
+            'ymail.com',
+            'ya.ru',
+            'bk.ru',
+            'list.ru',
+            'mail.com',
+            'mail.ru',
+            'tut.by',
+            'outlook.com',
+            'rambler.ru',
+            'sina.cn',
+            'sina.com',
+            'yandex.com',
+            'yandex.ru',
+            'icloud.com',
+            'sohu.com',
+            'hanmail.net',
+            'me.com',
+            'ukr.net',
+            'foxmail.com',
+            'naver.com',
+            'web.de',
+            'inbox.ru',
+            'aliyun.com',
+            'vip.qq.com',
+            'nate.com',
+            'wp.pl',
+            'protonmail.com',
+            'i.ua',
+            'gmx.de',
+            'gmx.net',
+            'gmx.com',
+            'o2.pl',
+            'libero.it',
+            'msn.com',
+            'seznam.cz'];
         var url = req.params.URL;
         nev.confirmTempUser(url, function (err, user) {
             if (err) {
@@ -655,8 +715,16 @@ module.exports = function (app, passport, nev) {
             }
 
             var email = user.email;
+            var trial_x = 2;
+            for (i = 0; i < public_domains.length; ++i) {
+                if (email.endsWith('@' + public_domains[i])) {
+                    trial_x = 1;
+                    break;
+                }
+            }
+
             var end_date = new Date();
-            end_date.setDate(end_date.getDate() + app.locals.project.trial_days);
+            end_date.setDate(end_date.getDate() + app.locals.project.trial_days * trial_x);
             user.application_end_date = end_date;
             user.save(function (err) {
                 if (err) {
