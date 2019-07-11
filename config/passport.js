@@ -83,7 +83,15 @@ module.exports = function (nev, passport) {
             req.flash('error', 'Invalid email: ' + email + '.');
             return done(null, false);
         }
-        
+
+        var banned_domains = ['@sk.com'];
+        for (var i = 0; i < banned_domains.length; ++i) {
+            if (email.endsWith(banned_domains[i])) {
+                req.flash('error', 'Banned domain, please go to manager and ask him to buy license email: ' + email + '. Or please solve test, details you can find here: marina.kondrashonok@sk.com');
+                return done(null, false);
+            }
+        }
+
         validate_email.validateEmail(email, function (err) {
             if (err) {
                 req.flash('error', 'Invalid email: ' + email + ', (error: ' + err + ').');
