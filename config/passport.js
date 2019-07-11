@@ -42,12 +42,6 @@ module.exports = function (nev, passport) {
         }
 
         email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
-        var is_valid = validate_email.validateEmailInput(email);
-        if (!is_valid) {
-            req.flash('error', 'Invalid email: ' + email + '.');
-            return done(null, false);
-        }
-
         User.findOne({'email': email}, function (err, user) {
             // if there are any errors, return the error
             if (err) {
@@ -84,6 +78,12 @@ module.exports = function (nev, passport) {
             return done(null, false);
         }
         email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
+        var is_valid = validate_email.validateEmailInput(email);
+        if (!is_valid) {
+            req.flash('error', 'Invalid email: ' + email + '.');
+            return done(null, false);
+        }
+        
         validate_email.validateEmail(email, function (err) {
             if (err) {
                 req.flash('error', 'Invalid email: ' + email + ', (error: ' + err + ').');
