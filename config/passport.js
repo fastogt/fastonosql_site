@@ -48,7 +48,6 @@ module.exports = function (nev, passport, banned_domains) {
             return done(null, false);
         }
 
-
         User.findOne({'email': email}, function (err, user) {
             // if there are any errors, return the error
             if (err) {
@@ -85,7 +84,7 @@ module.exports = function (nev, passport, banned_domains) {
             return done(null, false);
         }
 
-
+        email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
         for (i = 0; i < banned_domains.length; ++i) {
             if (email.endsWith('@' + banned_domains[i])) {
                 req.flash('error', 'Banned domain, please go to manager and ask him to buy licenses.');

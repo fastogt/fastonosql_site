@@ -46,7 +46,8 @@
         <!-- LOGIN FORM -->
         <form name="signUpForm" action="/signup" onsubmit="return validateForm()" method="post">
             <div class="form-group">
-                <label>Email (Professional email give 2x Trial)</label>
+                <label>Email (For public emails <%= project.trial_days %> day(s) trial, for professional
+                    emails <%= 2 * project.trial_days %> day(s) trial)</label>
                 <input type="email" class="form-control" name="email">
             </div>
             <div class="form-group">
