@@ -73,7 +73,8 @@ app.locals.site = {
     supported_databases: public_settings_config.site.supported_databases,
     support_email: settings_config.support_email,
     support_email_password: settings_config.support_email_password,
-    notify_email: settings_config.notify_email
+    notify_email: settings_config.notify_email,
+    banned_domains: settings_config.banned_domains
 };
 app.locals.project = {
     name: public_settings_config.project.name,
@@ -278,7 +279,7 @@ nev.generateTempUserModel(User, function (err, tempUserModel) {
     console.log('generated temp user model: ' + (typeof tempUserModel === 'function'));
 });
 
-require('./config/passport')(nev, passport); // pass passport for configuration
+require('./config/passport')(nev, passport, app.locals.site.banned_domains); // pass passport for configuration
 
 // set up our express application
 app.use(compression());
