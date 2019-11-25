@@ -158,14 +158,15 @@ module.exports = function (app, passport, nev) {
 
     // Note: remove user
     function removeUser(user, res) {
-        deleteFolderRecursive(gen_user_save_folder_path(user.email));
+        /*deleteFolderRecursive(gen_user_save_folder_path(user.email));
         user.remove(function (err) {
             if (!err) {
                 res.redirect('/logout');
             } else {
                 res.redirect('/profile');
             }
-        })
+        })*/
+        res.redirect('/logout');
     }
 
     // normal routes ===============================================================
